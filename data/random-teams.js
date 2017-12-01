@@ -558,18 +558,6 @@ class RandomTeams extends Dex.ModdedDex {
 		}
 
 		// These moves can be used even if we aren't setting up to use them:
-<<<<<<< HEAD
-		let SetupException = {
-			closecombat:1, extremespeed:1, suckerpunch:1, superpower:1,
-			clangingscales:1, dracometeor:1, leafstorm:1, overheat:1,
-		};
-		let counterAbilities = {
-			'Adaptability':1, 'Contrary':1, 'Hustle':1, 'Iron Fist':1, 'Skill Link':1,
-		};
-		let ateAbilities = {
-			'Aerilate':1, 'Galvanize':1, 'Pixilate':1, 'Refrigerate':1,
-		};
-=======
 		let SetupException = [
 			'closecombat', 'extremespeed', 'suckerpunch', 'superpower',
 			'clangingscales', 'dracometeor', 'leafstorm', 'overheat',
@@ -580,7 +568,6 @@ class RandomTeams extends Dex.ModdedDex {
 		let ateAbilities = [
 			'Aerilate', 'Galvanize', 'Pixilate', 'Refrigerate',
 		];
->>>>>>> f36753f65b92ecc8a173d8af8f42ad50378b0699
 
 		let hasMove, counter;
 
