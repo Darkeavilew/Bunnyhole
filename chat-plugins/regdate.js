@@ -6,7 +6,7 @@ const Autolinker = require('autolinker');
 
 let regdateCache = {};
 
-EM.regdate = function (target, callback) {
+BH.regdate = function (target, callback) {
 	target = toId(target);
 	if (regdateCache[target]) return callback(regdateCache[target]);
 	let options = {
@@ -48,7 +48,7 @@ function saveRegdateCache() {
 	fs.writeFileSync('config/regdate.json', JSON.stringify(regdateCache));
 }
 
-EM.parseMessage = function (message) {
+BH.parseMessage = function (message) {
 	if (message.substr(0, 5) === "/html") {
 		message = message.substr(5);
 		message = message.replace(/\_\_([^< ](?:[^<]*?[^< ])?)\_\_(?![^<]*?<\/a)/g, '<i>$1</i>'); // italics
@@ -67,7 +67,7 @@ EM.parseMessage = function (message) {
 	return message;
 };
 
-EM.messageSeniorStaff = function (message, pmName, from) {
+BH.messageSeniorStaff = function (message, pmName, from) {
 	pmName = (pmName ? pmName : '~Spark Server');
 	from = (from ? ' (PM from ' + from + ')' : '');
 	Users.users.forEach(curUser => {
@@ -77,7 +77,7 @@ EM.messageSeniorStaff = function (message, pmName, from) {
 	});
 };
 
-EM.reloadCSS = function () {
+BH.reloadCSS = function () {
 	const cssPath = 'spark'; // This should be the server id if Config.serverid doesn't exist. Ex: 'serverid'
 	let options = {
 		host: 'play.pokemonshowdown.com',
@@ -89,7 +89,7 @@ EM.reloadCSS = function () {
 };
 
 //Daily Rewards System by Lord Haji, Credit to SpacialGaze
-EM.giveDailyReward = function (user) {
+BH.giveDailyReward = function (user) {
 	if (!user) return false;
 	let reward = 0, time = Date.now();
 	for (let ip in user.ips) {
@@ -112,7 +112,7 @@ EM.giveDailyReward = function (user) {
 	user.send('|popup||wide||html| <center><u><b><font size="3">Spark Daily Bonus</font></b></u><br>You have been awarded ' + reward + ' Bucks.<br>' + showDailyRewardAni(reward) + '<br>Because you have connected to the server for the past ' + (reward === 1 ? 'Day' : reward + ' Days') + '.</center>');
 };
 
-EM.randomString = function (length) {
+BH.randomString = function (length) {
 	return Math.round((Math.pow(36, length + 1) - Math.random() * Math.pow(36, length))).toString(36).slice(1);
 };
 
