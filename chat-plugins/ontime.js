@@ -31,28 +31,28 @@ exports.commands = {
 
 		const userid = target ? toId(target) : user.userid;
 		const currentOntime = Ontime[userid] ? Date.now() - Ontime[userid] : 0;
-		const totalOntime = Db.ontime.get(userid, 0) + currentOntime;
+		const totalOntime = Db('ontime').get(userid, 0) + currentOntime;
 
-		if (!totalOntime) return this.sendReplyBox(WL.nameColor(userid, true) + " has never been online on this server.");
+		if (!totalOntime) return this.sendReplyBox(BH.nameColor(userid, true) + " has never been online on this server.");
 		const isConnected = Users.get(userid) && Users.get(userid).connected;
 
 		// happens when a user opens 2 tabs and closes one of them, removing them from the Ontime object
 		if (isConnected && !Ontime[userid]) Ontime[userid] = Date.now();
 
 		if (isConnected) {
-			this.sendReplyBox(WL.nameColor(userid, true) + '\'s total ontime is <b>' + displayTime(convertTime(totalOntime)) + '</b>.' + ' Current ontime: <b>' + displayTime(convertTime((currentOntime))) + '</b>.');
+			this.sendReplyBox(BH.nameColor(userid, true) + '\'s total ontime is <b>' + displayTime(convertTime(totalOntime)) + '</b>.' + ' Current ontime: <b>' + displayTime(convertTime((currentOntime))) + '</b>.');
 		} else {
-			this.sendReplyBox(WL.nameColor(userid, true) + '\'s total ontime is <b>' + displayTime(convertTime(totalOntime)) + '</b>.' + ' Currently not online.');
+			this.sendReplyBox(BH.nameColor(userid, true) + '\'s total ontime is <b>' + displayTime(convertTime(totalOntime)) + '</b>.' + ' Currently not online.');
 		}
 	},
 	nolifeladder: 'ontimeladder',
 	mostonline: 'ontimeladder',
 	ontimeladder: function (target, room, user) {
 		if (!this.runBroadcast()) return;
-		let keys = Db.ontime.keys().map(name => {
+		let keys = Db('ontime').keys().map(name => {
 			let currentOntime = 0;
 			if (Ontime[name]) currentOntime = Date.now() - Ontime[name];
-			const totalOntime = Db.ontime.get(name, 0) + currentOntime;
+			const totalOntime = Db('ontime').get(name, 0) + currentOntime;
 			return {
 				name: name,
 				time: totalOntime,
