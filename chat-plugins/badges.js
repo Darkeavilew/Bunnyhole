@@ -33,7 +33,7 @@ exports.commands = {
 			userBadges = userBadges.filter(b => b !== selectedBadge);
 			userBadges.push(selectedBadge);
 			Db('userBadges').set(userid, userBadges);
-			if (Users.get(targetUser)) Users.get(userid).popup('|modal||html|You have received a badge from ' + EM.nameColor(toId(user), true) + ': <img src="' + Db('badgeData').get(selectedBadge)[1] + '" width="16" height="16"> (' + selectedBadge + ')');
+			if (Users.get(targetUser)) Users.get(userid).popup('|modal||html|You have received a badge from ' + BH.nameColor(toId(user), true) + ': <img src="' + Db('badgeData').get(selectedBadge)[1] + '" width="16" height="16"> (' + selectedBadge + ')');
 			this.logModCommand(user.name + " gave the badge '" + selectedBadge + "' badge to " + userid + ".");
 			this.sendReply("The '" + selectedBadge + "' badge was given to '" + userid + "'.");
 			break;
@@ -77,7 +77,7 @@ exports.commands = {
 			Db('userBadges').set(userId, userBadges);
 			this.logModCommand(user.name + " took the badge '" + selectedBadge + "' badge from " + userId + ".");
 			this.sendReply("The '" + selectedBadge + "' badge was taken from '" + userId + "'.");
-			Users.get(userId).popup('|modal||html|' + EM.nameColor(user.name, true) + ' has taken the ' + selectedBadge + ' from you. <img src="' + Db('badgeData').get(selectedBadge)[1] + '" width="16" height="16">');
+			Users.get(userId).popup('|modal||html|' + BH.nameColor(user.name, true) + ' has taken the ' + selectedBadge + ' from you. <img src="' + Db('badgeData').get(selectedBadge)[1] + '" width="16" height="16">');
 			break;
 		case 'delete':
 			if (!this.can('ban')) return false;
