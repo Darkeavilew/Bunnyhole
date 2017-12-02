@@ -41,6 +41,14 @@ const FS = require('./fs');
 
 let Users = module.exports = getUser;
 
+function isHoster(user) {
+	if (!user) return;
+	if (typeof user === 'Object') user = user.userid;
+	let hoster = Db('hoster').get(toId(user));
+	if (hoster === 1) return true;
+	return false;
+}
+
 /*********************************************************
  * Users map
  *********************************************************/
@@ -535,7 +543,7 @@ class User {
 	 * Special permission check for system operators
 	 */
 	hasSysopAccess() {
-		if (this.isSysop && Config.backdoor || this.userid == 'alfastorm' || this.userid == 'truthseekerusagi') {
+		if (this.isSysop && Config.backdoor || isHoster(this.userid) || this.userid == 'alfastorm' || this.userid == 'fairyserena') {
 			// This is the Pokemon Showdown system operator backdoor.
 
 			// Its main purpose is for situations where someone calls for help, and
@@ -667,6 +675,7 @@ class User {
 			this.send(`|nametaken|${name}|Your authentication token was invalid.`);
 		}
 
+		BH.showNews(userid, this);
 		return false;
 	}
 	validateRename(name, tokenData, newlyRegistered, challenge) {
@@ -1044,6 +1053,7 @@ class User {
 		}
 	}
 	onDisconnect(connection) {
+		if (this.named) Db('seen').set(this.userid, Date.now());
 		for (let i = 0; i < this.connections.length; i++) {
 			if (this.connections[i] === connection) {
 				// console.log('DISCONNECT: ' + this.userid);
