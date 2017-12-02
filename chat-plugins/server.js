@@ -118,7 +118,7 @@ exports.commands = {
 		if (!this.can('pmall')) return false;
 		if (!target) return this.parse('/help pmall');
 
-		let pmName = '~Spark Server';
+		let pmName = '~Bunnyhole Server';
 		Users.users.forEach(curUser => {
 			let message = '|pm|' + pmName + '|' + curUser.getIdentity() + '|' + target;
 			curUser.send(message);
@@ -132,7 +132,7 @@ exports.commands = {
 		if (!this.can('forcewin')) return false;
 		if (!target) return this.parse('/help pmallstaff');
 
-		let pmName = '~Spark Server';
+		let pmName = '~Bunnyhole Server';
 
 		Users.users.forEach(curUser => {
 			if (!curUser.isStaff) return;
@@ -162,11 +162,11 @@ exports.commands = {
 		if (!this.runBroadcast()) return;
 		if (!target) return this.parse('/help seen');
 		let targetUser = Users.get(target);
-		if (targetUser && targetUser.connected) return this.sendReplyBox(EM.nameColor(targetUser.name, true) + " is <b><font color='limegreen'>Currently Online</b></font>.");
+		if (targetUser && targetUser.connected) return this.sendReplyBox(BH.nameColor(targetUser.name, true) + " is <b><font color='limegreen'>Currently Online</b></font>.");
 		target = Chat.escapeHTML(target);
 		let seen = Db('seen').get(toId(target));
-		if (!seen) return this.sendReplyBox(EM.nameColor(target, true) + " has <b><font color='red'>never been online</font></b> on this server.");
-		this.sendReplyBox(EM.nameColor(target, true) + " was last seen <b>" + Chat.toDurationString(Date.now() - seen, {precision: true}) + "</b> ago.");
+		if (!seen) return this.sendReplyBox(BH.nameColor(target, true) + " has <b><font color='red'>never been online</font></b> on this server.");
+		this.sendReplyBox(BH.nameColor(target, true) + " was last seen <b>" + Chat.toDurationString(Date.now() - seen, {precision: true}) + "</b> ago.");
 	},
 	seenhelp: ["/seen - Shows when the user last connected on the server."],
 	
@@ -177,7 +177,7 @@ exports.commands = {
 			return this.sendReply("Usernames can not be less than one character or longer than 19 characters. (Current length: " + target.length + ".)");
 		}
 		if (!this.runBroadcast()) return;
-		EM.regdate(target, date => {
+		BH.regdate(target, date => {
 			if (date) {
 				this.sendReplyBox(regdateReply(date));
 			}
@@ -185,14 +185,14 @@ exports.commands = {
 
 		function regdateReply(date) {
 			if (date === 0) {
-				return EM.nameColor(target, true) + " <b><font color='red'>is not registered.</font></b>";
+				return BH.nameColor(target, true) + " <b><font color='red'>is not registered.</font></b>";
 			} else {
 				let d = new Date(date);
 				let MonthNames = ["January", "February", "March", "April", "May", "June",
 					"July", "August", "September", "October", "November", "December",
 				];
 				let DayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-				return EM.nameColor(target, true) + " was registered on <b>" + DayNames[d.getUTCDay()] + ", " + MonthNames[d.getUTCMonth()] + ' ' + d.getUTCDate() + ", " + d.getUTCFullYear() + "</b> at <b>" + d.getUTCHours() + ":" + d.getUTCMinutes() + ":" + d.getUTCSeconds() + " UTC.</b>";
+				return BH.nameColor(target, true) + " was registered on <b>" + DayNames[d.getUTCDay()] + ", " + MonthNames[d.getUTCMonth()] + ' ' + d.getUTCDate() + ", " + d.getUTCFullYear() + "</b> at <b>" + d.getUTCHours() + ":" + d.getUTCMinutes() + ":" + d.getUTCSeconds() + " UTC.</b>";
 			}
 			//room.update();
 		}
