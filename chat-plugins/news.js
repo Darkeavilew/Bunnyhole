@@ -23,7 +23,7 @@ function showSubButton(userid) {
 	let hasSubscribed = Db('NewsSubscribers').get(userid, false);
 	return `<hr><center><button class="button" name="send" value="/news ${(hasSubscribed ? `unsubscribe` : `subscribe`)}">${(hasSubscribed ? `Unsubscribe from the news` : `Subscribe to the news`)}</button></center>`;
 }
-EM.showNews = function (userid, user) {
+BH.showNews = function (userid, user) {
 	if (!user || !userid) return false;
 	if (!Db('NewsSubscribers').has(userid) || (userid in notifiedUsers)) return false;
 	let newsDisplay = generateNews();
