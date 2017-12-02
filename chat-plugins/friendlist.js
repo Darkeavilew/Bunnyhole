@@ -22,7 +22,7 @@ function Friends(isOnline, user) {
 }
 
 Friends.prototype.name = function () {
-	let userName = (EM.nameColor(this.username, true));
+	let userName = (BH.nameColor(this.username, true));
 	return '<button style="border: none; background: none; padding: 0;" name="parseCommand" value="/user ' + this.username + '">' + userName + "</button>";
 };
 
