@@ -1,16 +1,16 @@
 /**
-Spark Plugins
+Bunnyhole Miscellaneous Plugins
  **/
-EM.nameColor = function (name, bold) {
-        return (bold ? "<b>" : "") + "<font color=" + EM.Color(name) + ">" + (Users(name) && Users(name).connected && Users.getExact(name) ? Chat.escapeHTML(Users.getExact(name).name) : Chat.escapeHTML(name)) + "</font>" + (bold ? "</b>" : "");
+BH.nameColor = function (name, bold) {
+        return (bold ? "<b>" : "") + "<font color=" + BH.Color(name) + ">" + (Users(name) && Users(name).connected && Users.getExact(name) ? Chat.escapeHTML(Users.getExact(name).name) : Chat.escapeHTML(name)) + "</font>" + (bold ? "</b>" : "");
 };
 const path = require('path');
 const fs = require('fs');
 const moment = require('moment');
 
-EM.tells = {};
+BH.tells = {};
 try {
-	EM.tells = JSON.parse(fs.readFileSync('config/tells.json', 'utf8'));
+	BH.tells = JSON.parse(fs.readFileSync('config/tells.json', 'utf8'));
 } catch (e) {}
 
 const MAX_TELLS = 4;
@@ -22,15 +22,15 @@ function isHoster(user) {
 	if (hoster === 1) return true;
 	return false;
 }
-EM.getTells = function(target, room, user, connection) {
+BH.getTells = function(target, room, user, connection) {
 		target = Users.get(target);
-		let tell = EM.tells[target.userid];
+		let tell = BH.tells[target.userid];
 		if (!tell) return;
 		for (let i in tell) {
 			tell[i].forEach(msg => target.send('|pm| Unread Messages|' + target.getIdentity() + '|/raw ' + msg));
 		}
-		delete EM.tells[target.userid];
-		fs.writeFileSync('config/tells.json', JSON.stringify(EM.tells));
+		delete BH.tells[target.userid];
+		fs.writeFileSync('config/tells.json', JSON.stringify(BH.tells));
 	};
 const messages = [
     "has used explosion!",
@@ -117,22 +117,15 @@ const messages = [
 	 
 	credit: 'credits',
 	credits: function (target, room, user) {
-		let popup = "|html|" + "<font size=5><u><b>Spark Server Credits</b></u></font><br />" +
+		let popup = "|html|" + "<font size=5><u><b>Bunnyhole Server Credits</b></u></font><br />" +
 			"<br />" +
 			"<u><b>Server Maintainers:</u></b><br />" +
-			"- " + EM.nameColor('SparkyHeliolisk', true) + " (Owner, Sysop)<br />" +
-			"- " + EM.nameColor('AlfaStorm', true) + " (Development, Sysop)<br />" +
-		    	"<br />" +
-		    	"<u><b>Major Contributors:</b></u><br />" +
-			"- " + EM.nameColor('Jolt(S Jolteon)', true) + " (Developer)<br />" +
+			"- " + BH.nameColor('Fairy Serena', true) + " (Owner, Sysop)<br />" +
+			"- " + BH.nameColor('AlfaStorm', true) + " (Development, Sysop)<br />" +
 			"<br />" +
-		    	"<u><b>Minor Contributors:</b></u><br />" +
-		    	"- " + EM.nameColor('Insist', true) + " (Developer)<br />" +
-		    	"<br />" +
 			"<u><b>Special Thanks:</b></u><br />" +
 			"- Our Staff Members<br />" +
-			"- Our Regular Users<br />" +
-		    	"- SpacialGaze for most of the plugins<br />";
+			"- Our Regular Users<br />";
 		user.popup(popup);
 	},
 	 
@@ -150,30 +143,30 @@ const messages = [
 		if (!id || !target) return this.parse('/help tell');
 		if (target.length > MAX_TELL_LENGTH) return this.errorReply("You may not send a tell longer than " + MAX_TELL_LENGTH + " characters.");
 
-		if (EM.tells[id]) {
+		if (BH.tells[id]) {
 			if (!user.can('hotpatch')) {
 				let names = Object.keys(user.prevNames).concat(user.userid);
 				for (let i in names) {
 					let name = names[i];
-					if (EM.tells[id][name] && EM.tells[id][name].length >= MAX_TELLS) return this.sendReply('You may only leave ' + MAX_TELLS + ' messages for a user at a time. Please wait until ' + targetUser + ' comes online and views them before sending more.');
+					if (BH.tells[id][name] && BH.tells[id][name].length >= MAX_TELLS) return this.sendReply('You may only leave ' + MAX_TELLS + ' messages for a user at a time. Please wait until ' + targetUser + ' comes online and views them before sending more.');
 				}
 			}
 		} else {
-			EM.tells[id] = {};
+			BH.tells[id] = {};
 		}
 
-		let tell = EM.tells[id][user.userid];
+		let tell = BH.tells[id][user.userid];
 		let userSymbol = (Users.usergroups[user.userid] ? Users.usergroups[user.userid].substr(0, 1) : "");
-		let msg = '<small>[' + moment().format("HH:mm:ss") + ']</small> ' + userSymbol + '<strong class="username"><span style = "color:' + EM.Color(user.userid) + '">' + user.name + ':</span></strong> ' + Chat.escapeHTML(target);
+		let msg = '<small>[' + moment().format("HH:mm:ss") + ']</small> ' + userSymbol + '<strong class="username"><span style = "color:' + BH.Color(user.userid) + '">' + user.name + ':</span></strong> ' + Chat.escapeHTML(target);
 		if (tell) {
-			EM.tells[id][user.userid].push(msg);
+			BH.tells[id][user.userid].push(msg);
 		} else {
-			EM.tells[id][user.userid] = [msg];
+			BH.tells[id][user.userid] = [msg];
 		}
 
-		fs.writeFileSync('config/tells.json', JSON.stringify(EM.tells));
+		fs.writeFileSync('config/tells.json', JSON.stringify(BH.tells));
 				if (this.message.startsWith(`/tell`)) {
-		user.send('|pm| ' + this.targetUsername + '|' + this.user.getIdentity() + '|/raw ' + '<small>[' + moment().format("HH:mm:ss") + ']</small>' + userSymbol + '<strong class="username"><span style = "color:' + EM.Color(user.userid) + '">' + user.name + ':</span></strong> ' + Chat.escapeHTML(target));
+		user.send('|pm| ' + this.targetUsername + '|' + this.user.getIdentity() + '|/raw ' + '<small>[' + moment().format("HH:mm:ss") + ']</small>' + userSymbol + '<strong class="username"><span style = "color:' + BH.Color(user.userid) + '">' + user.name + ':</span></strong> ' + Chat.escapeHTML(target));
 		
 			return;
 		}
@@ -202,9 +195,9 @@ staff: 'authlist',
 				var person = row[i].split(',')[0];
 				function formatName (name) {
 					if (Users.getExact(name) && Users(name).connected) {
-						return '<i><b><font style="color:' + EM.Color(Users.getExact(name).name) + '">' + (Users.getExact(name).name) + '</font><b></i>';
+						return '<i><b><font style="color:' + BH.Color(Users.getExact(name).name) + '">' + (Users.getExact(name).name) + '</font><b></i>';
 					} else {
-						return '<font style="color:' + EM.Color(name) + '">' + (name) + '</font>';
+						return '<font style="color:' + BH.Color(name) + '">' + (name) + '</font>';
 					}
 				}
 				var personId = toId(person);
@@ -238,7 +231,7 @@ staff: 'authlist',
 				}
 			}
 			connection.popup('|html|' +
-				'<h3>Spark Server Authorities</h3>' +
+				'<h3>Bunnyhole Server Authorities</h3>' +
 				'<b><u>~Administrators' +  ' (' + staff['admins'].length + ')</u></b>:<br />' + staff['admins'].join(', ') +
 				'<br /><b><u>&Leaders' +  ' (' + staff['leaders'].length + ')</u></b>:<br />' + staff['leaders'].join(', ') +
 				'<br /><b><u>*Bots (' + staff['bots'].length + ')</u></b>:<br />' + staff['bots'].join(', ') +
@@ -364,9 +357,9 @@ staff: 'authlist',
 
 		let targets = target.split(',');
 		if (targets.length !== 2) {
-			room.add('|raw|<center><img src="' + Chat.escapeHTML(targets[0]) + '" alt="" width="50%"/><br /><small><em>(Image shown by: <b><font color="' + EM.Color(user.name) + '">' + user.name +  '</font></em></b>)</small>');
+			room.add('|raw|<center><img src="' + Chat.escapeHTML(targets[0]) + '" alt="" width="50%"/><br /><small><em>(Image shown by: <b><font color="' + BH.Color(user.name) + '">' + user.name +  '</font></em></b>)</small>');
 		} else {
-			room.add('|raw|<center><img src="' + Chat.escapeHTML(targets[0]) + '" alt="" width="' + toId(targets[1]) + '%"/><br /><small><em>(Image shown by: <b><font color="' + EM.Color(user.name) + '">' + user.name +  '</font></em></b>)</small>');
+			room.add('|raw|<center><img src="' + Chat.escapeHTML(targets[0]) + '" alt="" width="' + toId(targets[1]) + '%"/><br /><small><em>(Image shown by: <b><font color="' + BH.Color(user.name) + '">' + user.name +  '</font></em></b>)</small>');
 		}
 	},
 	
@@ -433,28 +426,12 @@ staff: 'authlist',
 		targetUser.leaveRoom(room);
 	},
 
-	ytmusic: "music",
-	music: function (target, room, user, connection, cmd) {
-		if (!target) return this.parse('/help music');
-		if (!this.runBroadcast()) return;
-		let musick = Chat.escapeHTML(target.trim());
-		if(cmd=="ytmusic")
-		{
-			if(musick.substring(0,8)=="https://") musick = musick.substring(7,musick.length);
-			if(musick.substring(0,7)=="http://") musick = musick.substring(6,musick.length);
-			this.sendReplyBox('<audio  style="width: 99.6%;border: 6px solid #F74823; color:green;" controls="" src="http://www.youtubeinmp3.com/fetch/?video='+musick+'" >Your user agent does not support the HTML5 Audio element.</audio>');
-			return;
-		}
-		this.sendReplyBox('<audio  style="width: 99.6%" controls="" src="'+target+'" border: 5px solid #E9DF15; background-color:Blue">Your user agent does not support the HTML5 Audio element.</audio>');
-	},
-	musichelp: ["/music <mp3 link>: Shows a box which can play mp3 music."],
-
 	bonus: 'dailybonus',
 	checkbonus: 'dailybonus',
 	dailybonus: function (target, room, user) {
 		let obj = Db('DailyBonus').get(user.latestIp, [1, Date.now()]);
 		let nextBonus = Date.now() - obj[1];
-		if ((86400000 - nextBonus) <= 0) return EM.giveDailyReward(user);
+		if ((86400000 - nextBonus) <= 0) return BH.giveDailyReward(user);
 		return this.sendReply('Your next bonus is ' + obj[0] + ' ' + (obj[0] === 1 ? moneyName : moneyPlural) + ' in ' + Chat.toDurationString(Math.abs(86400000 - nextBonus)));
 	},
 	roomlist: function (target, room, user) {
