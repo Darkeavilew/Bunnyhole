@@ -108,7 +108,7 @@ exports.commands = {
 	hex: function (target, room, user) {
 		if (!this.runBroadcast()) return;
 		let targetUser = (target ? target : user.name);
-		this.sendReplyBox('The hex code of ' + EM.nameColor(targetUser, true) + ' is: <font color="' + EM.Color(targetUser) + '"><b>' + EM.Color(targetUser) + '</b></font>');
+		this.sendReplyBox('The hex code of ' + BH.nameColor(targetUser, true) + ' is: <font color="' + BH.Color(targetUser) + '"><b>' + BH.Color(targetUser) + '</b></font>');
 	},
 };
 /*
@@ -305,7 +305,7 @@ function hashColor(name) {
   return colorCache[name];
 }
 exports.hashColor = hashColor;
-EM.Color = hashColor;
+BH.Color = hashColor;
 
 function hslToRgb(h, s, l) {
   let r, g, b, m, c, x;
