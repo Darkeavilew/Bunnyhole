@@ -123,14 +123,14 @@ class PassTheBomb {
 
 		this.madeMove = true;
 		this.setBomb(targetId);
-		this.room.add('|html|' + user.name + ' passed the bomb to <b style = "' + EM.nameColor(targetId) + '">' + this.players.get(targetId).name + '</b>!');
+		this.room.add('|html|' + user.name + ' passed the bomb to <b style = "' + BH.nameColor(targetId) + '">' + this.players.get(targetId).name + '</b>!');
 
 		if (this.checkWinner()) this.getWinner();
 	}
 	resetTimer() {
 		this.timer = setTimeout(() => {
 			let player = this.players.get(this.holder).name;
-			this.room.add('|html|<b>The bomb exploded and killed <span style = "' + EM.nameColor(this.holder) + '">' + player + '</span>').update();
+			this.room.add('|html|<b>The bomb exploded and killed <span style = "' + BH.nameColor(this.holder) + '">' + player + '</span>').update();
 			this.players.get(this.holder).status = 'dead';
 			this.canPass = false;
 			setTimeout(() => {
@@ -171,7 +171,7 @@ class PassTheBomb {
 	}
 	getWinner() {
 		let winner = this.getSurvivors()[0][1].name;
-		let msg = '|html|<div class = "infobox"><center>The winner of this game of Pass the Bomb is <b style = "color:' + EM.nameColor(winner) + '">' + Chat.escapeHTML(winner) + '!</b> Congratulations!</center>';
+		let msg = '|html|<div class = "infobox"><center>The winner of this game of Pass the Bomb is <b style = "color:' + BH.nameColor(winner) + '">' + Chat.escapeHTML(winner) + '!</b> Congratulations!</center>';
 		if (this.room.id === 'marketplace') {
 			msg += '<center>' + Chat.escapeHTML(winner) + ' has also won <b>5</b> credits for winning!</center>';
 			writeCredits(winner, 5, () => this.room.add(msg).update());
