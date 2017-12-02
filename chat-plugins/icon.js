@@ -60,7 +60,7 @@ exports.commands = {
 			this.sendReply("|raw|You have given " + EM.nameColor(target[0], true) + " an icon.");
 			Monitor.adminlog(target[0] + " has received an icon from " + user.name + ".");
 			this.privateModCommand("|raw|(" + target[0] + " has recieved icon: <img src='" + target[1] + "' width='32' height='32'> from " + user.name + ".)");
-			if (Users(target[0]) && Users(target[0]).connected) Users(target[0]).popup("|html|" + EM.nameColor(user.name, true) + " has set your userlist icon to: <img src='" + target[1] + "' width='32' height='32'><br><center>Refresh, If you don't see it.</center>");
+			if (Users(target[0]) && Users(target[0]).connected) Users(target[0]).popup("|html|" + BH.nameColor(user.name, true) + " has set your userlist icon to: <img src='" + target[1] + "' width='32' height='32'><br><center>Refresh, If you don't see it.</center>");
 			icons[toId(target[0])] = target[1];
 			updateIcons();
 		},
@@ -74,7 +74,7 @@ exports.commands = {
 			this.sendReply("You removed " + target + "'s icon.");
 			Monitor.adminlog(user.name + " removed " + target + "'s icon.");
 			this.privateModCommand("(" + target + "'s icon was removed by " + user.name + ".)");
-			if (Users(target) && Users(target).connected) Users(target).popup("|html|" + EM.nameColor(user.name, true) + " has removed your userlist icon.");
+			if (Users(target) && Users(target).connected) Users(target).popup("|html|" + BH.nameColor(user.name, true) + " has removed your userlist icon.");
 		},
 	},
 	iconhelp: [
