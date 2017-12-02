@@ -47,7 +47,7 @@ let shop = [
 	['Icon', 'Buy a custom icon that can be applied to the rooms you want. You must take into account that the provided image should be 32 x 32', 20],
 	['Custom Color', 'Changes the color of your name (can be denied if name is too bright)', 25],
 	['Trainer Card', 'Buys a trainer card which shows information through a command. (You supply, can be refused)', 25],
-        ['Avatar', 'Buys an custom avatar to be applied to your name (You supply. Images larger than 80x80 may not show correctly).', 35],
+	['Avatar', 'Buys an custom avatar to be applied to your name (You supply. Images larger than 80x80 may not show correctly).', 35],
 	['Custom PM Box', 'Buys a custom PM box made by AlfaStorm. (Please be aware that the more complex the price could change)', 30],
 	['Roomshop', 'Buys a roomshop to be used in your own room. (Use it responsibly as it can be taken away if abused)', 40],
 	['Room', 'Buys a chatroom for you to own. (within reason, can be refused).', 50],
@@ -193,7 +193,7 @@ exports.commands = {
 		if (userid.length > 19) return this.sendReply("/wallet - [user] can't be longer than 19 characters.");
 
 		Economy.readMoney(userid, money => {
-			this.sendReplyBox(EM.nameColor(target, true) + " has " + money + ((money === 1) ? " " + moneyName + "." : " " + moneyPlural + "."));
+			this.sendReplyBox(BH.nameColor(target, true) + " has " + money + ((money === 1) ? " " + moneyName + "." : " " + moneyPlural + "."));
 			//if (this.broadcasting) room.update();
 		});
 	},
@@ -334,7 +334,7 @@ exports.commands = {
 			let count = 1;
 			for (let u in rows) {
 				if (rows[u].amount < 1) continue;
-				output += '<tr><td>' + count + '</td><td>' + EM.nameColor(rows[u].name, true) + '</td><td>' + rows[u].amount + '</td></tr>';
+				output += '<tr><td>' + count + '</td><td>' + BH.nameColor(rows[u].name, true) + '</td><td>' + rows[u].amount + '</td></tr>';
 				count++;
 			}
 			self.sendReplyBox(output);
