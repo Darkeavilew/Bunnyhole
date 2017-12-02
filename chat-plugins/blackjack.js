@@ -45,7 +45,7 @@ class Blackjack {
 		for (let player in this.players) {
 			this.giveCard(this.players[player].user.userid);
 			this.giveCard(this.players[player].user.userid);
-			output += EM.nameColor(this.players[player].user.userid, true) + ': [' + this.players[player].cards[0] + '] ' +
+			output += BH.nameColor(this.players[player].user.userid, true) + ': [' + this.players[player].cards[0] + '] ' +
 			'[' + this.players[player].cards[1] + '] (' + this.players[player].points + ')<br />';
 		}
 
@@ -77,7 +77,7 @@ class Blackjack {
 				}
 			}
 
-			for (let u in winners) prettyWinners.push(EM.nameColor(winners[u], true));
+			for (let u in winners) prettyWinners.push(BH.nameColor(winners[u], true));
 
 			if (winners.length < 1) {
 				this.add("<br />There's no winners this time.", false, true);
@@ -86,10 +86,10 @@ class Blackjack {
 				if (this.room.id === 'marketplace') {
 					if (winners.length < 2) {
 						this.add("<br />Awarding 5 credits to " + winners[0] + ".", false, true);
-						EM.writeCredits(winners[0], 5);
+						BH.writeCredits(winners[0], 5);
 					} else {
 						this.add("<br />Awarding 2 credits to " + winners.join(', '), false, true);
-						EM.writeCredits(winners[0], 2, () => {
+						BH.writeCredits(winners[0], 2, () => {
 							this.giveCredits(winners);
 						});
 					}
@@ -106,7 +106,7 @@ class Blackjack {
 	giveCredits(winners) {
 		winners.splice(0, 1);
 		if (winners[0]) {
-			EM.writeCredits(winners[0], 2, () => {
+			BH.writeCredits(winners[0], 2, () => {
 				this.giveCredits(winners);
 			});
 		}
@@ -146,7 +146,7 @@ class Blackjack {
 		}
 		player.points += points;
 		if (player.cards.length < 3) return;
-		if (player.cards.length > 2) this.add('<br />' + (user === 'dealer' ? 'The <b>Dealer</b>' : EM.nameColor(user, true)) + ' hit and received [' + player.cards[player.cards.length - 1] + ']');
+		if (player.cards.length > 2) this.add('<br />' + (user === 'dealer' ? 'The <b>Dealer</b>' : BH.nameColor(user, true)) + ' hit and received [' + player.cards[player.cards.length - 1] + ']');
 		if (user === 'dealer') {
 			if (player.points > 21) {
 				let cards = '';
@@ -165,12 +165,12 @@ class Blackjack {
 			player.status = 'bust';
 			let cards = '';
 			for (let u in player.cards) cards += "[" + player.cards[u] + "] ";
-			this.add('<br />' + EM.nameColor(user, true) + ' has bust with ' + cards + '(' + player.points + ')');
+			this.add('<br />' + BH.nameColor(user, true) + ' has bust with ' + cards + '(' + player.points + ')');
 			player.user.sendTo(this.room.id, '|uhtmlchange|user-bj-' + this.id + '|');
 		}
 		if (player.points === 21) {
 			player.status = 'stand';
-			this.add('<br />' + EM.nameColor(user, true) + ' has blackjack!');
+			this.add('<br />' + BH.nameColor(user, true) + ' has blackjack!');
 			player.user.sendTo(this.room.id, '|uhtmlchange|user-bj-' + this.id + '|');
 		}
 		if (user !== 'dealer') this.players[user].cards = player.cards;
@@ -212,7 +212,7 @@ class Blackjack {
 			let cards = "";
 			for (let u in this.players[this.curUser].cards) cards += "[" + this.players[this.curUser].cards[u] + "] ";
 			this.players[this.curUser].status = 'stand';
-			this.add("<br />" + EM.nameColor(this.curUser, true) + " stands with " + cards + "(" + this.players[this.curUser].points + ") (Auto-stand: took too long to move)");
+			this.add("<br />" + BH.nameColor(this.curUser, true) + " stands with " + cards + "(" + this.players[this.curUser].points + ") (Auto-stand: took too long to move)");
 			this.next();
 		}, 60 * 1000);
 	}
@@ -224,7 +224,7 @@ class Blackjack {
 
 		this.players[user.userid] = {cards: [], points: 0, status: 'playing', user: user};
 		for (let ip in user.ips) this.ips.push(ip);
-		this.add("<br />" + EM.nameColor(user.userid, true) + ' has joined the game of blackjack');
+		this.add("<br />" + BH.nameColor(user.userid, true) + ' has joined the game of blackjack');
 	}
 	leave(user) {
 		delete this.players[user];
@@ -253,7 +253,7 @@ exports.commands = {
 			}
 
 			room.blackjack.add(
-				EM.nameColor(user.userid, true) + ' has started a game of blackjack.<br />' +
+				BH.nameColor(user.userid, true) + ' has started a game of blackjack.<br />' +
 				'<button name="send" value="/blackjack join">Join</button>' +
 				(room.blackjack.autostart ? '<br />Game will automatically start in ' + target + ' ' + (target === 1 ? 'minute' : 'minutes') + '.' : ''), false, true
 			);
@@ -290,7 +290,7 @@ exports.commands = {
 			let cards = "";
 			for (let u in room.blackjack.players[user.userid].cards) cards += "[" + room.blackjack.players[user.userid].cards[u] + "] ";
 			room.blackjack.players[user.userid].status = 'stand';
-			room.blackjack.add("<br />" + EM.nameColor(user.userid, true) + " stands with " + cards + "(" + room.blackjack.players[user.userid].points + ")");
+			room.blackjack.add("<br />" + BH.nameColor(user.userid, true) + " stands with " + cards + "(" + room.blackjack.players[user.userid].points + ")");
 			room.blackjack.next();
 		},
 
@@ -309,7 +309,7 @@ exports.commands = {
 			if (!room.blackjack.players[user.userid]) return this.errorReply("You haven't joined this game of blackjack.");
 			if (room.blackjack.players[room.blackjack.curUser] && room.blackjack.players[room.blackjack.curUser].user.userid === user.userid) return this.parse("/blackjack stand");
 			room.blackjack.leave(user);
-			room.blackjack.add("<br />" + EM.nameColor(user.userid, true) + " has left the game of blackjack.");
+			room.blackjack.add("<br />" + BH.nameColor(user.userid, true) + " has left the game of blackjack.");
 			this.sendReply("You've left this game of blackjack");
 		},
 
