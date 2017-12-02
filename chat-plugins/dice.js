@@ -51,7 +51,7 @@ class Dice {
 			if (this.players.length >= 2) return self.errorReply("Two users have already joined this game of dice.");
 
 			this.players.push(user);
-			this.room.add('|uhtmlchange|' + this.room.diceCount + '|' + this.startMessage + '<center>' + EM.nameColor(user.name) + ' has joined the game!</center></div>').update();
+			this.room.add('|uhtmlchange|' + this.room.diceCount + '|' + this.startMessage + '<center>' + BH.nameColor(user.name) + ' has joined the game!</center></div>').update();
 			if (this.players.length === 2) this.play();
 		});
 	}
@@ -74,10 +74,10 @@ class Dice {
 					user.sendTo(this.room, 'You have been removed from this game of dice, as you do not have enough money.');
 					other.sendTo(this.room, user.name + ' has been removed from this game of dice, as they do not have enough money. Wait for another user to join.');
 					this.players.splice(this.players.indexOf(user), 1);
-					this.room.add('|uhtmlchange|' + this.room.diceCount + '|' + this.startMessage + '<center>' + this.players.map(user => EM.nameColor(user.name)) + ' has joined the game!</center>').update();
+					this.room.add('|uhtmlchange|' + this.room.diceCount + '|' + this.startMessage + '<center>' + this.players.map(user => BH.nameColor(user.name)) + ' has joined the game!</center>').update();
 					return;
 				}
-				let players = this.players.map(user => EM.nameColor(user.name)).join(' and ');
+				let players = this.players.map(user => BH.nameColor(user.name)).join(' and ');
 				this.room.add('|uhtmlchange|' + this.room.diceCount + '|' + this.startMessage + '<center>' + players + ' have joined the game!</center></div>').update();
 				let roll1, roll2;
 				do {
@@ -95,10 +95,10 @@ class Dice {
 					this.room.add('|uhtmlchange|' + this.room.diceCount + '|<div class="infobox"><center>' + players + ' have joined the game!<br /><br />' +
 						'The game has been started! Rolling the dice...<br />' +
 						'<img src = "' + diceImg(roll1) + '" align = "left" title = "' + Chat.escapeHTML(p1.name) + '\'s roll"><img src = "' + diceImg(roll2) + '" align = "right" title = "' + p2.name + '\'s roll"><br />' +
-						EM.nameColor(p1.name, true) + ' rolled ' + (roll1 + 1) + '!<br />' +
-						EM.nameColor(p2.name, true) + ' rolled ' + (roll2 + 1) + '!<br />' +
-						EM.nameColor(winner.name, true) + ' has won <b style="color:green">' + (this.bet - taxedAmt) + '</b> ' + buck + '!<br />' +
-						'Better luck next time, ' + EM.nameColor(loser.name) + '!'
+						BH.nameColor(p1.name, true) + ' rolled ' + (roll1 + 1) + '!<br />' +
+						BH.nameColor(p2.name, true) + ' rolled ' + (roll2 + 1) + '!<br />' +
+						BH.nameColor(winner.name, true) + ' has won <b style="color:green">' + (this.bet - taxedAmt) + '</b> ' + buck + '!<br />' +
+						'Better luck next time, ' + BH.nameColor(loser.name) + '!'
 					).update();
 					Economy.writeMoney(winner.userid, (this.bet - taxedAmt), () => {
 						Economy.writeMoney(loser.userid, -this.bet, () => {
