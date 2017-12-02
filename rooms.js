@@ -857,6 +857,7 @@ class GlobalRoom extends BasicRoom {
 			this.maxUsersDate = Date.now();
 		}
 
+		BH.getTells(user);
 		return user;
 	}
 	/**
@@ -867,6 +868,7 @@ class GlobalRoom extends BasicRoom {
 	onRename(user, oldid, joining) {
 		delete this.users[oldid];
 		this.users[user.userid] = user;
+		BH.getTells(user);
 		return user;
 	}
 	/**
@@ -1466,6 +1468,7 @@ class ChatRoom extends BasicRoom {
 		this.sendUser(connection, '|init|chat\n|title|' + this.title + '\n' + userList + '\n' + this.getLogSlice(-100).join('\n') + this.getIntroMessage(user));
 		// @ts-ignore TODO: strongly-typed polls
 		if (this.poll) this.poll.onConnect(user, connection);
+		if (this.survey) this.survey.onConnect(user, connection);
 		if (this.game && this.game.onConnect) this.game.onConnect(user, connection);
 	}
 	/**
