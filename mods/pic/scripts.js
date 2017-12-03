@@ -50,8 +50,6 @@ exports.BattleScripts = {
 			if (Array.isArray(ability)) return ability.map(toId).includes(ally.ability);
 			return toId(ability) === ally.ability;
 		},
-<<<<<<< HEAD
-=======
 		getRequestData: function () {
 			let ally = this.side.active.find(ally => ally && ally !== this && !ally.fainted);
 			if (!ally) ally = {baseMoveset: []};
@@ -64,6 +62,5 @@ exports.BattleScripts = {
 			if (!this.ateBerry) this.disableMove('belch');
 			return Object.getPrototypeOf(this).getRequestData.call(this);
 		},
->>>>>>> 3bb4874276ad719f210278e394330daf40e9940c
 	},
 };
