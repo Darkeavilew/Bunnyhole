@@ -6,37 +6,36 @@ const Autolinker = require('autolinker');
 
 let regdateCache = {};
 
-BH.regdate = function (target, callback) {
-	target = toId(target);
-	if (regdateCache[target]) return callback(regdateCache[target]);
-	let options = {
-		host: 'pokemonshowdown.com',
-		port: 80,
-		path: '/users/' + target + '.json',
-		method: 'GET',
-	};
-	http.get(options, function (res) {
-		let data = '';
-		res.on('data', function (chunk) {
-			data += chunk;
-		}).on('end', function () {
-			data = JSON.parse(data);
-			let date = data['registertime'];
-			if (date !== 0 && date.toString().length < 13) {
-				while (date.toString().length < 13) {
-					date = Number(date.toString() + '0');
+regdate: function (target, callback) {
+		target = toId(target);
+		if (regdateCache[target]) return callback(regdateCache[target]);
+		let req = https.get('https://pokemonshowdown.com/users/' + target + '.json', res => {
+			let data = '';
+			res.on('data', chunk => {
+				data += chunk;
+			}).on('end', () => {
+				try {
+					data = JSON.parse(data);
+				} catch (e) {
+					return callback(false);
 				}
-			}
-			if (date !== 0) {
-				regdateCache[target] = date;
-				saveRegdateCache();
-			}
-			callback((date === 0 ? false : date));
+				let date = data['registertime'];
+				if (date !== 0 && date.toString().length < 13) {
+					while (date.toString().length < 13) {
+						date = Number(date.toString() + '0');
+					}
+				}
+				if (date !== 0) {
+					regdateCache[target] = date;
+					saveRegdateCache();
+				}
+				callback((date === 0 ? false : date));
+			});
 		});
-	});
-};
+		req.end();
+	},
 
-// last two functions needed to make sure EM.regdate() fully works
+// last two functions needed to make sure BH.regdate() fully works
 function loadRegdateCache() {
 	try {
 		regdateCache = JSON.parse(fs.readFileSync('config/regdate.json', 'utf8'));
