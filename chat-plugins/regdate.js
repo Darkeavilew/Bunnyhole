@@ -6,7 +6,7 @@ const Autolinker = require('autolinker');
 
 let regdateCache = {};
 
-exports.WL = {
+exports.BH = {
 	messageSeniorStaff: function (message, pmName, from) {
 		pmName = (pmName ? pmName : '~Bunnyhole Server');
 		from = (from ? ' (PM from ' + from + ')' : '');
