@@ -130,6 +130,7 @@ exports.commands = {
 		this.sendReply(target + ' has been removed from your friend list.');
 	},
 
+	friendslist: 'friendlist',
 	friendlist: function (room, user) {
 		this.sendReplyBox('/friends list of friends' + BR + '/addfriend to add a friend' + BR + '/removefriend to remove a friend' + BR + BR + 'Friendlist made by Niisama');
 	},
