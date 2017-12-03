@@ -771,6 +771,7 @@ class User {
 			if (user.namelocked) user.named = true;
 
 			Rooms.global.checkAutojoin(user);
+			BH.giveDailyReward(user);
 			Chat.loginfilter(user, this, userType);
 			return true;
 		}
@@ -778,6 +779,7 @@ class User {
 		// rename success
 		if (this.forceRename(name, registered)) {
 			Rooms.global.checkAutojoin(this);
+			BH.giveDailyReward(this);
 			Chat.loginfilter(this, null, userType);
 			return true;
 		}
