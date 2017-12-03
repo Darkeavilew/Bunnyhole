@@ -103,7 +103,6 @@ BH.messageSeniorStaff = function (message, pmName, from) {
 		}
 		Economy.writeMoney(user.userid, reward);
 		user.send('|popup||wide||html| <center><u><b><font size="3">Bunnyhole Daily Bonus</font></b></u><br>You have been awarded ' + reward + ' Stardust.<br>' + showDailyRewardAni(reward) + '<br>Because you have connected to the server for the past ' + (reward === 1 ? 'Day' : reward + ' Days') + '.</center>');
-	},
 };
 
 // last two functions needed to make sure WL.regdate() fully works
