@@ -6,7 +6,7 @@ const Autolinker = require('autolinker');
 
 let regdateCache = {};
 
-	regdate: function (target, callback) {
+BH.regdate: function (target, callback) {
 		target = toId(target);
 		if (regdateCache[target]) return callback(regdateCache[target]);
 		let req = https.get('https://pokemonshowdown.com/users/' + target + '.json', res => {
