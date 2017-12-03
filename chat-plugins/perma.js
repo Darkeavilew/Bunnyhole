@@ -51,7 +51,7 @@ exports.commands = {
 		target = toId(target);
 		if (Db('userType').get(target, 0) < 5) return this.errorReply(target + ' is not permalocked.');
 		if (Db('userType').get(target, 0) === 6) return this.errorReply(target + ' is permabanned. If you want to unpermaban them, use /unpermaban');
-		Db.userType.set(target, 0);
+		Db('userType').set(target, 0);
 		Punishments.unlock(target);
 		if (Users(target)) Users(target).popup('Your permalock was lifted by ' + user.name + '.');
 		if (Rooms('upperstaff')) Monitor.adminlog('[PermaMonitor] ' + user.name + ' has unpermalocked ' + target + '.');
