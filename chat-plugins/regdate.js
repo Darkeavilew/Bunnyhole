@@ -6,8 +6,7 @@ const Autolinker = require('autolinker');
 
 let regdateCache = {};
 
-exports.BH = {
-	messageSeniorStaff: function (message, pmName, from) {
+BH.messageSeniorStaff = function (message, pmName, from) {
 		pmName = (pmName ? pmName : '~Bunnyhole Server');
 		from = (from ? ' (PM from ' + from + ')' : '');
 		Users.users.forEach(curUser => {
@@ -21,8 +20,8 @@ exports.BH = {
 	// usage: BH.messageSeniorStaff('Mystifi is a confirmed user and they were banned from a public room. Assess the situation immediately.', '~Server')
 	//
 	// this makes a PM from ~Server stating the message
-
-	regdate: function (target, callback) {
+	
+	BH.regdate = function (target, callback) {
 		target = toId(target);
 		if (regdateCache[target]) return callback(regdateCache[target]);
 		let req = https.get('https://pokemonshowdown.com/users/' + target + '.json', res => {
@@ -52,7 +51,7 @@ exports.BH = {
 	},
 
 	/* eslint-disable no-useless-escape */
-	parseMessage: function (message) {
+	BH.parseMessage = function (message) {
 		if (message.substr(0, 5) === "/html") {
 			message = message.substr(5);
 			message = message.replace(/\_\_([^< ](?:[^<]*?[^< ])?)\_\_(?![^<]*?<\/a)/g, '<i>$1</i>'); // italics
@@ -72,18 +71,18 @@ exports.BH = {
 	},
 	/* eslint-enable no-useless-escape */
 
-	randomString: function (length) {
+	BH.randomString = function (length) {
 		return Math.round((Math.pow(36, length + 1) - Math.random() * Math.pow(36, length))).toString(36).slice(1);
 	},
 
-	reloadCSS: function () {
+	BH.reloadCSS = function () {
 		const cssPath = 'wavelength'; // This should be the server id if Config.serverid doesn't exist. Ex: 'serverid'
 		let req = https.get('https://play.pokemonshowdown.com/customcss.php?server=' + (Config.serverid || cssPath), () => {});
 		req.end();
 	},
 
 	//Daily Rewards System for Wavelength by Lord Haji
-	giveDailyReward: function (user) {
+	BH.giveDailyReward = function (user) {
 		if (!user || !user.named) return false;
 		let reward = 0, time = Date.now();
 		for (let ip in user.ips) {
