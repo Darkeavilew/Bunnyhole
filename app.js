@@ -115,6 +115,8 @@ Verifier.PM.spawn();
 
 global.Tournaments = require('./tournaments');
 
+global.Ontime = {};
+
 global.Dnsbl = require('./dnsbl');
 Dnsbl.loadDatacenters();
 
