@@ -61,6 +61,7 @@ let shopDisplay = getShopDisplay(shop);
  * @param {Array} shop
  * @return {String} display
  */
+/*
 function getShopDisplay(shop) {
 	let display = "<center><img src=https://i.imgur.com/HuJ822H.gif><img src=https://i.imgur.com/SW8D5HQ.png width=250> <img src=https://i.imgur.com/HuJ822H.gif></center><br><div' + (!this.isOfficial ? ' class=infobox-limited' : '') + '><table style='background: #D7DF01; border-color: #000000; border-radius: 8px' border='1' cellspacing='0' cellpadding='5' width='100%'>" +
 		"<tbody><tr><th><font color=#000000 face=courier>Item</font></th><th><font color=#000000 face=courier>Description</font></th><th><font color=#000000 face=courier>Price</font></th></tr>";
@@ -76,7 +77,7 @@ function getShopDisplay(shop) {
 	display += "</tbody></table></div><br><center><font color=#000 face=courier>To buy an item from the shop, use /buy <em>Item</em>. If you have any questions please contact an admin or global staff member.</font></center>";
 	return display;
 }
-
+*/
 let Economy = global.Economy = {
 	/**
  	* Reads the specified user's money.
@@ -172,7 +173,7 @@ function handleBoughtItem(item, user, cost) {
 		this.sendReply('You can now set your team!');
 	} else {
 		let msg = '**' + user.name + " has bought " + item + ".**";
-		Rooms.rooms.get("staff").add('|c|~Spark Server|' + msg);
+		Rooms.rooms.get("staff").add('|c|~Bunnyhole Server|' + msg);
 		Rooms.rooms.get("staff").update();
 		Users.users.forEach(function (user) {
 			if (user.group === '~' || user.group === '&' || user.group === '@') {
