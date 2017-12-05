@@ -44,7 +44,7 @@ exports.commands = {
 
 		case 'buy':
 		case 'join':
-			if (!EM.lottery.gameActive) return this.errorReply("The game of lottery is not currently running.");
+			if (!BH.lottery.gameActive) return this.errorReply("The game of lottery is not currently running.");
 			if (!this.canTalk()) return this.errorReply("You cannot do this while unable to talk.");
 			if (parts[1]) {
 				if (isNaN(Number(parts[1]))) return this.errorReply("The amount of tickets you buy must be a number.");
