@@ -53,7 +53,7 @@ let shop = [
 	['Room', 'Buys a chatroom for you to own. (within reason, can be refused).', 50],
 ];
 
-let shopDisplay = getShopDisplay(shop);
+/*let shopDisplay = getShopDisplay(shop);*/
 
 /**
  * Displays the shop
