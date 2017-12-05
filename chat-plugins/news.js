@@ -83,7 +83,7 @@ exports.commands = {
 			if (Db('NewsSubscribers').has(user.userid)) return this.errorReply("You are alreading subscribing Bunnyhole News.");
 			Db('NewsSubscribers').set(user.userid, true);
 			this.sendReply("You have subscribed Bunnyhole News.");
-			this.popupReply("|wide||html|You will receive Spark News automatically once you connect to the Bunnyhole server next time.<br><hr><center><button class='button' name='send' value ='/news'>View News</button></center>");
+			this.popupReply("|wide||html|You will receive Bunnyhole News automatically once you connect to the Bunnyhole server next time.<br><hr><center><button class='button' name='send' value ='/news'>View News</button></center>");
 		},
 		unsubscribe: function (target, room, user) {
 			if (!user.named) return this.errorReply('You must choose a name before unsubscribing');
