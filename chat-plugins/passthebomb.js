@@ -90,7 +90,7 @@ class PassTheBomb {
 		this.release = setTimeout(() => {
 			this.setBomb();
 			let player = this.players.get(this.holder).name;
-			this.room.add('|uhtmlchange|' + this.getMsg() + '<br><b style = "font-size: 10pt;">The bomb has been passed to <span style = "color:' + EM.nameColor(this.holder) + '">' + Chat.escapeHTML(player) + '</span>!</b></div>').update();
+			this.room.add('|uhtmlchange|' + this.getMsg() + '<br><b style = "font-size: 10pt;">The bomb has been passed to <span style = "color:' + BH.nameColor(this.holder) + '">' + Chat.escapeHTML(player) + '</span>!</b></div>').update();
 			this.canPass = true;
 			this.resetTimer();
 		}, (Math.floor(Math.random() * 12) + 3) * 1000);
