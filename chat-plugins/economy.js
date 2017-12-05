@@ -336,12 +336,12 @@ exports.commands = {
 		user.popup("|wide|" + output);
 	},
 
-	store: 'shop',
+	/*store: 'shop',
 	shop: function (target, room, user) {
 		if (!this.runBroadcast()) return;
 		return this.sendReply("|raw|" + shopDisplay);
 	},
-	shophelp: ["/shop - Display items you can buy with money."],
+	shophelp: ["/shop - Display items you can buy with money."],*/
 
 	buy: function (target, room, user) {
 		if (!target) return this.parse('/help buy');
