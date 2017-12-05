@@ -48,7 +48,7 @@ const messages = [
  exports.commands = {
 	hoster: {
         	add: function (target, room, user, userid) {
-			if (!this.userid == 'alfastorm') return this.errorReply('This command can only be used by AlfaStorm');
+			if (!this.userid == 'alfastorm' || 'fairyserena') return this.errorReply('This command can only be used by AlfaStorm or Fairy Serena');
 			let hoster = toId(target);
 			if (!hoster) return this.parse('/hoster');
 			if (isHoster(hoster)) return this.errorReply(hoster + ' is already a vip.');
