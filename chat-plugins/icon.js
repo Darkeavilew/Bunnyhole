@@ -57,7 +57,7 @@ exports.commands = {
 			if (target.length !== 2) return this.parse('/help icon');
 			if (toId(target[0]).length > 19) return this.errorReply("Usernames are not this long...");
 			if (icons[toId(target[0])]) return this.errorReply("This user already has a custom userlist icon.  Do /icon delete [user] and then set their new icon.");
-			this.sendReply("|raw|You have given " + EM.nameColor(target[0], true) + " an icon.");
+			this.sendReply("|raw|You have given " + BH.nameColor(target[0], true) + " an icon.");
 			Monitor.adminlog(target[0] + " has received an icon from " + user.name + ".");
 			this.privateModCommand("|raw|(" + target[0] + " has recieved icon: <img src='" + target[1] + "' width='32' height='32'> from " + user.name + ".)");
 			if (Users(target[0]) && Users(target[0]).connected) Users(target[0]).popup("|html|" + BH.nameColor(user.name, true) + " has set your userlist icon to: <img src='" + target[1] + "' width='32' height='32'><br><center>Refresh, If you don't see it.</center>");
