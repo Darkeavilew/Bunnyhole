@@ -58,7 +58,7 @@ class Blackjack {
 	}
 	end(force, user) {
 		if (force) {
-			this.add("(Blackjack forcibly ended by " + EM.nameColor(user) + ")", true);
+			this.add("(Blackjack forcibly ended by " + BH.nameColor(user) + ")", true);
 			if (this.curUser !== "") this.players[this.curUser].user.sendTo(this.room.id, '|uhtmlchange|user-bj-' + this.id + '|');
 		}
 		let winners = [];
