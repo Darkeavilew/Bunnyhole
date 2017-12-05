@@ -12,38 +12,12 @@ let geoip = require('geoip-lite-country');
 // fill in '' with the server IP
 let serverIp = Config.serverIp;
 
-function isDev(user) {
-	if (!user) return;
-	if (typeof user === 'object') user = user.userid;
-	let dev = Db('devs').get(toId(user));
-	if (dev === 1) return true;
-	return false;
-}
-
-function isVIP(user) {
-	if (!user) return;
-	if (typeof user === 'object') user = user.userid;
-	let vip = Db('vips').get(toId(user));
-	if (vip === 1) return true;
-	return false;
-}
-
 function showTitle(userid) {
 	userid = toId(userid);
 	if (Db('titles').has(userid)) {
 		return '<font color="' + Db('titles').get(userid)[1] +
 			'">(<strong>' + Db('titles').get(userid)[0] + '</strong>)</font>';
 	}
-	return '';
-}
-
-function devCheck(user) {
-	if (isDev(user)) return '<font color="#009320">(<strong>Developer</strong>)</font>';
-	return '';
-}
-
-function vipCheck(user) {
-	if (isVIP(user)) return '<font color="#6390F0">(<strong>VIP User</strong>)</font>';
 	return '';
 }
 
@@ -66,111 +40,7 @@ function showBadges(user) {
 	return '';
 }
 
-function lastActive(user) {
-	if (!Users(user)) return false;
-	user = Users(user);
-	return (user && user.lastMessageTime ? Chat.toDurationString(Date.now() - user.lastMessageTime, {precision: true}) : "hasn't talked yet");
-}
-
 exports.commands = {
-	dev: {
-		give: function (target, user) {
-			if (!this.can('ban')) return false;
-			if (!target) return this.parse('/help', true);
-			let devUsername = toId(target);
-			if (devUsername.length > 18) return this.errorReply("Usernames cannot exceed 18 characters.");
-			if (isDev(devUsername)) return this.errorReply(devUsername + " is already a DEV user.");
-			Db('devs').set(devUsername, 1);
-			this.sendReply('|html|' + BH.nameColor(devUsername, true) + " has been given DEV status.");
-			if (Users.get(devUsername)) Users(devUsername).popup("|html|You have been given DEV status by " + BH.nameColor(user.name, true) + ".");
-		},
-
-		take: function (target, user) {
-			if (!this.can('ban')) return false;
-			if (!target) return this.parse('/help', true);
-			let devUsername = toId(target);
-			if (devUsername.length > 18) return this.errorReply("Usernames cannot exceed 18 characters.");
-			if (!isDev(devUsername)) return this.errorReply(devUsername + " isn't a DEV user.");
-			Db('devs').delete(devUsername);
-			this.sendReply("|html|" + BH.nameColor(devUsername, true) + " has been demoted from DEV status.");
-			if (Users.get(devUsername)) Users(devUsername).popup("|html|You have been demoted from DEV status by " + BH.nameColor(user.name, true) + ".");
-		},
-
-		users: 'list',
-		list: function () {
-			if (!Db('devs').keys().length) return this.errorReply('There seems to be no user with DEV status.');
-			let display = [];
-			Db('devs').keys().forEach(devUser => {
-				display.push(BH.nameColor(devUser, (Users(devUser) && Users(devUser).connected)));
-			});
-			this.popupReply('|html|<strong><u><font size="3"><center>DEV Users:</center></font></u></strong>' + display.join(','));
-		},
-
-		'': 'help',
-		help: function () {
-			this.sendReplyBox(
-				'<div style="padding: 3px 5px;"><center>' +
-				'<code>/dev</code> commands.<br />These commands are nestled under the namespace <code>dev</code>.</center>' +
-				'<hr width="100%">' +
-				'<code>give [username]</code>: Gives <code>username</code> DEV status. Requires: & ~' +
-				'<br />' +
-				'<code>take [username]</code>: Takes <code>username</code>\'s DEV status. Requires: & ~' +
-				'<br />' +
-				'<code>list</code>: Shows list of users with DEV Status.' +
-				'</div>'
-			);
-		},
-	},
-
-	vip: {
-		give: function (target, room, user) {
-			if (!this.can('ban')) return false;
-			if (!target) return this.parse('/help', true);
-			let vipUsername = toId(target);
-			if (vipUsername.length > 18) return this.errorReply("Usernames cannot exceed 18 characters.");
-			if (isVIP(vipUsername)) return this.errorReply(vipUsername + " is already a VIP user.");
-			Db('vips').set(vipUsername, 1);
-			this.sendReply("|html|" + BH.nameColor(vipUsername, true) + " has been given VIP status.");
-			if (Users.get(vipUsername)) Users(vipUsername).popup("|html|You have been given VIP status by " + BH.nameColor(user.name, true) + ".");
-		},
-
-		take: function (target, room, user) {
-			if (!this.can('ban')) return false;
-			if (!target) return this.parse('/help', true);
-			let vipUsername = toId(target);
-			if (vipUsername.length > 18) return this.errorReply("Usernames cannot exceed 18 characters.");
-			if (!isVIP(vipUsername)) return this.errorReply(vipUsername + " isn't a VIP user.");
-			Db('vips').delete(vipUsername);
-			this.sendReply("|html|" + BH.nameColor(vipUsername, true) + " has been demoted from VIP status.");
-			if (Users.get(vipUsername)) Users(vipUsername).popup("|html|You have been demoted from VIP status by " +BH.nameColor(user.name, true) + ".");
-		},
-
-		users: 'list',
-		list: function (target, room, user) {
-			if (!Db('vips').keys().length) return this.errorReply('There seems to be no user with VIP status.');
-			let display = [];
-			Db('vips').keys().forEach(vipUser => {
-				display.push(BH.nameColor(vipUser, (Users(vipUser) && Users(vipUser).connected)));
-			});
-			this.popupReply('|html|<strong><u><font size="3"><center>VIP Users:</center></font></u></strong>' + display.join(','));
-		},
-
-		'': 'help',
-		help: function (target, room, user) {
-			this.sendReplyBox(
-				'<div style="padding: 3px 5px;"><center>' +
-				'<code>/vip</code> commands.<br />These commands are nestled under the namespace <code>vip</code>.</center>' +
-				'<hr width="100%">' +
-				'<code>give [username]</code>: Gives <code>username</code> VIP status. Requires: & ~' +
-				'<br />' +
-				'<code>take [username]</code>: Takes <code>username</code>\'s VIP status. Requires: & ~' +
-				'<br />' +
-				'<code>list</code>: Shows list of users with VIP Status' +
-				'</div>'
-			);
-		},
-	},
-
 	title: 'customtitle',
 	customtitle: {
 		set: 'give',
@@ -505,21 +375,6 @@ exports.commands = {
 		"/nature delete - Removes your Profile Nature.",
 	],
 
-	'!lastactive': true,
-	checkactivity: 'lastactive',
-	lastactive: function (target, room, user) {
-		if (!target) target = user.name;
-		const targetId = toId(target);
-		if (target.length > 18) return this.errorReply("Usernames cannot exceed 18 characters.");
-		if (!this.runBroadcast()) return;
-		let username = (targetId ? targetId.name : target);
-		let online = (targetId ? targetId.connected : false);
-		if (online && lastActive(toId(username))) {
-			return this.sendReplyBox(BH.nameColor(targetId, true) + ' was last active: ' + lastActive(toId(username)) + '.');
-		}
-	},
-	lastactivehelp: ["/lastactive - Shows how long ago it has been since a user has posted a message."],
-
 	'!profile': true,
 	profile: function (target, room, user) {
 		target = toId(target);
@@ -546,13 +401,6 @@ exports.commands = {
 			}
 			showProfile();
 		});
-
-		function getLastSeen(userid) {
-			if (Users(userid) && Users(userid).connected) return '<font color = "limegreen"><strong>Currently Online</strong></font>';
-			let seen = Db('seen').get(userid);
-			if (!seen) return '<font color = "red"><strong>Never</strong></font>';
-			return Chat.toDurationString(Date.now() - seen, {precision: true}) + " ago.";
-		}
 
 		function getFlag(userid) {
 			let ip = (Users(userid) ? geoip.lookup(Users(userid).latestIp) : false);
@@ -631,9 +479,6 @@ exports.commands = {
 				profile += background(toId(username)) + showBadges(toId(username));
 				profile += '<img src="' + avatar + '" height="80" width="80" align="left">';
 				profile += '&nbsp;<font color="#24678d"><strong>Name:</strong></font> ' + BH.nameColor(username, true) + '&nbsp;' + getFlag(toId(username)) + ' ' + showTitle(username) + '<br />';
-				profile += '&nbsp;<font color="#24678d"><strong>Group:</strong></font> ' + userGroup + ' ' + devCheck(username) + vipCheck(username) + '<br />';
-				profile += '&nbsp;<font color="#24678d"><strong>Registered:</strong></font> ' + regdate + '<br />';
-				profile += '&nbsp;<font color="#24678d"><strong>' + moneyPlural + ':</strong></font> ' + money + '<br />';
 				if (Db('pokemon').has(toId(username))) {
 					profile += '&nbsp;<font color="#24678d"><strong>Favorite Pokemon:</strong></font> ' + Db('pokemon').get(toId(username)) + '<br />';
 				}
@@ -643,7 +488,6 @@ exports.commands = {
 				if (Db('nature').has(toId(username))) {
 					profile += '&nbsp;<font color="#24678d"><strong>Nature:</strong></font> ' + Db('nature').get(toId(username)) + '<br />';
 				}
-				profile += '&nbsp;<font color="#24678d"><strong>Last Seen:</strong></font> ' + getLastSeen(toId(username)) + '</font><br />';
 				if (Db('friendcode').has(toId(username))) {
 					profile += '&nbsp;<font color="#24678d"><strong>Friend Code:</strong></font> ' + Db('friendcode').get(toId(username)) + '<br />';
 				}
@@ -671,9 +515,5 @@ exports.commands = {
 		"/bg delete [user] - Removes the user's profile background. Requires + or higher.",
 		"/fc set [friend code] - Sets your Friend Code.",
 		"/fc delete [friend code] - Removes your Friend Code.",
-		"/dev give [user] - Gives a user Dev Status. Requires @ or higher.",
-		"/dev take [user] - Removes a user's Dev Status. Requires @ or higher.",
-		"/vip give [user] - Gives a user VIP Status. Requires @ or higher.",
-		"/vip take [user] - Removes a user's VIP Status. Requires @ or higher.",
 	],
 };
