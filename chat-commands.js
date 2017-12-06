@@ -34,7 +34,7 @@ exports.commands = {
 		this.sendReplyBox("Server version: <b>" + Chat.package.version + "</b>");
 	},
 
-	'!authority': true,
+	/*'!authority': true,
 	auth: 'authority',
 	stafflist: 'authority',
 	globalauth: 'authority',
@@ -67,7 +67,7 @@ exports.commands = {
 
 		if (!buffer.length) return connection.popup("This server has no global authority.");
 		connection.popup(buffer.join("\n\n"));
-	},
+	},*/
 	authhelp: ["/auth - Show global staff for the server.",
 		"/auth [room] - Show what roomauth a room has.",
 		"/auth [user] - Show what global and roomauth a user has."],
@@ -1228,19 +1228,22 @@ exports.commands = {
 		}
 
 		let buffer = Object.keys(rankLists).sort((a, b) =>
-			(Config.groups[b] || {rank: 0}).rank - (Config.groups[a] || {rank: 0}).rank
+			(Config.groups[b] || {rank:0}).rank - (Config.groups[a] || {rank:0}).rank
 		).map(r => {
 			let roomRankList = rankLists[r].sort();
-			roomRankList = roomRankList.map(s => s in targetRoom.users ? "**" + s + "**" : s);
-			return (Config.groups[r] ? Config.groups[r].name + "s (" + r + ")" : r) + ":\n" + roomRankList.join(", ");
+			roomRankList = roomRankList.map(s => ((Users(s) && Users(s).connected) ? EM.nameColor(s, true) : EM.nameColor(s)));
+			return (Config.groups[r] ? Chat.escapeHTML(Config.groups[r].name) + "s (" + Chat.escapeHTML(r) + ")" : r) + ":\n" + roomRankList.join(", ");
 		});
 
 		if (!buffer.length) {
 			connection.popup("The room '" + targetRoom.title + "' has no auth." + userLookup);
 			return;
 		}
+		if (targetRoom.founder) {
+			buffer.unshift((targetRoom.founder ? "Room Founder:\n" + ((Users(targetRoom.founder) && Users(targetRoom.founder).connected) ? EM.nameColor(targetRoom.founder, true) : EM.nameColor(targetRoom.founder)) : ''));
+		}
 		if (targetRoom !== room) buffer.unshift("" + targetRoom.title + " room auth:");
-		connection.popup(buffer.join("\n\n") + userLookup);
+		connection.send("|popup||html|" + buffer.join("\n\n") + userLookup);
 	},
 
 	'!userauth': true,
