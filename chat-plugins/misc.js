@@ -56,7 +56,7 @@ const messages = [
 			this.sendReply(hoster + ' has been granted with vip status.');
 		},
 	       	remove: function (target, room, user) {
-			var userid = user.userid;    	
+			let userid = user.userid;    	
 			if (!isHoster(userid)) return false;
 			let hoster = toId(target);
 			if (!hoster) return this.parse('/hoster');
@@ -65,7 +65,7 @@ const messages = [
 			this.sendReply(hoster + '\'s vip status has been taken.');
 		},
 			list: function (target, room, user) {
-			var userid = user.userid;    	
+			let userid = user.userid;    	
 			if (!isHoster(userid)) return false;
 			if (!Object.keys(Db('hoster').object()).length) return this.errorReply('There seems to be no user with vip status.');
 			user.popup('|html|<center><b><u>Super Administrators.</u></b></center>' + '<br /><br />' + Object.keys(Db('hoster').object()).join('</strong><br />'));
@@ -86,15 +86,15 @@ const messages = [
 		if (Config.poofOff) return this.sendReply("Poof is currently disabled.");
 		if (target && !this.can('broadcast')) return false;
 		if (room.id !== 'lobby') return false;
-		var message = target || messages[Math.floor(Math.random() * messages.length)];
+		let message = target || messages[Math.floor(Math.random() * messages.length)];
 		if (message.indexOf('{{user}}') < 0) {
 			message = '{{user}} ' + message;
 		}
 		message = message.replace(/{{user}}/g, user.name);
 		if (!this.canTalk(message)) return false;
 
-		var colour = '#' + [1, 1, 1].map(function () {
-			var part = Math.floor(Math.random() * 0xaa);
+		let colour = '#' + [1, 1, 1].map(function () {
+			let part = Math.floor(Math.random() * 0xaa);
 			return (part < 0x10 ? '0' : '') + part.toString(16);
 		}).join('');
 
@@ -178,9 +178,9 @@ staff: 'authlist',
 	stafflist: 'authlist',
 	auth: 'authlist',
 	authlist: function(target, room, user, connection) {
-		var ignoreUsers = ['deltaskiez'];
+		let ignoreUsers = ['deltaskiez'];
 		fs.readFile('config/usergroups.csv', 'utf8', function(err, data) {
-			var staff = {
+			let staff = {
 				"admins": [],
 				"leaders": [],
 				"bots": [],
@@ -188,11 +188,11 @@ staff: 'authlist',
 				"drivers": [],
 				"voices": [],
 			};
-			var row = ('' + data).split('\n');
-			for (var i = row.length; i > -1; i--) {
+			let row = ('' + data).split('\n');
+			for (let i = row.length; i > -1; i--) {
 				if (!row[i]) continue;
-				var rank = row[i].split(',')[1].replace("\r", '');
-				var person = row[i].split(',')[0];
+				let rank = row[i].split(',')[1].replace("\r", '');
+				let person = row[i].split(',')[0];
 				function formatName (name) {
 					if (Users.getExact(name) && Users(name).connected) {
 						return '<i><b><font style="color:' + BH.Color(Users.getExact(name).name) + '">' + (Users.getExact(name).name) + '</font><b></i>';
@@ -200,7 +200,7 @@ staff: 'authlist',
 						return '<font style="color:' + BH.Color(name) + '">' + (name) + '</font>';
 					}
 				}
-				var personId = toId(person);
+				let personId = toId(person);
 				switch (rank) {
 					case '~':
 						if (~ignoreUsers.indexOf(personId)) break;
@@ -352,7 +352,7 @@ staff: 'authlist',
 	},
 	image: 'showimage',
 	showimage: function (target, room, user) {
-		if (!target) return this.errorReply('Usa: /image link, size');
+		if (!target) return this.errorReply('Use: /image link, size');
 		if (!this.can('mute', room)) return false;
 
 		let targets = target.split(',');
@@ -365,7 +365,7 @@ staff: 'authlist',
 	
 		cssedit: function (target, room, user, connection) {
 		if (!user.hasConsoleAccess(connection)) {return this.sendReply("/cssedit - Access denied.");}
-		var fsscript = require('fs');
+		let fsscript = require('fs');
 		if (!target) {
 			if (!fsscript.existsSync('config/custom.css')) return this.sendReply("custom.css does not exist.");
 			return this.sendReply("|raw|<div class=\"infobox\"><div class=\"infobox-limited\">" + fsscript.readFileSync('config/custom.css').toString() + "</div></div>");
@@ -391,12 +391,12 @@ staff: 'authlist',
 
 	clearall: function (target, room, user, connection) {
 		if (!this.can('clearall')) return;
-		var len = room.log.length,
+		let len = room.log.length,
 			users = [];
 		while (len--) {
 			room.log[len] = '';
 		}
-		for (var user in room.users) {
+		for (let user in room.users) {
 			users.push(user);
 			Users.get(user).leaveRoom(room, Users.get(user).connections[0]);
 		}
@@ -412,7 +412,7 @@ staff: 'authlist',
 	kick: function (target, room, user) {
 		if (!target) return;
 		target = this.splitTarget(target);
-		var targetUser = this.targetUser;
+		let targetUser = this.targetUser;
 		if (!targetUser || !targetUser.connected) {
 			return this.sendReply("User " + this.targetUsername + " not found.");
 		}
@@ -420,7 +420,7 @@ staff: 'authlist',
 			return this.sendReply("User " + this.targetUsername + " is not in the room " + room.id + ".");
 		}
 		if (!this.can('kick', targetUser, room)) return false;
-		var msg = "kicked from room " + room.id + " by " + user.name + (target ? " (" + target + ")" : "") + ".";
+		let msg = "kicked from room " + room.id + " by " + user.name + (target ? " (" + target + ")" : "") + ".";
 		this.addModCommand("" + targetUser.name + " was " + msg);
 		targetUser.popup("You have been " + msg);
 		targetUser.leaveRoom(room);
