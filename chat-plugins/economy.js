@@ -6,8 +6,8 @@ const fs = require('fs');
 // Ideally, this should be zero.
 const DEFAULT_AMOUNT = 0;
 
-global.currencyName = 'Buck';
-global.currencyPlural = 'Bucks';
+global.currencyName = 'PokeDollar';
+global.currencyPlural = 'PokeDollars';
 
 let Economy = global.Economy = {
 	/**
