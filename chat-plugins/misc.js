@@ -389,6 +389,28 @@ staff: 'authlist',
 		}
 	},
 
+	disableintroscroll: function (target, room, user) {
+		if (!this.can('roomowner')) return false;
+		if (!target) return this.errorReply("No Room Specified");
+		target = toId(target);
+		if (!Rooms(target)) return this.errorReply(`${target} is not a room`);
+		if (Db('disabledScrolls').has(target)) return this.errorReply(`${Rooms(target).title} has roomintro scroll disabled.`);
+		Db('disabledScrolls').set(target, true);
+		Monitor.adminlog(user.name + ` has disabled the roomintro scroll bar for ${Rooms(target).title}.`);
+	},
+
+	disableintroscrollhelp: ["/disableintroscroll [room] - Disables scroll bar preset in the room's roomintro."],
+	enableintroscroll: function (target, room, user) {
+		if (!this.can('roomowner')) return false;
+		if (!target) return this.errorReply("No Room Specified");
+		target = toId(target);
+		if (!Rooms(target)) return this.errorReply(`${target} is not a room`);
+		if (!Db('disabledScrolls').has(target)) return this.errorReply(`${Rooms(target).title} has roomintro scroll enabled.`);
+		Db('disabledScrolls').delete(target);
+		Monitor.adminlog(user.name + ` has enabled the roomintro scroll bar for ${Rooms(target).title}.`);
+	},
+	enableintroscrollhelp: ["/enableintroscroll [room] - Enables scroll bar preset in the room's roomintro."],
+
 	clearall: function (target, room, user, connection) {
 		if (!this.can('clearall')) return;
 		let len = room.log.length,
