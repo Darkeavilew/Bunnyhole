@@ -288,7 +288,7 @@ exports.commands = {
 		this.sendReplyBox(rankLadder('Richest Users', currencyPlural, keys.slice(0, target), 'money') + '</div>');
 	},
 
-	resetstardust: 'resetmoney',
+	resetbucks: 'resetmoney',
 	resetmoney: function (target, room, user) {
 		if (!this.can('roomowner')) return false;
 		if (!target) return this.parse('/help resetmoney');
