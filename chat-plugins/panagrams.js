@@ -62,11 +62,11 @@ class Panagram {
 
 	guess(user, guess) {
 		if (guess.species === this.answer.species) {
-			this.room.add(`|html|${Server.nameColor(user.name, true)} guessed <strong>${guess.species}</strong>, which was the correct answer! This user has also won 1 ${moneyName}!`);
+			this.room.add(`|html|${BH.nameColor(user.name, true)} guessed <strong>${guess.species}</strong>, which was the correct answer! This user has also won 1 ${moneyName}!`);
 			Economy.writeMoney(user.userid, 1);
 			this.end();
 		} else {
-			this.room.add(`|html|${Server.nameColor(user.name, true)} guessed <strong>${guess.species}</strong>, but was not the correct answer...`);
+			this.room.add(`|html|${BH.nameColor(user.name, true)} guessed <strong>${guess.species}</strong>, but was not the correct answer...`);
 			this.guessed[toId(guess.species)] = user.userid;
 		}
 	}
@@ -145,7 +145,7 @@ exports.commands = {
 		if (!this.can('ban', null, room)) return this.sendReply("You must be ranked @ or higher to end a game of panagram in this room.");
 
 		let skipCmd = ((cmd === 'panagramskip' || cmd === 'pskip') && pGames[room.id].sessions > 1);
-		if (skipCmd) room.add(`|html|The current session of panagram has been ended by ${Server.nameColor(user.name, true)}. The answer was <strong>${pGames[room.id].answer.species}</strong>.`);
+		if (skipCmd) room.add(`|html|The current session of panagram has been ended by ${BH.nameColor(user.name, true)}. The answer was <strong>${pGames[room.id].answer.species}</strong>.`);
 		pGames[room.id].end(!skipCmd);
 	},
 };
