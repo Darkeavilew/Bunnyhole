@@ -53,7 +53,7 @@ let Economy = global.Economy = {
 		}
 
 		let curTotal = Db('currency').get(userid, DEFAULT_AMOUNT);
-		Db.currency.set(userid, curTotal + amount);
+		Db('currency').set(userid, curTotal + amount);
 		let newTotal = Db('currency').get(userid);
 
 		if (callback && typeof callback === 'function') {
