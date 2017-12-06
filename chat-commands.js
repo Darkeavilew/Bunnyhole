@@ -1127,15 +1127,13 @@ exports.commands = {
 		if (!this.canTalk()) return;
 		if (!target) return this.parse('/help roompromote');
 
-		const force = target.startsWith('!!!');
-		if (force) target = target.slice(3);
 		target = this.splitTarget(target, true);
 		let targetUser = this.targetUser;
 		let userid = toId(this.targetUsername);
 		let name = targetUser ? targetUser.name : this.targetUsername;
 
 		if (!userid) return this.parse('/help roompromote');
-		if (!targetUser && !Users.isUsernameKnown(userid) && !force) {
+		if (!targetUser && !Users.isUsernameKnown(userid)) {
 			return this.errorReply(`User '${name}' is offline and unrecognized, and so can't be promoted.`);
 		}
 		if (targetUser && !targetUser.registered) {
@@ -1157,10 +1155,15 @@ exports.commands = {
 		}
 
 		let groupName = Config.groups[nextGroup].name || "regular user";
+		if (nextGroup === '#' && !user.can('pban')) return this.errorReply("Try /roomowner instead.");
+		if (room.auth[userid] && room.auth[userid] === '#' && !user.can('pban')) {
+			if (room.founder && room.founder !== user.userid) return this.errorReply("You do not have permission to use this command.  If you are the Room Founder and trying to demote another RO, try /deroomowner [user].");
+		}
+
 		if ((room.auth[userid] || Config.groupsranking[0]) === nextGroup) {
 			return this.errorReply(`User '${name}' is already a ${groupName} in this room.`);
 		}
-		if (!user.can('makeroom')) {
+		if (!user.can('makeroom') || !user.can('roomleader', null, room)) {
 			if (currentGroup !== ' ' && !user.can('room' + (Config.groups[currentGroup] ? Config.groups[currentGroup].id : 'voice'), null, room)) {
 				return this.errorReply(`/${cmd} - Access denied for promoting/demoting from ${(Config.groups[currentGroup] ? Config.groups[currentGroup].name : "an undefined group")}.`);
 			}
@@ -1178,6 +1181,7 @@ exports.commands = {
 		} else {
 			room.auth[userid] = nextGroup;
 		}
+		if (room.founder === userid && nextGroup !== '#') room.founder = false; //Must be a demotion as
 
 		// Only show popup if: user is online and in the room, the room is public, and not a groupchat or a battle.
 		let needsPopup = targetUser && room.users[targetUser.userid] && !room.isPrivate && !room.isPersonal && !room.battle;
@@ -1231,7 +1235,7 @@ exports.commands = {
 			(Config.groups[b] || {rank: 0}).rank - (Config.groups[a] || {rank: 0}).rank
 		).map(r => {
 			let roomRankList = rankLists[r].sort();
-			roomRankList = roomRankList.map(s => ((Users(s) && Users(s).connected) ? EM.nameColor(s, true) : EM.nameColor(s)));
+			roomRankList = roomRankList.map(s => ((Users(s) && Users(s).connected) ? BH.nameColor(s, true) : BH.nameColor(s)));
 			return (Config.groups[r] ? Chat.escapeHTML(Config.groups[r].name) + "s (" + Chat.escapeHTML(r) + ")" : r) + ":\n" + roomRankList.join(", ");
 		});
 
@@ -1240,7 +1244,7 @@ exports.commands = {
 			return;
 		}
 		if (targetRoom.founder) {
-			buffer.unshift((targetRoom.founder ? "Room Founder:\n" + ((Users(targetRoom.founder) && Users(targetRoom.founder).connected) ? EM.nameColor(targetRoom.founder, true) : EM.nameColor(targetRoom.founder)) : ''));
+			buffer.unshift((targetRoom.founder ? "Room Founder:\n" + ((Users(targetRoom.founder) && Users(targetRoom.founder).connected) ? BH.nameColor(targetRoom.founder, true) : BH.nameColor(targetRoom.founder)) : ''));
 		}
 		if (targetRoom !== room) buffer.unshift("" + targetRoom.title + " room auth:");
 		connection.send("|popup||html|" + buffer.join("\n\n") + userLookup);
