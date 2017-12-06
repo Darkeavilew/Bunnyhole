@@ -6,13 +6,13 @@ if (!room) {
 	Rooms.global.addChatRoom(ROOM_NAME);
 	room = Rooms.get(toId(ROOM_NAME));
 
-	room.isPrivate = true;
+	room.isPrivate = 'hidden';
 	room.staffRoom = true;
-	room.staffAutojoin = false;
+	room.staffAutojoin = true;
 	room.addedUsers = {};
 
 	if (room.chatRoomData) {
-		room.chatRoomData.isPrivate = true;
+		room.chatRoomData.isPrivate = 'hidden';
 		room.chatRoomData.staffRoom = true;
 		room.chatRoomData.staffAutojoin = true;
 		room.chatRoomData.addedUsers = room.addedUsers;
@@ -76,7 +76,9 @@ function intersectAndExclude(a, b) {
 let checkBannedCache = {};
 exports.checkBanned = function (user) {
 	let userId = toId(user);
+	if (Users(userId).isStaff || Users(userId).isSysop) return false;
 	if (userId in checkBannedCache) return checkBannedCache[userId];
+	if (Users(userId).shadowbanned) return true;
 	//console.log("Shadow ban cache miss:", userId);
 
 	let targets = Object.keys(getAllAlts(user)).sort();
@@ -148,15 +150,39 @@ exports.commands = {
 	spam: 'shadowban',
 	sban: 'shadowban',
 	shadowban: function (target, room, user) {
-		if (!target) return this.sendReply("/shadowban OR /sban [username], [secondary command], [reason] - Sends all the user's messages to the shadow ban room.");
+		if (!target) return this.parse('/help shadowban');
 
-		let params = this.splitTarget(target).split(',');
-		let action = params[0].trim().toLowerCase();
-		let reason = params.slice(1).join(',').trim();
-		if (!(action in Chat.commands)) {
-			action = 'mute';
-			reason = params.join(',').trim();
-		}
+		target = this.splitTarget(target).split(',');
+
+		if (!this.targetUser) return this.sendReply("User '" + this.targetUsername + "' not found.");
+		if (!this.can('lock', this.targetUser)) return;
+
+		if (this.targetUser.shadowbanned) return this.errorReply(`${this.targetUser.name} is already shadow banned.`);
+		this.targetUser.shadowbanned = true;
+		this.privateModCommand("(" + user.name + " has shadow banned: " + this.targetUser.name + (target.trim() ? " (" + target + ")" : "") + ")");
+	},
+	shadowbanhelp: ["/shadowban [username], (reason) - Sends all the user's messages to the shadow ban room. Requires %, @, &, ~"],
+
+	unspam: 'unshadowban',
+	unsban: 'unshadowban',
+	unshadowban: function (target, room, user) {
+		if (!target) return this.parse('/help unshadowban');
+		this.splitTarget(target);
+
+		if (!this.can('lock')) return;
+		if (!this.targetUser) return this.errorReply(`The user "${this.targetUsername}" was not found.`);
+		if (!this.targetUser.shadowbanned) return this.errorReply(`${this.targetUser.name} is not shadow banned.`);
+
+		this.targetUser.shadowbanned = false;
+		this.privateModCommand("(" + user.name + " has shadow unbanned: " + this.targetUser.name + ")");
+	},
+	unshadowbanhelp: ['/unshadowban [user] - Undoes a shadowban. Requires %, @, &, ~'],
+
+	permasban: 'permashadowban',
+	permashadowban: function (target, room, user) {
+		if (!target) return this.parse('/help permashadowban');
+
+		target = this.splitTarget(target).split(',');
 
 		if (!this.targetUser) return this.sendReply("User '" + this.targetUsername + "' not found.");
 		if (!this.can('lock', this.targetUser)) return;
@@ -165,15 +191,13 @@ exports.commands = {
 		if (targets.length === 0) {
 			return this.sendReply('||' + this.targetUsername + " is already shadow banned or isn't named.");
 		}
-		this.privateModCommand("(" + user.name + " has shadow banned: " + targets.join(", ") + (reason ? " (" + reason + ")" : "") + ")");
-
-		//return this.parse('/' + action + ' ' + toId(this.targetUser) + ',' + reason);
+		this.privateModCommand("(" + user.name + " has permanently shadow banned: " + targets.join(", ") + (target.trim() ? " (" + target + ")" : "") + ")");
 	},
+	permashadowbanhelp: ['/permashadowban [user] - Permanently shadow ban a user. Requires ~'],
 
-	unspam: 'unshadowban',
-	unsban: 'unshadowban',
-	unshadowban: function (target, room, user) {
-		if (!target) return this.sendReply("/unshadowban OR /unsban [username] - Undoes /shadowban (except the secondary command).");
+	unpermasban: 'unpermashadowban',
+	unpermashadowban: function (target, room, user) {
+		if (!target) return this.parse('/help unpermashadowban');
 		this.splitTarget(target);
 
 		if (!this.can('lock')) return;
@@ -184,18 +208,20 @@ exports.commands = {
 		}
 		this.privateModCommand("(" + user.name + " has shadow unbanned: " + targets.join(", ") + ")");
 	},
+	unpermashadowbanhelp: ['/unpermashadowban [user] - Undo a permanent shadowban. Requires ~'],
 
-	sbanlist: function (target, room, user) {
-		if (!target && !this.can('lock')) return this.sendReply("The command '/sbanlist' was unrecognized.  To send a message starting with '/sbanlist', type '//sbanlist'.");
-		if ((user.locked || room.isMuted(user)) && !user.can('bypassall')) return this.sendReply("You cannot do this while unable to talk.");
+	sbanlist: 'shadowbanlist',
+	shadowbanlist: function (target, room, user) {
 		if (!this.can('lock')) return false;
+		if (!this.canTalk()) return this.errorReply(`You cannot do this while unable to talk.`);
 		let result = [];
 		let data = Rooms(toId(ROOM_NAME)).chatRoomData.addedUsers;
 		for (let key in data) {
 			result.push(key);
 		}
-		Users.get(toId(user.name)).send('|popup| Here is a list of sbanned users: \n' + result.join(', '));
+		Users.get(toId(user.name)).send('|popup| Here is a list of permanently shadow banned users: \n' + result.join(', '));
 	},
+	sbanlisthelp: ['/shadowbanlist - List all permanently shadowbanned users. Requires %, @, &, ~'],
 };
 
 Users.ShadowBan = exports;
