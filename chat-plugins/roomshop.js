@@ -143,7 +143,7 @@ exports.commands = {
 			});
 
 			//this.sendReply('You have bought ' + itemID + ' for ' + cost + currencyName(cost) + '.'); //currencyName(cost)
-			  this.sendReply('You have bought ' + itemID + ' for ' + cost + ' bucks.');
+			  this.sendReply('You have bought ' + itemID + ' for ' + cost + ' PokeDollars.');
 		},
 		'': function (target, room, user) {
 			if (!this.canBroadcast()) return false;
