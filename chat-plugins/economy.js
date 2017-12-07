@@ -6,8 +6,8 @@ const fs = require('fs');
 // Ideally, this should be zero.
 const DEFAULT_AMOUNT = 0;
 
-global.currencyName = 'PokeDollar';
-global.currencyPlural = 'PokeDollars';
+global.moneyName = 'PokeDollar';
+global.moneyPlural = 'PokeDollars';
 
 let Economy = global.Economy = {
 	/**
@@ -126,7 +126,7 @@ exports.commands = {
 		if (userid.length > 19) return this.sendReply("/wallet - [user] can't be longer than 19 characters.");
 
 		Economy.readMoney(userid, money => {
-			this.sendReplyBox(BH.nameColor(target, true) + " has " + money + ((money === 1) ? " " + currencyName + "." : " " + currencyPlural + "."));
+			this.sendReplyBox(BH.nameColor(target, true) + " has " + money + ((money === 1) ? " " + moneyName + "." : " " + moneyPlural + "."));
 			//if (this.broadcasting) room.update();
 		});
 	},
@@ -146,21 +146,21 @@ exports.commands = {
 
 		let amount = Math.round(Number(splitTarget[1]));
 		if (isNaN(amount)) return this.sendReply("/" + cmd + "- [amount] must be a number.");
-		if (amount > 1000) return this.sendReply("/" + cmd + " - You can't give more than 1000 " + currencyName + " at a time.");
-		if (amount < 1) return this.sendReply("/" + cmd + " - You can't give less than one " + currencyName + ".");
+		if (amount > 1000) return this.sendReply("/" + cmd + " - You can't give more than 1000 " + moneyName + " at a time.");
+		if (amount < 1) return this.sendReply("/" + cmd + " - You can't give less than one " + moneyName + ".");
 
 		let reason = splitTarget[2];
 		if (reason.length > 100) return this.errorReply("Reason may not be longer than 100 characters.");
-		if (toId(reason).length < 1) return this.errorReply("Please specify a reason to give " + currencyName + ".");
+		if (toId(reason).length < 1) return this.errorReply("Please specify a reason to give " + moneyName + ".");
 
 		Economy.writeMoney(targetUser, amount, () => {
 			Economy.readMoney(targetUser, newAmount => {
 				if (Users(targetUser) && Users(targetUser).connected) {
-					Users.get(targetUser).popup('|html|You have received ' + amount + ' ' + (amount === 1 ? currencyName : currencyPlural) +
+					Users.get(targetUser).popup('|html|You have received ' + amount + ' ' + (amount === 1 ? moneyName : moneyPlural) +
 					' from ' + BH.nameColor(user.userid, true) + '.');
 				}
-				this.sendReply(targetUser + " has received " + amount + ((amount === 1) ? " " + currencyName + "." : " " + currencyPlural + "."));
-				Economy.logTransaction(user.name + " has given " + amount + ((amount === 1) ? " " + currencyName + " " : " " + currencyPlural + " ") + " to " + targetUser + ". (Reason: " + reason + ") They now have " + newAmount + (newAmount === 1 ? " " + currencyName + "." : " " + currencyPlural + "."));
+				this.sendReply(targetUser + " has received " + amount + ((amount === 1) ? " " + moneyName + "." : " " + moneyPlural + "."));
+				Economy.logTransaction(user.name + " has given " + amount + ((amount === 1) ? " " + moneyName + " " : " " + moneyPlural + " ") + " to " + targetUser + ". (Reason: " + reason + ") They now have " + newAmount + (newAmount === 1 ? " " + moneyName + "." : " " + moneyPlural + "."));
 			});
 		});
 	},
@@ -180,21 +180,21 @@ exports.commands = {
 
 		let amount = Math.round(Number(splitTarget[1]));
 		if (isNaN(amount)) return this.sendReply("/" + cmd + "- [amount] must be a number.");
-		if (amount > 1000) return this.sendReply("/" + cmd + " - You can't take more than 1000 " + currencyName + " at a time.");
-		if (amount < 1) return this.sendReply("/" + cmd + " - You can't take less than one " + currencyName + ".");
+		if (amount > 1000) return this.sendReply("/" + cmd + " - You can't take more than 1000 " + moneyName + " at a time.");
+		if (amount < 1) return this.sendReply("/" + cmd + " - You can't take less than one " + moneyName + ".");
 
 		let reason = splitTarget[2];
 		if (reason.length > 100) return this.errorReply("Reason may not be longer than 100 characters.");
-		if (toId(reason).length < 1) return this.errorReply("Please specify a reason to give " + currencyName + ".");
+		if (toId(reason).length < 1) return this.errorReply("Please specify a reason to give " + moneyName + ".");
 
 		Economy.writeMoney(targetUser, -amount, () => {
 			Economy.readMoney(targetUser, newAmount => {
 				if (Users(targetUser) && Users(targetUser).connected) {
-					Users.get(targetUser).popup('|html|' + BH.nameColor(user.userid, true) + ' has removed ' + amount + ' ' + (amount === 1 ? currencyName : currencyPlural) +
+					Users.get(targetUser).popup('|html|' + BH.nameColor(user.userid, true) + ' has removed ' + amount + ' ' + (amount === 1 ? moneyName : moneyPlural) +
 					' from you.<br />');
 				}
-				this.sendReply("You removed " + amount + ((amount === 1) ? " " + currencyName + " " : " " + currencyPlural + " ") + " from " + Chat.escapeHTML(targetUser));
-				Economy.logTransaction(user.name + " has taken " + amount + ((amount === 1) ? " " + currencyName + " " : " " + currencyPlural + " ") + " from " + targetUser + ". (Reason: " + reason + ") They now have " + newAmount + (newAmount === 1 ? " " + currencyName + "." : " " + currencyPlural + "."));
+				this.sendReply("You removed " + amount + ((amount === 1) ? " " + moneyName + " " : " " + moneyPlural + " ") + " from " + Chat.escapeHTML(targetUser));
+				Economy.logTransaction(user.name + " has taken " + amount + ((amount === 1) ? " " + moneyName + " " : " " + moneyPlural + " ") + " from " + targetUser + ". (Reason: " + reason + ") They now have " + newAmount + (newAmount === 1 ? " " + moneyName + "." : " " + moneyPlural + "."));
 			});
 		});
 	},
@@ -215,10 +215,10 @@ exports.commands = {
 
 		let amount = Math.round(Number(splitTarget[1]));
 		if (isNaN(amount)) return this.sendReply("/" + cmd + " - [amount] must be a number.");
-		if (amount > 1000) return this.sendReply("/" + cmd + " - You can't transfer more than 1000 " + currencyName + " at a time.");
-		if (amount < 1) return this.sendReply("/" + cmd + " - You can't transfer less than one " + currencyName + ".");
+		if (amount > 1000) return this.sendReply("/" + cmd + " - You can't transfer more than 1000 " + moneyName + " at a time.");
+		if (amount < 1) return this.sendReply("/" + cmd + " - You can't transfer less than one " + moneyName + ".");
 		Economy.readMoney(user.userid, money => {
-			if (money < amount) return this.sendReply("/" + cmd + " - You can't transfer more " + currencyName + " than you have.");
+			if (money < amount) return this.sendReply("/" + cmd + " - You can't transfer more " + moneyName + " than you have.");
 			if (cmd !== 'confirmtransfermoney') {
 				return this.popupReply('|html|<center>' +
 					'<button class = "card-td button" name = "send" value = "/confirmtransfermoney ' + toId(targetUser) + ', ' + amount + '"' +
@@ -230,14 +230,14 @@ exports.commands = {
 				Economy.writeMoney(targetUser, amount, () => {
 					Economy.readMoney(targetUser, firstAmount => {
 						Economy.readMoney(user.userid, secondAmount => {
-							this.popupReply("You sent " + amount + ((amount === 1) ? " " + currencyPlural : " " + currencyPlural) + " to " + targetUser);
+							this.popupReply("You sent " + amount + ((amount === 1) ? " " + moneyPlural : " " + moneyPlural) + " to " + targetUser);
 							Economy.logTransaction(
-								user.name + " has transfered " + amount + ((amount === 1) ? " " + currencyPlural : " " + currencyPlural) + " to " + targetUser + "\n" +
-								user.name + " now has " + secondAmount + " " + (secondAmount === 1 ? " " + currencyPlural : " " + currencyPlural) + " " +
-								targetUser + " now has " + firstAmount + " " + (firstAmount === 1 ? " " + currencyPlural : " " + currencyPlural)
+								user.name + " has transfered " + amount + ((amount === 1) ? " " + moneyPlural : " " + moneyPlural) + " to " + targetUser + "\n" +
+								user.name + " now has " + secondAmount + " " + (secondAmount === 1 ? " " + moneyPlural : " " + moneyPlural) + " " +
+								targetUser + " now has " + firstAmount + " " + (firstAmount === 1 ? " " + moneyPlural : " " + moneyPlural)
 							);
 							if (Users.getExact(targetUser) && Users.getExact(targetUser).connected) {
-								Users.getExact(targetUser).send('|popup||html|' + BH.nameColor(user.name, true) + " has sent you " + amount + ((amount === 1) ? " " + currencyPlural : " " + currencyPlural));
+								Users.getExact(targetUser).send('|popup||html|' + BH.nameColor(user.name, true) + " has sent you " + amount + ((amount === 1) ? " " + moneyPlural : " " + moneyPlural));
 							}
 						});
 					});
@@ -285,7 +285,7 @@ exports.commands = {
 		});
 		if (!keys.length) return this.sendReplyBox("Money ladder is empty.");
 		keys.sort(function (a, b) { return b.money - a.money; });
-		this.sendReplyBox(rankLadder('Richest Users', currencyPlural, keys.slice(0, target), 'money') + '</div>');
+		this.sendReplyBox(rankLadder('Richest Users', moneyPlural, keys.slice(0, target), 'money') + '</div>');
 	},
 
 	resetbucks: 'resetmoney',
@@ -294,7 +294,7 @@ exports.commands = {
 		if (!target) return this.parse('/help resetmoney');
 		target = toId(target);
 		Economy.writeMoney(target, 0);
-		this.sendReply(target + " now has 0 " + currencyName + ".");
+		this.sendReply(target + " now has 0 " + moneyName + ".");
 	},
 	resetmoneyhelp: ['/resetmoney [user] - Resets target user\'s currency to 0. Requires: &, ~'],
 
@@ -327,8 +327,8 @@ exports.commands = {
 		const users = Db('currency').keys().map(curUser => ({amount: Db('currency').get(curUser)}));
 		const total = users.reduce((acc, cur) => acc + cur.amount, 0);
 		let average = Math.floor(total / users.length) || 0;
-		let output = "There " + (total > 1 ? "are " : "is ") + total + " " + (total > 1 ? currencyPlural : currencyName) + " circulating in the economy. ";
-		output += "The average user has " + average + " " + (average > 1 ? currencyPlural : currencyName) + ".";
+		let output = "There " + (total > 1 ? "are " : "is ") + total + " " + (total > 1 ? moneyPlural : moneyName) + " circulating in the economy. ";
+		output += "The average user has " + average + " " + (average > 1 ? moneyPlural : moneyName) + ".";
 		this.sendReplyBox(output);
 	},
 };
