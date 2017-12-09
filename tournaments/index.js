@@ -901,6 +901,58 @@ class Tournament {
 		}));
 		this.isEnded = true;
 		if (this.autoDisqualifyTimer) clearTimeout(this.autoDisqualifyTimer);
+		//Tournament Winnings
+		//
+		let color = '#088cc7';
+		let sizeRequiredToEarn = 2;
+		let data = this.generator.getResults().map(usersToNames).toString();
+		let winner, runnerUp;
+
+		if (data.indexOf(',') >= 0) {
+			data = data.split(',');
+			winner = data[0];
+			if (data[1]) runnerUp = data[1];
+		} else {
+			winner = data;
+		}
+
+		let wid = toId(winner);
+		let rid = toId(runnerUp);
+		let tourSize = this.generator.users.size;
+		
+		if ((tourSize >= sizeRequiredToEarn) && this.room.isOfficial) {
+			let firstMoney = Math.round(tourSize / 4);
+			if (firstMoney < 2) firstMoney = 2;
+			if (Users(wid).tourBoost) firstMoney *= 200;
+			if (Users(wid).gameBoost) firstMoney *= 200;
+			let secondMoney = Math.round(firstMoney / 2);
+			if (runnerUp) {
+				if (Users(rid).tourBoost) secondMoney *= 100;
+				if (Users(rid).gameBoost) secondMoney *= 100;
+			}
+		
+			Economy.writeMoney(wid, firstMoney, () => {
+				Economy.readMoney(wid, newAmount => {
+					if (Users(wid) && Users(wid).connected) {
+						Users.get(wid).popup('|html|You have received ' + firstMoney + ' ' + (firstMoney === 1 ? global.moneyName : global.moneyPlural) + ' from winning the tournament.');
+					}
+					Economy.logTransaction(Chat.escapeHTML(winner) + ' has won ' + firstMoney + ' ' + (firstMoney === 1 ? global.moneyName : global.moneyPlural) + ' from a tournament.');
+				});
+			});
+			this.room.addRaw("<b><font color='" + color + "'>" + Chat.escapeHTML(winner) + "</font> has won " + "<font color='" + color + "'>" + firstMoney + " </font>" + (firstMoney === 1 ? global.moneyName : global.moneyPlural) + " for winning the tournament!</b>");
+
+			if (runnerUp) {
+				Economy.writeMoney(rid, secondMoney, () => {
+					Economy.readMoney(rid, newAmount => {
+						if (Users(rid) && Users(rid).connected) {
+							Users.get(rid).popup('|html|You have received ' + secondMoney + ' ' + (secondMoney === 1 ? global.moneyName : global.moneyPlural) + ' from winning the tournament.');
+						}
+						Economy.logTransaction(Chat.escapeHTML(runnerUp) + ' has won ' + secondMoney + ' ' + (secondMoney === 1 ? global.moneyName : global.moneyPlural) + ' from a tournament.');
+					});
+				});
+				this.room.addRaw("<b><font color='" + color + "'>" + Chat.escapeHTML(runnerUp) + "</font> has won " + "<font color='" + color + "'>" + secondMoney + " </font>" + (firstMoney === 1 ? global.moneyName : global.moneyPlural) + " for winning the tournament!</b>");
+			}
+		}
 		delete exports.tournaments[this.room.id];
 		delete this.room.game;
 		for (let i in this.players) {
@@ -1231,6 +1283,30 @@ let commands = {
 			if (tournament.autoDisqualifyTimeout === Infinity) return this.errorReply("The automatic tournament disqualify timer is not set.");
 			tournament.runAutoDisqualify(this);
 			this.logEntry(user.name + " used /tour runautodq");
+		},
+		remind: function (tournament, user) {
+			let users = tournament.generator.getAvailableMatches().toString().split(',');
+			let offlineUsers = [];
+			for (let u = 0; u < users.length; u++) {
+				let targetUser = Users.get(users[u]);
+				if (!targetUser) {
+					offlineUsers.push(users[u]);
+					continue;
+				} else if (!targetUser.connected) {
+					offlineUsers.push(targetUser.userid);
+					continue;
+				} else {
+					let pmName = '~Bunnyhole Server';
+					let message = '|pm|' + pmName + '|' + user.getIdentity() + '|' + 'You have a tournament battle in the room "' + tournament.room.title + '". If you do not start soon you may be disqualified.';
+					targetUser.send(message);
+				}
+			}
+			if (tournament.isTournamentStarted) {
+				tournament.room.addRaw('<b>Players have been reminded of their tournament battles by ' + user.name + '.</b>');
+				if (offlineUsers.length > 0 && offlineUsers !== '') tournament.room.addRaw('<b>The following users are currently offline: ' + offlineUsers + '.</b>');
+			} else {
+				this.errorReply('The tournament hasen\'t started yet.');
+			}
 		},
 		scout: 'setscouting',
 		scouting: 'setscouting',
