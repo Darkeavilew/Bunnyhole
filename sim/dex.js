@@ -741,11 +741,7 @@ class ModdedDex {
 		}
 
 		for (const rule of ruleset) {
-<<<<<<< HEAD
-			const ruleSpec = this.validateRule(rule);
-=======
 			const ruleSpec = this.validateRule(rule, format);
->>>>>>> a1270cac7a1546f0d0fc36fb505a1fe26d6174f6
 			if (typeof ruleSpec !== 'string') {
 				if (ruleSpec[0] === 'complexTeamBan') {
 					ruleTable.complexTeamBans.push(/** @type {any} */ (ruleSpec.slice(1)));
@@ -795,10 +791,7 @@ class ModdedDex {
 		switch (rule.charAt(0)) {
 		case '-':
 		case '+':
-<<<<<<< HEAD
-=======
 			if (format && format.team) throw new Error(`We don't currently support bans in generated teams`);
->>>>>>> a1270cac7a1546f0d0fc36fb505a1fe26d6174f6
 			if (rule.slice(1).includes('>') || rule.slice(1).includes('+')) {
 				let buf = rule.slice(1);
 				const gtIndex = buf.lastIndexOf('>');
@@ -873,11 +866,7 @@ class ModdedDex {
 			if (table.hasOwnProperty(id)) {
 				if (matchType === 'pokemon') {
 					const template = table[id];
-<<<<<<< HEAD
-					if (template.formes) {
-=======
 					if (template.otherFormes) {
->>>>>>> a1270cac7a1546f0d0fc36fb505a1fe26d6174f6
 						matches.push('basepokemon:' + id);
 						continue;
 					}
