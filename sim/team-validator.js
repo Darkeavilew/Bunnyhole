@@ -263,12 +263,18 @@ class Validator {
 			banReason = ruleTable.check('pokemontag:' + toId(postMegaTemplate.tier), setHas);
 			if (banReason) {
 				problems.push(`${postMegaTemplate.species} is in ${postMegaTemplate.tier}, which is ${banReason}.`);
+<<<<<<< HEAD
 			}
 		}
 		if (!templateOverride && ruleTable.has('-unreleased') && postMegaTemplate.isUnreleased) {
 			if (postMegaTemplate.eggGroups[0] === 'Undiscovered' && !postMegaTemplate.evos) {
 				problems.push(`${name} (${postMegaTemplate.species}) is unreleased.`);
+=======
+>>>>>>> a1270cac7a1546f0d0fc36fb505a1fe26d6174f6
 			}
+		}
+		if (!templateOverride && ruleTable.has('-unreleased') && postMegaTemplate.isUnreleased) {
+			problems.push(`${name} (${postMegaTemplate.species}) is unreleased.`);
 		}
 
 		banReason = ruleTable.check('ability:' + toId(set.ability), setHas);

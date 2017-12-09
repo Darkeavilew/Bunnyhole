@@ -272,17 +272,17 @@ class CommandContext {
 			if (this.pmTarget) {
 				Chat.sendPM(message, this.user, this.pmTarget);
 			} else {
-					if (Users.ShadowBan.checkBanned(this.user)) {
-						Users.ShadowBan.addMessage(this.user, "To " + this.room.id, message);
-						this.user.sendTo(this.room, (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') + this.user.getIdentity(this.room.id) + '|' + message);
-					} else {
-						this.room.add((this.room.type === 'chat' ? (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') : '|c|') + this.user.getIdentity(this.room.id) + '|' + message);
-						this.room.messageCount++;
-					}
+				if (Users.ShadowBan.checkBanned(this.user)) {
+					Users.ShadowBan.addMessage(this.user, "To " + this.room.id, message);
+					this.user.sendTo(this.room, (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') + this.user.getIdentity(this.room.id) + '|' + message);
+				} else {
+					this.room.add((this.room.type === 'chat' ? (this.room.type === 'chat' ? '|c:|' + (~~(Date.now() / 1000)) + '|' : '|c|') : '|c|') + this.user.getIdentity(this.room.id) + '|' + message);
+					this.room.messageCount++;
 				}
-				//this.room.add(`|c|${this.user.getIdentity(this.room.id)}|${message}`);
+			}
+			//this.room.add(`|c|${this.user.getIdentity(this.room.id)}|${message}`);
 		}
-		
+
 		this.update();
 
 		return message;

@@ -99,6 +99,17 @@ describe('Team Validator', function () {
 		assert(illegal);
 	});
 
+<<<<<<< HEAD
+=======
+	it('should reject banned Pokemon', function () {
+		let team = [
+			{species: 'arceus', ability: 'multitype', item: 'dragoniumz', moves: ['judgment']},
+		];
+		let illegal = TeamValidator('gen71v1').validateTeam(team);
+		assert(illegal);
+	});
+
+>>>>>>> a1270cac7a1546f0d0fc36fb505a1fe26d6174f6
 	it('should reject illegal egg move combinations', function () {
 		let team = [
 			{species: 'azumarill', ability: 'hugepower', moves: ['bellydrum', 'aquajet']},
