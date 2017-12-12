@@ -707,8 +707,8 @@ class Tournament {
 		this.isAvailableMatchesInvalidated = true;
 		this.update();
 
-		const validTeam = await user.prepBattle(this.teambuilderFormat, 'tournament', user);
-		if (!validTeam) {
+		const ready = await Ladders(this.teambuilderFormat).prepBattle(output.connection);
+		if (!ready) {
 			this.generator.setUserBusy(from, false);
 			this.generator.setUserBusy(to, false);
 
@@ -718,8 +718,8 @@ class Tournament {
 		}
 
 		this.lastActionTimes.set(to, Date.now());
-		this.pendingChallenges.set(from, {to: to, team: validTeam});
-		this.pendingChallenges.set(to, {from: from, team: validTeam});
+		this.pendingChallenges.set(from, {to: to, team: ready.team});
+		this.pendingChallenges.set(to, {from: from, team: ready.team});
 		from.sendRoom('|tournament|update|' + JSON.stringify({challenging: to.name}));
 		to.sendRoom('|tournament|update|' + JSON.stringify({challenged: from.name}));
 
@@ -767,8 +767,8 @@ class Tournament {
 		let challenge = this.pendingChallenges.get(player);
 		if (!challenge || !challenge.from) return;
 
-		const validTeam = await user.prepBattle(this.teambuilderFormat, 'tournament', user);
-		if (!validTeam) return;
+		const ready = await Ladders(this.teambuilderFormat).prepBattle(output.connection);
+		if (!ready) return;
 
 		// Prevent battles between offline users from starting
 		let from = Users.get(challenge.from.userid);
@@ -782,7 +782,7 @@ class Tournament {
 			p1: from,
 			p1team: challenge.team,
 			p2: user,
-			p2team: validTeam,
+			p2team: ready.team,
 			rated: !Ladders.disabled && this.isRated,
 			tour: this,
 		});
@@ -1160,8 +1160,12 @@ let commands = {
 		banlist: 'customrules',
 		rules: 'customrules',
 		customrules: function (tournament, user, params, cmd) {
+			if (cmd === 'banlist') {
+				return this.errorReply('The new syntax is: /tour rules -bannedthing, +unbannedthing, !removedrule, addedrule');
+			}
 			if (params.length < 1) {
-				this.sendReply("Usage: " + cmd + " <comma-separated arguments>");
+				this.sendReply("Usage: /tour rules <list of rules>");
+				this.sendReply("Rules can be: -bannedthing, +unbannedthing, !removedrule, addedrule");
 				return this.parse('/tour viewrules');
 			}
 			if (tournament.isTournamentStarted) {

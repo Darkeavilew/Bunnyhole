@@ -14,22 +14,29 @@
 
 'use strict';
 
-let Ladders = module.exports = getLadder;
-Object.assign(Ladders, require('./ladders-matchmaker'));
-
-Ladders.get = Ladders;
-Ladders.formatsListPrefix = '';
-Ladders.disabled = false;
-
-class Ladder {
+class LadderStore {
+	/**
+	 * @param {string} formatid
+	 */
 	constructor(formatid) {
-		this.formatid = toId(formatid);
+		this.formatid = formatid;
 	}
 
+	/**
+	 * Returns [formatid, html], where html is an the HTML source of a
+	 * ladder toplist, to be displayed directly in the ladder tab of the
+	 * client.
+	 * @return {Promise<[string, string]?>}
+	 */
 	async getTop() {
 		return null;
 	}
 
+	/**
+	 * Returns a Promise for the Elo rating of a user
+	 * @param {string} userid
+	 * @return {Promise<number>}
+	 */
 	async getRating(userid) {
 		let formatid = this.formatid;
 		let user = Users.getExact(userid);
@@ -46,12 +53,12 @@ class Ladder {
 			LoginServer.request('mmr', {
 				format: formatid,
 				user: userid,
-			}, (data, statusCode, error) => {
+			}, (/** @type {any} */ data, /** @type {number} */ statusCode, /** @type {Error?} */ error) => {
 				if (!data) return resolve(NaN);
 				if (data.errorip) {
 					return resolve(NaN);
 				}
-				return parseInt(data);
+				return resolve(parseInt(data));
 			});
 		});
 		if (isNaN(mmr)) return 1000;
@@ -61,6 +68,14 @@ class Ladder {
 		return mmr;
 	}
 
+	/**
+	 * Update the Elo rating for two players after a battle, and display
+	 * the results in the passed room.
+	 * @param {string} p1name
+	 * @param {string} p2name
+	 * @param {number} p1score
+	 * @param {GameRoom} room
+	 */
 	async updateRating(p1name, p2name, p1score, room) {
 		if (Ladders.disabled) {
 			room.addRaw(`Ratings not updated. The ladders are currently disabled.`).update();
@@ -78,7 +93,7 @@ class Ladder {
 					p2: p2name,
 					score: p1score,
 					format: formatid,
-				}, (data, statusCode, error) => {
+				}, (/** @type {any} */ data, /** @type {number} */ statusCode, /** @type {Error?} */ error) => {
 					if (error) return reject(error);
 					resolve(data);
 				});
@@ -132,12 +147,17 @@ class Ladder {
 
 		return [p1score, p1rating, p2rating];
 	}
+
+	/**
+	 * Returns a Promise for an array of strings of <tr>s for ladder ratings of the user
+	 * @param {string} username
+	 * @return {Promise<string[]>}
+	 */
+	static async visualizeAll(username) {
+		return [`<tr><td><strong>Please use the official client at play.pokemonshowdown.com</strong></td></tr>`];
+	}
 }
 
-function getLadder(formatid) {
-	return new Ladder(formatid);
-}
+LadderStore.formatsListPrefix = '';
 
-Ladders.visualizeAll = function (username) {
-	return Promise.resolve([`<tr><td><strong>Please use the official client at play.pokemonshowdown.com</strong></td></tr>`]);
-};
+module.exports = LadderStore;
