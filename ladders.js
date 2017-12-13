@@ -174,7 +174,11 @@ class Ladder extends LadderStore {
 	 */
 	static clearChallenges(username) {
 		const userid = toId(username);
+<<<<<<< HEAD
 		const userChalls = challenges.get(userid);
+=======
+		const userChalls = Ladders.challenges.get(userid);
+>>>>>>> f13093177b5adfe77f2e8d3000a62d3044be0a0b
 		if (userChalls) {
 			for (const chall of userChalls.slice()) {
 				let otherUserid;
@@ -245,7 +249,11 @@ class Ladder extends LadderStore {
 	 * @param {string} userid
 	 */
 	static getChallenging(userid) {
+<<<<<<< HEAD
 		const userChalls = challenges.get(userid);
+=======
+		const userChalls = Ladders.challenges.get(userid);
+>>>>>>> f13093177b5adfe77f2e8d3000a62d3044be0a0b
 		if (userChalls) {
 			for (const chall of userChalls) {
 				if (chall.from === userid) return chall;
@@ -257,10 +265,17 @@ class Ladder extends LadderStore {
 	 * @param {Challenge} challenge
 	 */
 	static addChallenge(challenge, skipUpdate = false) {
+<<<<<<< HEAD
 		let challs1 = challenges.get(challenge.from);
 		if (!challs1) challenges.set(challenge.from, challs1 = []);
 		let challs2 = challenges.get(challenge.to);
 		if (!challs2) challenges.set(challenge.to, challs2 = []);
+=======
+		let challs1 = Ladders.challenges.get(challenge.from);
+		if (!challs1) Ladders.challenges.set(challenge.from, challs1 = []);
+		let challs2 = Ladders.challenges.get(challenge.to);
+		if (!challs2) Ladders.challenges.set(challenge.to, challs2 = []);
+>>>>>>> f13093177b5adfe77f2e8d3000a62d3044be0a0b
 		challs1.push(challenge);
 		challs2.push(challenge);
 		if (!skipUpdate) {
@@ -274,16 +289,27 @@ class Ladder extends LadderStore {
 	 * @param {Challenge} challenge
 	 */
 	static removeChallenge(challenge, skipUpdate = false) {
+<<<<<<< HEAD
 		const fromChalls = /** @type {Challenge[]} */ (challenges.get(challenge.from));
+=======
+		const fromChalls = /** @type {Challenge[]} */ (Ladders.challenges.get(challenge.from));
+>>>>>>> f13093177b5adfe77f2e8d3000a62d3044be0a0b
 		// the challenge may have been cancelled
 		if (!fromChalls) return false;
 		const fromIndex = fromChalls.indexOf(challenge);
 		if (fromIndex < 0) return false;
 		fromChalls.splice(fromIndex, 1);
+<<<<<<< HEAD
 		if (!fromChalls.length) challenges.delete(challenge.from);
 		const toChalls = /** @type {Challenge[]} */ (challenges.get(challenge.to));
 		toChalls.splice(toChalls.indexOf(challenge), 1);
 		if (!toChalls.length) challenges.delete(challenge.to);
+=======
+		if (!fromChalls.length) Ladders.challenges.delete(challenge.from);
+		const toChalls = /** @type {Challenge[]} */ (Ladders.challenges.get(challenge.to));
+		toChalls.splice(toChalls.indexOf(challenge), 1);
+		if (!toChalls.length) Ladders.challenges.delete(challenge.to);
+>>>>>>> f13093177b5adfe77f2e8d3000a62d3044be0a0b
 		if (!skipUpdate) {
 			const fromUser = Users(challenge.from);
 			if (fromUser) Ladder.updateChallenges(fromUser);
@@ -300,7 +326,11 @@ class Ladder extends LadderStore {
 		if (!user.connected) return;
 		let challengeTo = null;
 		let challengesFrom = {};
+<<<<<<< HEAD
 		const userChalls = challenges.get(user.userid);
+=======
+		const userChalls = Ladders.challenges.get(user.userid);
+>>>>>>> f13093177b5adfe77f2e8d3000a62d3044be0a0b
 		if (userChalls) {
 			for (const chall of userChalls) {
 				if (chall.from === user.userid) {
@@ -326,7 +356,11 @@ class Ladder extends LadderStore {
 	cancelSearch(user) {
 		const formatid = toId(this.formatid);
 
+<<<<<<< HEAD
 		const formatTable = searches.get(formatid);
+=======
+		const formatTable = Ladders.searches.get(formatid);
+>>>>>>> f13093177b5adfe77f2e8d3000a62d3044be0a0b
 		if (!formatTable) return false;
 		if (!formatTable.has(user.userid)) return false;
 		formatTable.delete(user.userid);
@@ -342,7 +376,11 @@ class Ladder extends LadderStore {
 	static cancelSearches(user) {
 		let cancelCount = 0;
 
+<<<<<<< HEAD
 		for (let formatTable of searches.values()) {
+=======
+		for (let formatTable of Ladders.searches.values()) {
+>>>>>>> f13093177b5adfe77f2e8d3000a62d3044be0a0b
 			const search = formatTable.get(user.userid);
 			if (!search) continue;
 			formatTable.delete(user.userid);
@@ -360,7 +398,11 @@ class Ladder extends LadderStore {
 		const formatid = toId(this.formatid);
 		const user = Users.get(search.userid);
 		if (!user || !user.connected || user.userid !== search.userid) {
+<<<<<<< HEAD
 			const formatTable = searches.get(formatid);
+=======
+			const formatTable = Ladders.searches.get(formatid);
+>>>>>>> f13093177b5adfe77f2e8d3000a62d3044be0a0b
 			if (formatTable) formatTable.delete(search.userid);
 			if (user && user.connected) {
 				user.popup(`You changed your name and are no longer looking for a battle in ${formatid}`);
@@ -376,7 +418,11 @@ class Ladder extends LadderStore {
 	 */
 	static getSearches(user) {
 		let userSearches = [];
+<<<<<<< HEAD
 		for (const [formatid, formatTable] of searches) {
+=======
+		for (const [formatid, formatTable] of Ladders.searches) {
+>>>>>>> f13093177b5adfe77f2e8d3000a62d3044be0a0b
 			if (formatTable.has(user.userid)) userSearches.push(formatid);
 		}
 		return userSearches;
@@ -416,7 +462,11 @@ class Ladder extends LadderStore {
 	 */
 	hasSearch(user) {
 		const formatid = toId(this.formatid);
+<<<<<<< HEAD
 		const formatTable = searches.get(formatid);
+=======
+		const formatTable = Ladders.searches.get(formatid);
+>>>>>>> f13093177b5adfe77f2e8d3000a62d3044be0a0b
 		if (!formatTable) return false;
 		return formatTable.has(user.userid);
 	}
@@ -494,10 +544,17 @@ class Ladder extends LadderStore {
 	 */
 	addSearch(newSearch, user) {
 		const formatid = newSearch.formatid;
+<<<<<<< HEAD
 		let formatTable = searches.get(formatid);
 		if (!formatTable) {
 			formatTable = new Map();
 			searches.set(formatid, formatTable);
+=======
+		let formatTable = Ladders.searches.get(formatid);
+		if (!formatTable) {
+			formatTable = new Map();
+			Ladders.searches.set(formatid, formatTable);
+>>>>>>> f13093177b5adfe77f2e8d3000a62d3044be0a0b
 		}
 		if (formatTable.has(user.userid)) {
 			user.popup(`Couldn't search: You are already searching for a ${formatid} battle.`);
@@ -527,7 +584,11 @@ class Ladder extends LadderStore {
 	 */
 	static periodicMatch() {
 		// In order from longest waiting to shortest waiting
+<<<<<<< HEAD
 		for (const [formatid, formatTable] of searches) {
+=======
+		for (const [formatid, formatTable] of Ladders.searches) {
+>>>>>>> f13093177b5adfe77f2e8d3000a62d3044be0a0b
 			const matchmaker = Ladders(formatid);
 			let longestSearch, longestSearcher;
 			for (let search of formatTable.values()) {
@@ -608,6 +669,10 @@ const Ladders = Object.assign(getLadder, {
 	match: Ladder.match,
 
 	searches,
+<<<<<<< HEAD
+=======
+	challenges,
+>>>>>>> f13093177b5adfe77f2e8d3000a62d3044be0a0b
 	periodicMatchInterval,
 
 	// tells the client to ask the server for format information
