@@ -32,7 +32,7 @@ exports.commands = {
 
 		let length = Math.floor(Number(target));
 		if (isNaN(length)) return this.errorReply("The length must be a number.");
-		if (length > 15 || length < 2) return this.errorReply("The sentence cannot be this long.");
+		if (length > 21 || length < 2) return this.errorReply("The sentence cannot be this long.");
 
 		room.sentence = {};
 		room.sentence.size = length;
