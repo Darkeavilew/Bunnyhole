@@ -4,6 +4,7 @@ const FS = require('../fs');
 const TICKET_FILE = 'config/tickets.json';
 const TICKET_CACHE_TIME = 24 * 60 * 60 * 1000; // 24 hours
 const TICKET_BAN_DURATION = 48 * 60 * 60 * 1000; // 48 hours
+
 let tickets = {};
 
 try {
@@ -32,6 +33,7 @@ class HelpTicket extends Rooms.RoomGame {
 
 	onJoin(user, connection) {
 		if (!user.isStaff || !this.ticket.open) return false;
+		if (user.userid === this.ticket.userid) return false;
 		if (this.ticket.escalated && !user.can('declare')) return false;
 		if (!this.ticket.claimed) {
 			this.ticket.claimed = user.name;
@@ -109,7 +111,7 @@ class HelpTicket extends Rooms.RoomGame {
 function notifyStaff(upper) {
 	const room = Rooms(upper ? 'upperstaff' : 'staff');
 	if (!room) return;
-	let buf = `|uhtml|latest-tickets|<div class="infobox">`;
+	let buf = ``;
 	let keys = Object.keys(tickets).sort((a, b) => {
 		a = tickets[a];
 		b = tickets[b];
@@ -121,15 +123,21 @@ function notifyStaff(upper) {
 		return 0;
 	});
 	let count = 0;
+	let hasUnclaimed = false;
 	for (const key of keys) {
 		let ticket = tickets[key];
 		if (count >= 3) break;
-		if (!ticket.open || ticket.banned || (upper && !ticket.escalated) || (!upper && ticket.escalated)) continue;
-		buf += `<div ${ticket.claimed ? `` : `class="highlighted" `}style="padding: 3px 0 3px 0;">[Ticket] ${ticket.escalator ? `${ticket.escalator} escalated ${ticket.creator}'s ticket.` : `${ticket.creator} opened a new ticket.`} (Type: ${ticket.type}) <button class="button${ticket.claimed ? `` : ` notifying`}" name="send" value="/join help-${ticket.userid}">${ticket.claimed ? `Respond` : `Claim Ticket`}</button></div>`;
+		if (!ticket.open || ticket.banned) continue;
+		if (!upper !== !ticket.escalated) continue;
+		const escalator = ticket.escalator ? Chat.html` (escalated by ${ticket.escalator}).` : ``;
+		const creator = ticket.claimed ? Chat.html`${ticket.creator}` : Chat.html`<strong>${ticket.creator}</strong>`;
+		const notifying = ticket.claimed ? `` : ` notifying`;
+		if (!ticket.claimed) hasUnclaimed = true;
+		buf += `<button class="button${notifying}" name="send" value="/join help-${ticket.userid}">Help ${creator}: ${ticket.type}${escalator}</button> `;
 		count++;
 	}
-	buf += `${count === 0 ? `There are no open tickets.` : ``}</div>`;
-	room.add(buf).update();
+	buf = `|${hasUnclaimed ? 'uhtml' : 'uhtmlchange'}|latest-tickets|<div style="padding:3px">${buf}${count === 0 ? `There are no more open tickets.` : ``}</div>`;
+	room.send(buf);
 }
 
 function checkIp(ip) {
@@ -188,13 +196,12 @@ for (const room of Rooms.rooms.values()) {
 
 exports.pages = {
 	help: {
-		request() {
-			const user = this.user;
-
+		request(query, user, connection) {
+			if (!user.named) return Rooms.RETRY_AFTER_LOGIN;
 			let buf = `|title|Request Help\n|pagehtml|<div class="pad"><h2>Request help from global staff</h2>`;
 
 			let banMsg = checkTicketBanned(user);
-			if (banMsg) return this.errorReply(banMsg);
+			if (banMsg) return connection.popup(banMsg);
 			let ticket = tickets[user.userid];
 			let ipTicket = checkIp(user.latestIp);
 			if ((ticket && ticket.open) || ipTicket) {
@@ -206,8 +213,8 @@ exports.pages = {
 					writeTickets();
 				} else {
 					if (!helpRoom.auth[user.userid]) helpRoom.auth[user.userid] = '+';
-					this.popupReply(`You already have a Help ticket.`);
-					this.parse(`/join help-${ticket.userid}`);
+					connection.popup(`You already have a Help ticket.`);
+					user.joinRoom(`help-${ticket.userid}`);
 					return `|deinit`;
 				}
 			}
@@ -245,13 +252,15 @@ exports.pages = {
 			buf += `</details></div>`;
 			return buf;
 		},
-		tickets() {
+		tickets(query, user, connection) {
+			if (!user.named) return Rooms.RETRY_AFTER_LOGIN;
 			let buf = `|title|Ticket List\n`;
-			const user = this.user;
 			if (!user.can('lock')) {
 				return buf + `|pagehtml|Access denied`;
 			}
-			buf += `|pagehtml|<div class="pad" style="text-align:center"><button class="button" name="send" value="/helpticket list" style="float:left"><i class="fa fa-refresh"></i> Refresh</button><br /><br /><table style="margin-left: auto; margin-right: auto" border="1" cellspacing="0" cellpadding="3"><tbody><tr><th colspan="5">Ticket List</th></tr><tr><th>Status</th><th>Creator</th><th>Ticket Type</th><th>Claimed by</th><th>Action</th></tr>`;
+			buf += `|pagehtml|<div class="pad ladder"><button class="button" name="send" value="/helpticket list" style="float:left"><i class="fa fa-refresh"></i> Refresh</button><br /><br />`;
+			buf += `<table style="margin-left: auto; margin-right: auto"><tbody><tr><th colspan="5"><h2 style="margin: 5px auto">Help tickets</h1></th></tr>`;
+			buf += `<tr><th>Status</th><th>Creator</th><th>Ticket Type</th><th>Claimed by</th><th>Action</th></tr>`;
 			let keys = Object.keys(tickets).sort((a, b) => {
 				a = tickets[a];
 				b = tickets[b];
@@ -267,18 +276,34 @@ exports.pages = {
 			});
 			let hasBanHeader = false;
 			for (const key of keys) {
-				let ticket = tickets[key];
+				const ticket = tickets[key];
 				if (ticket.banned) {
 					if (ticket.expires <= Date.now()) continue;
 					if (!hasBanHeader) {
 						buf += `<tr><th>Status</th><th>Username</th><th>Banned by</th><th>Expires</th><th>Logs</th></tr>`;
 						hasBanHeader = true;
 					}
-					buf += `<tr><td><span style="color:red"><i class="fa fa-ban"></i> Banned</td><td>${ticket.name}</td><td>${ticket.by}</td><td>${Chat.toDurationString(ticket.expires - Date.now(), {precision: 1})}</td><td><a href="http://logs2.psim.us:8080/help-${ticket.userid}/"><button class="button">View Log</button></a></td></tr>`;
+					buf += `<tr><td><span style="color:gray"><i class="fa fa-ban"></i> Banned</td>`;
+					buf += Chat.html`<td>${ticket.name}</td>`;
+					buf += Chat.html`<td>${ticket.by}</td>`;
+					buf += `<td>${Chat.toDurationString(ticket.expires - Date.now(), {precision: 1})}</td>`;
 				} else {
 					if (ticket.escalated && !user.can('declare')) continue;
-					buf += `<tr><td>${ticket.open ? `<span style="color:green"><i class="fa fa-circle-o"></i> Open</span>` : `<span style="color:red"><i class="fa fa-check-circle-o"></i> Closed</span>`}</td><td>${ticket.creator}</td><td>${ticket.type}</td><td>${ticket.claimed ? ticket.claimed : (ticket.open ? `<button class="button" name="send" value="/join help-${ticket.userid}">Claim</button>` : `-`)}</td><td>${ticket.open ? `<button class="button" name="send" value="/helpticket close ${ticket.userid}">Close</button>` : ``} <a href="http://logs2.psim.us:8080/help-${ticket.userid}/"><button class="button">View Log</button></a></td></tr>`;
+					buf += `<tr><td>${!ticket.open ? `<span style="color:gray"><i class="fa fa-check-circle-o"></i> Closed</span>` : ticket.claimed ? `<span style="color:green"><i class="fa fa-circle-o"></i> Claimed</span>` : `<span style="color:orange"><i class="fa fa-circle-o"></i> <strong>Unclaimed</strong></span>`}</td>`;
+					buf += `<td>${ticket.creator}</td>`;
+					buf += `<td>${ticket.type}</td>`;
+					buf += `<td>${ticket.claimed ? ticket.claimed : `-`}</td>`;
 				}
+				buf += `<td>`;
+				const roomid = 'help-' + ticket.userid;
+				const logUrl = Config.modloglink ? Config.modloglink(new Date(ticket.created || (ticket.expires - TICKET_BAN_DURATION)), roomid) : '';
+				if (Rooms(roomid)) {
+					buf += `<a href="/${roomid}"><button class="button">${!ticket.claimed && ticket.open ? 'Claim' : 'View'}</button></a> `;
+				}
+				if (logUrl) {
+					buf += `<a href="${logUrl}"><button class="button">Log</button></a>`;
+				}
+				buf += '</td></tr>';
 			}
 			buf += `</tbody></table></div>`;
 			return buf;
@@ -288,11 +313,17 @@ exports.pages = {
 
 exports.commands = {
 	requesthelp: 'helpticket',
+	helprequest: 'helpticket',
 	report: 'helpticket',
 	ht: 'helpticket',
 	helpticket: {
+		'!create': true,
 		'': 'create',
 		create: function (target, room, user, connection) {
+			if (!this.runBroadcast()) return;
+			if (this.broadcasting) {
+				return this.sendReplyBox('|html|<button name="joinRoom" value="view-help-request" class="button"><strong>Request help</strong></button>');
+			}
 			if (user.can('lock')) return this.parse('/join view-help-request'); // Globals automatically get the form for reference.
 			if (!user.named) return this.errorReply(`You need to choose a username before doing this.`);
 			return this.parse('/join view-help-request');
@@ -417,6 +448,7 @@ exports.commands = {
 				notifyStaff(ticket.escalated);
 				writeTickets();
 			}
+			ticket.claimed = user.name;
 			this.sendReply(`You closed ${ticket.creator}'s ticket.`);
 		},
 		closehelp: ['/helpticket close [user] - Closes an open ticket. Requires: % @ * & ~'],
@@ -456,6 +488,7 @@ exports.commands = {
 			let punishment = {
 				banned: name,
 				by: user.name,
+				created: Date.now(),
 				expires: Date.now() + TICKET_BAN_DURATION,
 				reason: target,
 				ip: (targetUser ? targetUser.latestIp : ticket.ip),
