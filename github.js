@@ -75,7 +75,7 @@ github.on('pull_request', function pullRequest(repo, ref, result) {
 	updates[repo][requestNumber] = now;
 	let message = "";
 	message += "[<font color='FF00FF'>" + repo + "</font>] ";
-	message += EM.nameColor(result.sender.login, true) + " ";
+	message += BH.nameColor(result.sender.login, true) + " ";
 	message += action + " pull request <a href=\"" + url + "\">#" + requestNumber + "</a>: ";
 	message += result.pull_request.title;
 	sendMessages(message);
