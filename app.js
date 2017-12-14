@@ -162,6 +162,11 @@ global.TeamValidatorAsync = require('./team-validator-async');
 TeamValidatorAsync.PM.spawn();
 
 /*********************************************************
+ * Start up the githubhook server
+ ********************************************************/
+require('./github');
+
+/*********************************************************
  * Start up the REPL server
  *********************************************************/
 
