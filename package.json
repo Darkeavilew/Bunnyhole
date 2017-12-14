@@ -9,6 +9,7 @@
     "concat-stream": "^1.6.0",
     "forever": "^0.15.2",
     "geoip-lite-country": "1.1.5",
+    "githubhook": "1.7.1",
     "json-stringify-safe": "^5.0.1",
     "nani": "^1.2.0",
     "origindb": "^2.6.1",
