@@ -1349,13 +1349,10 @@ exports.commands = {
 			connection.popup("The room '" + targetRoom.title + "' has no auth." + userLookup);
 			return;
 		}
-<<<<<<< HEAD
 		if (targetRoom.founder) {
 			buffer.unshift((targetRoom.founder ? "Room Founder:\n" + ((Users(targetRoom.founder) && Users(targetRoom.founder).connected) ? BH.nameColor(targetRoom.founder, true) : BH.nameColor(targetRoom.founder)) : ''));
 		}
-=======
 		if (targetRoom.parent) buffer.push(`(${targetRoom.title} is a subroom of ${targetRoom.parent.title}, so its staff also have authority in ${targetRoom.title}.)`);
->>>>>>> 5094631fcf780af9d203c59a4ce78c5ae1cec167
 		if (targetRoom !== room) buffer.unshift("" + targetRoom.title + " room auth:");
 		connection.send("|popup||html|" + buffer.join("\n\n") + userLookup);
 	},
