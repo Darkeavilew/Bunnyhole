@@ -480,7 +480,6 @@ exports.commands = {
 				profile += `<img src="${avatar}" height="80" width="80" align="left">`;
 				profile += `&nbsp;<font color="#24678d"><strong>Name:</strong></font> ${BH.nameColor(username, true)}&nbsp; ${getFlag(toId(username))} ${showTitle(username)}<br />`;
 				profile += `&nbsp;<font color="#24678d"><strong>Group:</strong></font> ${userGroup} ${devCheck(username)} ${vipCheck(username)}<br />`;
-				profile += `&nbsp;<font color="#24678d"><strong>Registered:</strong></font> ${regdate}<br />`;
 				profile += `&nbsp;<font color="#24678d"><strong>${moneyPlural}:</strong></font> ${money}<br />`;
 				if (Db("pokemon").has(toId(username))) {
 					profile += `&nbsp;<font color="#24678d"><strong>Favorite Pokemon:</strong></font> ${Db("pokemon").get(toId(username))}<br />`;
