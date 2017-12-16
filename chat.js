@@ -37,7 +37,7 @@ const MAX_PARSE_RECURSION = 10;
 const VALID_COMMAND_TOKENS = '/!';
 const BROADCAST_TOKEN = '!';
 
-const FS = require('./fs');
+const FS = require('./lib/fs');
 
 let Chat = module.exports;
 
@@ -403,7 +403,7 @@ class CommandContext {
 		try {
 			result = commandHandler.call(this, this.target, this.room, this.user, this.connection, this.cmd, this.message);
 		} catch (err) {
-			require('./crashlogger')(err, 'A chat command', {
+			require('./lib/crashlogger')(err, 'A chat command', {
 				user: this.user.name,
 				room: this.room && this.room.id,
 				pmTarget: this.pmTarget && this.pmTarget.name,
