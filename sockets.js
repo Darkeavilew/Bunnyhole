@@ -309,11 +309,13 @@ if (cluster.isMaster) {
 		},
 	};
 
-	try {
-		const deflate = require('permessage-deflate').configure(Config.wsdeflate);
-		options.faye_server_options = [deflate];
-	} catch (e) {
-		require('./crashlogger')(new Error("Dependency permessage-deflate is not installed or is otherwise unaccessable. No message compression will take place until server restart."), "Sockets");
+	if (Config.wsdeflate) {
+		try {
+			const deflate = require('permessage-deflate').configure(Config.wsdeflate);
+			options.faye_server_options = {extensions: [deflate]};
+		} catch (e) {
+			require('./lib/crashlogger')(new Error("Dependency permessage-deflate is not installed or is otherwise unaccessable. No message compression will take place until server restart."), "Sockets");
+		}
 	}
 
 	const server = sockjs.createServer(options);
