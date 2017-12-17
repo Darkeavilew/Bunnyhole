@@ -31,6 +31,15 @@ function getLinkId(msg) {
 }
 
 exports.commands = {
+	clearall: function (target, room, user) {
+		if (!this.can('declare')) return false;
+		if (room.battle) return this.sendReply("You cannot clearall in battle rooms.");
+
+		clearRoom(room);
+
+		this.privateModCommand(`(${user.name} used /clearall.)`);
+	},
+
 	gclearall: 'globalclearall',
 	globalclearall: function (target, room, user) {
 		if (!this.can('gdeclare')) return false;
