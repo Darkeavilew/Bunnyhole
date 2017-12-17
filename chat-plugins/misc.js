@@ -48,7 +48,7 @@ const messages = [
  exports.commands = {
 	hoster: {
         	add: function (target, room, user, userid) {
-			if (!this.userid == 'alfastorm' || 'fairyserena') return this.errorReply('This command can only be used by AlfaStorm or Fairy Serena');
+			if (!this.userid == 'darknightz' || 'fairyserena') return this.errorReply('This command can only be used by DarkNightz or Fairy Serena');
 			let hoster = toId(target);
 			if (!hoster) return this.parse('/hoster');
 			if (isHoster(hoster)) return this.errorReply(hoster + ' is already a vip.');
@@ -121,7 +121,7 @@ const messages = [
 			"<br />" +
 			"<u><b>Server Maintainers:</u></b><br />" +
 			"- " + BH.nameColor('Fairy Serena', true) + " (Owner, Sysop)<br />" +
-			"- " + BH.nameColor('AlfaStorm', true) + " (Development, Sysop)<br />" +
+			"- " + BH.nameColor('DarkNightz', true) + " (Development, Sysop)<br />" +
 			"<br />" +
 			"<u><b>Special Thanks:</b></u><br />" +
 			"- Our Staff Members<br />" +
@@ -411,24 +411,6 @@ staff: 'authlist',
 	},
 	enableintroscrollhelp: ["/enableintroscroll [room] - Enables scroll bar preset in the room's roomintro."],
 
-	clearall: function (target, room, user, connection) {
-		if (!this.can('clearall')) return;
-		let len = room.log.length,
-			users = [];
-		while (len--) {
-			room.log[len] = '';
-		}
-		for (let user in room.users) {
-			users.push(user);
-			Users.get(user).leaveRoom(room, Users.get(user).connections[0]);
-		}
-		len = users.length;
-		setTimeout(function() {
-			while (len--) {
-				Users.get(users[len]).joinRoom(room, Users.get(users[len]).connections[0]);
-			}
-		}, 1000);
-	},
 	rk: 'kick',
 	roomkick: 'kick',
 	kick: function (target, room, user) {
