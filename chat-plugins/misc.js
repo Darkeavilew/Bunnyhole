@@ -411,6 +411,25 @@ staff: 'authlist',
 	},
 	enableintroscrollhelp: ["/enableintroscroll [room] - Enables scroll bar preset in the room's roomintro."],
 
+	clearall: function (target, room, user, connection) {
+		if (!this.can('clearall')) return;
+		var len = room.log.length,
+			users = [];
+		while (len--) {
+			room.log[len] = '';
+		}
+		for (var user in room.users) {
+			users.push(user);
+			Users.get(user).leaveRoom(room, Users.get(user).connections[0]);
+		}
+		len = users.length;
+		setTimeout(function() {
+			while (len--) {
+				Users.get(users[len]).joinRoom(room, Users.get(users[len]).connections[0]);
+			}
+		}, 1000);
+	},
+
 	rk: 'kick',
 	roomkick: 'kick',
 	kick: function (target, room, user) {
