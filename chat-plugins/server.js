@@ -1,10 +1,10 @@
 'use strict';
 
 function clearRoom(room) {
-	let len = (room.log && room.log.length) || 0;
+	let len = (room.log.log && room.log.log.length) || 0;
 	let users = [];
 	while (len--) {
-		room.log[len] = '';
+		room.log.log[len] = '';
 	}
 	for (let u in room.users) {
 		users.push(u);
@@ -31,6 +31,15 @@ function getLinkId(msg) {
 }
 
 exports.commands = {
+	clearall: function (target, room, user) {
+		if (!this.can('declare')) return false;
+		if (room.battle) return this.sendReply("You cannot clearall in battle rooms.");
+
+		clearRoom(room);
+
+		this.privateModCommand(`(${user.name} used /clearall.)`);
+	},
+
 	gclearall: 'globalclearall',
 	globalclearall: function (target, room, user) {
 		if (!this.can('gdeclare')) return false;
