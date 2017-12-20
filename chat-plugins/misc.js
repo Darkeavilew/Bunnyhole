@@ -411,25 +411,6 @@ staff: 'authlist',
 	},
 	enableintroscrollhelp: ["/enableintroscroll [room] - Enables scroll bar preset in the room's roomintro."],
 
-	clearall: function (target, room, user, connection) {
-		if (!this.can('clearall')) return;
-		var len = room.log.length,
-			users = [];
-		while (len--) {
-			room.log[len] = '';
-		}
-		for (var user in room.users) {
-			users.push(user);
-			Users.get(user).leaveRoom(room, Users.get(user).connections[0]);
-		}
-		len = users.length;
-		setTimeout(function() {
-			while (len--) {
-				Users.get(users[len]).joinRoom(room, Users.get(users[len]).connections[0]);
-			}
-		}, 1000);
-	},
-
 	rk: 'kick',
 	roomkick: 'kick',
 	kick: function (target, room, user) {
@@ -447,6 +428,17 @@ staff: 'authlist',
 		this.addModCommand("" + targetUser.name + " was " + msg);
 		targetUser.popup("You have been " + msg);
 		targetUser.leaveRoom(room);
+	},
+
+	kickall: function (target, room, user) {
+		if (!this.can('declare')) return this.errorReply("/kickall - Access denied.");
+		if (room.id === 'lobby') return this.errorReply("This command cannot be used in Lobby.");
+		for (let i in room.users) {
+			if (room.users[i] !== user.userid) {
+				room.users[i].leaveRoom(room.id);
+			}
+		}
+		this.privateModCommand('(' + Chat.escapeHTML(user.name) + 'kicked everyone from the room.');
 	},
 
 	bonus: 'dailybonus',
