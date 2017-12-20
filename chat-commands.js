@@ -1349,12 +1349,9 @@ exports.commands = {
 			connection.popup("The room '" + targetRoom.title + "' has no auth." + userLookup);
 			return;
 		}
-<<<<<<< HEAD
 		if (targetRoom.founder) {
 			buffer.unshift((targetRoom.founder ? "Room Founder:\n" + ((Users(targetRoom.founder) && Users(targetRoom.founder).connected) ? BH.nameColor(targetRoom.founder, true) : BH.nameColor(targetRoom.founder)) : ''));
 		}
-		if (targetRoom.parent) buffer.push(`(${targetRoom.title} is a subroom of ${targetRoom.parent.title}, so its staff also have authority in ${targetRoom.title}.)`);
-=======
 		let curRoom = targetRoom;
 		while (curRoom.parent) {
 			const modjoinSetting = curRoom.modjoin === true ? curRoom.modchat : curRoom.modjoin;
@@ -1370,7 +1367,7 @@ exports.commands = {
 		} else if (curRoom.isPrivate === 'hidden' || curRoom.isPrivate === 'voice') {
 			buffer.push(`${curRoom.title} is a hidden room, so global auth with no relevant roomauth will have authority in this room.`);
 		}
->>>>>>> b8be497142cc06603b3097dda37f8b871ad3ac21
+
 		if (targetRoom !== room) buffer.unshift("" + targetRoom.title + " room auth:");
 		connection.send("|popup||html|" + buffer.join("\n\n") + userLookup);
 	},
