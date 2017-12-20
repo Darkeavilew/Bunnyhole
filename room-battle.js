@@ -504,7 +504,10 @@ class Battle {
 			break;
 
 		case 'winupdate':
+<<<<<<< HEAD
 			lines = lines.slice(3);
+=======
+>>>>>>> 227f7b4741bb5f7f0a645a505bea0710bf8080a6
 			for (const line of lines.slice(3)) {
 				this.room.add(line);
 			}
