@@ -186,6 +186,35 @@ exports.commands = {
 		"/type delete - Removes your Favorite Type.",
 	],
 
+	home: 'hometown',
+	hometown: {
+		add: "set",
+		set: function (target, room, user) {
+			let type = target.toLowerCase();
+			if (!type) return this.parse("/help hometown");
+			if (!['Accumula Town', 'Ambrette Town', 'Anistar City', 'Anville Town', 'Aquacorde Town', 'Aspertia City', 'Azalea Town', 'Black City', 'Blackthorn City', 'Camphrier Town', 'Canalave City', 'Castelia City', 'Celadon City', 'Celestic Town', 'Cerulean City', 'Cherrygrove City', 'Cianwood City', 'Cinnabar Island', 'Coumarine City', 'Couriway Town', 'Cyllage City', 'Dendemille Town', 'Dewford Town', 'Driftveil City', 'Ecruteak City', 'Eterna City', 'Ever Grande City' , 'Fallarbor Town', 'Fight Area', 'Five Island', 'Floaroma Town', 'Floccesy Town', 'Fortree City', 'Four Island', 'Frontier Access', 'Fuchsia City', 'Geosenge Town', 'Goldenrod City', 'Hau\'oli City', 'Heahea City', 'Hearthome City', 'Humilau City', 'Icirrus City', 'Iki Town', 'Jubilife City', 'Kiloude City', 'Konikoni City', 'Lacunosa Town', 'Lavaridge Town', 'Lavender Town', 'Laverre City', 'Lentimas Town', 'Littleroot Town', 'Lilycove City', 'Lumiose City', 'Mahogany Town', 'Malie City', 'Mauville City', 'Mistralton City', 'Mossdeep City', 'Nacrene City', 'New Bark Town', 'Nimbasa City', 'Nuvema Town', 'Oldale Town', 'Olivine City', 'One Island', 'Opelucid City', 'Oreburgh City', 'Pacifidlog Town', 'Pallet Town', 'Paniola Town', 'Pastoria City', 'Petalburg City', 'Pewter City', 'Po Town', 'Resort Area', 'Rustboro City', 'Safari Zone Gate', 'Saffron City', 'Sandgem Town', 'Santalune City', 'Seafolk Village', 'Seven Island', 'Shalour City', 'Six Island', 'Slateport City', 'Snowbelle City', 'Snowpoint City', 'Solaceon Town', 'Sootopolis City', 'Striaton City', 'Sunyshore City', 'Survival Area', 'Tapu Village', 'Three Island', 'Twinleaf Town', 'Two Island', 'Undella Town', 'Vaniville Town', 'Veilstone City', 'Verdanturf Town', 'Vermilion City', 'Violet City', 'Virbank City', 'Viridian City', 'White Forest', 'Agate Village', 'Gateon Port', 'Phenac City', 'Pyrite Town', 'The Under', 'White City'].includes(type)) return this.sendReply('Valid hometowns are:TBA.');
+			Db('hometown').set(user.userid, type);
+			return this.sendReply("You have successfully set your Hometown onto your profile.");
+		},
+
+		del: "delete",
+		remove: "delete",
+		delete: function (target, room, user) {
+			if (!Db('hometown').has(user.userid)) return this.errorReply("Your Hometown hasn't been set.");
+			Db('hometown').delete(user.userid);
+			return this.sendReply("Your Favorite Hometown has been deleted from your profile.");
+		},
+
+		"": "help",
+		help: function (target, room, user) {
+			this.parse('/help hometown');
+		},
+	},
+	hometownhelp: [
+		"/hometown set [town] - Sets your Hometown.",
+		"/hometown delete - Removes your Hometown.",
+	],
+
 	pteam: 'profileteam',
 	profileteam: {
 		add: 'set',
@@ -479,6 +508,9 @@ exports.commands = {
 				profile += background(toId(username)) + showBadges(toId(username));
 				profile += '<img src="' + avatar + '" height="80" width="80" align="left">';
 				profile += '&nbsp;<font color="#24678d"><strong>Name:</strong></font> ' + BH.nameColor(username, true) + '&nbsp;' + getFlag(toId(username)) + ' ' + showTitle(username) + '<br />';
+				if (Db('hometown').has(toId(username))) {
+					profile += '&nbsp;<font color="#24678d"><strong>Hometown:</strong></font> ' + Db('hometown').get(toId(username)) + '<br />';
+				}
 				if (Db('pokemon').has(toId(username))) {
 					profile += '&nbsp;<font color="#24678d"><strong>Favorite Pokemon:</strong></font> ' + Db('pokemon').get(toId(username)) + '<br />';
 				}
