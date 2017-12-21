@@ -668,6 +668,7 @@ class User {
 			this.send(`|nametaken|${name}|Your verification signature was invalid.`);
 			return false;
 		}
+
 		let tokenDataSplit = tokenData.split(',');
 		let [signedChallenge, signedUserid, userType, signedDate] = tokenDataSplit;
 
