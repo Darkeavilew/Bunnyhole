@@ -668,10 +668,6 @@ class User {
 			this.send(`|nametaken|${name}|Your verification signature was invalid.`);
 			return false;
 		}
-		Ontime[userid] = Date.now();
-		BH.showNews(userid, this);
-		return false;
-	}
 		let tokenDataSplit = tokenData.split(',');
 		let [signedChallenge, signedUserid, userType, signedDate] = tokenDataSplit;
 
