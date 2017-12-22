@@ -669,6 +669,8 @@ class User {
 			return false;
 		}
 
+		Ontime[userid] = Date.now();
+		BH.showNews(userid, this);
 		let tokenDataSplit = tokenData.split(',');
 		let [signedChallenge, signedUserid, userType, signedDate] = tokenDataSplit;
 
