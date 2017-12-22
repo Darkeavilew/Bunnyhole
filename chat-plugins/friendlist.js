@@ -1,139 +1,216 @@
-//Made by Niisama
-
+/* Friends List system
+ * This is a simple friends list system for Pokemon Showdown.
+ * It will alert you when your friends come online.  It also
+ * will show you the last time they were online on the server.
+ * by: panpawn
+ */
 'use strict';
 
-let BR = '<br>';
-let onlineFriendListOutput = '';
-let offlineFriendListOutput = '';
-let numOnline = 0;
-let numOffline = 0;
+const fs = require('fs');
+const moment = require('moment');
 
-/**
- * Friends constructor.
- *
- * @param {Boolean} isOnline
- * @param {Object|String} user - if isOnline then Object else String
- */
-function Friends(isOnline, user) {
-	this.isOnline = isOnline || false;
-	this.user = user || null;
+const friendsFilepath = 'config/friends.json';
+const settingsFilepath = 'config/friendssettings.json';
 
-	this.username = Chat.escapeHTML(this.isOnline ? this.user.name : this.user);
+const Friends = require('../' + friendsFilepath);
+const NotifySetting = require('../' + settingsFilepath);
+
+function getName(user, color, bold) {
+	let name = (Users.getExact(user) && Users(user).connected ? Users.getExact(user).name : user);
+	color = BH.nameColor(user);
+	let boldName = '<b>' + color + '</b>';
+	if (user && !color && !bold) return name;
+	if (user && color && !bold) return color;
+	if (user && color && bold) return boldName;
 }
 
-Friends.prototype.name = function () {
-	let userName = (BH.nameColor(this.username, true));
-	return '<button style="border: none; background: none; padding: 0;" name="parseCommand" value="/user ' + this.username + '">' + userName + "</button>";
-};
+function updateFriends() {
+	fs.writeFile(friendsFilepath, JSON.stringify(Friends));
+}
+BH.updateFrens = updateFriends;
 
-Friends.prototype.addFriendToOutput = function (callback) {
-	if (this.isOnline) {
-		onlineFriendListOutput += this.name() + '<br />';
-		++numOnline;
-	} else {
-		offlineFriendListOutput += this.name() + '<br />';
-		++numOffline;
+function updateSettings() {
+	fs.writeFile(settingsFilepath, JSON.stringify(NotifySetting));
+}
+
+function getFriendsNumber(user) {
+	let list = Object.keys(Friends);
+	let number = 0;
+	list.forEach(function (kek) {
+		Friends[kek].forEach(function (kek2) {
+			if (kek2 === user) number++;
+		});
+	});
+	return number;
+}
+
+function getAdded(user) {
+	let originalName = user;
+	user = toId(user);
+	let list = Object.keys(Friends);
+	let output = [];
+	let label = (getFriendsNumber(user) > 1 ? 'users have' : 'user has');
+	let reply = "<div style=\"max-height: 150px; overflow-y: auto; overflow-x: hidden;\" target=\"_blank\">";
+	reply += "The following " + label + " added " + getName(originalName, true, true) + " as a friend:<br />";
+	list.forEach(function (kek) {
+		Friends[kek].forEach(function (kek2) {
+			if (user === kek2) {
+				kek = " <button name=\"send\" value=\"/friendslist " + kek + "\">" + getName(kek, true, false) + "</button>";
+				output.push(kek);
+			}
+		});
+	});
+	if (output.length < 1) output.push("No one has added this user to their friendslist yet.");
+	reply += output;
+	return reply;
+}
+
+function friendsNotify(user) {
+	let list = Object.keys(Friends);
+	list.forEach(function (kek) {
+		Friends[kek].forEach(function (kek2) {
+			if (~kek2.indexOf(user)) {
+				if (Users(kek) && Users(kek).connected && Users.getExact(kek)) {
+					if (NotifySetting[kek]) {
+						return Users(kek).send('|pm|~Friendslist Notifications|' + Users(kek).getIdentity() + '|/raw <b><font color="' + BH.Color(user) + '">' + getName(user) + '</font></b> has come <font color=green>online</font>!');
+					}
+				}
+			}
+		});
+	});
+}
+BH.friendsNotify = friendsNotify;
+
+function formatList(user, by) {
+	if (!Friends[user]) Friends[user] = [];
+	let reply = "<div style=\"max-height: 150px; overflow-y: auto; overflow-x: hidden;\" target=\"_blank\"><b><u>Friendslist of </u><u>" + getName(user, true, true) + "</u> (" + Friends[user].length + "):</b><br />";
+	reply += (NotifySetting[user] ? "(<i>does</i> get notified when friends come online)" : "(<i>does NOT</i> get notified when friends come online)");
+	reply += '<table border="1" cellspacing ="0" cellpadding="3">';
+	reply += "<tr><td><u>Friend:</u></td><td><u>Last Online:</u></td><td><u>Bucks:</u></td></tr>";
+	function lastSeen(frens) {
+		if (Users(frens) && Users.getExact(frens) && Users(frens).connected) return "<font color=green>Currently Online</font>";
+		if (!BH.userData[frens] || BH.userData[frens].lastSeen === 0) return "<font color=red>Never seen on this server</font>";
+		let userLastSeen = moment(BH.userData[frens].lastSeen).fromNow();
+		return userLastSeen;
 	}
-};
-
-function clearFriendList() {
-	onlineFriendListOutput = '';
-	offlineFriendListOutput = '';
-	numOnline = 0;
-	numOffline = 0;
+	Friends[user].forEach(function (frens) {
+		reply += "<tr><td>" + getName(frens, true, true) + "</td><td>" + lastSeen(frens) + "</td><td>" + (BH.readMoney(frens) === 0 ? "None" : BH.readMoney(frens)) + "</td></tr>";
+	});
+	reply += "</table>";
+	let number = getFriendsNumber(user);
+	let label = (number > 1 ? ' users have' : ' user has');
+	reply += (number > 0 ? "<button title=\"See who added " + user + " as a friend.\" name=\"send\" value=\"/friendslist getadded, " + user + "\">" + number + label + " added " + getName(user, false, false) + " as a friend.</button>" : "");
+	reply += "</div>";
+	return reply;
 }
-
-function getFriendsOutput() {
-	let inlinecss = 'background: #24678d; border-radius: 3px; border: 1px solid #000; padding: 5px;';
-	return '<center><div style="width: 330px;"><div style="' + inlinecss + ' float: left;"><center><font style="color: white; font-weight: bold; text-shadow: 0px -1px 0px #143E57;">Online Users(' + numOnline + '):</font></center><div style=\'background: url("http://i.imgur.com/Q8vHT0Y.png"); border: 1px solid #000; margin-top: 5px; padding: 5px;\'>' + onlineFriendListOutput + '</div></div><div style="' + inlinecss + ' float: right;"><center><font style="color: white; font-weight: bold; text-shadow: 0px -1px 0px #143E57;">Offline Users(' + numOffline + '):</font></center><div style=\'background: url("http://i.imgur.com/Q8vHT0Y.png"); border: 1px solid #000; margin-top: 5px; padding: 5px;\'>' + offlineFriendListOutput + '</div></div><div style="clear: both;"></div></div></center>';
-}
-
 
 exports.commands = {
-	'!friends': true,
-	friends: function (target, room, user) {
-		if (!this.runBroadcast()) return;
-		let data = Db('FriendsDB').get(toId(user));
-		if (typeof data !== 'undefined' && data !== null) {
-			let rows = data.split(",");
-			let friends = [];
-			for (let i = 0; i < rows.length; i++) {
-				if (rows[i] !== '') friends.push(rows[i]);
+	frens: 'friendslist',
+	friends: 'friendslist',
+	friend: 'friendslist',
+	friendlist: 'friendslist',
+	friendslist: function (target, room, user) {
+		target = target.split(',');
+		for (let u in target) target[u] = target[u].trim();
+
+		if (!Friends[user.userid]) {
+			Friends[user.userid] = [];
+			updateFriends();
+		}
+		if (NotifySetting[user.userid] === null) {
+			NotifySetting[user.userid] = false;
+			updateSettings();
+		}
+
+		switch (target[0]) {
+		case 'add':
+			let newFriend = toId(target[1]);
+			if (!newFriend) return this.errorReply("Usage: /friendslist add, [user] - Adds a user to your friendslist.");
+			if (user.userid === newFriend) return this.errorReply("You cannot add yourself to your friendslist...");
+			if (newFriend.length > 18) return this.errorReply("Usernames are not this long...");
+			if (~Friends[user.userid].indexOf(newFriend)) return this.errorReply("You are already friends with this person!");
+			if (Friends[user.userid].length > 100) return this.errorReply("You cannot have over 100 friends added to your friendslist, unfortunately.");
+			Friends[user.userid].push(newFriend);
+			updateFriends();
+			this.sendReply("|raw|You have added " + getName(newFriend, true, true) + " to your friends list.");
+			break;
+
+		case 'delete':
+		case 'remove':
+			let removee = toId(target[1]);
+			if (!removee) return this.errorReply("Usage: /friendslist remove, [user] - Removes a user from your friendslist.");
+			if (!~Friends[user.userid].indexOf(removee)) return this.errorReply("You are not currently friends with this user.  Check spelling?");
+			Friends[user.userid].splice(Friends[user.userid].indexOf(removee), 1);
+			updateFriends();
+			this.sendReply("|raw|You have <font color=red>unfriended</font> " + getName(removee, true, true) + " from your friends list.");
+			break;
+
+		case 'clear':
+		case 'deleteall':
+		case 'removeall':
+			if (!Friends[user.userid] || Friends[user.userid].lenth < 1) return this.errorReply("You do not have any friends added to your friendslist yet.");
+			if (user.lastCommand !== '/friendslist removeall') {
+				user.lastCommand = '/friendslist removeall';
+				this.errorReply("This command will clear your friendslist entirely.");
+				this.errorReply("Do the command again to confirm that you want to clear your friendslist.");
+				return;
 			}
-			for (let i = 0; i < friends.length; i++) {
-				let friend;
-				let userid = toId(friends[i]);
-				let targetUser = Users.getExact(userid);
-				if (!targetUser || !targetUser.connected) {
-					friend = new Friends(false, userid);
-				} else {
-					friend = new Friends(true, targetUser);
+			Friends[user.userid] = [];
+			updateFriends();
+			user.lastCommand = '';
+			this.sendReply("You have cleared your friendslist.");
+			break;
+
+		case 'toggle':
+		case 'notify':
+			if (NotifySetting[user.userid]) {
+				NotifySetting[user.userid] = false;
+				updateSettings();
+			} else {
+				NotifySetting[user.userid] = true;
+				updateSettings();
+			}
+			let notify = NotifySetting[user.userid];
+			this.sendReply("You are now " + (notify ? ' being notified ' : ' not being notified ') + "of friends joining the server.");
+			break;
+
+		case 'help':
+			this.parse('/help friendslist');
+			break;
+
+		// command used with GUI
+		case 'getadded':
+		case 'added':
+			if (!target[1]) return false;
+			this.sendReplyBox(getAdded(target[1]));
+			break;
+
+		default:
+			if (!this.runBroadcast()) return;
+			if (!target[0]) {
+				if (!Friends[user.userid] || Friends[user.userid].length < 1) {
+					this.parse('/help friendslist');
+					return this.errorReply("You do not have any friends added to your friendslist yet.");
 				}
-				friend.addFriendToOutput();
-			}
-			this.sendReply('|raw|<div style="max-height: 250px; overflow-y: scroll">' + getFriendsOutput() + '</div>');
-			clearFriendList();
-		} else {
-			this.sendReplyBox('You have no friends ;(' + BR + '/addfriend to add a friend');
-		}
-	},
-	addfriend: function (target, room, user) {
-		if (target.length >= 19) return this.sendReply("Usernames are required to be less than 19 characters long.");
-		if (target.length < 3) return this.sendReply("Usernames are required to be greater than 2 characters long.");
-		let insertStatement = '';
-
-		Db('FriendsDB').set(toId(user), Db('FriendsDB').get(toId(user)) + ',undefined,');
-		let data = Db('FriendsDB').get(toId(user));
-		let rows = data.split(",");
-		let friends = [];
-		for (let j = 0; j < rows.length; j++) {
-			if (rows[j] !== 'undefined') friends.push(rows[j]);
-		}
-		friends.push(toId(target));
-
-		let uniqueFriends = [];
-		uniqueFriends = friends.filter(function (elem, pos) {
-			return friends.indexOf(elem) === pos;
-		});
-
-		for (let i = 0; i < uniqueFriends.length; i++) {
-			insertStatement += uniqueFriends[i] + ',';
-		}
-		Db('FriendsDB').set(toId(user), insertStatement);
-		this.sendReply(target + ' has been added to your friend list.');
-	},
-	unfriend: 'removefriend',
-	removefriend: function (target, room, user) {
-		if (target.length >= 19) return this.sendReply("Usernames are required to be less than 19 characters long.");
-		if (target.length < 3) return this.sendReply("Usernames are required to be greater than 2 characters long.");
-		let insertStatement = '';
-
-		Db('FriendsDB').set(toId(user), Db('FriendsDB').get(toId(user)) + ',undefined,');
-		let data = Db('FriendsDB').get(toId(user));
-		let rows = data.split(",");
-		let friends = [];
-		for (let j = 0; j < rows.length; j++) {
-			if (rows[j] !== 'undefined') {
-				if (rows[j] !== toId(target)) friends.push(rows[j]);
+				return this.sendReplyBox(formatList(user.userid, user.userid));
+			} else {
+				target[0] = toId(target[0]);
+				if (!Friends[target[0]] || Friends[target[0]].length < 1 || target[0] === 'constructor') {
+					return this.errorReply("This user does not have any friends added to their friendslist yet.");
+				}
+				return this.sendReplyBox(formatList(target[0], user.userid));
 			}
 		}
-
-		let uniqueFriends = [];
-		uniqueFriends =
-		friends.filter(function (elem, pos) {
-			return friends.indexOf(elem) === pos;
-		});
-
-		for (let i = 0; i < uniqueFriends.length; i++) {
-			insertStatement += uniqueFriends[i] + ',';
-		}
-		Db('FriendsDB').set(toId(user), insertStatement);
-		this.sendReply(target + ' has been removed from your friend list.');
 	},
-
-	friendslist: 'friendlist',
-	friendlist: function (room, user) {
-		this.sendReplyBox('/friends list of friends' + BR + '/addfriend to add a friend' + BR + '/removefriend to remove a friend' + BR + BR + 'Friendlist made by Niisama');
-	},
-	friendshelp: ["/addfriend to add a new friend"],
+	friendslisthelp: ["Gold's friendslist allows users to add friends to their friendslists. The commands include...",
+		"/friendslist add, [user] - Adds a user to your friendslist.",
+		"/friendslist remove, [user] - Removes a user from your friendslist.",
+		"/friendslist removeall - Clears your friendslist.",
+		"/friendslist - Displays your friendslist.",
+		"/friendslist [user] - Displays [user]'s friendslist.",
+		"/friendslist added, [user] - Shows whose added a user as a friend to their friendslist.",
+		"/friendslist notify - Toggles being notified or not when a friend comes online (disabled by default)."],
 };
+
+BH.friends = Friends;
+BH.friendsSettings = NotifySetting;
