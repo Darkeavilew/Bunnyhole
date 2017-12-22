@@ -6,6 +6,14 @@ const Autolinker = require('autolinker');
 
 let regdateCache = {};
 
+BH.userData = Object.create(null);
+function loadUserData() {
+	fs.readFile('config/bunnyusers.json', 'utf8', function (err, file) {
+		if (err) return;
+		BH.userData = JSON.parse(file);
+	});
+}
+
 BH.messageSeniorStaff = function (message, pmName, from) {
 		pmName = (pmName ? pmName : '~Bunnyhole Server');
 		from = (from ? ' (PM from ' + from + ')' : '');
@@ -50,7 +58,40 @@ BH.messageSeniorStaff = function (message, pmName, from) {
 		req.end();
 	},
 
-	updateFriends = function (user, friend, action) {
+	
+	BH.createUser = function (user) { // doesn't save unless it gets edited
+			user = toId(user);
+			if (BH.userData[user] || user === 'constructor') return false;
+			if (user.substr(0, 5) === 'guest') return false;
+
+			BH.userData[user] = { // esteemed user data
+				ips: [],
+				tells: Object.create(null),
+				friends: [],
+				badges: [],
+				tellNum: 0,
+				money: 0,
+				lastSeen: 0,
+				color: false,
+				icon: false,
+				vip: false,
+				proxywhitelist: false,
+				status: '',
+				friendcode: '',
+			}; // we don't save blank user data objects until next save
+		},
+		BH.saveData = function () {
+			setTimeout(function () {
+				fs.writeFileSync('config/bunnyusers.json', JSON.stringify(BH.userData));
+			}, (1.25 * 1000)); // only save every 1.25 seconds - TOPS
+		},
+		BH.checkExisting = function (user) {
+			user = toId(user);
+			if (!BH.userData[user]) BH.createUser(user);
+			return BH.userData[user];
+		},
+
+	BH.updateFriends = function (user, friend, action) {
 			friend = toId(friend);
 			let data = this.checkExisting(user);
 			if (!data.friends) data.friends = [];
