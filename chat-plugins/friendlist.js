@@ -50,6 +50,7 @@ function getFriendsOutput() {
 
 
 exports.commands = {
+	'!friends': true,
 	friends: function (target, room, user) {
 		if (!this.runBroadcast()) return;
 		let data = Db('FriendsDB').get(toId(user));
