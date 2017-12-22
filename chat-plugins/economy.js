@@ -199,7 +199,7 @@ exports.commands = {
 		});
 	},
 
-	confirmtransferstardust: 'transfermoney',
+	confirmtransfermoney: 'transfermoney',
 	transfer: 'transfermoney',
 	transferbuck: 'transfermoney',
 	transferbucks: 'transfermoney',
