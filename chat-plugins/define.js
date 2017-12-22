@@ -49,7 +49,8 @@ exports.commands = {
 						count++;
 					}
 					self.sendReplyBox(output);
-					return room.update();
+					if (room) room.update();
+					return;
 				}
 			}
 		}
