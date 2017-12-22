@@ -167,6 +167,63 @@ exports.commands = {
 		this.privateModCommand('(' + Chat.escapeHTML(user.name) + ' mass room PM\'ed: ' + target + ')');
 	},
 
+	transferaccount: 'transferauthority',
+	transferauth: 'transferauthority',
+	transferauthority: (function () {
+		function transferAuth(user1, user2, transfereeAuth) { // bits and pieces taken from /userauth
+			let buff = [];
+			let ranks = Config.groupsranking;
+
+			// global authority
+			let globalGroup = Users.usergroups[user1];
+			if (globalGroup) {
+				let symbol = globalGroup.charAt(0);
+				if (ranks.indexOf(symbol) > ranks.indexOf(transfereeAuth)) return buff;
+				Users.setOfflineGroup(user1, Config.groupsranking[0]);
+				Users.setOfflineGroup(user2, symbol);
+				buff.push(`Global ${symbol}`);
+			}
+			// room authority
+			Rooms.rooms.forEach((curRoom, id) => {
+				if (curRoom.founder && curRoom.founder === user1) {
+					curRoom.founder = user2;
+					buff.push(`${id} [ROOMFOUNDER]`);
+				}
+				if (!curRoom.auth) return;
+				let roomGroup = curRoom.auth[user1];
+				if (!roomGroup) return;
+				delete curRoom.auth[user1];
+				curRoom.auth[user2] = roomGroup;
+				buff.push(roomGroup + id);
+			});
+			if (buff.length >= 2) { // did they have roomauth?
+				Rooms.global.writeChatRoomData();
+			}
+
+			if (Users(user1)) Users(user1).updateIdentity();
+			if (Users(user2)) Users(user2).updateIdentity();
+
+			return buff;
+		}
+		return function (target, room, user) {
+			if (!this.can('declare')) return false;
+			if (!target || !target.includes(',')) return this.parse(`/help transferauthority`);
+			target = target.split(',');
+			let user1 = target[0].trim(), user2 = target[1].trim(), user1ID = toId(user1), user2ID = toId(user2);
+			if (user1ID.length < 1 || user2ID.length < 1) return this.errorReply(`One or more of the given usernames are too short to be a valid username (min 1 character).`);
+			if (user1ID.length > 17 || user2ID.length > 17) return this.errorReply(`One or more of the given usernames are too long to be a valid username (max 17 characters).`);
+			if (user1ID === user2ID) return this.errorReply(`You provided the same accounts for the alt change.`);
+			let transferSuccess = transferAuth(user1ID, user2ID, user.group);
+			if (transferSuccess.length >= 1) {
+				this.addModCommand(`${user1} has had their account (${transferSuccess.join(', ')}) transfered onto new name: ${user2} - by ${user.name}.`);
+				this.sendReply(`Note: avatars do not transfer automatically with this command.`);
+			} else {
+				return this.errorReply(`User '${user1}' has no global or room authority, or they have higher global authority than you.`);
+			}
+		};
+	})(),
+	transferauthorityhelp: ["/transferauthority [old alt], [new alt] - Transfers a user's global/room authority onto their new alt. Requires & ~"],
+
 	seen: function (target, room, user) {
 		if (!this.runBroadcast()) return;
 		if (!target) return this.parse('/help seen');
