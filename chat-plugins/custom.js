@@ -30,22 +30,27 @@ exports.commands = {
 		        this.sendReplyBox('Join our server discord by clicking <a href="TBA">here</a>.');
 	},
 
+	'!hmm': true,
 	hmm: function(target, room, user) {
 	 	if (!this.runBroadcast()) return;
 	 	return this.sendReply('|raw|<center><img src="https://i.imgur.com/5pPDucQ.gif" width="300" height="169"></center>');
 	},
+	'!kicks': true,
 	kicks: function(target, room, user) {
 	 	if (!this.runBroadcast()) return;
 	 	return this.sendReply('|raw|<center><img src="https://i.imgur.com/rL3brvH.gif" width="300" height="169"></center>');
 	},
+	'!nekochan': true,
 	nekochan: function(target, room, user) {
 	 	if (!this.runBroadcast()) return;
 	 	return this.sendReply('|raw|<center><img src="https://i.imgur.com/er6fBG0.gif" width="300" height="169"></center>');
 	},
+	'!nono': true,
 	nono: function(target, room, user) {
 	 	if (!this.runBroadcast()) return;
 	 	return this.sendReply('|raw|<center><img src="https://i.imgur.com/NbAHKSD.gif" width="300" height="169"></center>');
 	},
+	'!dafuck': true,
  	dafuck: function(target, room, user) {
 	 	if (!this.runBroadcast()) return;
 	 	return this.sendReply('|raw|<center><img src="https://i.imgur.com/cVhyNfL.gif" width="300" height="169"></center>');
