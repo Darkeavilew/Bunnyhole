@@ -40,7 +40,8 @@ exports.commands = {
 				let output = "<font color=#24678d><b>Definitions for " + target + ":</b></font><br />";
 				if (!page[0]) {
 					self.sendReplyBox("No results for <b>\"" + target + "\"</b>.");
-					return room.update();
+					if (room) room.update();
+					return;
 				} else {
 					let count = 1;
 					for (let u in page) {
@@ -94,7 +95,8 @@ exports.commands = {
 				} else {
 					if (!definitions[0]['word'] || !definitions[0]['definition']) {
 						self.sendReplyBox("No results for <b>\"" + Chat.escapeHTML(target) + "\"</b>.");
-						return room.update();
+						if (room) room.update();
+						return;
 					}
 					let output = "<b>" + Chat.escapeHTML(definitions[0]['word']) + ":</b> " + Chat.escapeHTML(definitions[0]['definition']).replace(/\r\n/g, '<br />').replace(/\n/g, ' ');
 					if (output.length > 400) output = output.slice(0, 400) + '...';
