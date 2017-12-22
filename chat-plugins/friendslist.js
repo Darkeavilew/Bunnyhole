@@ -87,12 +87,11 @@ function formatList(user, by) {
 	reply += (NotifySetting[user] ? "(<i>does</i> get notified when friends come online)" : "(<i>does NOT</i> get notified when friends come online)");
 	reply += '<table border="1" cellspacing ="0" cellpadding="3">';
 	reply += "<tr><td><u>Friend:</u></td><td><u>Last Online:</u></td><td><u>Bucks:</u></td></tr>";
-	function getLastSeen(frens) {
+	function lastSeen(frens) {
 		if (Users(frens) && Users(frens).connected) return '<font color = "limegreen"><strong>Currently Online</strong></font>';
 			let seen = Db('seen').get(frens);
 			if (!seen) return '<font color = "red"><strong>Never</strong></font>';
 			return Chat.toDurationString(Date.now() - seen, {precision: true}) + " ago.";
-		}
 	}
 	Friends[user].forEach(function (frens) {
 		reply += "<tr><td>" + getName(frens, true, true) + "</td><td>" + lastSeen(frens) + "</td><td>" + (Economy.readMoney(frens) === 0 ? "None" : Economy.readMoney(frens)) + "</td></tr>";
