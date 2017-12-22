@@ -29,7 +29,7 @@ exports.commands = {
 		        if (!this.runBroadcast()) return;
 		        this.sendReplyBox('Join our server discord by clicking <a href="TBA">here</a>.');
 	},
-
+/*Bunnyhole Gifs*/
 	'!hmm': true,
 	hmm: function(target, room, user) {
 	 	if (!this.runBroadcast()) return;
