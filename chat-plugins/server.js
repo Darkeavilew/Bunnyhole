@@ -50,7 +50,7 @@ BH.messageSeniorStaff = function (message, pmName, from) {
 		req.end();
 	},
 
-	updateFriends: function (user, friend, action) {
+	updateFriends = function (user, friend, action) {
 			friend = toId(friend);
 			let data = this.checkExisting(user);
 			if (!data.friends) data.friends = [];
