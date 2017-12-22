@@ -1,6 +1,8 @@
-/**
-Bunnyhole Miscellaneous Plugins
- **/
+/* Miscellaneous Server Commands
+ * These are basic Pokemon Showdown server commands.
+ * Made for use in the Bunnyhole server.
+ * by: DarkNightz
+ */
 'use strict';
 
 BH.nameColor = function (name, bold) {
