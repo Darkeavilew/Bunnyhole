@@ -840,6 +840,7 @@ class GlobalRoom extends BasicRoom {
 		delete this.users[oldid];
 		this.users[user.userid] = user;
 		BH.getTells(user);
+		BH.friendsNotify(user);
 		return user;
 	}
 	/**
