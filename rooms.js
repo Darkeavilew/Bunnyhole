@@ -828,6 +828,7 @@ class GlobalRoom extends BasicRoom {
 		}
 
 		BH.getTells(user);
+		BH.friendsNotify(user);
 		return user;
 	}
 	/**
