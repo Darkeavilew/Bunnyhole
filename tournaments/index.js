@@ -923,12 +923,12 @@ class Tournament {
 		if ((tourSize >= sizeRequiredToEarn) && this.room.isOfficial) {
 			let firstMoney = Math.round(tourSize / 4);
 			if (firstMoney < 2) firstMoney = 2;
-			if (Users(wid).tourBoost) firstMoney *= 200;
-			if (Users(wid).gameBoost) firstMoney *= 200;
+			if (Users(wid).tourBoost) firstMoney *= 2;
+			if (Users(wid).gameBoost) firstMoney *= 2;
 			let secondMoney = Math.round(firstMoney / 2);
 			if (runnerUp) {
-				if (Users(rid).tourBoost) secondMoney *= 100;
-				if (Users(rid).gameBoost) secondMoney *= 100;
+				if (Users(rid).tourBoost) secondMoney *= 2;
+				if (Users(rid).gameBoost) secondMoney *= 2;
 			}
 		
 			Economy.writeMoney(wid, firstMoney, () => {
