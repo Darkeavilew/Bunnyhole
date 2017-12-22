@@ -32,7 +32,7 @@ BH.showNews = function (userid, user) {
 		notifiedUsers[userid] = setTimeout(() => {
 			delete notifiedUsers[userid];
 		}, 60 * 60 * 1000);
-		return user.send(`|pm| Server News|${user.getIdentity()}|/raw ${newsDisplay}`);
+		return user.send(`|pm| Bunnyhole News|${user.getIdentity()}|/raw ${newsDisplay}`);
 	}
 };
 
@@ -44,7 +44,7 @@ exports.commands = {
 		display: 'view',
 		view: function (target, room, user) {
 			if (!this.runBroadcast()) return;
-			let output = `<center><strong>Server News:</strong></center>${generateNews().join(`<hr>`)}${showSubButton(user.userid)}`;
+			let output = `<center><strong>Bunnyhole News:</strong></center>${generateNews().join(`<hr>`)}${showSubButton(user.userid)}`;
 			if (this.broadcasting) return this.sendReplyBox(`<div class="infobox-limited">${output}</div>`);
 			return user.send(`|popup||wide||html|${output}`);
 		},
