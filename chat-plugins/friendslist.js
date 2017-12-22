@@ -91,7 +91,7 @@ function formatList(user, by) {
 		if (Users(frens) && Users(frens).connected) return '<font color = "limegreen"><strong>Currently Online</strong></font>';
 			let seen = Db('seen').get(frens);
 			if (!seen) return '<font color = "red"><strong>Never</strong></font>';
-			return Chat.toDurationString(Date.now() - seen, {precision: true}) + " ago.";
+			return Chat.toDurationString(Date.now() - seen, {precision: true}) + " ago";
 	}
 	Friends[user].forEach(function (frens) {
 		reply += "<tr><td>" + getName(frens, true, true) + "</td><td>" + lastSeen(frens) + "</td><td>" + (Economy.readMoney(frens) === 0 ? "None" : Economy.readMoney(frens)) + "</td></tr>";
