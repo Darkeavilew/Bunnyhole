@@ -94,7 +94,7 @@ function formatList(user, by) {
 		return userLastSeen;
 	}
 	Friends[user].forEach(function (frens) {
-		reply += "<tr><td>" + getName(frens, true, true) + "</td><td>" + lastSeen(frens) + "</td><td>" + (BH.readMoney(frens) === 0 ? "None" : BH.readMoney(frens)) + "</td></tr>";
+		reply += "<tr><td>" + getName(frens, true, true) + "</td><td>" + lastSeen(frens) + "</td><td>" + (Economy.readMoney(frens) === 0 ? "None" : Economy.readMoney(frens)) + "</td></tr>";
 	});
 	reply += "</table>";
 	let number = getFriendsNumber(user);
