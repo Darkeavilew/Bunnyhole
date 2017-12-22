@@ -99,7 +99,8 @@ exports.commands = {
 					if (output.length > 400) output = output.slice(0, 400) + '...';
 					cacheUrbanWord(target, Chat.escapeHTML(definitions[0]['definition']).replace(/\r\n/g, '<br />').replace(/\n/g, ' '));
 					self.sendReplyBox(output);
-					return room.update();
+					if (room) room.update();
+					return;
 				}
 			}
 		}
