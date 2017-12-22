@@ -50,6 +50,22 @@ BH.messageSeniorStaff = function (message, pmName, from) {
 		req.end();
 	},
 
+	BH.updateFriends: function (user, friend, action) {
+			friend = toId(friend);
+			let data = this.checkExisting(user);
+			if (!data.friends) data.friends = [];
+
+			if (action === 'ADD') {
+				if (!data.friends.includes(friend))data.friends.push(friend);
+			} else if (action === 'DELETE') {
+				if (data.friends.includes(friend)) data.friends.splice(data.friends.indexOf(friend), 1);
+			} else {
+				return false;
+			}
+
+			this.saveData();
+		},
+
 	/* eslint-disable no-useless-escape */
 	BH.parseMessage = function (message) {
 		if (message.substr(0, 5) === "/html") {
