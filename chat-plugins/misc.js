@@ -274,6 +274,7 @@ exports.commands = {
 	})(),
 	transferauthorityhelp: ["/transferauthority [old alt], [new alt] - Transfers a user's global/room authority onto their new alt. Requires & ~"],
 
+	'!seen': true,
 	seen: function (target, room, user) {
 		if (!this.runBroadcast()) return;
 		if (!target) return this.parse('/help seen');
@@ -285,7 +286,8 @@ exports.commands = {
 		this.sendReplyBox(BH.nameColor(target, true) + " was last seen <b>" + Chat.toDurationString(Date.now() - seen, {precision: true}) + "</b> ago.");
 	},
 	seenhelp: ["/seen - Shows when the user last connected on the server."],
-	
+
+	'!regdate': true,
 	regdate: function (target, room, user, connection) {
 		if (!target) target = user.name;
 		target = toId(target);
