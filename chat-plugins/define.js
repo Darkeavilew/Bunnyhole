@@ -18,6 +18,7 @@ function cacheUrbanWord(word, definition) {
 }
 
 exports.commands = {
+	'!define': true,
 	def: 'define',
 	define: function (target, room, user) {
 		if (!target) return this.parse('/help define');
@@ -56,6 +57,7 @@ exports.commands = {
 	},
 	definehelp: ["/define [word] - Shows the definition of a word."],
 
+	'!ud': true,
 	u: 'ud',
 	urbandefine: 'ud',
 	ud: function (target, room, user, connection, cmd) {
