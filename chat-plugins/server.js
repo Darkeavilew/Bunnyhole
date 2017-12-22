@@ -58,7 +58,6 @@ BH.messageSeniorStaff = function (message, pmName, from) {
 		req.end();
 	},
 
-	
 	BH.createUser = function (user) { // doesn't save unless it gets edited
 			user = toId(user);
 			if (BH.userData[user] || user === 'constructor') return false;
