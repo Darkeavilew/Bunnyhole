@@ -105,6 +105,7 @@ function formatList(user, by) {
 }
 
 exports.commands = {
+	'!friendslist': true,
 	frens: 'friendslist',
 	friends: 'friendslist',
 	friend: 'friendslist',
