@@ -203,7 +203,7 @@ exports.commands = {
 			}
 		}
 	},
-	friendslisthelp: ["Gold's friendslist allows users to add friends to their friendslists. The commands include...",
+	friendslisthelp: ["Bunnyhole's friendslist allows users to add friends to their friendslists. The commands include...",
 		"/friendslist add, [user] - Adds a user to your friendslist.",
 		"/friendslist remove, [user] - Removes a user from your friendslist.",
 		"/friendslist removeall - Clears your friendslist.",
