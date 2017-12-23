@@ -1772,6 +1772,9 @@ exports.commands = {
 
 		const globalReason = (target ? `: ${userReason} ${proof}` : ``);
 		this.globalModlog((week ? "WEEKLOCK" : "LOCK"), targetUser || userid, ` by ${user.name}${globalReason}`);
+
+		// Automatically upload replays as evidence/reference to the punishment
+		if (room.battle) this.parse('/savereplay');
 		return true;
 	},
 	lockhelp: [
@@ -3110,7 +3113,7 @@ exports.commands = {
 	},
 	bashhelp: ["/bash [command] - Executes a bash command on the server. Requires: ~ console access"],
 
-	eval: function (target, room, user, connection) {
+	eval: async function (target, room, user, connection) {
 		if (!user.hasConsoleAccess(connection)) {
 			return this.errorReply("/eval - Access denied.");
 		}
@@ -3121,7 +3124,13 @@ exports.commands = {
 			/* eslint-disable no-unused-vars */
 			let battle = room.battle;
 			let me = user;
-			this.sendReply('||<< ' + Chat.stringify(eval(target)));
+			let result = eval(target);
+			let promiseString = '';
+			while (result instanceof Promise) {
+				result = await result;
+				promiseString += 'Promise -> ';
+			}
+			this.sendReply('||<< ' + promiseString + Chat.stringify(result));
 			/* eslint-enable no-unused-vars */
 		} catch (e) {
 			this.sendReply('|| << ' + ('' + e.stack).replace(/\n *at CommandContext\.eval [\s\S]*/m, '').replace(/\n/g, '\n||'));
