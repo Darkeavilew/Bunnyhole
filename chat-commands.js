@@ -3174,14 +3174,6 @@ exports.commands = {
 			let battle = room.battle;
 			let me = user;
 			let result = eval(target);
-<<<<<<< HEAD
-			let promiseString = '';
-			while (result instanceof Promise) {
-				result = await result;
-				promiseString += 'Promise -> ';
-			}
-			this.sendReply('||<< ' + promiseString + Chat.stringify(result));
-=======
 			if (result && result.then) {
 				result = 'Promise -> ' + Chat.stringify(await result);
 			} else {
@@ -3189,7 +3181,6 @@ exports.commands = {
 			}
 			result = result.replace(/\n/g, '\n||');
 			this.sendReply('||<< ' + result);
->>>>>>> 117561c6f294b599ad8f3a831a9f02c1f50d9fa9
 			/* eslint-enable no-unused-vars */
 		} catch (e) {
 			this.sendReply('|| << ' + ('' + e.stack).replace(/\n *at CommandContext\.eval [\s\S]*/m, '').replace(/\n/g, '\n||'));
