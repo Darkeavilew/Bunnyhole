@@ -86,7 +86,7 @@ function formatList(user, by) {
 	let reply = "<div style=\"max-height: 150px; overflow-y: auto; overflow-x: hidden;\" target=\"_blank\"><b><u>Friendslist of </u><u>" + getName(user, true, true) + "</u> (" + Friends[user].length + "):</b><br />";
 	reply += (NotifySetting[user] ? "(<i>does</i> get notified when friends come online)" : "(<i>does NOT</i> get notified when friends come online)");
 	reply += '<table border="1" cellspacing ="0" cellpadding="3">';
-	reply += "<tr><td><u>Friend:</u></td><td><u>Last Online:</u></td><td><u>Bucks:</u></td></tr>";
+	reply += "<tr><td><u>Friend:</u></td><td><u>Last Online:</u></td><td><u>PokeDollars:</u></td></tr>";
 	function lastSeen(frens) {
 		if (Users(frens) && Users(frens).connected) return '<font color = "limegreen"><strong>Currently Online</strong></font>';
 			let seen = Db('seen').get(frens);
