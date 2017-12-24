@@ -95,6 +95,7 @@ class BasicRoom {
 		/** @type {string?} */
 		this.modchat = null;
 		this.staffRoom = false;
+		/** @type {false | number} */
 		this.slowchat = false;
 		this.filterStretching = false;
 		this.filterEmojis = false;
@@ -985,6 +986,7 @@ class BasicChatRoom extends BasicRoom {
 		this.filterStretching = false;
 		this.filterEmojis = false;
 		this.filterCaps = false;
+		/** @type {false | number} */
 		this.slowchat = false;
 		this.introMessage = '';
 		this.staffMessage = '';
@@ -1007,6 +1009,12 @@ class BasicChatRoom extends BasicRoom {
 
 		/** @type {Map<string, ChatRoom>?} */
 		this.subRooms = null;
+
+		/** @type {?true | RegExp} */
+		this.banwordRegex = null;
+
+		/** @type {string[]} */
+		this.banwords = [];
 
 		/** @type {'chat' | 'battle'} */
 		this.type = 'chat';

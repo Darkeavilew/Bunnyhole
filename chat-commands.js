@@ -3043,33 +3043,82 @@ exports.commands = {
 		this.roomlog(user.name + " used /refreshpage");
 	},
 
-	updateserver: function (target, room, user, connection) {
+	updateserver: async function (target, room, user, connection) {
 		if (!user.hasConsoleAccess(connection)) {
-			return this.errorReply("/updateserver - Access denied.");
+			return this.errorReply(`/updateserver - Access denied.`);
 		}
 
 		if (Chat.updateServerLock) {
-			return this.errorReply("/updateserver - Another update is already in progress.");
+			return this.errorReply(`/updateserver - Another update is already in progress.`);
 		}
 
 		Chat.updateServerLock = true;
 
-		let logQueue = [];
-		logQueue.push(user.name + " used /updateserver");
+		const logRoom = Rooms('staff') || room;
 
-		connection.sendTo(room, "updating...");
+		/** @return {Promise<[number, string, string]>} */
+		function exec(/** @type {string} */ command) {
+			logRoom.roomlog(`$ ${command}`);
+			return new Promise((resolve, reject) => {
+				require('child_process').exec(command, (error, stdout, stderr) => {
+					logRoom.roomlog('[o] ' + stdout + '[e] ' + stderr);
+					resolve([error && error.code || 0, stdout, stderr]);
+				});
+			});
+		}
 
-		let exec = require('child_process').exec;
-		exec(`git fetch && git rebase --autostash FETCH_HEAD`, (error, stdout, stderr) => {
-			for (let s of ("" + stdout + stderr).split("\n")) {
-				connection.sendTo(room, s);
-				logQueue.push(s);
+		this.sendReply(`Fetching newest version...`);
+
+		let [code, stdout, stderr] = await exec(`git fetch`);
+		if (code) throw new Error(`updateserver: Crash while fetching - make sure this is a Git repository`);
+		if (!stdout && !stderr) {
+			return this.sendReply(`There were no updates.`);
+		}
+
+		[code, stdout, stderr] = await exec(`git rev-parse HEAD`);
+		if (code || stderr) throw new Error(`updateserver: Crash while grabbing hash`);
+		const oldHash = String(stdout).trim();
+
+		[code, stdout, stderr] = await exec(`git stash push -m "PS /updateserver autostash"`);
+		let stashedChanges = true;
+		if (code) throw new Error(`updateserver: Crash while stashing`);
+		if ((stdout + stderr).includes("No local changes")) {
+			stashedChanges = false;
+		} else if (stderr) {
+			throw new Error(`updateserver: Crash while stashing`);
+		} else {
+			this.sendReply(`Saving changes...`);
+		}
+
+		// errors can occur while rebasing or popping the stash; make sure to recover
+		try {
+			this.sendReply(`Rebasing...`);
+			[code, stdout, stderr] = await exec(`git rebase FETCH_HEAD`);
+			if (code) {
+				// conflict while rebasing
+				await exec(`git rebase --abort`);
+				throw new Error(`restore`);
 			}
-			for (let line of logQueue) {
-				room.roomlog(line);
+
+			if (stashedChanges) {
+				this.sendReply(`Restoring saved changes...`);
+				[code, stdout, stderr] = await exec(`git stash pop`);
+				if (code) {
+					// conflict while popping stash
+					await exec(`git reset HEAD .`);
+					await exec(`git checkout .`);
+					throw new Error(`restore`);
+				}
 			}
-			Chat.updateServerLock = false;
-		});
+
+			this.sendReply(`SUCCESSFUL, server updated.`);
+		} catch (e) {
+			// failed while rebasing or popping the stash
+			await exec(`git reset --hard ${oldHash}`);
+			await exec(`git stash pop`);
+			this.sendReply(`FAILED, old changes restored.`);
+		}
+		Chat.updateServerLock = false;
 	},
 
 	crashfixed: function (target, room, user) {
@@ -3125,12 +3174,22 @@ exports.commands = {
 			let battle = room.battle;
 			let me = user;
 			let result = eval(target);
+<<<<<<< HEAD
 			let promiseString = '';
 			while (result instanceof Promise) {
 				result = await result;
 				promiseString += 'Promise -> ';
 			}
 			this.sendReply('||<< ' + promiseString + Chat.stringify(result));
+=======
+			if (result && result.then) {
+				result = 'Promise -> ' + Chat.stringify(await result);
+			} else {
+				result = Chat.stringify(result);
+			}
+			result = result.replace(/\n/g, '\n||');
+			this.sendReply('||<< ' + result);
+>>>>>>> 117561c6f294b599ad8f3a831a9f02c1f50d9fa9
 			/* eslint-enable no-unused-vars */
 		} catch (e) {
 			this.sendReply('|| << ' + ('' + e.stack).replace(/\n *at CommandContext\.eval [\s\S]*/m, '').replace(/\n/g, '\n||'));
