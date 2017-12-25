@@ -3044,12 +3044,12 @@ exports.commands = {
 	},
 
 	updateserver: async function (target, room, user, connection) {
-		if (!user.hasConsoleAccess(connection)) {
+		if (!user.can('hotpatch')) {
 			return this.errorReply(`/updateserver - Access denied.`);
 		}
 
 		if (Chat.updateServerLock) {
-			return this.errorReply(`/updateserver - Another update is already in progress.`);
+			return this.errorReply(`/updateserver - Another update is already in progress (or a previous update crashed)`);
 		}
 
 		Chat.updateServerLock = true;
@@ -3061,7 +3061,9 @@ exports.commands = {
 			logRoom.roomlog(`$ ${command}`);
 			return new Promise((resolve, reject) => {
 				require('child_process').exec(command, (error, stdout, stderr) => {
-					logRoom.roomlog('[o] ' + stdout + '[e] ' + stderr);
+					let log = `[o] ${stdout}[e] ${stderr}`;
+					if (error) log = `[c] ${error.code}\n${log}`;
+					logRoom.roomlog(log);
 					resolve([error && error.code || 0, stdout, stderr]);
 				});
 			});
@@ -3072,6 +3074,7 @@ exports.commands = {
 		let [code, stdout, stderr] = await exec(`git fetch`);
 		if (code) throw new Error(`updateserver: Crash while fetching - make sure this is a Git repository`);
 		if (!stdout && !stderr) {
+			Chat.updateServerLock = false;
 			return this.sendReply(`There were no updates.`);
 		}
 
@@ -3079,7 +3082,7 @@ exports.commands = {
 		if (code || stderr) throw new Error(`updateserver: Crash while grabbing hash`);
 		const oldHash = String(stdout).trim();
 
-		[code, stdout, stderr] = await exec(`git stash push -m "PS /updateserver autostash"`);
+		[code, stdout, stderr] = await exec(`git stash save --include-untracked "PS /updateserver autostash"`);
 		let stashedChanges = true;
 		if (code) throw new Error(`updateserver: Crash while stashing`);
 		if ((stdout + stderr).includes("No local changes")) {
