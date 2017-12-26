@@ -39,9 +39,6 @@ const DEFAULT_TRAINER_SPRITES = [1, 2, 101, 102, 169, 170, 265, 266];
 
 const FS = require('./lib/fs');
 
-<<<<<<< HEAD
-let Users = module.exports = getUser;
-
 function isHoster(user) {
 	if (!user) return;
 	if (typeof user === 'Object') user = user.userid;
@@ -50,8 +47,6 @@ function isHoster(user) {
 	return false;
 }
 
-=======
->>>>>>> f27f0e21ddebb5ee6cda4f8892c82ab90019424b
 /*********************************************************
  * Users map
  *********************************************************/
