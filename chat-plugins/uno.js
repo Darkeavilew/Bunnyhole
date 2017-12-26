@@ -6,7 +6,7 @@
  *
  * @license MIT license
  */
-
+/*
 'use strict';
 
 const maxTime = 60; // seconds
@@ -720,3 +720,4 @@ exports.commands = {
 		"/uno suppress [on | off] - Toggles suppression of game messages.",
 	],
 };
+*/
