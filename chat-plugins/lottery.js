@@ -69,9 +69,12 @@ exports.commands = {
 				saveLottery();
 			} else {
 				const amount = Db('money').get(user.userid, 0);
-				if (amount < BH.lottery.ticketPrice) return this.errorReply('You do not have enough pokedollars to partake in this game of Lottery. You need ' + (BH.lottery.ticketPrice - amount) + moneyName(amount) + ' more.');
-				if (BH.lottery.playerIPS.length > 1) {
-					let filteredPlayerArray = BH.lottery.playerIPS.filter(function(ip) {
+				Economy.readMoney(user.userid, money => {
+					if (amount < BH.lottery.ticketPrice) {
+						user.sendTo(this.room, 'You do not have enough ' + moneyPlural + ' to join.');
+						return;
+					if (BH.lottery.playerIPS.length > 1) {
+						let filteredPlayerArray = BH.lottery.playerIPS.filter(function(ip) {
 						return ip === user.latestIp;
 					});
 					if (filteredPlayerArray.length >= BH.lottery.maxTicketsPerUser)  return this.errorReply("You cannot get more than " + BH.lottery.maxTicketsPerUser + " tickets for this game of lotto.");
