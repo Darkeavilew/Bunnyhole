@@ -22,7 +22,7 @@ function saveLottery() {
 	fs.writeFileSync('config/lottery.json', JSON.stringify(BH.lottery));
 }
 function moneyName(amount) {
-	let name = " buck";
+	let name = " pokedollar";
 	return name;
 }
 BH.pmall = function (message, pmName) {
@@ -52,7 +52,7 @@ exports.commands = {
 				if (Number(parts[1]) < 1) return this.errorReply("Cannot be less than 1.");
 				let bought = parts[1];
 				if (bought > BH.lottery.maxTicketsPerUser) return this.errorReply("You cannot get this many lottery tickets.");
-				if (bought * BH.lottery.ticketPrice > Db('money').get(user.userid, 0)) return this.errorReply("Sorry, you do not have enough bucks to buy that many tickets.");
+				if (bought * BH.lottery.ticketPrice > Db('money').get(user.userid, 0)) return this.errorReply("Sorry, you do not have enough pokedollars to buy that many tickets.");
 				if (BH.lottery.playerIPS.length > 1) {
 					let filteredPlayerArray = BH.lottery.playerIPS.filter(function(ip) {
 						return ip === user.latestIp;
@@ -69,7 +69,7 @@ exports.commands = {
 				saveLottery();
 			} else {
 				const amount = Db('money').get(user.userid, 0);
-				if (amount < BH.lottery.ticketPrice) return this.errorReply('You do not have enough bucks to partake in this game of Lottery. You need ' + (BH.lottery.ticketPrice - amount) + moneyName(amount) + ' more.');
+				if (amount < BH.lottery.ticketPrice) return this.errorReply('You do not have enough pokedollars to partake in this game of Lottery. You need ' + (BH.lottery.ticketPrice - amount) + moneyName(amount) + ' more.');
 				if (BH.lottery.playerIPS.length > 1) {
 					let filteredPlayerArray = BH.lottery.playerIPS.filter(function(ip) {
 						return ip === user.latestIp;
@@ -94,7 +94,7 @@ exports.commands = {
 			BH.lottery.maxTicketsPerUser = 10; //default max tickets per user
 			BH.lottery.maxTicketPrice = 20;
 			if (isNaN(Number(parts[1]))) return this.errorReply('The pot must be a number greater than 0');
-			if (parts[1] > BH.lottery.maxTicketPrice) return this.errorReply("Lottery tickets cannot cost more than " + BH.lottery.maxTicketPrice + " bucks.");
+			if (parts[1] > BH.lottery.maxTicketPrice) return this.errorReply("Lottery tickets cannot cost more than " + BH.lottery.maxTicketPrice + " pokedollars.");
 			BH.lottery.startTime = Date.now();
 			BH.lottery.ticketPrice = parts[1];
 			BH.lottery.gameActive = true;
@@ -105,14 +105,14 @@ exports.commands = {
 			let room_notification =
 					"<div class=\"broadcast-gold\"><center><b><font size=4 color=red>Lottery Game!</font></b><br />" +
 					"<i><font color=gray>(Started by: " + Chat.escapeHTML(user.name) + ")</font></i><br />" +
-					"A game of lottery has been started!  Cost to join is <b>" + BH.lottery.ticketPrice + "</b> Bucks.<br />" +
+					"A game of lottery has been started!  Cost to join is <b>" + BH.lottery.ticketPrice + "</b> Pokedollars.<br />" +
 					"To buy a ticket, do <code>/lotto join</code>. (Max tickets per user: " + BH.lottery.maxTicketsPerUser + ")</center></div>";
 			if (parts[2] === 'pmall') {
 				if (!this.can('hotpatch')) return false;
 				let loto_notification =
 						"<center><font size=5 color=red><b>Lottery Game!</b></font><br />" +
 						"A game of Lottery has started in <button name=\"send\" value=\"/join casino\">Casino</button>!<br />" +
-						"The ticket cost to join is <b> " + BH.lottery.ticketPrice + "</b> Bucks.  For every ticket bought, the server automatically matches that price towards the pot.<br />" +
+						"The ticket cost to join is <b> " + BH.lottery.ticketPrice + "</b> Pokedollars.  For every ticket bought, the server automatically matches that price towards the pot.<br />" +
 						"(For more information, hop in the room and do /lotto or ask for help!)</center>";
 				BH.pmall('/html ' + loto_notification, '~Bunnyhole Lottery');
 				Rooms.get('casino').add('|raw|' + room_notification);
@@ -131,13 +131,13 @@ exports.commands = {
 			if (!BH.lottery.pot !== 0) {
 				if (jackpot == 100) {
 					Rooms.get("casino").add('|raw|<b><font size="7" color="green"><blink>JACKPOT!</blink></font></b>');
-					Rooms.get("casino").add('|raw|<b><font size="4" color="' + BH.Color(winner) + '">' + winner + '</b></font><font size="4"> has won the game of lottery for <b>' + (BH.lottery.pot * 2) + '</b> bucks!</font>');
+					Rooms.get("casino").add('|raw|<b><font size="4" color="' + BH.Color(winner) + '">' + winner + '</b></font><font size="4"> has won the game of lottery for <b>' + (BH.lottery.pot * 2) + '</b> pokedollars!</font>');
 					Economy.writeMoney(toId(winner), BH.lottery.pot * 2);
 					BH.lottery = {};
 					saveLottery();
 				} else {
 					Economy.writeMoney(toId(winner), BH.lottery.pot);
-					Rooms.get("casino").add('|raw|<b><font size="4" color="' + BH.Color(winner) + '">' + winner + '</b></font><font size="4"> has won the game of lottery for <b>' + BH.lottery.pot + '</b> bucks!</font>');
+					Rooms.get("casino").add('|raw|<b><font size="4" color="' + BH.Color(winner) + '">' + winner + '</b></font><font size="4"> has won the game of lottery for <b>' + BH.lottery.pot + '</b> pokedollars!</font>');
 					BH.lottery = {};
 					saveLottery();
 				}
@@ -197,8 +197,8 @@ exports.commands = {
 					"<div style=\"max-height: 125px; overflow-y: auto; overflow-x: hidden;\" target=\"_blank\">" +
 					"<u>Lottery Game Status:</u><br />" +
 					"Game started by: <b><font color=" + BH.Color(BH.lottery.createdBy) + ">" + Chat.escapeHTML(BH.lottery.createdBy) + "</font></b><br />" +
-					"Pot: <b>" + BH.lottery.pot + " Bucks</b><br />" +
-					"Ticket price: <b>" + BH.lottery.ticketPrice + " Bucks</b><br />" +
+					"Pot: <b>" + BH.lottery.pot + " Pokedollars</b><br />" +
+					"Ticket price: <b>" + BH.lottery.ticketPrice + " Pokedollars</b><br />" +
 					"Game started: <b>" + moment(BH.lottery.startTime).fromNow() + "</b><br />" +
 					"Max tickets per user: <b>" + BH.lottery.maxTicketsPerUser + "</b><br />" +
 					"<b>Tickets bought (" + BH.lottery.players.length + "):</b><br />" +
@@ -215,7 +215,7 @@ exports.commands = {
 		case 'pot':
 			if (!this.runBroadcast()) return;
 			if (!BH.lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
-			this.sendReplyBox("The current lottery pot is worth: <b>" + BH.lottery.pot + "</b> bucks.");
+			this.sendReplyBox("The current lottery pot is worth: <b>" + BH.lottery.pot + "</b> pokedollars.");
 			break;
 
 		case 'obj':
