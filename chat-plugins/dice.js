@@ -34,7 +34,7 @@ class Dice {
 			delete this.room.dice;
 		}, INACTIVE_END_TIME);
 
-		let buck = (this.bet === 1 ? 'buck' : 'bucks');
+		let buck = (this.bet === 1 ? 'pokedollar' : 'pokedollars');
 		this.startMessage = '<div class="infobox"><b style="font-size: 14pt; color: #24678d"><center><span style="color: ' + BH.nameColor(starter) + '">' + Chat.escapeHTML(starter) + '</span> has started a game of dice for <span style = "color: green">' + amount + '</span> ' + buck + '!</center></b><br>' +
 			'<center><img style="margin-right: 30px;" src = "http://i.imgur.com/eywnpqX.png" width="80" height="80">' +
 			'<img style="transform:rotateY(180deg); margin-left: 30px;" src="http://i.imgur.com/eywnpqX.png" width="80" height="80"><br>' +
@@ -91,7 +91,7 @@ class Dice {
 
 				let taxedAmt = Math.round(this.bet * TAX);
 				setTimeout(() => {
-					let buck = (this.bet === 1 ? 'buck' : 'bucks');
+					let buck = (this.bet === 1 ? 'pokedollar' : 'pokedollars');
 					this.room.add('|uhtmlchange|' + this.room.diceCount + '|<div class="infobox"><center>' + players + ' have joined the game!<br /><br />' +
 						'The game has been started! Rolling the dice...<br />' +
 						'<img src = "' + diceImg(roll1) + '" align = "left" title = "' + Chat.escapeHTML(p1.name) + '\'s roll"><img src = "' + diceImg(roll2) + '" align = "right" title = "' + p2.name + '\'s roll"><br />' +
@@ -104,8 +104,8 @@ class Dice {
 						Economy.writeMoney(loser.userid, -this.bet, () => {
 							Economy.readMoney(winner.userid, winnerMoney => {
 								Economy.readMoney(loser.userid, loserMoney => {
-									Economy.logDice(winner.userid + " has won a dice against " + loser.userid + ". They now have " + winnerMoney + (winnerMoney === 1 ? " buck." : " bucks."));
-									Economy.logDice(loser.userid + " has lost a dice against " + winner.userid + ". T hey now have " + loserMoney + (loserMoney === 1 ? " buck." : " bucks."));
+									Economy.logDice(winner.userid + " has won a dice against " + loser.userid + ". They now have " + winnerMoney + (winnerMoney === 1 ? " pokedollar." : " pokedollars."));
+									Economy.logDice(loser.userid + " has lost a dice against " + winner.userid + ". T hey now have " + loserMoney + (loserMoney === 1 ? " pokedollar." : " pokedollars."));
 									this.end();
 								});
 							});
@@ -135,7 +135,7 @@ exports.commands = {
 		if (isNaN(target)) return this.errorReply('"' + target + '" isn\'t a valid number.');
 		if (target.includes('.') || amount < 1 || amount > 5000) return this.sendReply('The number of bucks must be between 1 and 5,000 and cannot contain a decimal.');
 		Economy.readMoney(user.userid, bucks => {
-			if (bucks < amount) return this.sendReply("You don't have " + amount + " " + (amount === 1 ? "buck" : "bucks") + ".");
+			if (bucks < amount) return this.sendReply("You don't have " + amount + " " + (amount === 1 ? "pokedollar" : "pokedollars") + ".");
 			room.dice = new Dice(room, amount, user.name);
 			this.parse("/joindice");
 		});
