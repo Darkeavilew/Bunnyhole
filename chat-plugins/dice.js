@@ -168,7 +168,7 @@ exports.commands = {
 		room.dice.end(user);
 	},
 	dicegamehelp: [
-		'/startdice or /dicegame [amount] - Starts a game of dice in the room for a given number of bucks, 1 by default (NOTE: There is a 10% tax on bucks you win from dice games).',
+		'/startdice or /dicegame [amount] - Starts a game of dice in the room for a given number of pokedollars, 1 by default (NOTE: There is a 10% tax on pokedollars you win from dice games).',
 		'/joindice - Joins the game of dice. You cannot use this command if you don\'t have the number of bucks the game is for.',
 		'/leavedice - Leaves the game of dice.',
 		'/enddice - Ends the game of dice. Requires + or higher to use.',
