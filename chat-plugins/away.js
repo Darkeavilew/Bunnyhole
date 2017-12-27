@@ -29,7 +29,7 @@ function parseStatus(text, encoding) {
 
 exports.commands = {
 	away: function (target, room, user) {
-		if (!user.isAway && user.name.length > 19 && !user.can('lock')) return this.sendReply('Your user name is too long to update your status.');
+		if (!user.isAway && user.name.length > 19) return this.sendReply('Your user name is too long to update your status.');
 
 		target = target ? target.replace(/[^a-zA-Z0-9]/g, '') : 'AWAY';
 		let newName = user.name;
@@ -44,7 +44,7 @@ exports.commands = {
 		}
 
 		newName += ' - ' + status;
-		if (newName.length > 18 && !user.can('lock')) return this.sendReply('The type of absence that you tried to choose "' + target + '" is too long for you username.');
+		if (newName.length > 29) return this.sendReply('The type of absence that you tried to choose "' + target + '" is too long for you username.');
 
         // forcerename any possible impersonators
 		let targetUser = Users.getExact(user.userid + target);
