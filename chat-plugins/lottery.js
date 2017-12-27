@@ -52,7 +52,7 @@ exports.commands = {
 				if (Number(parts[1]) < 1) return this.errorReply("Cannot be less than 1.");
 				let bought = parts[1];
 				if (bought > BH.lottery.maxTicketsPerUser) return this.errorReply("You cannot get this many lottery tickets.");
-				if (bought * BH.lottery.ticketPrice > Db('money').get(user.userid, 0)) return this.errorReply("Sorry, you do not have enough pokedollars to buy that many tickets.");
+				if (bought * BH.lottery.ticketPrice > Db('currency').get(user.userid, 0)) return this.errorReply("Sorry, you do not have enough pokedollars to buy that many tickets.");
 				if (BH.lottery.playerIPS.length > 1) {
 					let filteredPlayerArray = BH.lottery.playerIPS.filter(function(ip) {
 						return ip === user.latestIp;
@@ -68,7 +68,7 @@ exports.commands = {
 				}
 				saveLottery();
 			} else {
-				const amount = Db('money').get(user.userid, 0);
+				const amount = Db('currency').get(user.userid, 0);
 				if (amount < BH.lottery.ticketPrice) return this.errorReply('You do not have enough pokedollars to partake in this game of Lottery. You need ' + (BH.lottery.ticketPrice - amount) + moneyName(amount) + ' more.');
 				if (BH.lottery.playerIPS.length > 1) {
 					let filteredPlayerArray = BH.lottery.playerIPS.filter(function(ip) {
@@ -229,7 +229,7 @@ exports.commands = {
 					"<center><b>Lottery Commands</b><br />" +
 					"<code>/lotto create, [ticket price]</code> - Starts a game of lotto with the respected ticket price. (Requires @, #, &, ~)<br />" +
 					"<code>/lotto create, [ticket price], pmall</code> - Starts a game of lotto with the respected ticket price AND notifies everyone. (Requires ~)<br />" +
-					"<code>/lotto join</code> OR <code>/loto buy</code> - Buys 1 ticket for the current game of loto (no cap set as of now).<br />" +
+					"<code>/lotto join</code> OR <code>/loto buy</code> - Buys 1 ticket for the current game of lotto (no cap set as of now).<br />" +
 					"<code>/lotto end</code> - Picks a winner of the lotto.  (Requires @, #, &, ~)<br />" +
 					"<code>/lotto setlimit, [ticketcap]</code> - Sets the cap of tickets per user.  (Requires ~)<br />" +
 					"<code>/lotto pot</code> - Shows the current pot of the game of lotto.<br />" +
