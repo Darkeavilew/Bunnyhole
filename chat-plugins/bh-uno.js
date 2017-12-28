@@ -573,6 +573,25 @@ class Game {
 			this.room.add("The game of UNO was forcibly ended.");
 		} else {
 			this.room.add("Congratulations to " + getUserName(winner) + " for winning the game of UNO!");
+			let prize = 2;
+			let targetUser = toId(getUserName(winner));
+			prize += Math.floor(this.list.length / 5);
+			if (Users(targetUser).unoBoost) prize *= 2;
+			if (Users(targetUser).gameBoost) prize *= 2;
+			if (this.room.isOfficial) {
+				Economy.writeMoney(targetUser, prize, () => {
+					Economy.readMoney(targetUser, newAmount => {
+						if (Users(targetUser) && Users(targetUser).connected) {
+							Users.get(targetUser).popup('|html|You have received ' + prize + ' ' + (prize === 1 ? global.currencyName : global.currencyPlural) + ' from winning the game of uno.');
+						}
+						Economy.logTransaction(Chat.escapeHTML(getUserName(winner)) + ' has won ' + prize + ' ' + (prize === 1 ? global.currencyName : global.currencyPlural) + ' from a game of uno.');
+					});
+				});
+				for (let i = 0; i < this.list.length; i++) {
+					Users(this.list[i]).unoBoost = false;
+					Users(this.list[i]).gameBoost = false;
+				}
+			}
 		}
 		this.room.update();
 		delete this.room.game;
