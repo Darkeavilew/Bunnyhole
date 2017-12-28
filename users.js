@@ -120,7 +120,7 @@ function merge(user1, user2) {
  * Users.get("Some dude") will give you "Some guy"s user object.
  *
  * If this behavior is undesirable, use Users.getExact.
- * @param {string | User} name
+ * @param {?string | User} name
  * @param {boolean} exactName
  * @return {?User}
  */
@@ -437,6 +437,8 @@ class Connection {
 	}
 }
 
+/** @typedef {[string, string, Connection]} ChatQueueEntry */
+
 // User
 class User {
 	/**
@@ -493,7 +495,11 @@ class User {
 		this.inviteOnlyNextBattle = false;
 
 		// chat queue
+<<<<<<< HEAD
 		/** @type {[string, string, Connection][]?} */
+=======
+		/** @type {ChatQueueEntry[]?} */
+>>>>>>> e0c08eafba24dea71cd248ea4b928d992db1fdd8
 		this.chatQueue = null;
 		this.chatQueueTimeout = null;
 		this.lastChatMessage = 0;
@@ -510,6 +516,10 @@ class User {
 		/**@type {string} */
 		this.s3 = '';
 
+		/** @type {boolean} */
+		this.punishmentNotified = false;
+		/** @type {boolean} */
+		this.lockNotified = false;
 		/**@type {string} */
 		this.autoconfirmed = '';
 		// initialize
@@ -693,13 +703,13 @@ class User {
 	/**
 	 * @param {boolean} isForceRenamed
 	 */
-	resetName(isForceRenamed) {
+	resetName(isForceRenamed = false) {
 		return this.forceRename('Guest ' + this.guestNum, false, isForceRenamed);
 	}
 	/**
 	 * @param {?string} roomid
 	 */
-	updateIdentity(roomid) {
+	updateIdentity(roomid = null) {
 		if (roomid) {
 			return Rooms(roomid).onUpdateIdentity(this);
 		}
@@ -1365,11 +1375,11 @@ class User {
 		return true;
 	}
 	/**
-	 * @param {GlobalRoom | GameRoom | ChatRoom} room
-	 * @param {Connection} connection
+	 * @param {GlobalRoom | GameRoom | ChatRoom | string} room
+	 * @param {?Connection} connection
 	 * @param {boolean} force
 	 */
-	leaveRoom(room, connection, force) {
+	leaveRoom(room, connection = null, force = false) {
 		room = Rooms(room);
 		if (room.id === 'global') {
 			// you can't leave the global room except while disconnecting
@@ -1390,6 +1400,7 @@ class User {
 
 		let stillInRoom = false;
 		if (connection) {
+			// @ts-ignore TypeScript inferring wrong type for room
 			stillInRoom = this.connections.some(connection => connection.inRooms.has(room.id));
 		}
 		if (!stillInRoom) {
@@ -1452,8 +1463,12 @@ class User {
 				this.chatQueue.push([message, room.id, connection]);
 			}
 		} else if (now < this.lastChatMessage + throttleDelay) {
+<<<<<<< HEAD
 			// @ts-ignore TypeScript bug: tuple
 			this.chatQueue = [[message, room.id, connection]];
+=======
+			this.chatQueue = /** @type {ChatQueueEntry[]} */ ([[message, room.id, connection]]);
+>>>>>>> e0c08eafba24dea71cd248ea4b928d992db1fdd8
 			this.startChatQueue(throttleDelay - (now - this.lastChatMessage));
 		} else {
 			this.lastChatMessage = now;

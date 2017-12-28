@@ -34,11 +34,17 @@ function parseJSON(/** @type {string} */ json) {
 	return data;
 }
 
+/** @typedef {[AnyObject?, number, Error?]} LoginServerResponse */
+
 class LoginServerInstance {
 	constructor() {
 		this.uri = Config.loginserver;
 		/**
+<<<<<<< HEAD
 		 * @type {[AnyObject, (val: [AnyObject?, number, Error?]) => void][]}
+=======
+		 * @type {[AnyObject, (val: LoginServerResponse) => void][]}
+>>>>>>> e0c08eafba24dea71cd248ea4b928d992db1fdd8
 		 */
 		this.requestQueue = [];
 
@@ -54,12 +60,22 @@ class LoginServerInstance {
 	/**
 	 * @param {string} action
 	 * @param {AnyObject?} data
+<<<<<<< HEAD
 	 * @return {Promise<[AnyObject?, number, Error?]>}
 	 */
 	instantRequest(action, data = null) {
 		if (this.openRequests > 5) {
 			// @ts-ignore TypeScript bug: tuple
 			return Promise.resolve([null, 0, new RangeError("Request overflow")]);
+=======
+	 * @return {Promise<LoginServerResponse>}
+	 */
+	instantRequest(action, data = null) {
+		if (this.openRequests > 5) {
+			return Promise.resolve(/** @type {LoginServerResponse} */ (
+				[null, 0, new RangeError("Request overflow")]
+			));
+>>>>>>> e0c08eafba24dea71cd248ea4b928d992db1fdd8
 		}
 		this.openRequests++;
 		let dataString = '';
@@ -97,12 +113,22 @@ class LoginServerInstance {
 	/**
 	 * @param {string} action
 	 * @param {AnyObject?} data
+<<<<<<< HEAD
 	 * @return {Promise<[AnyObject?, number, Error?]>}
 	 */
 	request(action, data = null) {
 		if (this.disabled) {
 			// @ts-ignore TypeScript bug: tuple
 			return Promise.resolve([null, 0, new Error(`Login server connection disabled.`)]);
+=======
+	 * @return {Promise<LoginServerResponse>}
+	 */
+	request(action, data = null) {
+		if (this.disabled) {
+			return Promise.resolve(/** @type {LoginServerResponse} */ (
+				[null, 0, new Error(`Login server connection disabled.`)]
+			));
+>>>>>>> e0c08eafba24dea71cd248ea4b928d992db1fdd8
 		}
 
 		// ladderupdate and mmr are the most common actions
@@ -114,7 +140,11 @@ class LoginServerInstance {
 		}
 
 		let actionData = data || {};
+<<<<<<< HEAD
 		actionData.action = action;
+=======
+		actionData.act = action;
+>>>>>>> e0c08eafba24dea71cd248ea4b928d992db1fdd8
 		return new Promise(resolve => {
 			this.requestQueue.push([actionData, resolve]);
 			this.requestTimerPoke();
@@ -136,7 +166,11 @@ class LoginServerInstance {
 
 		if (!requests.length) return;
 
+<<<<<<< HEAD
 		/** @type {((val: [AnyObject?, number, Error?]) => void)[]} */
+=======
+		/** @type {((val: LoginServerResponse) => void)[]} */
+>>>>>>> e0c08eafba24dea71cd248ea4b928d992db1fdd8
 		let resolvers = [];
 		let dataList = [];
 		for (const [data, resolve] of requests) {
@@ -145,7 +179,10 @@ class LoginServerInstance {
 		}
 
 		this.requestStart(requests.length);
-		let postData = 'serverid=' + Config.serverid + '&servertoken=' + encodeURIComponent(Config.servertoken) + '&nocache=' + new Date().getTime() + '&json=' + encodeURIComponent(JSON.stringify(requests)) + '\n';
+		let postData = 'serverid=' + Config.serverid +
+			'&servertoken=' + encodeURIComponent(Config.servertoken) +
+			'&nocache=' + new Date().getTime() +
+			'&json=' + encodeURIComponent(JSON.stringify(dataList)) + '\n';
 		let requestOptions = url.parse(this.uri + 'action.php');
 		// @ts-ignore
 		requestOptions.method = 'post';
@@ -199,7 +236,11 @@ class LoginServerInstance {
 					if (data) {
 						resolve([data[i], res.statusCode, null]);
 					} else {
+<<<<<<< HEAD
 						resolve([null, res.statusCode, new Error("Corruption")]);
+=======
+						resolve([null, res.statusCode, new Error(buffer)]);
+>>>>>>> e0c08eafba24dea71cd248ea4b928d992db1fdd8
 					}
 				}
 				this.requestEnd();
