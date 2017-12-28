@@ -352,7 +352,7 @@ exports.commands = {
 			this.roomlog("" + user.name + " used " + message);
 			return this.privateModCommand("(A poll was started by " + user.name + ".)");
 		},
-		newhelp: [`/poll create [question], [option1], [option2], [...] - Creates a poll. Requires: % @ * # & ~`],
+		newhelp: [`/poll create [question], [option1], [option2], [...] - Creates a poll. Allows up to 5 polls at once. Requires: % @ * # & ~`],
 
 		vote: function (target, room, user) {
 			if (!room.poll) return this.errorReply("There is no poll running in this room.");
@@ -373,7 +373,7 @@ exports.commands = {
 
 			room.poll.vote(user, parsed, num);
 		},
-		votehelp: [`/poll vote [option number], [poll number] - Votes for option [number].`],
+		votehelp: [`/poll vote [option number], [poll number] - Votes for option [number] on poll [poll number].`],
 
 		timer: function (target, room, user) {
 			if (!room.poll) return this.errorReply("There is no poll running in this room.");
@@ -459,7 +459,7 @@ exports.commands = {
 				}
 			}
 		},
-		displayhelp: [`/poll display [poll id number] - Displays the poll`],
+		displayhelp: [`/poll display [poll id number] - Displays the poll. Id number is optional and only displays the poll with the id number.`],
 
 		'': function (target, room, user) {
 			this.parse('/help poll');
@@ -467,10 +467,10 @@ exports.commands = {
 	},
 
 	pollhelp: [
-		`/poll allows rooms to run their own polls. These polls are limited to one poll at a time per room.`,
+		`/poll allows rooms to run their own polls. These polls are limited to five polls at a time per room.`,
 		`Accepts the following commands:`,
-		`/poll create [question], [option1], [option2], [...] - Creates a poll. Requires: % @ * # & ~`,
-		`/poll htmlcreate [question], [option1], [option2], [...] - Creates a poll, with HTML allowed in the question and options. Requires: # & ~`,
+		`/poll create [question], [option1], [option2], [...] - Allows up to 5 polls at once per room. Creates a poll. Requires: % @ * # & ~`,
+		`/poll htmlcreate [question], [option1], [option2], [...] - Allows up to 5 polls at once per room. Creates a poll, with HTML allowed in the question and options. Requires: # & ~`,
 		`/poll vote [number], [poll id number] - Votes for option [number] in the poll [poll id number].`,
 		`/poll timer [minutes], [poll id number] - Sets the poll to automatically end after [minutes]. Requires: % @ * # & ~`,
 		`/poll results, [poll id number] - Shows the results of the poll without voting. NOTE: you can't go back and vote after using this.`,
