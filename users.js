@@ -495,11 +495,7 @@ class User {
 		this.inviteOnlyNextBattle = false;
 
 		// chat queue
-<<<<<<< HEAD
-		/** @type {[string, string, Connection][]?} */
-=======
 		/** @type {ChatQueueEntry[]?} */
->>>>>>> e0c08eafba24dea71cd248ea4b928d992db1fdd8
 		this.chatQueue = null;
 		this.chatQueueTimeout = null;
 		this.lastChatMessage = 0;
@@ -1463,12 +1459,7 @@ class User {
 				this.chatQueue.push([message, room.id, connection]);
 			}
 		} else if (now < this.lastChatMessage + throttleDelay) {
-<<<<<<< HEAD
-			// @ts-ignore TypeScript bug: tuple
-			this.chatQueue = [[message, room.id, connection]];
-=======
 			this.chatQueue = /** @type {ChatQueueEntry[]} */ ([[message, room.id, connection]]);
->>>>>>> e0c08eafba24dea71cd248ea4b928d992db1fdd8
 			this.startChatQueue(throttleDelay - (now - this.lastChatMessage));
 		} else {
 			this.lastChatMessage = now;
