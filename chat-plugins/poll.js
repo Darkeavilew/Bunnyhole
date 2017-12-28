@@ -14,6 +14,7 @@ class Poll {
 			room.pollNumber = 1;
 		}
 		this.room = room;
+<<<<<<< HEAD
 		this.pollArray = [{
 			room: room,
 			pollNum: room.pollNumber,
@@ -28,6 +29,19 @@ class Poll {
 		}];
 		for (let i = 0; i < options.length; i++) {
 			this.pollArray[0].options.set(i + 1, {name: options[i], votes: 0});
+=======
+		this.question = questionData.source;
+		this.supportHTML = questionData.supportHTML;
+		this.voters = {};
+		this.voterIps = {};
+		this.totalVotes = 0;
+		this.timeout = null;
+		this.timeoutMins = 0;
+
+		this.options = new Map();
+		for (const [i, option] of options.entries()) {
+			this.options.set(i + 1, {name: option, votes: 0});
+>>>>>>> a6ce5c9dc1a8460fc854c4bba3531c3c7b6f4864
 		}
 	}
 
