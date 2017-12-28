@@ -67,19 +67,12 @@ exports.commands = {
 
 		if (!buffer.length) return connection.popup("This server has no global authority.");
 		connection.popup(buffer.join("\n\n"));
-<<<<<<< HEAD
 	},*/
-	authhelp: ["/auth - Show global staff for the server.",
-		"/auth [room] - Show what roomauth a room has.",
-		"/auth [user] - Show what global and roomauth a user has."],
-=======
-	},
 	authhelp: [
 		`/auth - Show global staff for the server.`,
 		`/auth [room] - Show what roomauth a room has.`,
 		`/auth [user] - Show what global and roomauth a user has.`,
 	],
->>>>>>> e0c08eafba24dea71cd248ea4b928d992db1fdd8
 
 	userlist: function (target, room, user) {
 		let userList = [];
