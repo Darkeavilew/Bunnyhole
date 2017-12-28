@@ -352,11 +352,7 @@ exports.commands = {
 			this.roomlog("" + user.name + " used " + message);
 			return this.privateModCommand("(A poll was started by " + user.name + ".)");
 		},
-<<<<<<< HEAD
-		newhelp: ["/poll create [question], [option1], [option2], [...] - Creates a poll. Allows up to 5 polls at once. Requires: % @ * # & ~"],
-=======
 		newhelp: [`/poll create [question], [option1], [option2], [...] - Creates a poll. Requires: % @ * # & ~`],
->>>>>>> e0c08eafba24dea71cd248ea4b928d992db1fdd8
 
 		vote: function (target, room, user) {
 			if (!room.poll) return this.errorReply("There is no poll running in this room.");
@@ -377,11 +373,7 @@ exports.commands = {
 
 			room.poll.vote(user, parsed, num);
 		},
-<<<<<<< HEAD
-		votehelp: ["/poll vote [option number], [poll number] - Votes for option [number] on poll [poll number]."],
-=======
-		votehelp: [`/poll vote [number] - Votes for option [number].`],
->>>>>>> e0c08eafba24dea71cd248ea4b928d992db1fdd8
+		votehelp: [`/poll vote [option number], [poll number] - Votes for option [number].`],
 
 		timer: function (target, room, user) {
 			if (!room.poll) return this.errorReply("There is no poll running in this room.");
@@ -417,14 +409,10 @@ exports.commands = {
 				}
 			}
 		},
-<<<<<<< HEAD
-		timerhelp: ["/poll timer [minutes], [poll id number] - Sets the poll to automatically end after [minutes] minutes. Requires: % @ * # & ~", "/poll timer clear - Clears the poll's timer. Requires: % @ * # & ~"],
-=======
 		timerhelp: [
-			`/poll timer [minutes] - Sets the poll to automatically end after [minutes] minutes. Requires: % @ * # & ~`,
+			`/poll timer [minutes], [poll id number] - Sets the poll to automatically end after [minutes] minutes. Requires: % @ * # & ~`,
 			`/poll timer clear - Clears the poll's timer. Requires: % @ * # & ~`,
 		],
->>>>>>> e0c08eafba24dea71cd248ea4b928d992db1fdd8
 
 		results: function (target, room, user) {
 			if (!room.poll) return this.errorReply("There is no poll running in this room.");
@@ -432,11 +420,7 @@ exports.commands = {
 			if (!num) return this.errorReply("Not a poll number!");
 			if (room.poll.pollArray[num].pollNum === parseInt(target)) return room.poll.blankvote(user, num);
 		},
-<<<<<<< HEAD
-		resultshelp: ["/poll results [poll id number] - Shows the results of the poll without voting. NOTE: you can't go back and vote after using this."],
-=======
-		resultshelp: [`/poll results - Shows the results of the poll without voting. NOTE: you can't go back and vote after using this.`],
->>>>>>> e0c08eafba24dea71cd248ea4b928d992db1fdd8
+		resultshelp: [`/poll results [poll id number] - Shows the results of the poll without voting. NOTE: you can't go back and vote after using this.`],
 
 		close: 'end',
 		stop: 'end',
@@ -453,11 +437,7 @@ exports.commands = {
 
 			return this.privateModCommand("(A poll was ended by " + user.name + ".)");
 		},
-<<<<<<< HEAD
-		endhelp: ["/poll end [poll id number] - Ends a poll and displays the results. Requires: % @ * # & ~"],
-=======
-		endhelp: [`/poll end - Ends a poll and displays the results. Requires: % @ * # & ~`],
->>>>>>> e0c08eafba24dea71cd248ea4b928d992db1fdd8
+		endhelp: [`/poll end [poll id number] - Ends a poll and displays the results. Requires: % @ * # & ~`],
 
 		show: 'display',
 		display: function (target, room, user, connection) {
@@ -479,11 +459,7 @@ exports.commands = {
 				}
 			}
 		},
-<<<<<<< HEAD
-		displayhelp: ["/poll display [poll id number] - Displays the poll. Id number is optional and only displays the poll with the id number."],
-=======
-		displayhelp: [`/poll display - Displays the poll`],
->>>>>>> e0c08eafba24dea71cd248ea4b928d992db1fdd8
+		displayhelp: [`/poll display [poll id number] - Displays the poll`],
 
 		'': function (target, room, user) {
 			this.parse('/help poll');
@@ -491,27 +467,15 @@ exports.commands = {
 	},
 
 	pollhelp: [
-<<<<<<< HEAD
-		"/poll allows rooms to run their own polls. These polls are limited to five polls at a time per room.",
-		"Accepts the following commands:",
-		"/poll create [question], [option1], [option2], [...] - Allows up to 5 polls at once per room. Creates a poll. Requires: % @ * # & ~",
-		"/poll htmlcreate [question], [option1], [option2], [...] - Allows up to 5 polls at once per room. Creates a poll, with HTML allowed in the question and options. Requires: # & ~",
-		"/poll vote [number], [poll id number] - Votes for option [number] in the poll [poll id number].",
-		"/poll timer [minutes], [poll id number] - Sets the poll to automatically end after [minutes]. Requires: % @ * # & ~",
-		"/poll results, [poll id number] - Shows the results of the poll without voting. NOTE: you can't go back and vote after using this.",
-		"/poll display [poll id number] - Displays the poll. The poll id number is optional for this command and displays only the poll with the matching id number.",
-		"/poll end [poll id number] - Ends a poll and displays the results. The poll id number is optional for this command and ends only the poll with the matching id number. and Requires: % @ * # & ~",
-=======
 		`/poll allows rooms to run their own polls. These polls are limited to one poll at a time per room.`,
 		`Accepts the following commands:`,
 		`/poll create [question], [option1], [option2], [...] - Creates a poll. Requires: % @ * # & ~`,
 		`/poll htmlcreate [question], [option1], [option2], [...] - Creates a poll, with HTML allowed in the question and options. Requires: # & ~`,
-		`/poll vote [number] - Votes for option [number].`,
-		`/poll timer [minutes] - Sets the poll to automatically end after [minutes]. Requires: % @ * # & ~`,
-		`/poll results - Shows the results of the poll without voting. NOTE: you can't go back and vote after using this.`,
-		`/poll display - Displays the poll`,
-		`/poll end - Ends a poll and displays the results. Requires: % @ * # & ~`,
->>>>>>> e0c08eafba24dea71cd248ea4b928d992db1fdd8
+		`/poll vote [number], [poll id number] - Votes for option [number] in the poll [poll id number].`,
+		`/poll timer [minutes], [poll id number] - Sets the poll to automatically end after [minutes]. Requires: % @ * # & ~`,
+		`/poll results, [poll id number] - Shows the results of the poll without voting. NOTE: you can't go back and vote after using this.`,
+		`/poll display [poll id number] - Displays the poll. The poll id number is optional for this command and displays only the poll with the matching id number.`,
+		`/poll end [poll id number] - Ends a poll and displays the results. The poll id number is optional for this command and ends only the poll with the matching id number. Requires: % @ * # & ~`,
 	],
 };
 process.nextTick(() => {
