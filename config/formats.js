@@ -224,22 +224,6 @@ exports.Formats = [
 		requirePentagon: true,
 	},
 	{
-		name: "[Gen 7] Custom Game",
-
-		mod: 'gen7',
-		searchShow: false,
-		canUseRandomTeam: true,
-		debug: true,
-		maxLevel: 9999,
-		defaultLevel: 100,
-		teamLength: {
-			validate: [1, 24],
-			battle: 24,
-		},
-		// no restrictions, for serious (other than team preview)
-		ruleset: ['Team Preview', 'Cancel Mod'],
-	},
-	{
 		name: "[Gen 7] Perseverance",
 		
 		effectType: 'Format',
@@ -276,6 +260,23 @@ exports.Formats = [
 				allPokemon[i].maxhp *= 5;
 				allPokemon[i].hp = allPokemon[i].maxhp;
 		},
+	{
+		name: "[Gen 7] Custom Game",
+
+		mod: 'gen7',
+		searchShow: false,
+		canUseRandomTeam: true,
+		debug: true,
+		maxLevel: 9999,
+		defaultLevel: 100,
+		teamLength: {
+			validate: [1, 24],
+			battle: 24,
+		},
+		// no restrictions, for serious (other than team preview)
+		ruleset: ['Team Preview', 'Cancel Mod'],
+	},
+	
 	// US/UM Doubles
 	///////////////////////////////////////////////////////////////////
 
