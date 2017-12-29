@@ -180,16 +180,17 @@ class PassTheBomb extends Rooms.RoomGame {
 		let targetUser = toId(getUserName(winner));
 		let prize = 1;
 		if (this.room.isOfficial) {
-				Economy.writeMoney(targetUser, prize, () => {
-					Economy.readMoney(targetUser, newAmount => {
-						if (Users(targetUser) && Users(targetUser).connected) {
-							Users.get(targetUser).popup('|html|You have received ' + prize + ' ' + (prize === 1 ? global.moneyName : global.moneyPlural) + ' from winning the game of uno.');
-						}
-						Economy.logTransaction(Chat.escapeHTML(getUserName(winner)) + ' has won ' + prize + ' ' + (prize === 1 ? global.moneyName : global.moneyPlural) + ' from a game of uno.');
-					});
+			Economy.writeMoney(targetUser, prize, () => {
+				Economy.readMoney(targetUser, newAmount => {
+					if (Users(targetUser) && Users(targetUser).connected) {
+						Users.get(targetUser).popup('|html|You have received ' + prize + ' ' + (prize === 1 ? global.moneyName : global.moneyPlural) + ' from winning the game of uno.');
+					}
+					Economy.logTransaction(Chat.escapeHTML(getUserName(winner)) + ' has won ' + prize + ' ' + (prize === 1 ? global.moneyName : global.moneyPlural) + ' from a game of uno.');
 				});
-		this.room.add(msg).update();
-		this.end();
+			});
+			this.room.add(msg).update();
+			this.end();
+		}
 	}
 	end(user) {
 		if (user) {
