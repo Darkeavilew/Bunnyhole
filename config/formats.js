@@ -259,7 +259,9 @@ exports.Formats = [
 			for (let i = 0, len = allPokemon.length; i < len; i++) {
 				allPokemon[i].maxhp *= 5;
 				allPokemon[i].hp = allPokemon[i].maxhp;
+			}
 		},
+	},
 	{
 		name: "[Gen 7] Custom Game",
 
