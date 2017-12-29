@@ -701,7 +701,7 @@ exports.commands = {
 		`/uno play [card id] [change] - plays the uno card and specifies colour change if applicable.`,
 		`/uno draw - draws a card.`,
 		`/uno pass - pass after drawing a card.`,
-		`/uno uno - call out \"UNO!\" or attempt to catch someone for not saying uno.`,
+		`/uno uno - call out "UNO!" or attempt to catch someone for not saying uno.`,
 		`/uno enable - enables UNO in that room.`,
 		`/uno disable - disables UNO in that room.`,
 	],
