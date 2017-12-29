@@ -177,6 +177,17 @@ class PassTheBomb extends Rooms.RoomGame {
 	getWinner() {
 		let winner = this.getSurvivors()[0][1].name;
 		let msg = '|html|<div class = "infobox"><center>The winner of this game of Pass the Bomb is <b style = "color:' + BH.nameColor(winner) + '">' + Chat.escapeHTML(winner) + '!</b> Congratulations!</center>';
+		let targetUser = toId(getUserName(winner));
+		let prize = 1;
+		if (this.room.isOfficial) {
+				Economy.writeMoney(targetUser, prize, () => {
+					Economy.readMoney(targetUser, newAmount => {
+						if (Users(targetUser) && Users(targetUser).connected) {
+							Users.get(targetUser).popup('|html|You have received ' + prize + ' ' + (prize === 1 ? global.moneyName : global.moneyPlural) + ' from winning the game of uno.');
+						}
+						Economy.logTransaction(Chat.escapeHTML(getUserName(winner)) + ' has won ' + prize + ' ' + (prize === 1 ? global.moneyName : global.moneyPlural) + ' from a game of uno.');
+					});
+				});
 		this.room.add(msg).update();
 		this.end();
 	}
