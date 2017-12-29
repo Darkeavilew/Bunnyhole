@@ -55,6 +55,7 @@ exports.commands = {
 		let targetUser = Users.get(target);
 		let username = (targetUser ? targetUser.name : target);
 		let userid = (targetUser ? targetUser.userid : toId(target));
+		let regdate = '(Unregistered)';
 		BH.regdate(userid, date => {
 			if (date) {
 				let d = new Date(date);
