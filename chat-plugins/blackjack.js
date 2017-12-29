@@ -119,7 +119,7 @@ class Blackjack {
 		this.lastMessage = this.lastMessage + message;
 	}
 	giveCard(user) {
-		if (this.deck.length < 1) this.deck = Tools.shuffle(deck.slice(0));
+		if (this.deck.length < 1) this.deck = Dex.shuffle(deck.slice(0));
 		let card = toId(this.deck[0]).toUpperCase();
 		let player = (user === 'dealer' ? this.dealer : this.players[user]);
 		player.cards.push(this.deck[0]);
