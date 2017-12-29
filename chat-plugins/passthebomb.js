@@ -134,7 +134,7 @@ class PassTheBomb extends Rooms.RoomGame {
 	resetTimer() {
 		this.timer = setTimeout(() => {
 			let player = this.players.get(this.holder).name;
-			this.room.add('|html|The bomb exploded and killed <span style = "' + BH.nameColor(this.holder, true) + '">' + player + '</span>').update();
+			this.room.add('|html|The bomb exploded and killed <span style = "' + BH.nameColor(this.holder) + '">' + Chat.escapeHTML(player) + '</span>').update();
 			this.players.get(this.holder).status = 'dead';
 			this.canPass = false;
 			setTimeout(() => {
