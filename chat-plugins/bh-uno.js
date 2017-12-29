@@ -573,7 +573,7 @@ class Game {
 			this.room.add("The game of UNO was forcibly ended.");
 		} else {
 			this.room.add("Congratulations to " + getUserName(winner) + " for winning the game of UNO!");
-			let prize = 2;
+			let prize = 1;
 			let targetUser = toId(getUserName(winner));
 			prize += Math.floor(this.list.length / 5);
 			if (Users(targetUser).unoBoost) prize *= 2;
