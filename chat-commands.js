@@ -1229,7 +1229,7 @@ exports.commands = {
 		}
 		if (!this.canTalk()) return;
 		if (!target) return this.parse('/help roompromote');
-		
+
 		const force = target.startsWith('!!!');
 		if (force) target = target.slice(3);
 		target = this.splitTarget(target, true);
