@@ -332,7 +332,7 @@ function hslToRgb(h, s, l) {
 		g = c;
 		b = x;
 	} else if (h < 4) {
- 		r = 0;
+		r = 0;
 		g = x;
 		b = c;
 	} else if (h < 5) {
