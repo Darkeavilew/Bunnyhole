@@ -54,6 +54,6 @@ music: {
 		let self = this;
 		let targetUser = Users.get(target);
 	}
-    theme += `&nbsp;${song(toId(username))}`;
-	this.sendReplyBox(theme);
+   let theme = `&nbsp;${song(toId(username))}`;
+	return this.sendReplyBox(theme);
 };
