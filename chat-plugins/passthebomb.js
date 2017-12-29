@@ -157,7 +157,7 @@ class PassTheBomb extends Rooms.RoomGame {
 	removeUser(userid, left) {
 		if (!this.players.has(userid)) return;
 
-		this.room.add('|html|' + Server.nameColor(this.players.get(userid).name, true) + ' has ' + (left ? 'left' : 'been disqualified from') + ' the game.');
+		this.room.add('|html|' + BH.nameColor(this.players.get(userid).name, true) + ' has ' + (left ? 'left' : 'been disqualified from') + ' the game.');
 		this.players.delete(userid);
 		this.madeMove = true;
 		if (this.checkWinner()) {
