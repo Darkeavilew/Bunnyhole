@@ -1,14 +1,14 @@
 'use strict';
 
 function song(fren) {
-			let song = Db("music").get([fren, 'link']);
-			let title = Db("music").get([fren, 'title']);
-			if (!Db("music").has(fren)) return '';
-			return '<acronym title="' + title + '"><br /><audio src="' + song + '" controls="" style="width:100%;"></audio></acronym>';
-		}
+	let song = Db("music").get([fren, 'link']);
+	let title = Db("music").get([fren, 'title']);
+	if (!Db("music").has(fren)) return '';
+	return '<acronym title="' + title + '"><br /><audio src="' + song + '" controls="" style="width:100%;"></audio></acronym>';
+}
 
 exports.commands = {
-music: {
+	music: {
 		add: "set",
 		give: "set",
 		set: function (target, room, user) {
@@ -44,19 +44,36 @@ music: {
 		"/music set [user], [link], [title of song] - Sets a user's profile music.",
 		"/music take [user] - Removes a user's profile music.",
 	],
-  
-  '!theme': true,
-	theme: function (target, room, user) {
+
+	'!profile': true,
+	profile: function (target, room, user) {
 		target = toId(target);
 		if (!target) target = user.name;
 		if (target.length > 18) return this.errorReply("Usernames cannot exceed 18 characters.");
 		if (!this.runBroadcast()) return;
 		let self = this;
 		let targetUser = Users.get(target);
-	}
-   let theme = ``
-	theme += `<div>`;
-	theme += `${song(toId(username))}`;
-	theme += `</div>`;
-	return this.sendReplyBox(theme);
+		let username = (targetUser ? targetUser.name : target);
+		let userid = (targetUser ? targetUser.userid : toId(target));
+		BH.regdate(userid, date => {
+			if (date) {
+				let d = new Date(date);
+				let MonthNames = ["January", "February", "March", "April", "May", "June",
+					"July", "August", "September", "October", "November", "December",
+				];
+				regdate = MonthNames[d.getUTCMonth()] + ' ' + d.getUTCDate() + ", " + d.getUTCFullYear();
+			}
+			showTheme();
+		});
+
+		function showTheme() {
+			Economy.readMoney(toId(username), money => {
+				let theme = ``;
+				theme += `&nbsp;${song(toId(username))}`;
+				theme += `&nbsp;</div>`;
+				theme += `<br clear="all">`;
+				self.sendReplyBox(theme);
+			});
+		}
+	},
 };
