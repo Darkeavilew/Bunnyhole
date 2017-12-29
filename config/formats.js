@@ -303,21 +303,11 @@ exports.Formats = [
 
 		mod: 'gen7',
 		gameType: 'doubles',
-		searchShow: false,
 		ruleset: ['Pokemon', 'Standard Doubles', 'Swagger Clause', 'Team Preview'],
 		banlist: ['Arceus', 'Dialga', 'Giratina', 'Giratina-Origin', 'Groudon', 'Ho-Oh', 'Jirachi', 'Kangaskhan-Mega', 'Kyogre', 'Kyurem-White', 'Lugia', 'Lunala',
 			'Magearna', 'Mewtwo', 'Necrozma-Dawn-Wings', 'Necrozma-Dusk-Mane', 'Palkia', 'Rayquaza', 'Reshiram', 'Solgaleo', 'Xerneas', 'Yveltal', 'Zekrom',
 			'Power Construct', 'Eevium Z', 'Dark Void', 'Gravity ++ Grass Whistle', 'Gravity ++ Hypnosis', 'Gravity ++ Lovely Kiss', 'Gravity ++ Sing', 'Gravity ++ Sleep Powder',
 		],
-	},
-	{
-		name: "[Gen 7] Doubles OU (suspect test)",
-		desc: ["&bullet; <a href=\"http://www.smogon.com/forums/threads/3623271/\">Doubles OU Suspect Test</a>"],
-
-		mod: 'gen7',
-		gameType: 'doubles',
-		challengeShow: false,
-		ruleset: ['[Gen 7] Doubles OU'],
 	},
 	{
 		name: "[Gen 7] Doubles Ubers",
@@ -341,6 +331,7 @@ exports.Formats = [
 			'Mawile-Mega', 'Metagross-Mega', 'Milotic', 'Mimikyu', 'Naganadel', 'Ninetales-Alola', 'Oranguru', 'Pelipper', 'Politoed', 'Porygon2',
 			'Salamence-Mega', 'Scrafty', 'Snorlax', 'Stakataka', 'Suicune', 'Swampert-Mega', 'Tapu Bulu', 'Tapu Fini', 'Tapu Koko', 'Tapu Lele', 'Tyranitar',
 			'Volcanion', 'Volcarona', 'Weavile', 'Whimsicott', 'Zapdos', 'Zygarde-Base',
+<<<<<<< HEAD
 		],
 	},
 	{
@@ -360,6 +351,8 @@ exports.Formats = [
 			'Kartana', 'Kyogre', 'Kyurem-White', 'Lugia', 'Lunala', 'Magearna', 'Marshadow', 'Mewtwo', 'Naganadel', 'Necrozma-Dawn-Wings', 'Necrozma-Dusk-Mane',
 			'Palkia', 'Pheromosa', 'Rayquaza', 'Reshiram', 'Shaymin-Sky', 'Solgaleo', 'Tapu Lele', 'Xerneas', 'Yveltal', 'Zekrom', 'Zygarde',
 			'Battle Bond', 'Shadow Tag', 'Damp Rock', 'Gengarite', 'Kangaskhanite', 'Lucarionite', 'Mawilite', 'Medichamite', 'Metagrossite', 'Salamencite', 'Smooth Rock', 'Terrain Extender', 'Baton Pass',
+=======
+>>>>>>> 7be046215f8f398f1ba265f2fce338e4022d2a85
 		],
 	},
 	{
