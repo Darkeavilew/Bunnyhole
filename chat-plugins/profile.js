@@ -309,43 +309,6 @@ exports.commands = {
 		"/bg delete [user] - Removes the user's profile background.",
 	],
 
-	music: {
-		add: "set",
-		give: "set",
-		set: function (target, room, user) {
-			if (!this.can('broadcast')) return false;
-			let parts = target.split(',');
-			let targ = parts[0].toLowerCase().trim();
-			if (!parts[2]) return this.errorReply('/musichelp');
-			let link = parts[1].trim();
-			let title = parts[2].trim();
-			Db('music').set([targ, 'link'], link);
-			Db('music').set([targ, 'title'], title);
-			this.sendReply(targ + '\'s song has been set to: ');
-			this.parse('/profile ' + targ);
-		},
-
-		take: "delete",
-		remove: "delete",
-		delete: function (target, room, user) {
-			if (!this.can('broadcast')) return false;
-			let targ = target.toLowerCase();
-			if (!target) return this.parse('/musichelp');
-			if (!Db('music').has(targ)) return this.errorReply('This user does not have any music on their profile.');
-			Db('music').delete(targ);
-			return this.sendReply('This user\'s profile music has been deleted.');
-		},
-
-		'': 'help',
-		help: function (target, room, user) {
-			this.parse('/musichelp');
-		},
-	},
-	musichelp: [
-		"/music set [user], [link], [title of song] - Sets a user's profile music.",
-		"/music take [user] - Removes a user's profile music.",
-	],
-
 	pokemon: {
 		add: "set",
 		set: function (target, room, user) {
@@ -524,7 +487,6 @@ exports.commands = {
 					profile += '&nbsp;<font color="#24678d"><strong>Friend Code:</strong></font> ' + Db('friendcode').get(toId(username)) + '<br />';
 				}
 				profile += '&nbsp;' + showTeam(toId(username)) + '<br />';
-				profile += '&nbsp;' + song(toId(username)) + '';
 				profile += '&nbsp;</div>';
 				profile += '<br clear="all">';
 				self.sendReplyBox(profile);
