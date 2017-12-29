@@ -239,7 +239,43 @@ exports.Formats = [
 		// no restrictions, for serious (other than team preview)
 		ruleset: ['Team Preview', 'Cancel Mod'],
 	},
+	{
+		name: "[Gen 7] Perseverance",
+		
+		effectType: 'Format',
+		challengeDefault: true,
+		rated: true,
+		challengeShow: true,
+		searchShow: true,
+		isTeambuilderFormat: true,
+		defaultLevel: 100,
+		onFaint: function(pokemon) {
+				let name = pokemon.side.name;
+				let winner = '';
+				if (pokemon.side.id === 'p1') {
+					winner = 'p2';
+				} else {
+					winner = 'p1';
+				}
+				pokemon.battle.win(winner);
+			
+		},
+		mod: 'gen7',
+		ruleset: ['Pokemon', 'Standard', 'Sleep Clause Mod', 'OHKO Clause', 'Species Clause', 'Team Preview'],
+		banlist: ['Uber', 'Soul Dew', 'Toxapex']
+	},
+	{
+		name: "[Gen 7] Pokemon Mystery Dungeon",
 
+		mod: 'pmd',
+		team: 'randomPmd',
+		ruleset: ['HP Percentage Mod', 'Cancel Mod'],
+		onBegin: function () {
+			let allPokemon = this.p1.pokemon.concat(this.p2.pokemon);
+			for (let i = 0, len = allPokemon.length; i < len; i++) {
+				allPokemon[i].maxhp *= 5;
+				allPokemon[i].hp = allPokemon[i].maxhp;
+		},
 	// US/UM Doubles
 	///////////////////////////////////////////////////////////////////
 
