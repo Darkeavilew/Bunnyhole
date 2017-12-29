@@ -241,7 +241,7 @@ exports.commands = {
 	blackjack: {
 		new: 'create',
 		create: function (target, room, user) {
-			if (!this.can('blackjack', null, room)) return false;
+			if (!this.can('roommod', null, room)) return false;
 			if (room.blackjack) return this.errorReply("There's already a game of blackjack in this room.");
 
 			room.blackjack = new Blackjack(room);
