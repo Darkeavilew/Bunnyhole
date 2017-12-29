@@ -261,14 +261,14 @@ exports.commands = {
 
 		start: function (target, room, user) {
 			if (!room.blackjack) return this.errorReply("There's no game of blackjack in this room.");
-			if (!this.can('blackjack', null, room)) return false;
+			if (!this.can('roommod', null, room)) return false;
 			let reply = room.blackjack.start();
 			if (reply) this.errorReply(reply);
 		},
 
 		end: function (target, room, user) {
 			if (!room.blackjack) return this.errorReply("There's no game of blackjack in this room.");
-			if (!this.can('blackjack', null, room)) return false;
+			if (!this.can('roommod', null, room)) return false;
 			room.blackjack.end(true, user.userid);
 		},
 
