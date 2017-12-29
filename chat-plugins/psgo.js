@@ -89,11 +89,11 @@ function giveCard(name, card) {
 	if (!cards[card]) return false;
 	let newCard = Object.assign({}, cards[card]);
 	let userid = toId(name);
-	Db.cards.set(userid, Db.cards.get(userid, []).concat([newCard]));
+	Db('cards').set(userid, Db('cards').get(userid, []).concat([newCard]));
 }
 
 function hasCard(userid, cardId) {
-	let userCards = Db.cards.get(userid, []);
+	let userCards = Db('cards').get(userid, []);
 	for (let i = 0; i < userCards.length; i++) {
 		let card = userCards[i];
 		if (card.id === cardId) {
@@ -104,7 +104,7 @@ function hasCard(userid, cardId) {
 }
 
 function takeCard(userid, cardId) {
-	let userCards = Db.cards.get(userid, []);
+	let userCards = Db('cards').get(userid, []);
 	let idx = -1;
 	for (let i = 0; i < userCards.length; i++) {
 		let card = userCards[i];
@@ -115,7 +115,7 @@ function takeCard(userid, cardId) {
 	}
 	if (idx === -1) return false;
 	userCards.splice(idx, 1);
-	Db.cards.set(userid, userCards);
+	Db('cards').set(userid, userCards);
 	return true;
 }
 
@@ -140,7 +140,7 @@ exports.commands = {
 		showcase: function (target, room, user) {
 			if (!this.runBroadcast()) return;
 			if (!target) target = user.userid;
-			const cards = Db.cards.get(toId(target), []);
+			const cards = Db('cards').get(toId(target), []);
 			if (!cards.length) return this.sendReplyBox(`${toId(target)} has no cards.`);
 			let cardsShown = 0;
 			// done this way because of a glitch
@@ -156,7 +156,7 @@ exports.commands = {
 				cardsShown++;
 				return `<button name="send" value="/psgo card ${card.id}" style="border-radius: 12px; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2) inset;"><img src="${card.image}" width="100" title="${card.id}"></button>`;
 			});
-			this.sendReplyBox(`<div style="max-height: 300px; overflow-y: scroll;">${cardsMapping.join('')}</div><br><center><b>${WL.nameColor(toId(target), true)} has ${cards.length} cards</b></center>`);
+			this.sendReplyBox(`<div style="max-height: 300px; overflow-y: scroll;">${cardsMapping.join('')}</div><br><center><b>${BH.nameColor(toId(target), true)} has ${cards.length} cards</b></center>`);
 		},
 		showcasehelp: ['/psgo showcase (user) - Show all of the selected users cards.'],
 
@@ -182,7 +182,7 @@ exports.commands = {
 				return this.popupReply(`|html|<center>` +
 					`<button class = "card-td button" name = "send" value = "/psgo confirmtransfercard ${targetUser.userid}, ${card}"` +
 					`style = "outline: none; width: 200px; font-size: 11pt; padding: 10px; border-radius: 14px ; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4); box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.4) inset; transition: all 0.2s;">` +
-					`Confirm transfer to <br><b style = "color:${WL.hashColor(targetUser.userid)}; text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8)">${Chat.escapeHTML(targetUser.name)}</b></button></center>`
+					`Confirm transfer to <br><b style = "color:${BH.Color(targetUser.userid)}; text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8)">${Chat.escapeHTML(targetUser.name)}</b></button></center>`
 				);
 			}
 
@@ -322,10 +322,10 @@ exports.commands = {
 			for (let u in targets) targets[u] = targets[u].trim();
 			let targetUser = Users(toId(targets[0]));
 			if (!targetUser) targetUser = {name: target[0], userid: toId(target[0]), connected: false};
-			if (!Db.cards.get(targetUser.userid, []).length) return this.errorReply(`${targetUser.name} has no cards.`);
+			if (!Db('cards').get(targetUser.userid, []).length) return this.errorReply(`${targetUser.name} has no cards.`);
 			if (cmd !== 'take') {
 				if (cmd !== 'confirmtakeall') return this.sendReply(`WARNING: Are you sure you want to take ALL of ${targetUser.name}'s cards? If so use /psgo confirmtakeall ${targetUser.name}`);
-				Db.cards.set(targetUser.userid, []);
+				Db('cards').set(targetUser.userid, []);
 				if (targetUser.connected) targetUser.popup(`You have lost all your cards.`);
 				return this.sendReply(`All of ${targetUser.name}'s cards have been removed.`);
 			}
@@ -348,16 +348,16 @@ exports.commands = {
 				target = toPackName(target);
 				if (packs.indexOf(target) === -1) return this.parse(`/psgo shop`);
 				let userMoney = Economy.readMoney(user.userid);
-				if (userMoney < 5) return this.errorReply(`You need at least 5 ${currencyPlural} to buy a pack!`);
+				if (userMoney < 5) return this.errorReply(`You need at least 5 ${moneyPlural} to buy a pack!`);
 				Economy.writeMoney(user.userid, -5, () => {
 					Economy.readMoney(user.userid, amount => {
-						Economy.logTransaction(`${user.name} has purchased a ${target} pack for 5 ${currencyPlural}. They now have ${amount} ${(userMoney === 1 ? currencyName : currencyPlural)}`);
+						Economy.logTransaction(`${user.name} has purchased a ${target} pack for 5 ${moneyPlural}. They now have ${amount} ${(userMoney === 1 ? moneyName : moneyPlural)}`);
 					});
 				});
-				Db.userpacks.set(user.userid, Db.userpacks.get(user.userid, []).concat([target]));
+				Db('userpacks').set(user.userid, Db('userpacks').get(user.userid, []).concat([target]));
 				return this.parse(`/psgo packs pending`);
 			},
-			buyhelp: ['/psgo shop buy [pack] - Cost 5 ' + currencyPlural + '  per pack.'],
+			buyhelp: ['/psgo shop buy [pack] - Cost 5 ' + moneyPlural + '  per pack.'],
 			// All packs are added by default.
 			'': 'display',
 			display: function (target, room, user) {
@@ -365,7 +365,7 @@ exports.commands = {
 				let output = `<div style="max-height:200px; width:100%; overflow: scroll;">`;
 				output += `<table><tr><center>Pack Shop</center></tr>`;
 				for (let u in packs) {
-					output += `<tr><td style="border: 2px solid #000000; width: 20%; text-align: center"><button class="button" name="send" value="/psgo shop buy ${packs[u]}">Buy Pack: ${packs[u]}</button></td><td style="border: 2px solid #000000; width: 20%; text-align: center"> Price: 5 ${currencyPlural}</td></tr>`;
+					output += `<tr><td style="border: 2px solid #000000; width: 20%; text-align: center"><button class="button" name="send" value="/psgo shop buy ${packs[u]}">Buy Pack: ${packs[u]}</button></td><td style="border: 2px solid #000000; width: 20%; text-align: center"> Price: 5 ${moneyPlural}</td></tr>`;
 				}
 				output += `</table></div>`;
 				return this.sendReplyBox(output);
@@ -385,7 +385,7 @@ exports.commands = {
 				if (!targetUser) return this.errorReply(`The user "${targets[0]}" was not found.`);
 				let pack = toPackName(targets[1]);
 				if (!packs.includes(pack)) return this.errorReply(`The pack ${pack} does not exist!`);
-				Db.userpacks.set(targetUser.userid, Db.userpacks.get(targetUser.userid, []).concat([pack]));
+				Db('userpacks').set(targetUser.userid, Db('userpacks').get(targetUser.userid, []).concat([pack]));
 				if (targetUser.connected) targetUser.popup(`You have received a ${pack} pack.`);
 
 				return this.sendReply(`A ${pack} pack has been given to ${targetUser.name}`);
@@ -403,7 +403,7 @@ exports.commands = {
 				let targetUser = Users(toId(targets[0]));
 				if (!targetUser) targetUser = {name: target[0], userid: toId(target[0]), connected: false};
 				let pack = toPackName(targets[1]);
-				if (!Db.userpacks.get(targetUser.userid, []).length) return this.errorReply(`${targetUser.name} has no packs.`);
+				if (!Db('userpacks').get(targetUser.userid, []).length) return this.errorReply(`${targetUser.name} has no packs.`);
 				if (!toId(pack) && cmd !== 'take') {
 					if (cmd !== 'confirmtakeall') return this.sendReply(`WARNING: Are you sure you want to take ALL of ${targetUser.name}'s packs? If so use /psgo packs confirmtakeall ${targetUser.name}`);
 					Db.userpacks.set(targetUser.userid, []);
@@ -411,9 +411,9 @@ exports.commands = {
 					return this.sendReply(`${targetUser.name}'s packs have been removed.`);
 				}
 				if (!packs[pack]) return this.errorReply(`${pack} is not a valid pack.`);
-				let index = Db.userpacks.get(targetUser.userid, []).indexOf(pack);
+				let index = Db('userpacks').get(targetUser.userid, []).indexOf(pack);
 				if (index === -1) return this.sendReply(`${targetUser.name} does not have any ${pack} packs.`);
-				let array = Db.userpacks.get(targetUser.userid, []);
+				let array = Db('userpacks').get(targetUser.userid, []);
 				if (cmd === 'takeall') {
 					for (let i = 0; i < array.length; i++) {
 						if (array[i] === pack) {
@@ -435,18 +435,18 @@ exports.commands = {
 				if (!this.runBroadcast()) return;
 				if (!target) return this.parse(`/help psgo packs open`);
 				target = toPackName(target);
-				if (!Db.userpacks.has(user.userid)) return this.errorReply(`You do not have any packs.`);
-				let index = Db.userpacks.get(user.userid, []).indexOf(target);
+				if (!Db('userpacks').has(user.userid)) return this.errorReply(`You do not have any packs.`);
+				let index = Db('userpacks').get(user.userid, []).indexOf(target);
 				if (index === -1) return this.errorReply(`You do not have the pack ${target}.`);
-				let array = Db.userpacks.get(user.userid, []);
+				let array = Db('userpacks').get(user.userid, []);
 				array.splice(index, 1);
-				Db.userpacks.set(user.userid, array);
+				Db('userpacks').set(user.userid, array);
 				let cards = makePack(target);
 				let results = [];
 				for (let u in cards) {
 					results.push(`<button class="button" name="send" value="/psgo card ${cards[u].id}"><img src="${cards[u].image}" title="${cards[u].id} height="100" width="80"/></button>`);
 				}
-				Db.cards.set(user.userid, Db.cards.get(user.userid, []).concat(cards));
+				Db('cards').set(user.userid, Db('cards').get(user.userid, []).concat(cards));
 				return this.sendReplyBox(`You have received the following cards from the ${target} pack:<br/>${results.join('')}`);
 			},
 			openhelp: ['/psgo packs open [pack name] - Open a pack you own.'],
@@ -455,9 +455,9 @@ exports.commands = {
 			pending: 'holding',
 			stored: 'holding',
 			holding: function (target, room, user) {
-				if (!Db.userpacks.get(user.userid, []).length) return this.errorReply(`You do not have any packs!`);
+				if (!Db('userpacks').get(user.userid, []).length) return this.errorReply(`You do not have any packs!`);
 				let usedPacks = {};
-				let userPacks = Db.userpacks.get(user.userid, []);
+				let userPacks = Db('userpacks').get(user.userid, []);
 				for (let i = 0; i < userPacks.length; i++) {
 					if (!usedPacks[userPacks[i]]) {
 						usedPacks[userPacks[i]] = 1;
@@ -480,9 +480,9 @@ exports.commands = {
 		ladder: function (target, room, user) {
 			if (!this.runBroadcast()) return;
 			let values = {Common: 1, Uncommon: 3, Rare: 6, "Ultra Rare": 10, Legendary: 15, Mythic: 20};
-			let keys = Db.cards.keys().map(name => {
+			let keys = Db('cards').keys().map(name => {
 				let points = 0;
-				let userCards = Db.cards.get(name, []);
+				let userCards = Db('cards').get(name, []);
 				if (userCards.length) {
 					for (let c = 0; c < userCards.length; c++) {
 						points += values[userCards[c].rarity] || 1;
@@ -509,13 +509,13 @@ exports.commands = {
 			}
 			if (user.psgoResetCode !== target.trim()) return this.parse(`/psgo reset`);
 
-			let cardKeys = Db.cards.keys();
+			let cardKeys = Db('cards').keys();
 			for (let i = 0; i < cardKeys.length; i++) {
-				Db.cards.remove(cardKeys[i]);
+				Db('cards').delete(cardKeys[i]);
 			}
-			let packKeys = Db.userpacks.keys();
+			let packKeys = Db('userpacks').keys();
 			for (let i = 0; i < packKeys.length; i++) {
-				Db.userpacks.remove(packKeys[i]);
+				Db('userpacks').delete(packKeys[i]);
 			}
 			Rooms.rooms.forEach(r => {
 				r.addRaw(`<div class="broadcast-red"><strong>The PSGO database was reset</strong><br/>You no longer have any cards or packs.`).update();
@@ -536,7 +536,7 @@ exports.commands = {
 		'/psgo give [user], [card] - gives the user specified card. Requires &, ~',
 		'/psgo take [user], [card] - takes the card from the specified user. Requires: &, ~',
 		'/psgo takeall [user] - takes all cards from the specified user. Requires: &, ~',
-		'/psgo shop buy [pack] - Cost 5 ' + global.currencyPlural + '  per pack.',
+		'/psgo shop buy [pack] - Cost 5 ' + global.moneyPlural + '  per pack.',
 		'/psgo shop display - shops pack shop.<br />',
 		'/psgo packs give [user], [pack] - gives a user a  pack. Requires &, ~',
 		'/psgo packs take [user], [pack] - Take a pack from a user. Requires &, ~',
