@@ -48,7 +48,7 @@ exports.commands = {
 		newName += ' - ' + status;
 		if (newName.length > 29) return this.sendReply('The type of absence that you tried to choose "' + target + '" is too long for you username.');
 
-        // forcerename any possible impersonators
+		// forcerename any possible impersonators
 		let targetUser = Users.getExact(user.userid + target);
 		if (targetUser && targetUser !== user && targetUser.name === user.name + ' - ' + target) {
 			targetUser.resetName();
