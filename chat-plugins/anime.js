@@ -78,8 +78,8 @@ exports.commands = {
 						room.update();
 					});
 			})
-		.catch(error => {
-			return this.errorReply("Anime not found.");
-		});
+			.catch(error => {
+				return this.errorReply("Anime not found.");
+			});
 	},
 };
