@@ -21,7 +21,7 @@ exports.commands = {
 			Db("music").set([targ, 'link'], link);
 			Db("music").set([targ, 'title'], title);
 			this.sendReply(`${targ}'s song has been set to: `);
-			this.parse(`/profile ${targ}`);
+			this.parse(`/theme ${targ}`);
 		},
 
 		take: "delete",
@@ -30,9 +30,9 @@ exports.commands = {
 			if (!this.can('broadcast')) return false;
 			let targ = target.toLowerCase();
 			if (!target) return this.parse('/musichelp');
-			if (!Db("music").has(targ)) return this.errorReply('This user does not have any music on their profile.');
+			if (!Db("music").has(targ)) return this.errorReply('This user does not have any music on their theme.');
 			Db("music").delete(targ);
-			return this.sendReply('This user\'s profile music has been deleted.');
+			return this.sendReply('This user\'s theme music has been deleted.');
 		},
 
 		'': 'help',
@@ -41,8 +41,8 @@ exports.commands = {
 		},
 	},
 	musichelp: [
-		"/music set [user], [link], [title of song] - Sets a user's profile music.",
-		"/music take [user] - Removes a user's profile music.",
+		"/music set [user], [link], [title of song] - Sets a user's theme music.",
+		"/music take [user] - Removes a user's theme music.",
 	],
 
 	'!theme': true,
