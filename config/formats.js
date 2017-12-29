@@ -331,7 +331,6 @@ exports.Formats = [
 			'Mawile-Mega', 'Metagross-Mega', 'Milotic', 'Mimikyu', 'Naganadel', 'Ninetales-Alola', 'Oranguru', 'Pelipper', 'Politoed', 'Porygon2',
 			'Salamence-Mega', 'Scrafty', 'Snorlax', 'Stakataka', 'Suicune', 'Swampert-Mega', 'Tapu Bulu', 'Tapu Fini', 'Tapu Koko', 'Tapu Lele', 'Tyranitar',
 			'Volcanion', 'Volcarona', 'Weavile', 'Whimsicott', 'Zapdos', 'Zygarde-Base',
-<<<<<<< HEAD
 		],
 	},
 	{
@@ -351,8 +350,6 @@ exports.Formats = [
 			'Kartana', 'Kyogre', 'Kyurem-White', 'Lugia', 'Lunala', 'Magearna', 'Marshadow', 'Mewtwo', 'Naganadel', 'Necrozma-Dawn-Wings', 'Necrozma-Dusk-Mane',
 			'Palkia', 'Pheromosa', 'Rayquaza', 'Reshiram', 'Shaymin-Sky', 'Solgaleo', 'Tapu Lele', 'Xerneas', 'Yveltal', 'Zekrom', 'Zygarde',
 			'Battle Bond', 'Shadow Tag', 'Damp Rock', 'Gengarite', 'Kangaskhanite', 'Lucarionite', 'Mawilite', 'Medichamite', 'Metagrossite', 'Salamencite', 'Smooth Rock', 'Terrain Extender', 'Baton Pass',
-=======
->>>>>>> 7be046215f8f398f1ba265f2fce338e4022d2a85
 		],
 	},
 	{
