@@ -15,7 +15,7 @@ function loadLottery() {
 		console.log("Could not load lottery database.");
 	}
 }
-setTimeout (function() { loadLottery(); }, 1000);
+setTimeout( function () { loadLottery(); }, 1000);
 
 function saveLottery() {
 	fs.writeFileSync('config/lottery.json', JSON.stringify(BH.lottery));
@@ -29,7 +29,7 @@ BH.pmall = function (message, pmName) {
 	Users.users.forEach(curUser => {
 		curUser.send('|pm|' + pmName + '|' + curUser.getIdentity() + '|' + message);
 	});
-}
+};
 
 exports.commands = {
 	loto: 'lottery',
@@ -54,7 +54,7 @@ exports.commands = {
 				if (bought > BH.lottery.maxTicketsPerUser) return this.errorReply("You cannot get this many lottery tickets.");
 				if (bought * BH.lottery.ticketPrice > Db('currency').get(user.userid, 0)) return this.errorReply("Sorry, you do not have enough pokedollars to buy that many tickets.");
 				if (BH.lottery.playerIPS.length > 1) {
-					let filteredPlayerArray = BH.lottery.playerIPS.filter (function(ip) {
+					let filteredPlayerArray = BH.lottery.playerIPS.filter( function (ip) {
 						return ip === user.latestIp;
 					});
 					if (Number(Object.keys(filteredPlayerArray).length) + Number(bought) > BH.lottery.maxTicketsPerUser) return this.errorReply("You cannot get more than " + BH.lottery.maxTicketsPerUser + " tickets for this game of lotto.");
@@ -71,7 +71,7 @@ exports.commands = {
 				const amount = Db('currency').get(user.userid, 0);
 				if (amount < BH.lottery.ticketPrice) return this.errorReply('You do not have enough pokedollars to partake in this game of Lottery. You need ' + (BH.lottery.ticketPrice - amount) + moneyName(amount) + ' more.');
 				if (BH.lottery.playerIPS.length > 1) {
-					let filteredPlayerArray = BH.lottery.playerIPS.filter (function(ip) {
+					let filteredPlayerArray = BH.lottery.playerIPS.filter ( function (ip) {
 						return ip === user.latestIp;
 					});
 					if (filteredPlayerArray.length >= BH.lottery.maxTicketsPerUser) return this.errorReply("You cannot get more than " + BH.lottery.maxTicketsPerUser + " tickets for this game of lotto.");
@@ -129,7 +129,7 @@ exports.commands = {
 			let winner = BH.lottery.players[Math.floor(Math.random() * BH.lottery.players.length)];
 			let jackpot = Math.floor(100 * Math.random()) + 1;
 			if (!BH.lottery.pot !== 0) {
-				if (jackpot == 100) {
+				if (jackpot === 100) {
 					Rooms.get("casino").add('|raw|<b><font size="7" color="green"><blink>JACKPOT!</blink></font></b>');
 					Rooms.get("casino").add('|raw|<b><font size="4" color="' + BH.Color(winner) + '">' + winner + '</b></font><font size="4"> has won the game of lottery for <b>' + (BH.lottery.pot * 2) + '</b> pokedollars!</font>');
 					Economy.writeMoney(toId(winner), BH.lottery.pot * 2);
@@ -176,8 +176,8 @@ exports.commands = {
 			if (!parts[1]) parts[1] = user.name;
 			let chance = 0;
 			if (BH.lottery.players.length > 1) {
-				let filteredPlayerArray = BH.lottery.players.filter(function(username) {
-					return username === toId(parts[1])
+				let filteredPlayerArray = BH.lottery.players.filter(function (username) {
+					return username === toId(parts[1]);
 				});
 				chance = ((filteredPlayerArray.length / BH.lottery.players.length) * 100).toFixed(1);
 			}
@@ -194,22 +194,22 @@ exports.commands = {
 			if (!this.runBroadcast()) return;
 			if (!BH.lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
 			this.sendReplyBox(
-					"<div style=\"max-height: 125px; overflow-y: auto; overflow-x: hidden;\" target=\"_blank\">" +
+				"<div style=\"max-height: 125px; overflow-y: auto; overflow-x: hidden;\" target=\"_blank\">" +
 					"<u>Lottery Game Status:</u><br />" +
 					"Game started by: <b><font color=" + BH.Color(BH.lottery.createdBy) + ">" + Chat.escapeHTML(BH.lottery.createdBy) + "</font></b><br />" +
 					"Pot: <b>" + BH.lottery.pot + " Pokedollars</b><br />" +
 					"Ticket price: <b>" + BH.lottery.ticketPrice + " Pokedollars</b><br />" +
-					"Game started: <b>" + moment(BH.lottery.startTime).fromNow() + "</b><br />" +
+					"Game started: <b>" + (BH.lottery.startTime).fromNow() + "</b><br />" +
 					"Max tickets per user: <b>" + BH.lottery.maxTicketsPerUser + "</b><br />" +
 					"<b>Tickets bought (" + BH.lottery.players.length + "):</b><br />" +
 					BH.lottery.players + "</div>"
-				);
+			);
 			break;
 
 		case 'uptime':
 			if (!this.runBroadcast()) return;
 			if (!BH.lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
-			this.sendReplyBox("Lottery Game Uptime: <b>" + moment(BH.lottery.startTime).fromNow() + "</b>");
+			this.sendReplyBox("Lottery Game Uptime: <b>" + (BH.lottery.startTime).fromNow() + "</b>");
 			break;
 
 		case 'pot':
@@ -226,7 +226,7 @@ exports.commands = {
 		default:
 			if (!this.runBroadcast()) return;
 			this.sendReplyBox(
-					"<center><b>Lottery Commands</b><br />" +
+				"<center><b>Lottery Commands</b><br />" +
 					"<code>/lotto create, [ticket price]</code> - Starts a game of lotto with the respected ticket price. (Requires @, #, &, ~)<br />" +
 					"<code>/lotto create, [ticket price], pmall</code> - Starts a game of lotto with the respected ticket price AND notifies everyone. (Requires ~)<br />" +
 					"<code>/lotto join</code> OR <code>/loto buy</code> - Buys 1 ticket for the current game of lotto (no cap set as of now).<br />" +
@@ -237,7 +237,7 @@ exports.commands = {
 					"<code>/lotto status</code> - Shows the current status of lottery.<br />" +
 					"<code>/lotto odds, [user]</code> - Shows the odds of [user] winning the lottery.<br />" +
 					"<code>/lotto tickets</code> - Shows all of the current tickets in the current game of lotto."
-				);
+			);
 		}
-	}
+	},
 };
