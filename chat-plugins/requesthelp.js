@@ -60,7 +60,7 @@ exports.commands = {
 
 	reports: function (target, room, user, connection, cmd) {
 		if (!user.can('seniorstaff')) return this.sendReply('/reports - Access denied.');
-		if (!target) let target = '';
+		if (!target) target = '';
 		target = target.trim();
 
 		let cmdParts = target.split(' ');
