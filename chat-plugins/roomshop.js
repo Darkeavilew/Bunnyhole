@@ -120,15 +120,15 @@ exports.commands = {
 			if (!db('roomshop').has([room.id, 'Bank'])) return this.errorReply(room.id + ' does not have a bank set.');
 			if (db('roomshop').get([room.id, 'Bank']) === user.userid) return this.errorReply('Bank cannot purchase from the roomshop.');
 
-			let usersMoney = Db('money').get(user.userid, 0);
+			let usersMoney = Db('currency').get(user.userid, 0);
 			let bank = db('roomshop').get([room.id, 'Bank']);
-			let banksMoney = Db('money').get(bank, 0);
+			let banksMoney = Db('currency').get(bank, 0);
 			let cost = db('roomshop').get([room.id, itemID, 'Price']);
 
 			if (usersMoney < cost) return this.errorReply('You do not have enough money to purchase ' + itemID + '.');
 
-			Db('money').set(user.userid, usersMoney - cost).get(user.userid);
-			Db('money').set(bank, banksMoney + cost).get(bank);
+			Db('currency').set(user.userid, usersMoney - cost).get(user.userid);
+			Db('currency').set(bank, banksMoney + cost).get(bank);
 			db('roomshop').set();
 
 			if (!fs.existsSync('logs/roomshops')) fs.mkdirSync('logs/roomshops');
