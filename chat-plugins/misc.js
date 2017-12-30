@@ -69,6 +69,14 @@ function clearRoom(room) {
 	}, 1000);
 }
 
+function formatName(name) {
+	if (Users.getExact(name) && Users(name).connected) {
+		return '<i><b><font style="color:' + BH.Color(Users.getExact(name).name) + '">' + (Users.getExact(name).name) + '</font><b></i>';
+	} else {
+		return '<font style="color:' + BH.Color(name) + '">' + (name) + '</font>';
+	}
+}
+
 function getLinkId(msg) {
 	msg = msg.split(' ');
 	for (let i = 0; i < msg.length; i++) {
@@ -653,13 +661,6 @@ exports.commands = {
 				if (!row[i]) continue;
 				let rank = row[i].split(',')[1].replace("\r", '');
 				let person = row[i].split(',')[0];
-				function formatName(name) {
-					if (Users.getExact(name) && Users(name).connected) {
-						return '<i><b><font style="color:' + BH.Color(Users.getExact(name).name) + '">' + (Users.getExact(name).name) + '</font><b></i>';
-					} else {
-						return '<font style="color:' + BH.Color(name) + '">' + (name) + '</font>';
-					}
-				}
 				let personId = toId(person);
 				switch (rank) {
 				case '~':
