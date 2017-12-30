@@ -29,7 +29,6 @@ class Draft {
 			'draftpicks': [],
 		};
 		this.originalOrder.push(teamname);
-		let fileName = this.room + 'draft';
 		Db('fileName').set('teams', this.teams);
 		this.room.add('|html|<div style="' + greencss + '">The <b>' + teamname + '</b> are now apart of the draft and is managed by <b>' + manager + '</b></div>');
 		this.log(teamname + ' is now apart of the draft and is managed by ' + manager);
@@ -43,7 +42,6 @@ class Draft {
 			if (this.order[i] === teamname) this.order.splice(i, 1);
 			continue;
 		}
-		let fileName = this.room + 'draft';
 		Db('fileName').set('teams', this.teams);
 		this.log(teamname + ' has been removed from this league.');
 	}
@@ -62,7 +60,6 @@ class Draft {
 		if (this.teams[this.turn].manager !== user) return self.errorReply('It is not your turn to draft.');
 		if (this.draftedMons.includes(pk)) return self.errorReply('This mon has already been drafted by someone else.');
 		this.teams[this.turn].draftpicks.push(pk);
-		let fileName = this.room + 'draft';
 		Db('fileName').set('teams', this.teams);
 		this.draftedMons.push(pk);
 		if (this.order.length === this.order.indexOf(this.turn) + 1) {
@@ -133,7 +130,6 @@ class Draft {
 		let oldpickDraftSpot = this.draftedMons.indexOf(oldpick);
 		this.draftedMons[oldpickDraftSpot] = mon;
 		this.teams[team].draftpicks[pick - 1] = mon;
-		let fileName = this.room + 'draft';
 		Db('fileName').set('teams', this.teams);
 		this.room.add('|html|<div style="' + greencss + '">Change : <b>' + team + '</b> has changed their pick : <b>' + oldpick + '</b> changed to : <b>' + this.teams[team].draftpicks[pick - 1] + '</b>.<br><b>' + team + '\'s</b> Line up now looks like: ' + this.iconize(this.teams[team].draftpicks) + '</div>');
 		this.log(team + ' has changed their draft pick : ' + oldpick + ' to : ' + mon);
