@@ -101,7 +101,6 @@ exports.commands = {
 			case 'decline':
 			case 'deny':
 				if (params.length < 1) return this.sendReply("Usage: /reports deny [id]");
-				let id = params.shift();
 				if (!Reports[id]) return this.sendReply("There's no report with that id.");
 				if (Reports[id].status !== 'Pending Staff') return this.sendReply("That report isn't pending staff.");
 				if (Users(Reports[id].reporter) && Users(Reports[id].reporter).connected) {
