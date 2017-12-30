@@ -72,13 +72,13 @@ BH.createUser = function (user) { // doesn't save unless it gets edited
 		status: '',
 		friendcode: '',
 	}; // we don't save blank user data objects until next save
-}
+};
 
 BH.saveData = function () {
 	setTimeout(function () {
 		fs.writeFileSync('config/bunnyusers.json', JSON.stringify(BH.userData));
 	}, (1.25 * 1000)); // only save every 1.25 seconds - TOPS
-},
+}
 
 BH.checkExisting = function (user) {
 	user = toId(user);
