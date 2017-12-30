@@ -135,8 +135,8 @@ class RPSLSGame {
 			this.p2.send("|pm|~RPSLS Host|" + this.p2.userid + "|/html The game with " + this.p1.name + " was a tie! " + this.p1.name + " has chosen " + choiceNames[this.p1choice] + ".");
 			if (this.gameType === "bucks") {
 				//return their 3 bucks each
-				Db('money').set(this.p1.userid, Db('money').get(this.p1.userid, 0) + 3);
-				Db('money').set(this.p2.userid, Db('money').get(this.p2.userid, 0) + 3);
+				Db('currency').set(this.p1.userid, Db('currency').get(this.p1.userid, 0) + 3);
+				Db('currency').set(this.p2.userid, Db('currency').get(this.p2.userid, 0) + 3);
 			}
 		} else if (gameResult === "p1") {
 			winner = this.p1;
@@ -158,7 +158,7 @@ class RPSLSGame {
 		loser.send("|pm|~RPSLS Host|" + loser.userid + "|/html You have lost the game against " + winner.name + "! " + (!inactivity ? winner.name + " has chosen " + choiceNames[(loser.userid === this.p1.userid ? this.p2choice : this.p1choice)] + "." : ""));
 		if (this.gameType === "bucks") {
 			//set but bucks
-			Db('money').set(winner.userid, Db('money').get(winner.userid, 0) + 6);
+			Db('currency').set(winner.userid, Db('currency').get(winner.userid, 0) + 6);
 			winner.send("|pm|~RPSLS Host|" + winner.userid + "|/html You have also won 6 " + moneyPlural + ".");
 		} else {
 			//do rank change
@@ -225,7 +225,7 @@ function updateSearches() {
 			updatedSearches[user.userid] = Rooms.global.RPSLS.searches[userid];
 		} else {
 			//return bucks if it's a search for bucks
-			if (updatedSearches[user.userid] === "bucks") Db('money').set(userid, Db('money').get(userid, 0) + 3);
+			if (updatedSearches[user.userid] === "bucks") Db('currency').set(userid, Db('currency').get(userid, 0) + 3);
 		}
 	}
 	Rooms.global.RPSLS.searches = updatedSearches;
@@ -238,9 +238,9 @@ exports.commands = {
 			updateSearches();
 			let gameType = "ladder";
 			if (target && target === "bucks") {
-				if (Db('money').get(user.userid, 0) >= 3) {
+				if (Db('currency').get(user.userid, 0) >= 3) {
 					gameType = "bucks";
-					Db('money').set(user.userid, (Db('money').get(user.userid, 0) - 3));
+					Db('currency').set(user.userid, (Db('currency').get(user.userid, 0) - 3));
 				} else {
 					return this.errorReply("You do not have enough " + moneyPlural + " (3) to search for a game of Rock/Paper/Scissors/Lizard/Spock for " + moneyPlural + ".");
 				}
@@ -253,7 +253,7 @@ exports.commands = {
 			if (!user.RPSLSgame || user.RPSLSgame !== "searching") return this.errorReply("You are not searching for a game of Rock/Paper/Scissors/Lizard/Spock!");
 			updateSearches();
 			if (Rooms.global.RPSLS.searches[user.userid] === "bucks") {
-				Db('money').set(user.userid, Db('money').get(user.userid, 0) + 3);
+				Db('currency').set(user.userid, Db('currency').get(user.userid, 0) + 3);
 			}
 			delete Rooms.global.RPSLS.searches[user.userid];
 			user.RPSLSgame = null;
