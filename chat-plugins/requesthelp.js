@@ -2,9 +2,9 @@
 * Reports Plugin *
 * Credits: jd    *
 *****************/
-var fs = require('fs');
-var Reports = {};
-var reportsRoom = Rooms('staff');
+let fs = require('fs');
+let Reports = {};
+let reportsRoom = Rooms('staff');
 if (!reportsRoom) return false;
 
 function loadReports() {
@@ -17,18 +17,18 @@ function loadReports() {
 loadReports();
 
 function saveReports() {
-	for (var u in Object.keys(Reports)) {
-		var currentReport = Reports[Object.keys(Reports)[u]];
-		var seconds = Math.floor(((Date.now() - currentReport.reportTime) / 1000));
-		var minutes = Math.floor((seconds / 60));
-		var hours = Math.floor((minutes / 60));
+	for (let u in Object.keys(Reports)) {
+		let currentReport = Reports[Object.keys(Reports)[u]];
+		let seconds = Math.floor(((Date.now() - currentReport.reportTime) / 1000));
+		let minutes = Math.floor((seconds / 60));
+		let hours = Math.floor((minutes / 60));
 		if (hours > 12) delete Reports[currentReport];
 	}
 	fs.writeFile('config/reports.json', JSON.stringify(Reports));
 }
 
 function messageSeniorStaff (message) {
-	for (var u in Users.users) {
+	for (let u in Users.users) {
 		if (!Users.users[u].connected || !Users.users[u].can('declare')) continue;
 		Users.users[u].send("|pm|~Server|" + Users.users[u].getIdentity() + "|" + message);
 	}
@@ -43,7 +43,7 @@ exports.commands = {
 		if (!target) return this.sendReply("Usage: /requesthelp [message] - Requests help from Senior Staff. Please remember to include as much detail as possible with your request.");
 		if (target.length < 1) return this.sendReply("Usage: /requesthelp [message] - Requests help from Senior Staff. Please remember to include as much detail as possible with your request.");
 
-		var reportId = (Object.size(Reports) + 1);
+		let reportId = (Object.size(Reports) + 1);
 		while (Reports[reportId]) reportId--;
 		Reports[reportId] = new Object();
 		Reports[reportId].reporter = user.name;
@@ -60,24 +60,24 @@ exports.commands = {
 
 	reports: function (target, room, user, connection, cmd) {
 		if (!user.can('seniorstaff')) return this.sendReply('/reports - Access denied.');
-		if (!target) var target = '';
+		if (!target) let target = '';
 		target = target.trim();
 
-		var cmdParts = target.split(' ');
-		var cmd = cmdParts.shift().trim().toLowerCase();
-		var params = cmdParts.join(' ').split(',').map(function (param) { return param.trim(); });
+		let cmdParts = target.split(' ');
+		let cmd = cmdParts.shift().trim().toLowerCase();
+		let params = cmdParts.join(' ').split(',').map(function (param) { return param.trim(); });
 		switch (cmd) {
 			case '':
 			case 'view':
 				if (!this.runBroadcast()) return;
 				if (Object.size(Reports) < 1) return this.sendReplyBox("There's currently no pending reports.");
-				var output = '|raw|<table border="1" cellspacing ="0" cellpadding="3"><tr><th>ID</th><th>Reporter</th><th>Message</th><th>Report Time</th><th>Status</th></tr>';
-				for (var u in Object.keys(Reports)) {
-					var currentReport = Reports[Object.keys(Reports)[u]];
-					var date = new Date(currentReport.reportTime);
-					var hours = date.getUTCHours();
+				let output = '|raw|<table border="1" cellspacing ="0" cellpadding="3"><tr><th>ID</th><th>Reporter</th><th>Message</th><th>Report Time</th><th>Status</th></tr>';
+				for (let u in Object.keys(Reports)) {
+					let currentReport = Reports[Object.keys(Reports)[u]];
+					let date = new Date(currentReport.reportTime);
+					let hours = date.getUTCHours();
 					if (hours.toString() === "0") hours = "00";
-					var minutes = date.getUTCMinutes();
+					let minutes = date.getUTCMinutes();
 					if (minutes < 10) minutes = '0'+minutes;
 					output += '<tr><td>' + currentReport.id + '</td><td>' + Tools.escapeHTML(currentReport.reporter) + '</td><td>' +
 						Tools.escapeHTML(currentReport.message) + '</td><td>' + hours + ':' + minutes + ' (GMT)</td><td>' + Tools.escapeHTML(currentReport.status) + '</td></tr>';
@@ -86,7 +86,7 @@ exports.commands = {
 				break;
 			case 'accept':
 				if (params.length < 1) return this.sendReply("Usage: /reports accept [id]");
-				var id = params.shift();
+				let id = params.shift();
 				if (!Reports[id]) return this.sendReply("There's no report with that id.");
 				if (Reports[id].status !== 'Pending Staff') return this.sendReply("That report isn't pending staff.");
 				Reports[id].status = "Accepted by " + user.name;
@@ -102,7 +102,7 @@ exports.commands = {
 			case 'decline':
 			case 'deny':
 				if (params.length < 1) return this.sendReply("Usage: /reports deny [id]");
-				var id = params.shift();
+				let id = params.shift();
 				if (!Reports[id]) return this.sendReply("There's no report with that id.");
 				if (Reports[id].status !== 'Pending Staff') return this.sendReply("That report isn't pending staff.");
 				if (Users(Reports[id].reporter) && Users(Reports[id].reporter).connected) {
@@ -118,7 +118,7 @@ exports.commands = {
 			case 'del':
 			case 'delete':
 				if (params.length < 1) return this.sendReply("Usage: /reports delete [id]");
-				var id = params.shift();
+				let id = params.shift();
 				if (!Reports[id]) return this.sendReply("There's no report with that id.");
 				messageSeniorStaff(user.name + " deleted the report by " + Reports[id].reporter + ". (ID: " + id + ")");
 				reportsRoom.add(user.name + " deleted the report by " + Reports[id].reporter + ". (ID: " + id + ")");
