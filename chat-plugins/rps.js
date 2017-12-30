@@ -104,7 +104,7 @@ exports.commands = {
 					}
 					return this.sendReply('You responded with spock.');
 				} else {
-				return this.sendReply('Please respond with one of the following: rock, paper, scissors, lizard or spock.');
+					return this.sendReply('Please respond with one of the following: rock, paper, scissors, lizard or spock.');
 				}
 			} else {
 				return this.sendReply('You are not in this game of rock-paper-scissors-lizard-spock.');
@@ -112,8 +112,8 @@ exports.commands = {
 		}
 	},
 
-	compare: function(target, room, user) {
-		if(gamestart === false) {
+	compare: function (target, room, user) {
+		if (gamestart === false) {
 			return this.sendReply('There is no rock-paper-scissors-lizard-spock game going on right now.');
 		} else {
 			if (player1response[0] === undefined && player2response[0] === undefined) {
@@ -199,7 +199,7 @@ exports.commands = {
 		}
 	},
 
-	endrps: function(target, room, user) {
+	endrps: function (target, room, user) {
 		if (!user.can('broadcast')) {
 			return this.sendReply('You do not have enough authority to do this.');
 		}
@@ -219,7 +219,7 @@ exports.commands = {
 	},
 
 	jrps: 'joinrps',
-	joinrps: function(target, room, user) {
+	joinrps: function (target, room, user) {
 		if (rockpaperscissors === false) {
 			return this.sendReply('There is no game going on right now.');
 		}
