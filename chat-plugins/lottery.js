@@ -15,7 +15,7 @@ function loadLottery() {
 		console.log("Could not load lottery database.");
 	}
 }
-setTimeout( function () { loadLottery(); }, 1000);
+setTimeout(function () { loadLottery(); }, 1000);
 
 function saveLottery() {
 	fs.writeFileSync('config/lottery.json', JSON.stringify(BH.lottery));
@@ -54,7 +54,7 @@ exports.commands = {
 				if (bought > BH.lottery.maxTicketsPerUser) return this.errorReply("You cannot get this many lottery tickets.");
 				if (bought * BH.lottery.ticketPrice > Db('currency').get(user.userid, 0)) return this.errorReply("Sorry, you do not have enough pokedollars to buy that many tickets.");
 				if (BH.lottery.playerIPS.length > 1) {
-					let filteredPlayerArray = BH.lottery.playerIPS.filter( function (ip) {
+					let filteredPlayerArray = BH.lottery.playerIPS.filter(function (ip) {
 						return ip === user.latestIp;
 					});
 					if (Number(Object.keys(filteredPlayerArray).length) + Number(bought) > BH.lottery.maxTicketsPerUser) return this.errorReply("You cannot get more than " + BH.lottery.maxTicketsPerUser + " tickets for this game of lotto.");
@@ -71,7 +71,7 @@ exports.commands = {
 				const amount = Db('currency').get(user.userid, 0);
 				if (amount < BH.lottery.ticketPrice) return this.errorReply('You do not have enough pokedollars to partake in this game of Lottery. You need ' + (BH.lottery.ticketPrice - amount) + moneyName(amount) + ' more.');
 				if (BH.lottery.playerIPS.length > 1) {
-					let filteredPlayerArray = BH.lottery.playerIPS.filter ( function (ip) {
+					let filteredPlayerArray = BH.lottery.playerIPS.filter(function (ip) {
 						return ip === user.latestIp;
 					});
 					if (filteredPlayerArray.length >= BH.lottery.maxTicketsPerUser) return this.errorReply("You cannot get more than " + BH.lottery.maxTicketsPerUser + " tickets for this game of lotto.");
