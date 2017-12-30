@@ -66,77 +66,77 @@ exports.commands = {
 		let cmdParts = target.split(' ');
 		let params = cmdParts.join(' ').split(',').map(function (param) { return param.trim(); });
 		switch (cmd) {
-			case '':
-			case 'view':
-				if (!this.runBroadcast()) return;
-				if (Object.size(Reports) < 1) return this.sendReplyBox("There's currently no pending reports.");
-				let output = '|raw|<table border="1" cellspacing ="0" cellpadding="3"><tr><th>ID</th><th>Reporter</th><th>Message</th><th>Report Time</th><th>Status</th></tr>';
-				for (let u in Object.keys(Reports)) {
-					let currentReport = Reports[Object.keys(Reports)[u]];
-					let date = new Date(currentReport.reportTime);
-					let hours = date.getUTCHours();
-					if (hours.toString() === "0") hours = "00";
-					let minutes = date.getUTCMinutes();
-					if (minutes < 10) minutes = '0'+minutes;
-					output += '<tr><td>' + currentReport.id + '</td><td>' + Tools.escapeHTML(currentReport.reporter) + '</td><td>' +
-						Tools.escapeHTML(currentReport.message) + '</td><td>' + hours + ':' + minutes + ' (GMT)</td><td>' + Tools.escapeHTML(currentReport.status) + '</td></tr>';
-				}
-				this.sendReply(output);
-				break;
-			case 'accept':
-				if (params.length < 1) return this.sendReply("Usage: /reports accept [id]");
-				let id = params.shift();
-				if (!Reports[id]) return this.sendReply("There's no report with that id.");
-				if (Reports[id].status !== 'Pending Staff') return this.sendReply("That report isn't pending staff.");
-				Reports[id].status = "Accepted by " + user.name;
-				saveReports();
-				if (Users(Reports[id].reporter) && Users(Reports[id].reporter).connected) {
-					Users(Reports[id].reporter).popup("Your report has been accepted by " + user.name);
-				}
-				this.sendReply("You've accepted the report by "+ Reports[id].reporter);
-				messageSeniorStaff(user.name + " accepted the report by " + Reports[id].reporter + ". (ID: " + id + ")");
-				reportsRoom.add(user.name + " accepted the report by " + Reports[id].reporter + ". (ID: " + id + ")");
-				reportsRoom.update();
-				break;
-			case 'decline':
-			case 'deny':
-				if (params.length < 1) return this.sendReply("Usage: /reports deny [id]");
-				if (!Reports[id]) return this.sendReply("There's no report with that id.");
-				if (Reports[id].status !== 'Pending Staff') return this.sendReply("That report isn't pending staff.");
-				if (Users(Reports[id].reporter) && Users(Reports[id].reporter).connected) {
-					Users(Reports[id].reporter).popup("Your report has been denied by " + user.name);
-				}
-				this.sendReply("You've denied the report by "+Reports[id].reporter);
-				messageSeniorStaff(user.name + " denied the report by " + Reports[id].reporter + ". (ID: " + id + ")");
-				reportsRoom.add(user.name + " denied the report by " + Reports[id].reporter + ". (ID: " + id + ")");
-				reportsRoom.update();
-				delete Reports[id];
-				saveReports();
-				break;
-			case 'del':
-			case 'delete':
-				if (params.length < 1) return this.sendReply("Usage: /reports delete [id]");
-				if (!Reports[id]) return this.sendReply("There's no report with that id.");
-				messageSeniorStaff(user.name + " deleted the report by " + Reports[id].reporter + ". (ID: " + id + ")");
-				reportsRoom.add(user.name + " deleted the report by " + Reports[id].reporter + ". (ID: " + id + ")");
-				reportsRoom.update();
-				delete Reports[id];
-				saveReports();
-				this.sendReply("That report has been deleted.");
-				break;
-			case 'help':
-				if (!this.runBroadcast()) return;
-				this.sendReplyBox("Report commands: <br />" +
+		case '':
+		case 'view':
+			if (!this.runBroadcast()) return;
+			if (Object.size(Reports) < 1) return this.sendReplyBox("There's currently no pending reports.");
+			let output = '|raw|<table border="1" cellspacing ="0" cellpadding="3"><tr><th>ID</th><th>Reporter</th><th>Message</th><th>Report Time</th><th>Status</th></tr>';
+			for (let u in Object.keys(Reports)) {
+				let currentReport = Reports[Object.keys(Reports)[u]];
+				let date = new Date(currentReport.reportTime);
+				let hours = date.getUTCHours();
+				if (hours.toString() === "0") hours = "00";
+				let minutes = date.getUTCMinutes();
+				if (minutes < 10) minutes = '0' + minutes;
+				output += '<tr><td>' + currentReport.id + '</td><td>' + Chat.escapeHTML(currentReport.reporter) + '</td><td>' +
+						Chat.escapeHTML(currentReport.message) + '</td><td>' + hours + ':' + minutes + ' (GMT)</td><td>' + Chat.escapeHTML(currentReport.status) + '</td></tr>';
+			}
+			this.sendReply(output);
+			break;
+		case 'accept':
+			if (params.length < 1) return this.sendReply("Usage: /reports accept [id]");
+			let id = params.shift();
+			if (!Reports[id]) return this.sendReply("There's no report with that id.");
+			if (Reports[id].status !== 'Pending Staff') return this.sendReply("That report isn't pending staff.");
+			Reports[id].status = "Accepted by " + user.name;
+			saveReports();
+			if (Users(Reports[id].reporter) && Users(Reports[id].reporter).connected) {
+				Users(Reports[id].reporter).popup("Your report has been accepted by " + user.name);
+			}
+			this.sendReply("You've accepted the report by "+ Reports[id].reporter);
+			messageSeniorStaff(user.name + " accepted the report by " + Reports[id].reporter + ". (ID: " + id + ")");
+			reportsRoom.add(user.name + " accepted the report by " + Reports[id].reporter + ". (ID: " + id + ")");
+			reportsRoom.update();
+			break;
+		case 'decline':
+		case 'deny':
+			if (params.length < 1) return this.sendReply("Usage: /reports deny [id]");
+			if (!Reports[id]) return this.sendReply("There's no report with that id.");
+			if (Reports[id].status !== 'Pending Staff') return this.sendReply("That report isn't pending staff.");
+			if (Users(Reports[id].reporter) && Users(Reports[id].reporter).connected) {
+				Users(Reports[id].reporter).popup("Your report has been denied by " + user.name);
+			}
+			this.sendReply("You've denied the report by "+Reports[id].reporter);
+			messageSeniorStaff(user.name + " denied the report by " + Reports[id].reporter + ". (ID: " + id + ")");
+			reportsRoom.add(user.name + " denied the report by " + Reports[id].reporter + ". (ID: " + id + ")");
+			reportsRoom.update();
+			delete Reports[id];
+			saveReports();
+			break;
+		case 'del':
+		case 'delete':
+			if (params.length < 1) return this.sendReply("Usage: /reports delete [id]");
+			if (!Reports[id]) return this.sendReply("There's no report with that id.");
+			messageSeniorStaff(user.name + " deleted the report by " + Reports[id].reporter + ". (ID: " + id + ")");
+			reportsRoom.add(user.name + " deleted the report by " + Reports[id].reporter + ". (ID: " + id + ")");
+			reportsRoom.update();
+			delete Reports[id];
+			saveReports();
+			this.sendReply("That report has been deleted.");
+			break;
+		case 'help':
+			if (!this.runBroadcast()) return;
+			this.sendReplyBox("Report commands: <br />" +
 					"/report [message] - Adds a report to the system<br />" +
 					"/reports view - Views all current reports<br />" +
 					"/reports accept [id] - Accepts a report<br />" +
 					"/reports delete [id] - Deletes a report<br />" +
 					"/reports deny [id] - Denies a report"
-				);
-				break;
-			default:
-				this.sendReply("/reports " + target + " - Command not found.");
-				break;
+			);
+			break;
+		default:
+			this.sendReply("/reports " + target + " - Command not found.");
+			break;
 		}
 	},
-}
+};
