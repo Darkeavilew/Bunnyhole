@@ -27,28 +27,28 @@ function isHoster(user) {
 }
 
 BH.getTells = function (target, room, user, connection) {
-		target = Users.get(target);
-		let tell = BH.tells[target.userid];
-		if (!tell) return;
-		for (let i in tell) {
-			tell[i].forEach(msg => target.send('|pm| Unread Messages|' + target.getIdentity() + '|/raw ' + msg));
-		}
-		delete BH.tells[target.userid];
-		fs.writeFileSync('config/tells.json', JSON.stringify(BH.tells));
-	};
+	target = Users.get(target);
+	let tell = BH.tells[target.userid];
+	if (!tell) return;
+	for (let i in tell) {
+		tell[i].forEach(msg => target.send('|pm| Unread Messages|' + target.getIdentity() + '|/raw ' + msg));
+	}
+	delete BH.tells[target.userid];
+	fs.writeFileSync('config/tells.json', JSON.stringify(BH.tells));
+};
 
 const messages = [
-    "has used explosion!",
-    "was swallowed up by the earth!",
-    "was abducted by aliens.",
-    "has left the building.",
-    "got lost in the woods!",
-    "went to praise a Magikarp",
-    "was killed by a Magikarp",
-    "magically disappeared",
-    "was put to sleep by a jigglypuff",
-    "entered zen mode",
-    "kicked his modem in error",
+	"has used explosion!",
+	"was swallowed up by the earth!",
+	"was abducted by aliens.",
+	"has left the building.",
+	"got lost in the woods!",
+	"went to praise a Magikarp",
+	"was killed by a Magikarp",
+	"magically disappeared",
+	"was put to sleep by a jigglypuff",
+	"entered zen mode",
+	"kicked his modem in error",
 ];
 
 function clearRoom(room) {
@@ -172,7 +172,7 @@ exports.commands = {
 
 		room.mute(targetUser, muteDuration, false);
 	},
-	
+
 	masspm: 'pmall',
 	pmall: function (target, room, user) {
 		if (!this.can('pmall')) return false;
@@ -317,7 +317,7 @@ exports.commands = {
 		}
 	},
 	regdatehelp: ["/regdate - Gets the regdate (register date) of a username."],
-	
+
 	reddeclare: 'declare',
 	greendeclare: 'declare',
 	declare: function (target, room, user, connection, cmd, message) {
@@ -361,7 +361,7 @@ exports.commands = {
 		this.logModCommand(user.name + " declared " + target);
 	},
 	htmldeclarehelp: ["/htmldeclare [message] - Anonymously announces a message using safe HTML. Requires: ~"],
-	
+
 	redglobaldeclare: 'globaldeclare',
 	greenglobaldeclare: 'globaldeclare',
 	redgdeclare: 'globaldeclare',
@@ -448,7 +448,7 @@ exports.commands = {
 		Users.get(userid).joinRoom(roomid);
 	},
 	forcejoinhelp: ["/forcejoin [target], [room] - Forces a user to join a room"],
-	
+
 	usetoken: function (target, room, user, connection, cmd, message) {
 		target = target.split(',');
 		if (target.length < 2) return this.parse('/help usetoken');
@@ -507,16 +507,16 @@ exports.commands = {
 	],
 
 	hoster: {
-        	add: function (target, room, user, userid) {
-			if (!this.userid == 'darknightz' || 'fairyserena') return this.errorReply('This command can only be used by DarkNightz or Fairy Serena');
+		add: function (target, room, user, userid) {
+			if (!this.userid === 'darknightz' || 'fairyserena') return this.errorReply('This command can only be used by DarkNightz or Fairy Serena');
 			let hoster = toId(target);
 			if (!hoster) return this.parse('/hoster');
 			if (isHoster(hoster)) return this.errorReply(hoster + ' is already a vip.');
 			Db('hoster').set(hoster, 1);
 			this.sendReply(hoster + ' has been granted with vip status.');
 		},
-	       	remove: function (target, room, user) {
-			let userid = user.userid;    	
+		remove: function (target, room, user) {
+			let userid = user.userid;
 			if (!isHoster(userid)) return false;
 			let hoster = toId(target);
 			if (!hoster) return this.parse('/hoster');
@@ -524,19 +524,19 @@ exports.commands = {
 			Db('hoster').delete(hoster);
 			this.sendReply(hoster + '\'s vip status has been taken.');
 		},
-			list: function (target, room, user) {
-			let userid = user.userid;    	
+		list: function (target, room, user) {
+			let userid = user.userid;	
 			if (!isHoster(userid)) return false;
 			if (!Object.keys(Db('hoster').object()).length) return this.errorReply('There seems to be no user with vip status.');
 			user.popup('|html|<center><b><u>Super Administrators.</u></b></center>' + '<br /><br />' + Object.keys(Db('hoster').object()).join('</strong><br />'));
 		},
-		    '': function(target,room,user) {
-		  	if (!this.can('hotpatch')) return false;
-		  	this.sendReplyBox('<strong>Hoster Commands:</strong><br>' +
-		  	'<li><em>&mdash; add</em> - Adds a user to the list of server hosters.</li>' +
-		  	'<li><em>&mdash; remove</em> - Removes a user from the list of hosters.</li>' +
-		  	'<li><em>&mdash; list</em> - Shows the list of server hosters.</li>'
-		  	);
+		'': function (target, room, user) {
+			if (!this.can('hotpatch')) return false;
+			this.sendReplyBox('<strong>Hoster Commands:</strong><br>' +
+			'<li><em>&mdash; add</em> - Adds a user to the list of server hosters.</li>' +
+			'<li><em>&mdash; remove</em> - Removes a user from the list of hosters.</li>' +
+			'<li><em>&mdash; list</em> - Shows the list of server hosters.</li>'
+			);
 		    },
 	},
 
@@ -617,7 +617,7 @@ exports.commands = {
 
 		let tell = BH.tells[id][user.userid];
 		let userSymbol = (Users.usergroups[user.userid] ? Users.usergroups[user.userid].substr(0, 1) : "");
-		let msg = '<small>[' + moment().format("HH:mm:ss") + ']</small> ' + userSymbol + '<strong class="username"><span style = "color:' + BH.Color(user.userid) + '">' + user.name + ':</span></strong> ' + Chat.escapeHTML(target);
+		let msg = '<small>[' + ().format("HH:mm:ss") + ']</small> ' + userSymbol + '<strong class="username"><span style = "color:' + BH.Color(user.userid) + '">' + user.name + ':</span></strong> ' + Chat.escapeHTML(target);
 		if (tell) {
 			BH.tells[id][user.userid].push(msg);
 		} else {
@@ -625,21 +625,21 @@ exports.commands = {
 		}
 
 		fs.writeFileSync('config/tells.json', JSON.stringify(BH.tells));
-				if (this.message.startsWith(`/tell`)) {
-		user.send('|pm| ' + this.targetUsername + '|' + this.user.getIdentity() + '|/raw ' + '<small>[' + moment().format("HH:mm:ss") + ']</small>' + userSymbol + '<strong class="username"><span style = "color:' + BH.Color(user.userid) + '">' + user.name + ':</span></strong> ' + Chat.escapeHTML(target));
-		
+		if (this.message.startsWith(`/tell`)) {
+			user.send('|pm| ' + this.targetUsername + '|' + this.user.getIdentity() + '|/raw ' + '<small>[' + moment().format("HH:mm:ss") + ']</small>' + userSymbol + '<strong class="username"><span style = "color:' + BH.Color(user.userid) + '">' + user.name + ':</span></strong> ' + Chat.escapeHTML(target));
+
 			return;
 		}
 	},
 	tellhelp: ['/tell [user], [message] - Leaves a message for an offline user for them to see when they log on next.'],
-	
+
 	'!authlist': true,
 	staff: 'authlist',
 	stafflist: 'authlist',
 	auth: 'authlist',
-	authlist: function(target, room, user, connection) {
+	authlist: function (target, room, user, connection) {
 		let ignoreUsers = ['deltaskiez'];
-		fs.readFile('config/usergroups.csv', 'utf8', function(err, data) {
+		fs.readFile('config/usergroups.csv', 'utf8', function (err, data) {
 			let staff = {
 				"admins": [],
 				"leaders": [],
@@ -662,38 +662,38 @@ exports.commands = {
 				}
 				let personId = toId(person);
 				switch (rank) {
-					case '~':
-						if (~ignoreUsers.indexOf(personId)) break;
-						staff['admins'].push(formatName(person));
-						break;
-					case '&':
-						if (~ignoreUsers.indexOf(personId)) break;
-						staff['leaders'].push(formatName(person));
-						break;	
-					case '*':
-						if (~ignoreUsers.indexOf(personId)) break;
-						staff['bots'].push(formatName(person));
-						break;
-					case '@':
-						if (~ignoreUsers.indexOf(personId)) break;
-						staff['mods'].push(formatName(person));
-						break;
-					case '%':
-						if (~ignoreUsers.indexOf(personId)) break;
-						staff['drivers'].push(formatName(person));
-						break;
-					case '+':
-						if (~ignoreUsers.indexOf(personId)) break;
-						staff['voices'].push(formatName(person));
-						break;
-					default:
-						continue;
+				case '~':
+					if (~ignoreUsers.indexOf(personId)) break;
+					staff['admins'].push(formatName(person));
+					break;
+				case '&':
+					if (~ignoreUsers.indexOf(personId)) break;
+					staff['leaders'].push(formatName(person));
+					break;	
+				case '*':
+					if (~ignoreUsers.indexOf(personId)) break;
+					staff['bots'].push(formatName(person));
+					break;
+				case '@':
+					if (~ignoreUsers.indexOf(personId)) break;
+					staff['mods'].push(formatName(person));
+					break;
+				case '%':
+					if (~ignoreUsers.indexOf(personId)) break;
+					staff['drivers'].push(formatName(person));
+					break;
+				case '+':
+					if (~ignoreUsers.indexOf(personId)) break;
+					staff['voices'].push(formatName(person));
+					break;
+				default:
+					continue;
 				}
 			}
 			connection.popup('|html|' +
 				'<h3>Bunnyhole Server Authorities</h3>' +
-				'<b><u>~Administrators' +  ' (' + staff['admins'].length + ')</u></b>:<br />' + staff['admins'].join(', ') +
-				'<br /><b><u>&Leaders' +  ' (' + staff['leaders'].length + ')</u></b>:<br />' + staff['leaders'].join(', ') +
+				'<b><u>~Administrators' + ' (' + staff['admins'].length + ')</u></b>:<br />' + staff['admins'].join(', ') +
+				'<br /><b><u>&Leaders' + ' (' + staff['leaders'].length + ')</u></b>:<br />' + staff['leaders'].join(', ') +
 				'<br /><b><u>*Bots (' + staff['bots'].length + ')</u></b>:<br />' + staff['bots'].join(', ') +
 				'<br /><b><u>@Moderators (' + staff['mods'].length + ')</u></b>:<br />' + staff['mods'].join(', ') +
 				'<br /><b><u>%Drivers (' + staff['drivers'].length + ')</u></b>:<br />' + staff['drivers'].join(', ') +
@@ -818,14 +818,14 @@ exports.commands = {
 
 		let targets = target.split(',');
 		if (targets.length !== 2) {
-			room.add('|raw|<center><img src="' + Chat.escapeHTML(targets[0]) + '" alt="" width="50%"/><br /><small><em>(Image shown by: <b><font color="' + BH.Color(user.name) + '">' + user.name +  '</font></em></b>)</small>');
+			room.add('|raw|<center><img src="' + Chat.escapeHTML(targets[0]) + '" alt="" width="50%"/><br /><small><em>(Image shown by: <b><font color="' + BH.Color(user.name) + '">' + user.name + '</font></em></b>)</small>');
 		} else {
-			room.add('|raw|<center><img src="' + Chat.escapeHTML(targets[0]) + '" alt="" width="' + toId(targets[1]) + '%"/><br /><small><em>(Image shown by: <b><font color="' + BH.Color(user.name) + '">' + user.name +  '</font></em></b>)</small>');
+			room.add('|raw|<center><img src="' + Chat.escapeHTML(targets[0]) + '" alt="" width="' + toId(targets[1]) + '%"/><br /><small><em>(Image shown by: <b><font color="' + BH.Color(user.name) + '">' + user.name + '</font></em></b>)</small>');
 		}
 	},
 
-		cssedit: function (target, room, user, connection) {
-		if (!user.hasConsoleAccess(connection)) {return this.sendReply("/cssedit - Access denied.");}
+	cssedit: function (target, room, user, connection) {
+		if (!user.hasConsoleAccess(connection)) { return this.sendReply("/cssedit - Access denied."); }
 		let fsscript = require('fs');
 		if (!target) {
 			if (!fsscript.existsSync('config/custom.css')) return this.sendReply("custom.css does not exist.");
@@ -836,7 +836,7 @@ exports.commands = {
 	},
 
 	destroymodlog: function (target, room, user, connection) {
-		if (!user.hasConsoleAccess(connection)) {return this.sendReply("/destroymodlog - Access denied.");}
+		if (!user.hasConsoleAccess(connection)) { return this.sendReply("/destroymodlog - Access denied."); }
 		let logPath = 'logs/modlog/';
 		if (Chat.modlog && Chat.modlog[room.id]) {
 			Chat.modlog[room.id].close();
@@ -951,7 +951,7 @@ exports.commands = {
 		if (!user.can('roomowner')) return this.sendReplyBox(header + official.join(' ') + nonOfficial.join(' '));
 		this.sendReplyBox(header + official.join(' ') + nonOfficial.join(' ') + privateRoom.join(' ') + (groupChats.length > 1 ? groupChats.join(' ') : '') + (battleRooms.length > 1 ? battleRooms.join(' ') : ''));
 	},
-	
+
 	hide: 'hideauth',
 	hideauth: function (target, room, user) {
 		if (!this.can('lock')) return false;
