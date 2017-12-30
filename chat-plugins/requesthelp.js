@@ -2,6 +2,8 @@
 * Reports Plugin *
 * Credits: jd    *
 *****************/
+'use strict';
+
 let fs = require('fs');
 let Reports = {};
 let reportsRoom = Rooms('staff');
