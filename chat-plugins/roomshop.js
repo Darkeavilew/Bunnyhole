@@ -33,7 +33,7 @@ exports.commands = {
 		},
 		bank: {
 			set: function (target, room, user) {
-				if (!this.can('declare', null, room)) return false;
+				if (!this.can('roommod', null, room)) return false;
 				if (!db('roomshop').has(room.id)) return this.errorReply('Roomshop is not enabled here.');
 				if (db('roomshop').has([room.id, 'Bank'])) return this.errorReply(room.id + ' already has a bank.');
 
@@ -47,7 +47,7 @@ exports.commands = {
 				this.sendReply(bank + ' has been made the bank for ' + room.id + '\'s shop.');
 			},
 			change: function (target, room, user) {
-				if (!this.can('declare', null, room)) return false;
+				if (!this.can('roommod', null, room)) return false;
 				if (!db('roomshop').has(room.id)) return this.errorReply('Roomshop is not enabled here.');
 				if (!db('roomshop').has([room.id, 'Bank'])) return this.errorReply(room.id + ' does not have a bank set.');
 
@@ -71,7 +71,7 @@ exports.commands = {
 			},
 		},
 		add: function (target, room, user) {
-			if (!this.can('declare', null, room)) return false;
+			if (!this.can('roommod', null, room)) return false;
 			if (!db('roomshop').has(room.id)) return this.errorReply('Roomshop is not enabled here.');
 
 			let opts = target.split(',');
@@ -99,7 +99,7 @@ exports.commands = {
 			this.sendReply(itemName + ' added to the roomshop.');
 		},
 		remove: function (target, room, user) {
-			if (!this.can('declare', null, room)) return false;
+			if (!this.can('roommod', null, room)) return false;
 			if (!db('roomshop').has(room.id)) return this.errorReply('Roomshop is not enabled here.');
 
 			let itemID = toId(target);
@@ -171,7 +171,7 @@ exports.commands = {
 			this.sendReplyBox(display(keys));
 		},
 		log: function (target, room, user) {
-			if (!this.can('declare', null, room)) return false;
+			if (!this.can('roommod', null, room)) return false;
 			if (!db('roomshop').has(room.id)) return this.errorReply('Roomshop is not enabled here.');
 			target = toId(target);
 
