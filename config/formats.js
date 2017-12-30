@@ -250,7 +250,6 @@ exports.Formats = [
 				winner = 'p1';
 			}
 			pokemon.battle.win(winner);
-
 		},
 		mod: 'gen7',
 		ruleset: ['Pokemon', 'Standard', 'Sleep Clause Mod', 'OHKO Clause', 'Species Clause', 'Team Preview'],
