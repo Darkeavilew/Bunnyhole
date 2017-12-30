@@ -30,7 +30,7 @@ let TicTacToe = (function () {
 			'6': 6,
 			'7': 7,
 			'8': 8,
-			'9': 9
+			'9': 9,
 		};
 		this.markedCount = 0;
 		this.phase = 'waiting';
@@ -184,7 +184,7 @@ let cmds = {
 			if (game.checkPlayer(user)) return this.sendReply(game.checkPlayer(user) + ' has already sent you a request...');
 			return this.sendReply(target.name + ' has already asked someone else for a game of Tic-Tac-Toe.');
 		}
-		for (let i in tttgames)
+		for (let i in tttgames) {
 			if (tttgames[i].checkPlayer(user)) return this.sendReply('You were sent a game request by ' + tttgames[i].checkPlayer(user) + '. First respond to that request before challenging someone else.');
 		target.send('|pm|' + user.getIdentity() + '|' + target.getIdentity() + '|/html ' + user.getIdentity() + ' wants to play Tic-Tac-Toe!<br>' +
 			'<button name = "send" value = "/ttt accept ' + user.userid + '">Accept</button> <button name = "send" value = "/ttt decline ' + user.userid + '">Decline</button>'
@@ -224,7 +224,7 @@ let cmds = {
 		if (user.userid === target.userid) return this.sendReply('You can\'t use this command on yourself.');
 		let game = tttgames[tttplayers[toId(targetUser)]];
 		if (!(target.userid in tttplayers) || !game.checkPlayer(target)) return this.sendReply(target + ' has not challenged you to a game of Tic-Tac-Toe.');
-		if (game.checkPlayer(target) && game.phase == 'started') return this.sendReply('You are playing with ' + game.checkPlayer(user) + ' right now. If you want to end the game, use /ttt end.');
+		if (game.checkPlayer(target) && game.phase === 'started') return this.sendReply('You are playing with ' + game.checkPlayer(user) + ' right now. If you want to end the game, use /ttt end.');
 
 		if (Users.get(target) && Users.get(target).connected) Users.get(target).send('|pm|' + user.getIdentity() + '|' + Users.get(target).getIdentity() + '|/error Your Tic-Tac-Toe request was declined.');
 		user.send('|pm|' + Users.get(target) + '|' + user.getIdentity() + '|/error You have declined the game request.');
@@ -257,12 +257,12 @@ let cmds = {
 		let game = tttgames[tttplayers[user.userid]];
 		if (game.phase === 'waiting') game.end('The request was withdrawn.');
 		else game.end(user.name + ' has decided to leave the game midway.');
-	}
+	},
 };
 
 exports.commands = {
 	ttt: 'tictactoe',
 	tictactoe: cmds,
 	tttend: 'endttt',
-	endttt: cmds.end	
-}
+	endttt: cmds.end,
+};
