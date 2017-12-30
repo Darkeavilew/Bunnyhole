@@ -78,13 +78,13 @@ BH.saveData = function () {
 	setTimeout(function () {
 		fs.writeFileSync('config/bunnyusers.json', JSON.stringify(BH.userData));
 	}, (1.25 * 1000)); // only save every 1.25 seconds - TOPS
-}
+};
 
 BH.checkExisting = function (user) {
 	user = toId(user);
 	if (!BH.userData[user]) BH.createUser(user);
 	return BH.userData[user];
-},
+};
 
 BH.updateFriends = function (user, friend, action) {
 	friend = toId(friend);
@@ -100,7 +100,7 @@ BH.updateFriends = function (user, friend, action) {
 	}
 
 	this.saveData();
-},
+};
 
 /* eslint-disable no-useless-escape */
 BH.parseMessage = function (message) {
@@ -120,18 +120,18 @@ BH.parseMessage = function (message) {
 	message = message.replace(/&lt;&lt;([a-z0-9-]+)&gt;&gt;/g, '&laquo;<a href="/$1" target="_blank">$1</a>&raquo;'); // <<roomid>>
 	message = Autolinker.link(message, {stripPrefix: false, phone: false, twitter: false});
 	return message;
-},
+};
 /* eslint-enable no-useless-escape */
 
 BH.randomString = function (length) {
 	return Math.round((Math.pow(36, length + 1) - Math.random() * Math.pow(36, length))).toString(36).slice(1);
-},
+};
 
 BH.reloadCSS = function () {
 	const cssPath = 'wavelength'; // This should be the server id if Config.serverid doesn't exist. Ex: 'serverid'
 	let req = https.get('https://play.pokemonshowdown.com/customcss.php?server=' + (Config.serverid || cssPath), () => {});
 	req.end();
-},
+};
 
 //Daily Rewards System for Wavelength by Lord Haji
 BH.giveDailyReward = function (user) {
