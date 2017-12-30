@@ -6,11 +6,10 @@
 'use strict';
 
 BH.nameColor = function (name, bold) {
-        return (bold ? "<b>" : "") + "<font color=" + BH.Color(name) + ">" + (Users(name) && Users(name).connected && Users.getExact(name) ? Chat.escapeHTML(Users.getExact(name).name) : Chat.escapeHTML(name)) + "</font>" + (bold ? "</b>" : "");
+	return (bold ? "<b>" : "") + "<font color=" + BH.Color(name) + ">" + (Users(name) && Users(name).connected && Users.getExact(name) ? Chat.escapeHTML(Users.getExact(name).name) : Chat.escapeHTML(name)) + "</font>" + (bold ? "</b>" : "");
 };
 const path = require('path');
 const fs = require('fs');
-const moment = require('moment');
 
 BH.tells = {};
 try {
@@ -27,7 +26,7 @@ function isHoster(user) {
 	return false;
 }
 
-BH.getTells = function(target, room, user, connection) {
+BH.getTells = function (target, room, user, connection) {
 		target = Users.get(target);
 		let tell = BH.tells[target.userid];
 		if (!tell) return;
