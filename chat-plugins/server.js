@@ -16,7 +16,7 @@ BH.messageSeniorStaff = function (message, pmName, from) {
 			curUser.send('|pm|' + pmName + '|' + curUser.getIdentity() + '|' + message + from);
 		}
 	});
-}
+};
 // format: BH.messageSeniorStaff('message', 'person')
 //
 // usage: BH.messageSeniorStaff('Mystifi is a confirmed user and they were banned from a public room. Assess the situation immediately.', '~Server')
@@ -50,12 +50,12 @@ BH.regdate = function (target, callback) {
 		});
 	});
 	req.end();
-},
+}
 
 BH.createUser = function (user) { // doesn't save unless it gets edited
-		user = toId(user);
-		if (BH.userData[user] || user === 'constructor') return false;
-		if (user.substr(0, 5) === 'guest') return false;
+	user = toId(user);
+	if (BH.userData[user] || user === 'constructor') return false;
+	if (user.substr(0, 5) === 'guest') return false;
 
 	BH.userData[user] = { // esteemed user data
 		ips: [],
