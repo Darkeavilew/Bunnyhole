@@ -32,7 +32,7 @@ function saveReports() {
 function messageSeniorStaff (message) {
 	for (let u in Users.users) {
 		if (!Users.users[u].connected || !Users.users[u].can('declare')) continue;
-		Users.users[u].send("|pm|~Server|" + Users.users[u].getIdentity() + "|" + message);
+		Users.users[u].send("|pm|~Bunnyhole Server|" + Users.users[u].getIdentity() + "|" + message);
 	}
 }
 
@@ -95,7 +95,7 @@ exports.commands = {
 			if (Users(Reports[id].reporter) && Users(Reports[id].reporter).connected) {
 				Users(Reports[id].reporter).popup("Your report has been accepted by " + user.name);
 			}
-			this.sendReply("You've accepted the report by "+ Reports[id].reporter);
+			this.sendReply("You've accepted the report by " + Reports[id].reporter);
 			messageSeniorStaff(user.name + " accepted the report by " + Reports[id].reporter + ". (ID: " + id + ")");
 			reportsRoom.add(user.name + " accepted the report by " + Reports[id].reporter + ". (ID: " + id + ")");
 			reportsRoom.update();
@@ -108,7 +108,7 @@ exports.commands = {
 			if (Users(Reports[id].reporter) && Users(Reports[id].reporter).connected) {
 				Users(Reports[id].reporter).popup("Your report has been denied by " + user.name);
 			}
-			this.sendReply("You've denied the report by "+Reports[id].reporter);
+			this.sendReply("You've denied the report by " + Reports[id].reporter);
 			messageSeniorStaff(user.name + " denied the report by " + Reports[id].reporter + ". (ID: " + id + ")");
 			reportsRoom.add(user.name + " denied the report by " + Reports[id].reporter + ". (ID: " + id + ")");
 			reportsRoom.update();
