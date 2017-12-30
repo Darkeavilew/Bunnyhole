@@ -50,7 +50,7 @@ BH.regdate = function (target, callback) {
 		});
 	});
 	req.end();
-}
+};
 
 BH.createUser = function (user) { // doesn't save unless it gets edited
 	user = toId(user);
@@ -72,7 +72,7 @@ BH.createUser = function (user) { // doesn't save unless it gets edited
 		status: '',
 		friendcode: '',
 	}; // we don't save blank user data objects until next save
-},
+}
 
 BH.saveData = function () {
 	setTimeout(function () {
