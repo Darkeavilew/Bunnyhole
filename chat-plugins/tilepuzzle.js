@@ -7,7 +7,7 @@ const INACTIVE_KICK_TIME = 3 * 60 * 1000; //3 minutes
 if (!global.TilePuzzles) global.TilePuzzles = new Map();
 let TilePuzzles = global.TilePuzzles;
 
-function getTime (ms) {
+function getTime(ms) {
 	let total = [];
 	let time = Date.now() - ms;
 	let secs = Math.floor(time / 1000);
@@ -49,7 +49,7 @@ let tiles = [
 });
 
 class TilePuzzle {
-	constructor (user) {
+	constructor(user) {
 		this.user = user;
 		this.answer = tiles[Math.floor(Math.random() * tiles.length)];
 		this.tiles = this.answer.slice(0);
@@ -94,13 +94,13 @@ class TilePuzzle {
 		}
 		return true;
 	}
-	getTile (num, border) {
+	getTile(num, border) {
 		return '<div style = "display: inline-block; width: 50px; height: 50px; border-top: 1px solid #fff; border-left: 1px solid #fff;' +
 			'border-right: 2px solid rgba(0, 0, 0, 0.4); border-bottom: 2px solid rgba(0, 0, 0, 0.3); ' + (border ? 'border: ' + border : '') + '">' +
 			'<button name = "send" value = "/tilepuzzle select ' + (num + 1) + '" style = "width: inherit; height: inherit;' +
 			'border: none; background: url(' + this.tiles[num].tile + '); transform: rotate(' + this.tiles[num].angle + 'deg);"></button></div>';
 	}
-	selectTile (tileNumber) {
+	selectTile(tileNumber) {
 		if (!isNaN(this.selection) && (tileNumber === this.selection)) {
 			this.display[tileNumber] = this.getTile(tileNumber);
 			delete this.selection;
