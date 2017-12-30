@@ -5,7 +5,6 @@
  */
 'use strict';
 
-const moment = require('moment');
 const fs = require('fs');
 BH.lottery = {};
 
@@ -16,7 +15,7 @@ function loadLottery() {
 		console.log("Could not load lottery database.");
 	}
 }
-setTimeout(function() {loadLottery();}, 1000);
+setTimeout (function() { loadLottery(); }, 1000);
 
 function saveLottery() {
 	fs.writeFileSync('config/lottery.json', JSON.stringify(BH.lottery));
@@ -26,11 +25,11 @@ function moneyName(amount) {
 	return name;
 }
 BH.pmall = function (message, pmName) {
-			if (!pmName) pmName = 'Bunnyhole Server';
-			Users.users.forEach(curUser => {
-				curUser.send('|pm|' + pmName + '|' + curUser.getIdentity() + '|' + message);
-			});
-},
+	if (!pmName) pmName = 'Bunnyhole Server';
+	Users.users.forEach(curUser => {
+		curUser.send('|pm|' + pmName + '|' + curUser.getIdentity() + '|' + message);
+	});
+}
 
 exports.commands = {
 	loto: 'lottery',
@@ -40,6 +39,7 @@ exports.commands = {
 		for (let u in parts) parts[u] = parts[u].trim();
 		if (room.id !== 'casino') return this.errorReply("You must be in Casino to use this command.");
 		if (!Rooms.get('casino')) return this.errorReply("You must have the room \"Casino\" in order to use this script.");
+
 		switch (toId(parts[0])) {
 
 		case 'buy':
@@ -54,7 +54,7 @@ exports.commands = {
 				if (bought > BH.lottery.maxTicketsPerUser) return this.errorReply("You cannot get this many lottery tickets.");
 				if (bought * BH.lottery.ticketPrice > Db('currency').get(user.userid, 0)) return this.errorReply("Sorry, you do not have enough pokedollars to buy that many tickets.");
 				if (BH.lottery.playerIPS.length > 1) {
-					let filteredPlayerArray = BH.lottery.playerIPS.filter(function(ip) {
+					let filteredPlayerArray = BH.lottery.playerIPS.filter (function(ip) {
 						return ip === user.latestIp;
 					});
 					if (Number(Object.keys(filteredPlayerArray).length) + Number(bought) > BH.lottery.maxTicketsPerUser) return this.errorReply("You cannot get more than " + BH.lottery.maxTicketsPerUser + " tickets for this game of lotto.");
@@ -62,7 +62,7 @@ exports.commands = {
 				Economy.writeMoney(toId(user.name), -bought * BH.lottery.ticketPrice);
 				BH.lottery.pot = Math.round(BH.lottery.pot + (BH.lottery.ticketPrice * bought * 1.5));
 				Rooms.get('casino').add("|raw|<b><font color=" + BH.Color(user.name) + ">" + user.name + "</font></b> has bought " + bought + " lottery tickets.");
-				for (let x=bought; x>0; x--) {
+				for (let x = bought; x > 0; x--) {
 					BH.lottery.players.push(toId(user.name));
 					BH.lottery.playerIPS.push(user.latestIp);
 				}
@@ -71,10 +71,10 @@ exports.commands = {
 				const amount = Db('currency').get(user.userid, 0);
 				if (amount < BH.lottery.ticketPrice) return this.errorReply('You do not have enough pokedollars to partake in this game of Lottery. You need ' + (BH.lottery.ticketPrice - amount) + moneyName(amount) + ' more.');
 				if (BH.lottery.playerIPS.length > 1) {
-					let filteredPlayerArray = BH.lottery.playerIPS.filter(function(ip) {
+					let filteredPlayerArray = BH.lottery.playerIPS.filter (function(ip) {
 						return ip === user.latestIp;
 					});
-					if (filteredPlayerArray.length >= BH.lottery.maxTicketsPerUser)  return this.errorReply("You cannot get more than " + BH.lottery.maxTicketsPerUser + " tickets for this game of lotto.");
+					if (filteredPlayerArray.length >= BH.lottery.maxTicketsPerUser) return this.errorReply("You cannot get more than " + BH.lottery.maxTicketsPerUser + " tickets for this game of lotto.");
 				}
 				Economy.writeMoney(toId(user.name), -BH.lottery.ticketPrice);
 				BH.lottery.pot = Math.round(BH.lottery.pot + (BH.lottery.ticketPrice * 1.5));
