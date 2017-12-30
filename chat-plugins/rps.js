@@ -1,7 +1,7 @@
 'use strict';
 
 //rps
-let rockpaperscissors  = false;
+let rockpaperscissors = false;
 let numberofspots = 2;
 let gamestart = false;
 let rpsplayers = new Array();
@@ -10,54 +10,54 @@ let player1response = new Array();
 let player2response = new Array();
 
 exports.commands = {
-rps: "rockpaperscissors",
-	rockpaperscissors: function(target, room, user) {
-		if(rockpaperscissors === false) {
+	rps: "rockpaperscissors",
+	rockpaperscissors: function (target, room, user) {
+		if (rockpaperscissors === false) {
 			rockpaperscissors = true;
 			return this.parse('/jrps');
 		}
 	},
 
 	respond: 'play',
-	play: function(target, room, user) {
-		if(gamestart === false) {
+	play: function (target, room, user) {
+		if (gamestart === false) {
 			return this.sendReply('There is currently no game of rock-paper-scissors-lizard-spock going on.');
 		} else {
-			if(user.userid === rpsplayersid[0]) {
-				if(player1response[0]) {
+			if (user.userid === rpsplayersid[0]) {
+				if (player1response[0]) {
 					return this.sendReply('You have already responded.');
 				}
-				if(target === 'rock') {
+				if (target === 'rock') {
 					player1response.push('rock');
-					if(player2response[0]) {
+					if (player2response[0]) {
 						return this.parse('/compare');
 					}
 					return this.sendReply('You responded with rock.');
 				}
-				if(target === 'paper') {
+				if (target === 'paper') {
 					player1response.push('paper');
-					if(player2response[0]) {
+					if (player2response[0]) {
 						return this.parse('/compare');
 					}
 					return this.sendReply('You responded with paper.');
 				}
-				if(target === 'scissors') {
+				if (target === 'scissors') {
 					player1response.push('scissors');
-					if(player2response[0]) {
+					if (player2response[0]) {
 						return this.parse('/compare');
 					}
 					return this.sendReply('You responded with scissors.');
 				}
-				if(target === 'lizard') {
+				if (target === 'lizard') {
 					player1response.push('lizard');
-					if(player2response[0]) {
+					if (player2response[0]) {
 						return this.parse('/compare');
 					}
 					return this.sendReply('You responded with lizard.');
 				}
-				if(target === 'spock') {
+				if (target === 'spock') {
 					player1response.push('spock');
-					if(player2response[0]) {
+					if (player2response[0]) {
 						return this.parse('/compare');
 					}
 					return this.sendReply('You responded with spock.');
@@ -65,41 +65,41 @@ rps: "rockpaperscissors",
 					return this.sendReply('Please respond with one of the following: rock, paper, scissors, lizard or spock.');
 				}
 			}
-			if(user.userid === rpsplayersid[1]) {
-				if(player2response[0]) {
+			if (user.userid === rpsplayersid[1]) {
+				if (player2response[0]) {
 					return this.sendReply('You have already responded.');
 				}
-				if(target === 'rock') {
+				if (target === 'rock') {
 					player2response.push('rock');
-					if(player1response[0]) {
+					if (player1response[0]) {
 						return this.parse('/compare');
 					}
 					return this.sendReply('You responded with rock.');
 				}
-				if(target === 'paper') {
+				if (target === 'paper') {
 					player2response.push('paper');
-					if(player1response[0]) {
+					if (player1response[0]) {
 						return this.parse('/compare');
 					}
 					return this.sendReply('You responded with paper.');
 				}
-				if(target === 'scissors') {
+				if (target === 'scissors') {
 					player2response.push('scissors');
-					if(player1response[0]) {
+					if (player1response[0]) {
 						return this.parse('/compare');
 					}
 					return this.sendReply('You responded with scissors.');
 				}
-				if(target === 'lizard') {
+				if (target === 'lizard') {
 					player2response.push('lizard');
-					if(player1response[0]) {
+					if (player1response[0]) {
 						return this.parse('/compare');
 					}
 					return this.sendReply('You responded with lizard.');
 				}
-				if(target === 'spock') {
+				if (target === 'spock') {
 					player2response.push('spock');
-					if(player1response[0]) {
+					if (player1response[0]) {
 						return this.parse('/compare');
 					}
 					return this.sendReply('You responded with spock.');
@@ -116,76 +116,76 @@ rps: "rockpaperscissors",
 		if(gamestart === false) {
 			return this.sendReply('There is no rock-paper-scissors-lizard-spock game going on right now.');
 		} else {
-			if(player1response[0] === undefined && player2response[0] === undefined) {
+			if (player1response[0] === undefined && player2response[0] === undefined) {
 				return this.sendReply('Neither ' + rpsplayers[0] + ' nor ' + rpsplayers[1] + ' has responded yet.');
 			}
-			if(player1response[0] === undefined) {
+			if (player1response[0] === undefined) {
 				return this.sendReply(rpsplayers[0] + ' has not responded yet.');
 			}
-			if(player2response[0] === undefined) {
+			if (player2response[0] === undefined) {
 				return this.sendReply(rpsplayers[1] + ' has not responded yet.');
 			} else {
-				if(player1response[0] === player2response[0]) {
+				if (player1response[0] === player2response[0]) {
 					this.add('Both players responded with \'' + player1response[0] + '\', so the game of rock-paper-scissors-lizard-spock between ' + rpsplayers[0] + ' and ' + rpsplayers[1] + ' was a tie!');
 				}
-				if(player1response[0] === 'rock' && player2response[0] === 'paper') {
+				if (player1response[0] === 'rock' && player2response[0] === 'paper') {
 					this.add('|html|' + rpsplayers[0] + ' responded with \'rock\' and ' + rpsplayers[1] + ' responded with \'paper\', so <b>' + rpsplayers[1] + '</b> won the game of rock-paper-scissors-lizard-spock!');
 				}
-				if(player1response[0] === 'rock' && player2response[0] === 'scissors') {
+				if (player1response[0] === 'rock' && player2response[0] === 'scissors') {
 					this.add('|html|' + rpsplayers[0] + ' responded with \'rock\' and ' + rpsplayers[1] + ' responded with \'scissors\', so <b>' + rpsplayers[0] + '</b> won the game of rock-paper-scissors-lizard-spock!');
 				}
-				if(player1response[0] === 'rock' && player2response[0] === 'lizard') {
+				if (player1response[0] === 'rock' && player2response[0] === 'lizard') {
 					this.add('|html|' + rpsplayers[0] + ' responded with \'rock\' and ' + rpsplayers[1] + ' responded with \'lizard\', so <b>' + rpsplayers[0] + '</b> won the game of rock-paper-scissors-lizard-spock!');
 				}
-				if(player1response[0] === 'rock' && player2response[0] === 'spock') {
+				if (player1response[0] === 'rock' && player2response[0] === 'spock') {
 					this.add('|html|' + rpsplayers[0] + ' responded with \'rock\' and ' + rpsplayers[1] + ' responded with \'spock\', so <b>' + rpsplayers[1] + '</b> won the game of rock-paper-scissors-lizard-spock!');
 				}
-				if(player1response[0] === 'paper' && player2response[0] === 'rock') {
+				if (player1response[0] === 'paper' && player2response[0] === 'rock') {
 					this.add('|html|' + rpsplayers[0] + ' responded with \'paper\' and ' + rpsplayers[1] + ' responded with \'rock\', so <b>' + rpsplayers[0] + '</b> won the game of rock-paper-scissors-lizard-spock!');
 				}
-				if(player1response[0] === 'paper' && player2response[0] === 'scissors') {
+				if (player1response[0] === 'paper' && player2response[0] === 'scissors') {
 					this.add('|html|' + rpsplayers[0] + ' responded with \'paper\' and ' + rpsplayers[1] + ' responded with \'scissors\', so <b>' + rpsplayers[1] + '</b> won the game of rock-paper-scissors-lizard-spock!');
 				}
-				if(player1response[0] === 'paper' && player2response[0] === 'spock') {
+				if (player1response[0] === 'paper' && player2response[0] === 'spock') {
 					this.add('|html|' + rpsplayers[0] + ' responded with \'paper\' and ' + rpsplayers[1] + ' responded with \'spock\', so <b>' + rpsplayers[0] + '</b> won the game of rock-paper-scissors-lizard-spock!');
 				}
-				if(player1response[0] === 'paper' && player2response[0] === 'lizard') {
+				if (player1response[0] === 'paper' && player2response[0] === 'lizard') {
 					this.add('|html|' + rpsplayers[0] + ' responded with \'paper\' and ' + rpsplayers[1] + ' responded with \'lizard\', so <b>' + rpsplayers[1] + '</b> won the game of rock-paper-scissors-lizard-spock!');
 				}
-				if(player1response[0] === 'scissors' && player2response[0] === 'rock') {
+				if (player1response[0] === 'scissors' && player2response[0] === 'rock') {
 					this.add('|html|' + rpsplayers[0] + ' responded with \'scissors\' and ' + rpsplayers[1] + ' responded with \'rock\', so <b>' + rpsplayers[1] + '</b> won the game of rock-paper-scissors-lizard-spock!');
 				}
-				if(player1response[0] === 'scissors' && player2response[0] === 'paper') {
+				if (player1response[0] === 'scissors' && player2response[0] === 'paper') {
 					this.add('|html|' + rpsplayers[0] + ' responded with \'scissors\' and ' + rpsplayers[1] + ' responded with \'paper\', so <b>' + rpsplayers[0] + '</b> won the game of rock-paper-scissors-lizard-spock!');
 				}
-				if(player1response[0] === 'scissors' && player2response[0] === 'spock') {
+				if (player1response[0] === 'scissors' && player2response[0] === 'spock') {
 					this.add('|html|' + rpsplayers[0] + ' responded with \'scissors\' and ' + rpsplayers[1] + ' responded with \'spock\', so <b>' + rpsplayers[1] + '</b> won the game of rock-paper-scissors-lizard-spock!');
 				}
-				if(player1response[0] === 'scissors' && player2response[0] === 'lizard') {
+				if (player1response[0] === 'scissors' && player2response[0] === 'lizard') {
 					this.add('|html|' + rpsplayers[0] + ' responded with \'scissors\' and ' + rpsplayers[1] + ' responded with \'lizard\', so <b>' + rpsplayers[0] + '</b> won the game of rock-paper-scissors-lizard-spock!');
 				}
-				if(player1response[0] === 'lizard' && player2response[0] === 'rock') {
+				if (player1response[0] === 'lizard' && player2response[0] === 'rock') {
 					this.add('|html|' + rpsplayers[0] + ' responded with \'lizard\' and ' + rpsplayers[1] + ' responded with \'rock\', so <b>' + rpsplayers[1] + '</b> won the game of rock-paper-scissors-lizard-spock!');
 				}
-				if(player1response[0] === 'lizard' && player2response[0] === 'spock') {
+				if (player1response[0] === 'lizard' && player2response[0] === 'spock') {
 					this.add('|html|' + rpsplayers[0] + ' responded with \'lizard\' and ' + rpsplayers[1] + ' responded with \'spock\', so <b>' + rpsplayers[0] + '</b> won the game of rock-paper-scissors-lizard-spock!');
 				}
-				if(player1response[0] === 'lizard' && player2response[0] === 'paper') {
+				if (player1response[0] === 'lizard' && player2response[0] === 'paper') {
 					this.add('|html|' + rpsplayers[0] + ' responded with \'lizard\' and ' + rpsplayers[1] + ' responded with \'paper\', so <b>' + rpsplayers[0] + '</b> won the game of rock-paper-scissors-lizard-spock!');
 				}
-				if(player1response[0] === 'lizard' && player2response[0] === 'scissors') {
+				if (player1response[0] === 'lizard' && player2response[0] === 'scissors') {
 					this.add('|html|' + rpsplayers[0] + ' responded with \'lizard\' and ' + rpsplayers[1] + ' responded with \'scissors\', so <b>' + rpsplayers[1] + '</b> won the game of rock-paper-scissors-lizard-spock!');
 				}
-				if(player1response[0] === 'spock' && player2response[0] === 'paper') {
+				if (player1response[0] === 'spock' && player2response[0] === 'paper') {
 					this.add('|html|' + rpsplayers[0] + ' responded with \'spock\' and ' + rpsplayers[1] + ' responded with \'paper\', so <b>' + rpsplayers[1] + '</b> won the game of rock-paper-scissors-lizard-spock!');
 				}
-				if(player1response[0] === 'spock' && player2response[0] === 'scissors') {
+				if (player1response[0] === 'spock' && player2response[0] === 'scissors') {
 					this.add('|html|' + rpsplayers[0] + ' responded with \'spock\' and ' + rpsplayers[1] + ' responded with \'scissors\', so <b>' + rpsplayers[0] + '</b> won the game of rock-paper-scissors-lizard-spock!');
 				}
-				if(player1response[0] === 'spock' && player2response[0] === 'rock') {
+				if (player1response[0] === 'spock' && player2response[0] === 'rock') {
 					this.add('|html|' + rpsplayers[0] + ' responded with \'spock\' and ' + rpsplayers[1] + ' responded with \'rock\', so <b>' + rpsplayers[0] + '</b> won the game of rock-paper-scissors-lizard-spock!');
 				}
-				if(player1response[0] === 'spock' && player2response[0] === 'lizard') {
+				if (player1response[0] === 'spock' && player2response[0] === 'lizard') {
 					this.add('|html|' + rpsplayers[0] + ' responded with \'spock\' and ' + rpsplayers[1] + ' responded with \'lizard\', so <b>' + rpsplayers[1] + '</b> won the game of rock-paper-scissors-lizard-spock!');
 				}
 				rockpaperscissors = false;
@@ -200,13 +200,13 @@ rps: "rockpaperscissors",
 	},
 
 	endrps: function(target, room, user) {
-		if(!user.can('broadcast')) {
+		if (!user.can('broadcast')) {
 			return this.sendReply('You do not have enough authority to do this.');
 		}
-		if(rockpaperscissors === false) {
+		if (rockpaperscissors === false) {
 			return this.sendReply('There is no game of rock-paper-scissors-lizard-spock happening right now.');
 		}
-		if(user.can('broadcast') && rockpaperscissors === true) {
+		if (user.can('broadcast') && rockpaperscissors === true) {
 			rockpaperscissors = false;
 			numberofspots = 2;
 			gamestart = false;
@@ -220,30 +220,30 @@ rps: "rockpaperscissors",
 
 	jrps: 'joinrps',
 	joinrps: function(target, room, user) {
-		if(rockpaperscissors === false) {
+		if (rockpaperscissors === false) {
 			return this.sendReply('There is no game going on right now.');
 		}
-		if(numberofspots === 0) {
+		if (numberofspots === 0) {
 			return this.sendReply('There is no more space in the game.');
 		}
 		else {
-			if(rpsplayers[0] === undefined) {
+			if (rpsplayers[0] === undefined) {
 				numberofspots = numberofspots - 1;
 				this.add('|html|<b>' + user.name + '</b> has started a game of rock-paper-scissors-lizard-spock! /jrps or /joinrps to play against them.');
 				rpsplayers.push(user.name);
 				rpsplayersid.push(user.userid);
 				return false;
 			}
-			if(rpsplayers[0] === user.name) {
+			if (rpsplayers[0] === user.name) {
 				return this.sendReply('You are already in the game.');
 			}
-			if(rpsplayers[0] && rpsplayers[1] === undefined) {
+			if (rpsplayers[0] && rpsplayers[1] === undefined) {
 				numberofspots = numberofspots - 1;
 				this.add('|html|<b>' + user.name + '</b> has joined the game of rock-paper-scissors-lizard-spock!');
 				rpsplayers.push(user.name);
 				rpsplayersid.push(user.userid);
 			}
-			if(numberofspots === 0) {
+			if (numberofspots === 0) {
 				this.add('|html|The game of rock-paper-scissors-lizard-spock between <b>' + rpsplayers[0] + '</b> and <b>' + rpsplayers[1] + '</b> has begun! Use /play rock/paper/scissors/lizard/spock');
 				gamestart = true;
 			}
