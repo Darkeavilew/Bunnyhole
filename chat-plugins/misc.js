@@ -617,7 +617,7 @@ exports.commands = {
 
 		let tell = BH.tells[id][user.userid];
 		let userSymbol = (Users.usergroups[user.userid] ? Users.usergroups[user.userid].substr(0, 1) : "");
-		let msg = '<small>[' + ().format("HH:mm:ss") + ']</small> ' + userSymbol + '<strong class="username"><span style = "color:' + BH.Color(user.userid) + '">' + user.name + ':</span></strong> ' + Chat.escapeHTML(target)';
+		let msg = '<small>[' + ().format("HH:mm:ss") + ']</small> ' + userSymbol + '<strong class="username"><span style = "color:' + BH.Color(user.userid) + '">' + user.name + ':</span></strong> ' + Chat.escapeHTML(target);
 		if (tell) {
 			BH.tells[id][user.userid].push(msg);
 		} else {
