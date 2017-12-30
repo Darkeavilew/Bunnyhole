@@ -61,9 +61,9 @@ exports.commands = {
 			date = new Date();
 			if (toId(targetSplit[1]) === 'yesterday') date.setDate(date.getDate() - 1);
 			date = date.toLocaleDateString('en-US', {
-				day : 'numeric',
-				month : 'numeric',
-				year : 'numeric',
+				day: 'numeric',
+				month: 'numeric',
+				year: 'numeric',
 			}).split('/').reverse();
 			if (date[1] < 10) date[1] = "0" + date[1];
 			if (date[2] < 10) date[2] = "0" + date[2];
@@ -99,7 +99,7 @@ exports.commands = {
 				return user.send("|popup||wide||html|" + output);
 			}
 
-			data = targetRoom + "|" + date + "|" + JSON.stringify(Server.customColors) + "\n" + data;
+			data = targetRoom + "|" + date + "|" + JSON.stringify(BH.customColors) + "\n" + data;
 
 			fs.writeFile('static/logs/' + filename, data, err => {
 				if (err) return this.errorReply("/viewlogs - " + err);
