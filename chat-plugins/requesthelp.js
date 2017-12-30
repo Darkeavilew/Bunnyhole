@@ -29,7 +29,7 @@ function saveReports() {
 	fs.writeFile('config/reports.json', JSON.stringify(Reports));
 }
 
-function messageSeniorStaff (message) {
+function messageSeniorStaff(message) {
 	for (let u in Users.users) {
 		if (!Users.users[u].connected || !Users.users[u].can('declare')) continue;
 		Users.users[u].send("|pm|~Bunnyhole Server|" + Users.users[u].getIdentity() + "|" + message);
@@ -47,7 +47,7 @@ exports.commands = {
 
 		let reportId = (Object.size(Reports) + 1);
 		while (Reports[reportId]) reportId--;
-		Reports[reportId] = new Object();
+		Reports[reportId] = {};
 		Reports[reportId].reporter = user.name;
 		Reports[reportId].message = target.trim();
 		Reports[reportId].id = reportId;
