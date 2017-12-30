@@ -13,7 +13,7 @@ function getTime(ms) {
 	let secs = Math.floor(time / 1000);
 	let mins = Math.floor(secs / 60);
 	if (mins) total.push(mins + ' minute' + (mins === 1 ? '' : 's'));
-	if (secs %= 60) total.push(secs + ' second' + (secs === 1 ? '' : 's'));
+	if (secs% = 60) total.push(secs + ' second' + (secs === 1 ? '' : 's'));
 	return total.join(' and ');
 }
 
