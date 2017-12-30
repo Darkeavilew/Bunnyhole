@@ -41,7 +41,7 @@ const FS = require('./lib/fs');
 
 function isHoster(user) {
 	if (!user) return;
-	if (typeof user === 'Object') user = user.userid;
+	if (typeof user === Object) user = user.userid;
 	let hoster = Db('hoster').get(toId(user));
 	if (hoster === 1) return true;
 	return false;
