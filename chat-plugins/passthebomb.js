@@ -178,7 +178,7 @@ class PassTheBomb extends Rooms.RoomGame {
 	checkWinner() {
 		if (this.getSurvivors().length === 1) return true;
 	}
-	
+
 	getWinner() {
 		let winner = this.getSurvivors()[0][1].name;
 		let msg = '|html|<div class = "infobox"><center>The winner of this game of Pass the Bomb is <b style = "color:' + BH.nameColor(winner) + '">' + Chat.escapeHTML(winner) + '!</b> Congratulations!</center>';
