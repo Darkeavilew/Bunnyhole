@@ -243,7 +243,6 @@ exports.Formats = [
 		isTeambuilderFormat: true,
 		defaultLevel: 100,
 		onFaint: function (pokemon) {
-			let name = pokemon.side.name;
 			let winner = '';
 			if (pokemon.side.id === 'p1') {
 				winner = 'p2';
