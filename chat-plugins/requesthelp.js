@@ -64,7 +64,6 @@ exports.commands = {
 		target = target.trim();
 
 		let cmdParts = target.split(' ');
-		let cmd = cmdParts.shift().trim().toLowerCase();
 		let params = cmdParts.join(' ').split(',').map(function (param) { return param.trim(); });
 		switch (cmd) {
 			case '':
