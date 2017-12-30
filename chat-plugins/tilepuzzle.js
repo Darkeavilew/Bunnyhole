@@ -116,11 +116,9 @@ class TilePuzzle {
 			this.selection = tileNumber;
 			this.display[tileNumber] = this.getTile(tileNumber, '1px solid red');
 		}
-		this.resetTimer(); {
+		this.resetTimer();
 		if (!this.isFinished()) this.update();
-	} else {
-			this.end(true);
-		}
+		else this.end(true);
 	}
 	rotateTile() {
 		if (isNaN(this.selection)) return this.update('You haven\'t selected a tile to rotate yet.');
