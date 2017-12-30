@@ -20,7 +20,7 @@ const MAX_TELLS = 4;
 const MAX_TELL_LENGTH = 500;
 function isHoster(user) {
 	if (!user) return;
-	if (typeof user === 'Object') user = user.userid;
+	if (typeof user === Object) user = user.userid;
 	let hoster = Db('hoster').get(toId(user));
 	if (hoster === 1) return true;
 	return false;
@@ -390,7 +390,7 @@ exports.commands = {
 		this.logModCommand(user.name + " globally declared " + target);
 	},
 	globaldeclarehelp: ["/globaldeclare [message] - Anonymously announces a message to every room on the server. Requires: ~"],
-	
+
 	redchatdeclare: 'chatdeclare',
 	greenchatdeclare: 'chatdeclare',
 	redcdeclare: 'chatdeclare',
@@ -525,7 +525,7 @@ exports.commands = {
 			this.sendReply(hoster + '\'s vip status has been taken.');
 		},
 		list: function (target, room, user) {
-			let userid = user.userid;	
+			let userid = user.userid;
 			if (!isHoster(userid)) return false;
 			if (!Object.keys(Db('hoster').object()).length) return this.errorReply('There seems to be no user with vip status.');
 			user.popup('|html|<center><b><u>Super Administrators.</u></b></center>' + '<br /><br />' + Object.keys(Db('hoster').object()).join('</strong><br />'));
@@ -540,7 +540,7 @@ exports.commands = {
 		    },
 	},
 
-  	d: 'poof',
+	d: 'poof',
 	cpoof: 'poof',
 	poof: function (target, room, user) {
 		if (Config.poofOff) return this.sendReply("Poof is currently disabled.");
@@ -653,7 +653,7 @@ exports.commands = {
 				if (!row[i]) continue;
 				let rank = row[i].split(',')[1].replace("\r", '');
 				let person = row[i].split(',')[0];
-				function formatName (name) {
+				function formatName(name) {
 					if (Users.getExact(name) && Users(name).connected) {
 						return '<i><b><font style="color:' + BH.Color(Users.getExact(name).name) + '">' + (Users.getExact(name).name) + '</font><b></i>';
 					} else {
@@ -669,7 +669,7 @@ exports.commands = {
 				case '&':
 					if (~ignoreUsers.indexOf(personId)) break;
 					staff['leaders'].push(formatName(person));
-					break;	
+					break;
 				case '*':
 					if (~ignoreUsers.indexOf(personId)) break;
 					staff['bots'].push(formatName(person));
