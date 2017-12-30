@@ -192,7 +192,7 @@ let cmds = {
 		user.send('|pm|' + target.getIdentity() + '|' + user.getIdentity() + '|/html You have challenged ' + target.getIdentity() + ' to a game of Tic-Tac-Toe. Waiting for their response...');
 		let gameId = tttplayers[user.userid] = (Object.keys(tttgames).length ? Object.keys(tttgames).length - 1 : 0);
 		tttgames[gameId] = new TicTacToe(user, target, gameId);
-	},
+	}
 
 	acc: 'accept',
 	accept: function (target, room, user, connection, cmd) {
