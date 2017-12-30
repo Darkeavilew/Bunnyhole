@@ -116,7 +116,6 @@ exports.commands = {
 			case 'del':
 			case 'delete':
 				if (params.length < 1) return this.sendReply("Usage: /reports delete [id]");
-				let id = params.shift();
 				if (!Reports[id]) return this.sendReply("There's no report with that id.");
 				messageSeniorStaff(user.name + " deleted the report by " + Reports[id].reporter + ". (ID: " + id + ")");
 				reportsRoom.add(user.name + " deleted the report by " + Reports[id].reporter + ". (ID: " + id + ")");
