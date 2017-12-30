@@ -7,7 +7,6 @@
 'use strict';
 
 const fs = require('fs');
-const moment = require('moment');
 
 const friendsFilepath = 'config/friends.json';
 const settingsFilepath = 'config/friendssettings.json';
