@@ -57,7 +57,7 @@ exports.commands = {
 		let userid = (targetUser ? targetUser.userid : toId(target));
 		if (userid) {
 			showTheme();
-		};
+		}
 
 		function showTheme() {
 			Economy.readMoney(toId(username), money => {
