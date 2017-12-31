@@ -289,15 +289,7 @@ class CommandContext {
 
 		if (message && message !== true && typeof message.then !== 'function') {
 			if (this.pmTarget) {
-				let buf = `|pm|${this.user.getIdentity()}|${this.pmTarget.getIdentity()}|${message}`;
-				this.user.send(buf);
-				if (Users.ShadowBan.checkBanned(this.user)) {
-					Users.ShadowBan.addMessage(this.user, "Private to " + this.pmTarget.getIdentity());
-				} else {
-					if (this.pmTarget !== this.user) this.pmTarget.send(buf);
-				}
-				this.pmTarget.lastPM = this.user.userid;
-				this.user.lastPM = this.pmTarget.userid;
+				Chat.sendPM(message, this.user, this.pmTarget);
 			} else {
 				if (Users.ShadowBan.checkBanned(this.user)) {
 					Users.ShadowBan.addMessage(this.user, "To " + this.room.id, message);
@@ -1118,7 +1110,11 @@ Chat.sendPM = function (message, user, pmTarget, onlyRecipient = null) {
 	let buf = `|pm|${user.getIdentity()}|${pmTarget.getIdentity()}|${message}`;
 	if (onlyRecipient) return onlyRecipient.send(buf);
 	user.send(buf);
-	if (pmTarget !== user) pmTarget.send(buf);
+	if (Users.ShadowBan.checkBanned(this.user)) {
+		Users.ShadowBan.addMessage(this.user, "Private to " + this.pmTarget.getIdentity());
+	} else {
+		if (pmTarget !== user) pmTarget.send(buf);
+	}
 	pmTarget.lastPM = user.userid;
 	user.lastPM = pmTarget.userid;
 };
