@@ -379,17 +379,9 @@ exports.commands = {
 		let userid = (targetUser ? targetUser.userid : toId(target));
 		let avatar = (targetUser ? (isNaN(targetUser.avatar) ? "http://" + serverIp + ":" + Config.port + "/avatars/" + targetUser.avatar : "http://play.pokemonshowdown.com/sprites/trainers/" + targetUser.avatar + ".png") : (Config.customavatars[userid] ? "http://" + serverIp + ":" + Config.port + "/avatars/" + Config.customavatars[userid] : "http://play.pokemonshowdown.com/sprites/trainers/1.png"));
 		if (targetUser && targetUser.avatar[0] === '#') avatar = 'http://play.pokemonshowdown.com/sprites/trainers/' + targetUser.avatar.substr(1) + '.png';
-		let regdate = '(Unregistered)';
-		BH.regdate(userid, date => {
-			if (date) {
-				let d = new Date(date);
-				let MonthNames = ["January", "February", "March", "April", "May", "June",
-					"July", "August", "September", "October", "November", "December",
-				];
-				regdate = MonthNames[d.getUTCMonth()] + ' ' + d.getUTCDate() + ", " + d.getUTCFullYear();
-			}
+		if (userid) {
 			showProfile();
-		});
+		};
 
 		function getFlag(userid) {
 			let ip = (Users(userid) ? geoip.lookup(Users(userid).latestIp) : false);
