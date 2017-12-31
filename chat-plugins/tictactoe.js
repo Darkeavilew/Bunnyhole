@@ -225,7 +225,7 @@ let cmds = {
 		if (user.userid === target.userid) return this.sendReply('You can\'t use this command on yourself.');
 		let game = tttgames[tttplayers[toId(targetUser)]];
 		if (!(target.userid in tttplayers) || !game.checkPlayer(target)) return this.sendReply(target + ' has not challenged you to a game of Tic-Tac-Toe.');
-		if (game.checkPlayer(target) && game.phase == 'started') return this.sendReply('You are playing with ' + game.checkPlayer(user) + ' right now. If you want to end the game, use /ttt end.');
+		if (game.checkPlayer(target) && game.phase === 'started') return this.sendReply('You are playing with ' + game.checkPlayer(user) + ' right now. If you want to end the game, use /ttt end.');
 
 		if (Users.get(target) && Users.get(target).connected) Users.get(target).send('|pm|' + user.getIdentity() + '|' + Users.get(target).getIdentity() + '|/error Your Tic-Tac-Toe request was declined.');
 		user.send('|pm|' + Users.get(target) + '|' + user.getIdentity() + '|/error You have declined the game request.');
@@ -258,12 +258,12 @@ let cmds = {
 		let game = tttgames[tttplayers[user.userid]];
 		if (game.phase === 'waiting') game.end('The request was withdrawn.');
 		else game.end(user.name + ' has decided to leave the game midway.');
-	}
+	},
 };
 
 exports.commands = {
 	ttt: 'tictactoe',
 	tictactoe: cmds,
 	tttend: 'endttt',
-	endttt: cmds.end	
-}
+	endttt: cmds.end,
+};
