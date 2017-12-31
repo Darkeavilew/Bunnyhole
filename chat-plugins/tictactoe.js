@@ -30,7 +30,7 @@ let TicTacToe = (function () {
 			'6': 6,
 			'7': 7,
 			'8': 8,
-			'9': 9
+			'9': 9,
 		};
 		this.markedCount = 0;
 		this.phase = 'waiting';
@@ -184,10 +184,11 @@ let cmds = {
 			if (game.checkPlayer(user)) return this.sendReply(game.checkPlayer(user) + ' has already sent you a request...');
 			return this.sendReply(target.name + ' has already asked someone else for a game of Tic-Tac-Toe.');
 		}
-		for (let i in tttgames)
+		for (let i in tttgames) {
 			if (tttgames[i].checkPlayer(user)) return this.sendReply('You were sent a game request by ' + tttgames[i].checkPlayer(user) + '. First respond to that request before challenging someone else.');
+		}
 		target.send('|pm|' + user.getIdentity() + '|' + target.getIdentity() + '|/html ' + user.getIdentity() + ' wants to play Tic-Tac-Toe!<br>' +
-			'<button name = "send" value = "/ttt accept ' + user.userid + '">Accept</button> <button name = "send" value = "/ttt decline ' + user.userid + '">Decline</button>'
+		'<button name = "send" value = "/ttt accept ' + user.userid + '">Accept</button> <button name = "send" value = "/ttt decline ' + user.userid + '">Decline</button>'
 		);
 		user.send('|pm|' + target.getIdentity() + '|' + user.getIdentity() + '|/html You have challenged ' + target.getIdentity() + ' to a game of Tic-Tac-Toe. Waiting for their response...');
 		let gameId = tttplayers[user.userid] = (Object.keys(tttgames).length ? Object.keys(tttgames).length - 1 : 0);
