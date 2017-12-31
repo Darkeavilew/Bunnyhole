@@ -55,17 +55,9 @@ exports.commands = {
 		let targetUser = Users.get(target);
 		let username = (targetUser ? targetUser.name : target);
 		let userid = (targetUser ? targetUser.userid : toId(target));
-		let regdate = '(Unregistered)';
-		BH.regdate(userid, date => {
-			if (date) {
-				let d = new Date(date);
-				let MonthNames = ["January", "February", "March", "April", "May", "June",
-					"July", "August", "September", "October", "November", "December",
-				];
-				regdate = MonthNames[d.getUTCMonth()] + ' ' + d.getUTCDate() + ", " + d.getUTCFullYear();
-			}
+		if (userid) {
 			showTheme();
-		});
+		};
 
 		function showTheme() {
 			Economy.readMoney(toId(username), money => {
