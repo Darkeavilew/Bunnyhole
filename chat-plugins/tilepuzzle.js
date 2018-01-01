@@ -117,8 +117,11 @@ class TilePuzzle {
 			this.display[tileNumber] = this.getTile(tileNumber, '1px solid red');
 		}
 		this.resetTimer();
-		if (!this.isFinished()) this.update();
-		else this.end(true);
+		if (!this.isFinished()) {
+			this.update();
+		} else {
+			this.end(true);
+		}
 	}
 	rotateTile() {
 		if (isNaN(this.selection)) return this.update('You haven\'t selected a tile to rotate yet.');
@@ -130,11 +133,17 @@ class TilePuzzle {
 		this.update();
 	}
 	end(status) {
-		if (status === 'inactive') this.user.popup('The game of Tile Puzzle has been ended due to inactivity.');
-		else if (status) this.update('You finished the puzzle in ' + getTime(this.startTime) + '! Good job!');
-		else this.user.popup('You have decided to leave the game midway.');
-		clearTimeout(this.timer);
-		global.TilePuzzles.delete(this.user);
+		if (status === 'inactive') {
+			this.user.popup('The game of Tile Puzzle has been ended due to inactivity.');
+		} else {
+			if (status) {
+				this.update('You finished the puzzle in ' + getTime(this.startTime) + '! Good job!');
+			} else {
+				this.user.popup('You have decided to leave the game midway.');
+			}
+			clearTimeout(this.timer);
+			global.TilePuzzles.delete(this.user);
+		}
 	}
 }
 
