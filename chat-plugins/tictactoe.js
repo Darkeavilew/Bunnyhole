@@ -48,15 +48,21 @@ let TicTacToe = (function () {
 	};
 
 	TicTacToe.prototype.switchPlayer = function () {
-		if (this.currentPlayer === this.p1) this.currentPlayer = this.p2;
-		else this.currentPlayer = this.p1;
+		if (this.currentPlayer === this.p1) {
+			this.currentPlayer = this.p2;
+		} else {
+			this.currentPlayer = this.p1;
+		}
 	};
 
 	TicTacToe.prototype.getGrid = function (gameOver) {
 		let marked = [];
 		for (let i in this.boxes) {
-			if (typeof this.boxes[i] === 'string') marked.push(this.boxes[i]);
-			else marked.push('<button style = "height: 80px%; width: 80px; font-size: 20pt" name = "send" value = "/ttt markbox ' + i + '"><b>' + i + '</b></button>');
+			if (typeof this.boxes[i] === 'string') {
+				marked.push(this.boxes[i]);
+			} else {
+				marked.push('<button style = "height: 80px%; width: 80px; font-size: 20pt" name = "send" value = "/ttt markbox ' + i + '"><b>' + i + '</b></button>');
+			}
 		}
 		let style = 'width: 100px; height: 100px; font-size: 20pt; ';
 		let grid = '<table cellspacing = "0">' +
@@ -256,8 +262,11 @@ let cmds = {
 	end: function (target, room, user) {
 		if (!(user.userid in tttplayers)) return this.sendReply('You aren\'t playing a game of Tic-Tac-Toe right now.');
 		let game = tttgames[tttplayers[user.userid]];
-		if (game.phase === 'waiting') game.end('The request was withdrawn.');
-		else game.end(user.name + ' has decided to leave the game midway.');
+		if (game.phase === 'waiting') {
+			game.end('The request was withdrawn.');
+		} else {
+			game.end(user.name + ' has decided to leave the game midway.');
+		}
 	},
 };
 
