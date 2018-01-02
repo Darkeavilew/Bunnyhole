@@ -523,6 +523,7 @@ exports.commands = {
 		'/usetoken [token], [argument(s)] - Redeem a token from the shop. Accepts the following arguments: ',
 		'/usetoken avatar, [image] | /usetoken declare, [message] | /usetoken color, [hex code]',
 		'/usetoken icon [image] | /usetoken title, [name], [hex code] | /usetoken theme, [link], [title of song]',
+		'/usetoken pteam',
 	],
 
 	hoster: {
