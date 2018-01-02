@@ -56,7 +56,7 @@ exports.commands = {
 		Reports[reportId].status = 'Pending Staff';
 		Reports[reportId].reportTime = moment().format('MMMM Do YYYY, h:mm A') + " EST";
 		saveReports();
-		BH.messageSeniorStaff('A new report has been submitted by ' + user.name + '. ID: ' + reportId + ' Message: ' + target.trim());
+		messageSeniorStaff('A new report has been submitted by ' + user.name + '. ID: ' + reportId + ' Message: ' + target.trim());
 		reportsRoom.add('A new report has been submitted by ' + user.name + '. ID: ' + reportId + ' Message: ' + target.trim());
 		reportsRoom.update();
 		return this.sendReply("Your report has been sent to Senior Staff.");
@@ -98,7 +98,7 @@ exports.commands = {
 				Users(Reports[id].reporter).popup("Your report has been accepted by " + user.name);
 			}
 			this.sendReply("You've accepted the report by " + Reports[id].reporter);
-			BH.messageSeniorStaff(user.name + " accepted the report by " + Reports[id].reporter + ". (ID: " + id + ")");
+			messageSeniorStaff(user.name + " accepted the report by " + Reports[id].reporter + ". (ID: " + id + ")");
 			reportsRoom.add(user.name + " accepted the report by " + Reports[id].reporter + ". (ID: " + id + ")");
 			reportsRoom.update();
 			break;
@@ -111,7 +111,7 @@ exports.commands = {
 				Users(Reports[id].reporter).popup("Your report has been denied by " + user.name);
 			}
 			this.sendReply("You've denied the report by " + Reports[id].reporter);
-			BH.messageSeniorStaff(user.name + " denied the report by " + Reports[id].reporter + ". (ID: " + id + ")");
+			messageSeniorStaff(user.name + " denied the report by " + Reports[id].reporter + ". (ID: " + id + ")");
 			reportsRoom.add(user.name + " denied the report by " + Reports[id].reporter + ". (ID: " + id + ")");
 			reportsRoom.update();
 			delete Reports[id];
@@ -121,7 +121,7 @@ exports.commands = {
 		case 'delete':
 			if (params.length < 1) return this.sendReply("Usage: /reports delete [id]");
 			if (!Reports[id]) return this.sendReply("There's no report with that id.");
-			BH.messageSeniorStaff(user.name + " deleted the report by " + Reports[id].reporter + ". (ID: " + id + ")");
+			messageSeniorStaff(user.name + " deleted the report by " + Reports[id].reporter + ". (ID: " + id + ")");
 			reportsRoom.add(user.name + " deleted the report by " + Reports[id].reporter + ". (ID: " + id + ")");
 			reportsRoom.update();
 			delete Reports[id];
