@@ -11,6 +11,7 @@
     "geoip-lite-country": "1.1.5",
     "githubhook": "1.7.1",
     "json-stringify-safe": "^5.0.1",
+    "moment": "^2.13.0",
     "nani": "^1.2.0",
     "origindb": "^2.6.1",
     "request-image-size": "^2.1.0",
@@ -30,7 +31,7 @@
   },
   "scripts": {
     "start": "node pokemon-showdown",
-    "test": "eslint --rulesdir=dev-tools/eslint --cache . && tsc && mocha"
+    "test": "eslint --rulesdir=dev-tools/eslint --cache . && mocha"
   },
   "bin": "./pokemon-showdown",
   "homepage": "http://pokemonshowdown.com",
