@@ -464,7 +464,7 @@ exports.commands = {
 		target[0] = toId(target[0]);
 		if (target[0] === 'intro') target[0] = 'disableintroscroll';
 		let msg = '';
-		if (['avatar', 'declare', 'icon', 'color', 'theme', 'title', 'disableintroscroll'].indexOf(target[0]) === -1) return this.parse('/help usetoken');
+		if (['avatar', 'declare', 'icon', 'color', 'theme', 'title', 'room', 'disableintroscroll'].indexOf(target[0]) === -1) return this.parse('/help usetoken');
 		if (!user.tokens || !user.tokens[target[0]]) return this.errorReply('You need to buy this from the shop first.');
 		target[1] = target[1].trim();
 
@@ -482,6 +482,11 @@ exports.commands = {
 		case 'color':
 			msg += '/html <center>' + BH.nameColor(user.name, true) + ' has redeemed a custom color token.<br/> hex color: <span' + target[1] + '<br/>';
 			msg += '<button class="button" name="send" value="/customcolor set ' + user.name + ',' + target[1] + '">Set color (<b><font color="' + target[1] + '">' + target[1] + '</font></b>)</button></center>';
+			delete user.tokens[target[0]];
+			return BH.messageSeniorStaff(msg);
+		case 'room':
+			msg += '/html <center>' + BH.nameColor(user.name, true) + ' has redeemed a chatroom token.<br/> Roomname: ' + target[1] + "<br/>";
+			msg += '<button class="button" name="send" value="/makechatroom ' + target[1] + '">Make this room</button></center>';
 			delete user.tokens[target[0]];
 			return BH.messageSeniorStaff(msg);
 		case 'icon':
@@ -518,6 +523,7 @@ exports.commands = {
 		'/usetoken [token], [argument(s)] - Redeem a token from the shop. Accepts the following arguments: ',
 		'/usetoken avatar, [image] | /usetoken declare, [message] | /usetoken color, [hex code]',
 		'/usetoken icon [image] | /usetoken title, [name], [hex code] | /usetoken theme, [link], [title of song]',
+		'/usetoken room [roomname] | /usetoken disableintroscroll, [room]',
 	],
 
 	hoster: {
