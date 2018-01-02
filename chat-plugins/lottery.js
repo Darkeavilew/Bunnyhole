@@ -5,6 +5,7 @@
  */
 'use strict';
 
+const moment = require('moment');
 const fs = require('fs');
 BH.lottery = {};
 
@@ -197,7 +198,7 @@ exports.commands = {
 					"Game started by: <b><font color=" + BH.Color(BH.lottery.createdBy) + ">" + Chat.escapeHTML(BH.lottery.createdBy) + "</font></b><br />" +
 					"Pot: <b>" + BH.lottery.pot + " Pokedollars</b><br />" +
 					"Ticket price: <b>" + BH.lottery.ticketPrice + " Pokedollars</b><br />" +
-					"Game started: <b>" + (BH.lottery.startTime).fromNow() + "</b><br />" +
+					"Game started: <b>" + moment(BH.lottery.startTime).fromNow() + "</b><br />" +
 					"Max tickets per user: <b>" + BH.lottery.maxTicketsPerUser + "</b><br />" +
 					"<b>Tickets bought (" + BH.lottery.players.length + "):</b><br />" +
 					BH.lottery.players + "</div>"
@@ -207,7 +208,7 @@ exports.commands = {
 		case 'uptime':
 			if (!this.runBroadcast()) return;
 			if (!BH.lottery.gameActive) return this.errorReply("There is no active game of lottery currently running.");
-			this.sendReplyBox("Lottery Game Uptime: <b>" + (BH.lottery.startTime).fromNow() + "</b>");
+			this.sendReplyBox("Lottery Game Uptime: <b>" + moment(BH.lottery.startTime).fromNow() + "</b>");
 			break;
 
 		case 'pot':
