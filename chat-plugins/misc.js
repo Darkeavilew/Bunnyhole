@@ -464,7 +464,7 @@ exports.commands = {
 		target[0] = toId(target[0]);
 		if (target[0] === 'intro') target[0] = 'disableintroscroll';
 		let msg = '';
-		if (['avatar', 'declare', 'icon', 'color', 'emote', 'title', 'disableintroscroll'].indexOf(target[0]) === -1) return this.parse('/help usetoken');
+		if (['avatar', 'declare', 'icon', 'color', 'theme', 'title', 'disableintroscroll'].indexOf(target[0]) === -1) return this.parse('/help usetoken');
 		if (!user.tokens || !user.tokens[target[0]]) return this.errorReply('You need to buy this from the shop first.');
 		target[1] = target[1].trim();
 
@@ -507,7 +507,7 @@ exports.commands = {
 			if (!Rooms(roomid)) return this.errorReply(`${roomid} is not a room.`);
 			if (Db('disabledScrolls').has(roomid)) return this.errorReply(`${Rooms(roomid).title} has already roomintro scroll disabled.`);
 			msg += '/html <center>' + BH.nameColor(user.name, true) + ' has redeemed roomintro scroll disabler token.<br/>';
-			msg += '<button class="button" name="send" value="/disableintroscroll ' + target[1] + '">Disable Intro Scrool for <b>' + Rooms(roomid).title + '</b></button></center>';
+			msg += '<button class="button" name="send" value="/disableintroscroll ' + target[1] + '">Disable Intro Scroll for <b>' + Rooms(roomid).title + '</b></button></center>';
 			delete user.tokens[target[0]];
 			return BH.messageSeniorStaff(msg);
 		default:
