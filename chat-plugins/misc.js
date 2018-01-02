@@ -464,7 +464,7 @@ exports.commands = {
 		target[0] = toId(target[0]);
 		if (target[0] === 'intro') target[0] = 'disableintroscroll';
 		let msg = '';
-		if (['avatar', 'declare', 'icon', 'color', 'theme', 'title', 'disableintroscroll'].indexOf(target[0]) === -1) return this.parse('/help usetoken');
+		if (['avatar', 'declare', 'icon', 'color', 'theme', 'title', 'pteam', 'disableintroscroll'].indexOf(target[0]) === -1) return this.parse('/help usetoken');
 		if (!user.tokens || !user.tokens[target[0]]) return this.errorReply('You need to buy this from the shop first.');
 		target[1] = target[1].trim();
 
@@ -487,6 +487,11 @@ exports.commands = {
 		case 'icon':
 			msg += '/html <center>' + BH.nameColor(user.name, true) + ' has redeemed a icon token.<br/><img src="' + target[1] + '" alt="icon"/><br/>';
 			msg += '<button class="button" name="send" value="/customicon set ' + user.userid + ', ' + target[1] + '">Apply icon</button></center>';
+			delete user.tokens[target[0]];
+			return BH.messageSeniorStaff(msg);
+		case 'pteam':
+			msg = '/html <center>' + BH.nameColor(user.name, true) + ' has redeemed a profile team token.<br/><br/>';
+			msg += '<button class="button" name="send" value="/profileteam give ' + user.userid + '">Give Profile Team</button></center>';
 			delete user.tokens[target[0]];
 			return BH.messageSeniorStaff(msg);
 		case 'title':
