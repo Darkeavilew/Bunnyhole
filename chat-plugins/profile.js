@@ -485,8 +485,6 @@ exports.commands = {
 		"/type delete - Delete your favorite type.",
 		"/nature set [nature] - Set your nature.",
 		"/nature delete - Delete your nature.",
-		"/music set [user], [song], [title] - Sets a user's profile song. Requires + or higher.",
-		"/music take [user] - Removes a user's profile song. Requires + or higher.",
 		"/bg set [user], [link] - Sets the user's profile background. Requires + or higher.",
 		"/bg delete [user] - Removes the user's profile background. Requires + or higher.",
 		"/fc set [friend code] - Sets your Friend Code.",
