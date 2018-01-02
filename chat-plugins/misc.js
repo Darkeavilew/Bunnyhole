@@ -491,8 +491,14 @@ exports.commands = {
 			return BH.messageSeniorStaff(msg);
 		case 'title':
 			if (!target[2]) return this.errorReply('/usetoken title, [name], [hex code]');
-			msg += '/html <center>' + BH.nameColor(user.name, true) + ' has redeem a title token.<br/> title name: ' + target[1] + '<br/>';
+			msg += '/html <center>' + BH.nameColor(user.name, true) + ' has redeemed a title token.<br/> title name: ' + target[1] + '<br/>';
 			msg += '<button class="button" name="send" value="/customtitle set ' + user.userid + ', ' + target[1] + ', ' + target[2] + '">Set title (<b><font color="' + target[2] + '">' + target[2] + '</font></b>)</button></center>';
+			delete user.tokens[target[0]];
+			return BH.messageSeniorStaff(msg);
+		case 'theme':
+			if (!target[2]) return this.errorReply('/usetoken theme, [link], [title of song]');
+			msg += '/html <center>' + BH.nameColor(user.name, true) + ' has redeemed a theme token.<br/><audio src="' + target[1] + '" controls="" style="width:100%;"></audio><br/>';
+			msg += '<button class="button" name="send" value="/music set ' + user.userid + ', ' + target[1] + ', ' + target[2] + '">Set theme</button></center>';
 			delete user.tokens[target[0]];
 			return BH.messageSeniorStaff(msg);
 		case 'disableintroscroll':
@@ -511,8 +517,7 @@ exports.commands = {
 	usetokenhelp: [
 		'/usetoken [token], [argument(s)] - Redeem a token from the shop. Accepts the following arguments: ',
 		'/usetoken avatar, [image] | /usetoken declare, [message] | /usetoken color, [hex code]',
-		'/usetoken icon [image] | /usetoken title, [name], [hex code] | /usetoken emote, [name], [image]',
-		'/usetoken disableintroscroll [room name]',
+		'/usetoken icon [image] | /usetoken title, [name], [hex code] | /usetoken theme, [link], [title of song]',
 	],
 
 	hoster: {
