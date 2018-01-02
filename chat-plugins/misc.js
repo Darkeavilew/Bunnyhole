@@ -625,7 +625,7 @@ exports.commands = {
 
 		let tell = BH.tells[id][user.userid];
 		let userSymbol = (Users.usergroups[user.userid] ? Users.usergroups[user.userid].substr(0, 1) : "");
-		let msg = '<small>[' + {timestamp} + ']</small> ' + userSymbol + '<strong class="username"><span style = "color:' + BH.Color(user.userid) + '">' + user.name + ':</span></strong> ' + Chat.escapeHTML(target);
+		let msg = '<small>[' + Chat.toTimestamp + ']</small> ' + userSymbol + '<strong class="username"><span style = "color:' + BH.Color(user.userid) + '">' + user.name + ':</span></strong> ' + Chat.escapeHTML(target);
 		if (tell) {
 			BH.tells[id][user.userid].push(msg);
 		} else {
@@ -634,7 +634,7 @@ exports.commands = {
 
 		fs.writeFileSync('config/tells.json', JSON.stringify(BH.tells));
 		if (this.message.startsWith(`/tell`)) {
-			user.send('|pm| ' + this.targetUsername + '|' + this.user.getIdentity() + '|/raw ' + '<small>[' + {timestamp} + ']</small>' + userSymbol + '<strong class="username"><span style = "color:' + BH.Color(user.userid) + '">' + user.name + ':</span></strong> ' + Chat.escapeHTML(target));
+			user.send('|pm| ' + this.targetUsername + '|' + this.user.getIdentity() + '|/raw ' + '<small>[' + Chat.toTimestamp + ']</small>' + userSymbol + '<strong class="username"><span style = "color:' + BH.Color(user.userid) + '">' + user.name + ':</span></strong> ' + Chat.escapeHTML(target));
 
 			return;
 		}
