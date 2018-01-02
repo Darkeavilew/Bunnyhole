@@ -12,7 +12,7 @@ exports.commands = {
 		add: "set",
 		give: "set",
 		set: function (target, room, user) {
-			if (!this.can('broadcast')) return false;
+			if (!this.can('ban')) return false;
 			let parts = target.split(',');
 			let targ = parts[0].toLowerCase().trim();
 			if (!parts[2]) return this.errorReply('/musichelp');
@@ -27,7 +27,7 @@ exports.commands = {
 		take: "delete",
 		remove: "delete",
 		delete: function (target, room, user) {
-			if (!this.can('broadcast')) return false;
+			if (!this.can('ban')) return false;
 			let targ = target.toLowerCase();
 			if (!target) return this.parse('/musichelp');
 			if (!Db("music").has(targ)) return this.errorReply('This user does not have any music on their theme.');
