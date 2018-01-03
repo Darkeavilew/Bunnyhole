@@ -151,7 +151,7 @@ exports.commands = {
 		case 'setlimit':
 			if (!this.can('hotpatch')) return false;
 			if (!BH.lottery.gameActive) return this.errorReply("The game of lottery is not currently running.");
-			if (BH.lottery.players.length >= 1) return this.errorReply("You cannot change the limit because someone(s) have already bought a lottery ticket.");
+			if (BH.lottery.players.length >= 1) return this.errorReply("You cannot change the limit because someone has already bought a lottery ticket.");
 			if (!parts[1]) return this.errorReply("Usage: /lotto setlimit, [limit of tickets per user].");
 			if (isNaN(Number(parts[1]))) return this.errorReply('The pot must be a number greater than 0');
 			BH.lottery.maxTicketsPerUser = parts[1];
