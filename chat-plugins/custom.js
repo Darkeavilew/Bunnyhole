@@ -27,7 +27,7 @@ exports.commands = {
 	'!discord': true,
 	    discord: function (target, room, user) {
 		        if (!this.runBroadcast()) return;
-		        this.sendReplyBox('Join our server discord by clicking <a href="TBA">here</a>.');
+		        this.sendReplyBox('Join our server discord by clicking <a href="https://discord.gg/KeeKb2P">here</a>.');
 	},
 	/*Bunnyhole Gifs*/
 	'!hmm': true,
