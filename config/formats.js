@@ -447,11 +447,7 @@ exports.Formats = [
 
 		mod: 'gen7',
 		ruleset: ['[Gen 7] OU'],
-<<<<<<< HEAD
-		banlist: ['Hoopa-Unbound', 'Kartana', 'Kyurem-Black', 'Gyarados-Mega', 'Regigigas', 'Shedinja', 'Slaking', 'Huge Power', 'Imposter', 'Pure Power', 'Speed Boost', 'Water Bubble', 'Assist', 'Chatter'],
-=======
 		banlist: ['Hoopa-Unbound', 'Kartana', 'Kyurem-Black', 'Regigigas', 'Shedinja', 'Slaking', 'Huge Power', 'Imposter', 'Pure Power', 'Speed Boost', 'Water Bubble', 'Gyaradosite', 'Assist', 'Chatter'],
->>>>>>> 99d682ca26fb184f10a788bf7c5406dad8e951af
 		noChangeForme: true,
 		noChangeAbility: true,
 		getEvoFamily: function (species) {
