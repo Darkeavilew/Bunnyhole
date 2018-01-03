@@ -93,8 +93,6 @@ exports.commands = {
 			"- /buddies<br />" +
 			"- /hehe<br />" +
 			"- /tea<br />" +
-			"- /hehe<br />" +
-			"- /tea<br />" +
 			"- /cri<br />" +
 			"- /smile<br />" +
 			"</div>"
