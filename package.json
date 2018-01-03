@@ -17,7 +17,7 @@
     "request-image-size": "^2.1.0",
     "request": "^2.82.0",
     "sockjs": "0.3.18",
-    "uuid": "^2.0.2"
+    "uuid": "^3.1.0"
   },
   "optionalDependencies": {
     "cloud-env": "0.2.2",
