@@ -25,6 +25,11 @@ exports.BattleAliases = {
 	"monorandom": "[Gen 7] Monotype Random Battle",
 	"bf": "[Gen 6] Battle Factory",
 
+	//Bunnyhole
+	"doublesmono": "[Gen 7] Doubles Monotype",
+	"perseverance": "[Gen 7] Perseverance",
+	"pmd": "[Gen 7] Pokemon Mystery Dungeon",
+
 	// mega evos
 	"fabio": "Ampharos-Mega",
 	"maero": "Aerodactyl-Mega",
