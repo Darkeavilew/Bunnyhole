@@ -80,4 +80,24 @@ exports.commands = {
 		if (!this.runBroadcast()) return;
 		return this.sendReply('|raw|<center><img src="https://i.imgur.com/TJruUuJ.gif" width="300" height="169"></center>');
 	},
+	'!giflist': true,
+	giflist: function (target, room, user) {
+		if (!this.canBroadcast('broadcast')) return;
+		this.sendReplyBox(
+			"<strong>List of Server Gifs</strong><br />" +
+			"- /hmm<br />" +
+			"- /kicks<br />" +
+			"- /nekochan<br />" +
+			"- /nono<br />" +
+			"- /dafuck<br />" +
+			"- /buddies<br />" +
+			"- /hehe<br />" +
+			"- /tea<br />" +
+			"- /hehe<br />" +
+			"- /tea<br />" +
+			"- /cri<br />" +
+			"- /smile<br />" +
+			"</div>"
+		);
+	},
 };
