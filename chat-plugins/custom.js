@@ -60,7 +60,7 @@ exports.commands = {
 		if (!this.runBroadcast()) return;
 		return this.sendReply('|raw|<center><img src="https://i.imgur.com/HJ1Jz5e.gif" width="300" height="169"></center>');
 	},
-		'!hehe': true,
+	'!hehe': true,
 	hehe: function (target, room, user) {
 		if (!this.runBroadcast()) return;
 		return this.sendReply('|raw|<center><img src="https://i.imgur.com/JZHXoJu.gif" width="300" height="169"></center>');
