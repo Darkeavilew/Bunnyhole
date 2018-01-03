@@ -55,4 +55,29 @@ exports.commands = {
 		if (!this.runBroadcast()) return;
 		return this.sendReply('|raw|<center><img src="https://i.imgur.com/cVhyNfL.gif" width="300" height="169"></center>');
 	},
+	'!buddies': true,
+	buddies: function (target, room, user) {
+		if (!this.runBroadcast()) return;
+		return this.sendReply('|raw|<center><img src="https://i.imgur.com/HJ1Jz5e.gif" width="300" height="169"></center>');
+	},
+		'!hehe': true,
+	hehe: function (target, room, user) {
+		if (!this.runBroadcast()) return;
+		return this.sendReply('|raw|<center><img src="https://i.imgur.com/JZHXoJu.gif" width="300" height="169"></center>');
+	},
+	'!tea': true,
+	tea: function (target, room, user) {
+		if (!this.runBroadcast()) return;
+		return this.sendReply('|raw|<center><img src="https://i.imgur.com/e5hei6e.gif" width="300" height="169"></center>');
+	},
+	'!cri': true,
+	cri: function (target, room, user) {
+		if (!this.runBroadcast()) return;
+		return this.sendReply('|raw|<center><img src="https://i.imgur.com/foMOnVb.gif" width="300" height="169"></center>');
+	},
+	'!smile': true,
+	smile: function (target, room, user) {
+		if (!this.runBroadcast()) return;
+		return this.sendReply('|raw|<center><img src="https://i.imgur.com/TJruUuJ.gif" width="300" height="169"></center>');
+	},
 };
