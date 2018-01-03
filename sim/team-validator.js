@@ -933,11 +933,7 @@ class Validator {
 				if (template.baseSpecies === 'Necrozma') types = ['Psychic', 'Steel', 'Ghost'];
 				if (template.baseSpecies === 'Arceus' || template.baseSpecies === 'Silvally' || types.includes(move.type)) return false;
 			}
-<<<<<<< HEAD
-			if (format.id === 'gen7alphabetcup') {
-=======
 			if (format.id === 'gen7alphabetcup' && Object.keys(alreadyChecked).length < 2) {
->>>>>>> 99d682ca26fb184f10a788bf7c5406dad8e951af
 				const letter = template.id.slice(0, 1);
 				if (move.id.slice(0, 1) === letter && !move.isZ && !noLearn.includes(move.name)) return false;
 			}
