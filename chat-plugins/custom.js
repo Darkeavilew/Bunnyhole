@@ -82,7 +82,7 @@ exports.commands = {
 	},
 	'!giflist': true,
 	giflist: function (target, room, user) {
-		if (!this.canBroadcast('broadcast')) return;
+		if (!this.runBroadcast()) return;
 		this.sendReplyBox(
 			"<strong>List of Server Gifs</strong><br />" +
 			"- /hmm<br />" +
