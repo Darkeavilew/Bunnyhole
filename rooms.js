@@ -993,6 +993,12 @@ class BasicChatRoom extends BasicRoom {
 		this.staffMessage = '';
 		this.autojoin = false;
 		this.staffAutojoin = /** @type {string | boolean} */ (false);
+
+		/** @type {?true | RegExp} */
+		this.banwordRegex = null;
+		/** @type {string[]} */
+		this.banwords = [];
+
 		this.chatRoomData = (options.isPersonal ? null : options);
 		Object.assign(this, options);
 		if (this.auth) Object.setPrototypeOf(this.auth, null);
@@ -1010,12 +1016,6 @@ class BasicChatRoom extends BasicRoom {
 
 		/** @type {Map<string, ChatRoom>?} */
 		this.subRooms = null;
-
-		/** @type {?true | RegExp} */
-		this.banwordRegex = null;
-
-		/** @type {string[]} */
-		this.banwords = [];
 
 		/** @type {'chat' | 'battle'} */
 		this.type = 'chat';
