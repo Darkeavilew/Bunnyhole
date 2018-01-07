@@ -24,8 +24,28 @@ exports.commands = {
 					"<i>Please follow these rules to make the server a friendly and enjoyable place to be. Breaking any rules will result in punishment.</i><br />");
 	},
 
+	houserules: 'casinorules',
+	casinorules: function (target, room, user) {
+		if (!this.runBroadcast()) return;
+		this.sendReplyBox(
+			'<center><u><b><font size="5">Casino Games</font></b></u></center><br />' +
+			'<b><u>Dice</u></b><br />' +
+			'PvP Roll dice against someone else. Winner takes all.<br />' +
+			'Commands: /startdice # /joindice /enddice <br><button style="border-radius: 5px ; border: 2px inset black ; background-color: #0a6c03 ; border: 2px inset #000000 ; font-weight: bold ; color: #ffffff ; border-radius: 7px ; padding: 3px" name="send" value=/startdice">Start Dice (1)</button> | <button style="border-radius: 5px ; border: 2px inset black ; background-color: #0a6c03 ; border: 2px inset #000000 ; font-weight: bold ; color: #ffffff ; border-radius: 7px ; padding: 3px" name="send" value="/enddice">End Dice</button><br />' +
+			'<b><u>Slots</u></b><br />' +
+			'PvE Spin the slots at a chance to win various prizes. Cost: 3<br>Commands: /slots /slots start<br><button style="border-radius: 5px ; border: 2px inset black ; background-color: #0a6c03 ; border: 2px inset #000000 ; font-weight: bold ; color: #ffffff ; border-radius: 7px ; padding: 3px" name="send" value=/slots">Slots Info</button> | <button style="border-radius: 5px ; border: 2px inset black ; background-color: #0a6c03 ; border: 2px inset #000000 ; font-weight: bold ; color: #ffffff ; border-radius: 7px ; padding: 3px" name="send" value="/slots start">Spin Slots</button><br />' +
+			'<b><u>Blackjack</u></b><br />' +
+			'P, P, PvE Try to get closer to 21 than the dealer without going over. Hit to get an extra card or stay.<br>Commands: /blackjack join /blackjack hit /blackjack stay <br><button style="border-radius: 5px ; border: 2px inset black ; background-color: #0a6c03 ; border: 2px inset #000000 ; font-weight: bold ; color: #ffffff ; border-radius: 7px ; padding: 3px" name="send" value=/blackjack">Blackjack Info</button> | <button style="border-radius: 5px ; border: 2px inset black ; background-color: #0a6c03 ; border: 2px inset #000000 ; font-weight: bold ; color: #ffffff ; border-radius: 7px ; padding: 3px" name="send" value="/blackjack join">Join Blackjack</button><br />' +
+			'<b><u>Lotto</u></b><br />' +
+			'PvPvP Buy a ticket to join the lottery drawing. <br>Commands: /lotto /lotto status /lotto join<br><button style="border-radius: 5px ; border: 2px inset black ; background-color: #0a6c03 ; border: 2px inset #000000 ; font-weight: bold ; color: #ffffff ; border-radius: 7px ; padding: 3px" name="send" value=/lotto">Lotto Info</button> | <button style="border-radius: 5px ; border: 2px inset black ; background-color: #0a6c03 ; border: 2px inset #000000 ; font-weight: bold ; color: #ffffff ; border-radius: 7px ; padding: 3px" name="send" value="/lotto status">Lotto Status</button> | <button style="border-radius: 5px ; border: 2px inset black ; background-color: #0a6c03 ; border: 2px inset #000000 ; font-weight: bold ; color: #ffffff ; border-radius: 7px ; padding: 3px" name="send" value="/lotto Join">Buy Ticket</button><br />' +
+			'<center><u><b>Informational Buttons</b></u><br />' +
+			'<button name="send" value= "/roomshop" style="width: 100px ; border: 1px solid black ; -moz-border-radius: 2px ; border-radius: 3px ; font-size: 11px ; font-family: &quot;verdana&quot; , sans-serif ; padding: 3px 3px 3px 3px ; display: inline-block ; font-weight: bold ; color: #ffffff ; background-color: #CF2727 ; background-image: -o-linear-gradient(top , #9C1C1E, #CF2727) ; background-image: linear-gradient(to bottom , #9C1C1E, #CF2727)">Room Shop</button> | <button name="send" value= "/richestusers" style="width: 100px ; border: 1px solid black ; -moz-border-radius: 2px ; border-radius: 3px ; font-size: 11px ; font-family: &quot;verdana&quot; , sans-serif ; padding: 3px 3px 3px 3px ; display: inline-block ; font-weight: bold ; color: #ffffff ; background-color: #CF2727 ; background-image: -o-linear-gradient(top , #9C1C1E, #CF2727) ; background-image: linear-gradient(to bottom , #9C1C1E, #CF2727)">Richest Users</button>' +
+			'</center>'
+		);
+	},
+
 	'!discord': true,
-	    discord: function (target, room, user) {
+	discord: function (target, room, user) {
 		        if (!this.runBroadcast()) return;
 		        this.sendReplyBox('Join our server discord by clicking <a href="https://discord.gg/KeeKb2P">here</a>.');
 	},
