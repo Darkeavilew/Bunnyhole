@@ -160,8 +160,8 @@ class RPSLSGame {
 			//set but bucks
 			Db('currency').set(winner.userid, Db('currency').get(winner.userid, 0) + 6);
 			Economy.logTransaction(
-								loser.name + " has lost 3 pokedollars from rpsls to " + winner.name + "\n" +
-								winner.name + " now has 6 pokedollars from the rpsls game against " + loser.name + "\n"
+				loser.name + " has lost 3 pokedollars from rpsls to " + winner.name + "\n" +
+				winner.name + " now has 6 pokedollars from the rpsls game against " + loser.name + "\n"
 			);
 			winner.send("|pm|~RPSLS Host|" + winner.userid + "|/html You have also won 6 " + moneyPlural + ".");
 		} else {
