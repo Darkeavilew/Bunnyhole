@@ -105,7 +105,7 @@ class Dice {
 							Economy.readMoney(winner.userid, winnerMoney => {
 								Economy.readMoney(loser.userid, loserMoney => {
 									Economy.logDice(winner.userid + " has won a dice against " + loser.userid + ". They now have " + winnerMoney + (winnerMoney === 1 ? " pokedollar." : " pokedollars."));
-									Economy.logDice(loser.userid + " has lost a dice against " + winner.userid + ". T hey now have " + loserMoney + (loserMoney === 1 ? " pokedollar." : " pokedollars."));
+									Economy.logDice(loser.userid + " has lost a dice against " + winner.userid + ". They now have " + loserMoney + (loserMoney === 1 ? " pokedollar." : " pokedollars."));
 									this.end();
 								});
 							});
