@@ -91,7 +91,8 @@ exports.commands = {
 				let definitions = page['list'];
 				if (page['result_type'] === 'no_results') {
 					self.sendReplyBox("No results for <b>\"" + Chat.escapeHTML(target) + "\"</b>.");
-					return room.update();
+					if (room) room.update();
+					return;
 				} else {
 					if (!definitions[0]['word'] || !definitions[0]['definition']) {
 						self.sendReplyBox("No results for <b>\"" + Chat.escapeHTML(target) + "\"</b>.");
