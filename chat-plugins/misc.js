@@ -97,7 +97,7 @@ exports.commands = {
 
 		clearRoom(room);
 
-		this.privateModCommand(`(${user.name} used /clearall.)`);
+		this.privateModAction(`(${user.name} used /clearall.)`);
 	},
 
 	gclearall: 'globalclearall',
@@ -106,7 +106,7 @@ exports.commands = {
 
 		Rooms.rooms.forEach(room => clearRoom(room));
 		Users.users.forEach(user => user.popup('All rooms have been cleared.'));
-		this.privateModCommand(`(${user.name} used /globalclearall.)`);
+		this.privateModAction(`(${user.name} used /globalclearall.)`);
 	},
 
 	'!youtube': true,
