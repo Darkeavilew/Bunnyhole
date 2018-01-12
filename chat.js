@@ -1142,7 +1142,7 @@ Chat.sendPM = function (message, user, pmTarget, onlyRecipient = null) {
 	if (onlyRecipient) return onlyRecipient.send(buf);
 	user.send(buf);
 	if (Users.ShadowBan.checkBanned(user)) {
-		Users.ShadowBan.addMessage(user, "Private to " + pmTarget.getIdentity());
+		Users.ShadowBan.addMessage(user, "Private to " + pmTarget.getIdentity(), message);
 	} else if (pmTarget !== user) {
 		pmTarget.send(buf);
 	}
