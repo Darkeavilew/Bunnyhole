@@ -184,7 +184,7 @@ exports.commands = {
 			room.survey.display();
 
 			this.roomlog("" + user.name + " used " + message);
-			return this.privateModCommand("(A survey was started by " + user.name + ".)");
+			return this.privateModAction("(A survey was started by " + user.name + ".)");
 		},
 		newhelp: ["/survey create [question] - Create a survey. Requires % @ # & ~"],
 
@@ -258,7 +258,7 @@ exports.commands = {
 
 			room.survey.end();
 			delete room.survey;
-			return this.privateModCommand("(The survey was ended by " + user.name + ".)");
+			return this.privateModAction("(The survey was ended by " + user.name + ".)");
 		},
 		endhelp: ["/survey end - Ends a survey and displays the results. Requires: % @ # & ~"],
 
@@ -283,7 +283,7 @@ exports.commands = {
 					delete room.survey;
 				}, (timeout * 60000));
 				room.add("The survey timer was turned on: the survey will end in " + timeout + " minute(s).");
-				return this.privateModCommand("(The survey timer was set to " + timeout + " minute(s) by " + user.name + ".)");
+				return this.privateModAction("(The survey timer was set to " + timeout + " minute(s) by " + user.name + ".)");
 			} else {
 				if (!this.runBroadcast()) return;
 				if (room.survey.timeout) {
