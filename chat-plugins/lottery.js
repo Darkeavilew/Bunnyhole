@@ -145,7 +145,7 @@ exports.commands = {
 				BH.lottery = {};
 				saveLottery();
 			}
-			this.privateModCommand("(" + Chat.escapeHTML(user.name) + " has ended the game of lottery.)");
+			this.privateModAction("(" + Chat.escapeHTML(user.name) + " has ended the game of lottery.)");
 			break;
 
 		case 'setlimit':
