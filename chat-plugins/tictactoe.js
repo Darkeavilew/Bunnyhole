@@ -164,9 +164,9 @@ let cmds = {
 		this.sendReplyBox('<b>Tic-Tac-Toe commands</b><br>' +
 			'<li>/ttt c <em>User</em> - Sends a user a request to play Tic-Tac-Toe. This can also be used in PMs. (Requests automatically expire if they\'re not accepted or declined within 1.5 minutes.)<br>' +
 			'<li>/ttt accept <em>User</em>  - Accepts a Tic-Tac-Toe request from a user.<br>' +
-			'<li>/ttc decline <em>User</em> - Declines a Tic-Tac-Toe request from a user.<br>' +
-			'<li>/ttc see or /ttt show - Opens up the Tic-Tac-Toe board, in case you accidentally closed it out.<br>' +
-			'<li>/ttc end - Exits the current game of Tic-Tac-Toe. Cancels a play request if the game hasn\'t been started yet. (Note: The game automatically ends after a user stays inactive for more than 30 seconds.)<br>'
+			'<li>/ttt decline <em>User</em> - Declines a Tic-Tac-Toe request from a user.<br>' +
+			'<li>/ttt see or /ttt show - Opens up the Tic-Tac-Toe board, in case you accidentally closed it out.<br>' +
+			'<li>/ttt end - Exits the current game of Tic-Tac-Toe. Cancels a play request if the game hasn\'t been started yet. (Note: The game automatically ends after a user stays inactive for more than 30 seconds.)<br>'
 		);
 	},
 
@@ -247,7 +247,7 @@ let cmds = {
 		game.markBox(user, target);
 	},
 
-	update: 'see',
+	open: 'see',
 	view: 'see',
 	show: 'see',
 	see: function (target, room, user) {
