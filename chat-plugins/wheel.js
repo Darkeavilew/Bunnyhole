@@ -64,7 +64,7 @@ exports.commands = {
 				if (money < wheels[targets[0]][wheels[targets[0]].length - 1] * Number(targets[1])) return this.errorReply('You do not have enough bucks to create this game.');
 				if (!checkMoney(targets[1])) return this.errorReply('Multipliers ' + isMoney(targets[1]) + '.');
 				room.wheel = new Wheel(parseInt(targets[1]), user.userid, wheels[targets[0]], spinWheel(wheels[targets[0]]));
-				room.add(room.wheel.initDisplay(target)); //make look fancy later
+				room.add(room.wheel.initDisplay(target));
 				room.add('|raw|<b><font color="orange">' + BH.nameColor(user, true) + ' is hosting the wheel.</font></b>');
 				room.update();
 				Economy.writeMoney(user.userid, (room.wheel.wheel[room.wheel.wheel.length - 1] * room.wheel.wheelMulti) * -1);
@@ -119,7 +119,6 @@ exports.commands = {
 		help: function (target, room, user) {
 			if (!this.runBroadcast()) return;
 			this.sendReplyBox('<center>Wheels of Misfortune Commands</center><hr />' +
-			'More detailed WOM documentation <a href="http://pastebin.com/fKExymMZ">here</a><br />' +
 			'/wheel list - Shows the list of wheels with their names and numbers<br />' +
 			'/wheel create [wheelname], [multiplier] - Starts a wheel game Hint: don\'t put "Wheel of" in the wheelname<br />' +
 			'/wheel join/spin/start - Joins the wheel game. <br />' +
@@ -127,12 +126,12 @@ exports.commands = {
 		},
 		list: function (target, room, user) {
 			if (!this.runBroadcast()) return;
-			this.sendReplyBox('<center>Wheels of Misfortune :]</center><hr />' +
-			'Wheel of Scrubs: -5, -4, -3, -2, -2, -1, -1, -1, -1, -1, -1, +1, +1, +3, +3, +3, +3, +3, +3, +5 Made by Bandi for the scrub jd<br />' +
-			'Wheel of Wealth: -200, -100, -100, -50, -50, -25, -25, -25, +50, +200, +200, +300, +300, +400 Made by Emelio<br />' +
-			'Wheel of Arrogance -20, -10, -10, -5, -5, -1, -1, +2, +15, +20, +25 Made by Bandi<br />' +
-			'Wheel of Demise -10, -8, -4, -2, -2, -2, +1, +2, +5, +6, +9, +10 Made by IcyDemise<br />' +
-			'To make a wheel PM Bandi, :].');
+			this.sendReplyBox('<center>Wheels of Misfortune:</center><hr />' +
+			'Wheel of Scrubs: -5, -4, -3, -2, -2, -1, -1, -1, -1, -1, -1, +1, +1, +3, +3, +3, +3, +3, +3, +5<br />' +
+			'Wheel of Wealth: -200, -100, -100, -50, -50, -25, -25, -25, +50, +200, +200, +300, +300, +400<br />' +
+			'Wheel of Arrogance -20, -10, -10, -5, -5, -1, -1, +2, +15, +20, +25<br />' +
+			'Wheel of Demise -10, -8, -4, -2, -2, -2, +1, +2, +5, +6, +9, +10<br />' +
+			'To make a wheel talk to a global staff member.');
 		},
 	},
 };
