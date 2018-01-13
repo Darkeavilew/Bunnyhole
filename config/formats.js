@@ -806,11 +806,6 @@ exports.Formats = [
 	{
 		name: "[Gen 7] Random Perseverance",
 
-		effectType: 'Format',
-		challengeDefault: true,
-		rated: true,
-		challengeShow: true,
-		searchShow: true,
 		defaultLevel: 100,
 		onFaint: function (pokemon) {
 			let winner = '';
