@@ -155,7 +155,7 @@ BH.giveDailyReward = function (user) {
 	}
 	Economy.writeMoney(user.userid, reward);
 	user.send('|popup||wide||html| <center><u><b><font size="3">Bunnyhole Daily Bonus</font></b></u><br>You have been awarded ' + reward + ' Pokedollar(s).<br>' + showDailyRewardAni(reward) + '<br>Because you have connected to the server for the past ' + (reward === 1 ? 'Day' : reward + ' Days') + '.</center>');
-	Economy.logTransaction(Chat.escapeHTML(user.userid) + ' has recieved ' + reward + ' ' + (reward === 1 ? global.moneyName : global.moneyPlural) + ' from the daily reward.');
+	Economy.logTransaction(Chat.escapeHTML(user.userid) + ' has received ' + reward + ' ' + (reward === 1 ? global.moneyName : global.moneyPlural) + ' from the daily reward.');
 };
 
 // last two functions needed to make sure WL.regdate() fully works
