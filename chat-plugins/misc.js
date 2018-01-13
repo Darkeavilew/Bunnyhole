@@ -122,7 +122,7 @@ exports.commands = {
 
 		if (targetUser in room.users) targetUser.popup("|modal|" + user.name + " has muted you in " + room.id + " for 24 hours. " + target);
 		this.addModAction("" + targetUser.name + " was muted by " + user.name + " for 24 hours." + (target ? " (" + target + ")" : ""));
-		if (targetUser.autoconfirmed && targetUser.autoconfirmed !== targetUser.userid) this.privateModCommand("(" + targetUser.name + "'s ac account: " + targetUser.autoconfirmed + ")");
+		if (targetUser.autoconfirmed && targetUser.autoconfirmed !== targetUser.userid) this.privateModAction("(" + targetUser.name + "'s ac account: " + targetUser.autoconfirmed + ")");
 		this.add('|unlink|' + toId(this.inputUsername));
 
 		room.mute(targetUser, muteDuration, false);
@@ -170,7 +170,7 @@ exports.commands = {
 			let message = '|pm|' + pmName + '|' + room.users[i].getIdentity() + '| ' + target;
 			room.users[i].send(message);
 		}
-		this.privateModCommand('(' + Chat.escapeHTML(user.name) + ' mass room PM\'ed: ' + target + ')');
+		this.privateModAction('(' + Chat.escapeHTML(user.name) + ' mass room PM\'ed: ' + target + ')');
 	},
 
 	transferaccount: 'transferauthority',
@@ -675,7 +675,7 @@ exports.commands = {
 		let name = targetUser.name;
 		room.auth[targetUser.userid] = '#';
 		room.founder = targetUser.userid;
-		this.addModCommand(name + ' was appointed to Room Founder by ' + user.name + '.');
+		this.addModAction(name + ' was appointed to Room Founder by ' + user.name + '.');
 		room.onUpdateIdentity(targetUser);
 		room.chatRoomData.founder = room.founder;
 		Rooms.global.writeChatRoomData();
@@ -717,7 +717,7 @@ exports.commands = {
 		let name = targetUser.name;
 
 		room.auth[targetUser.userid] = '&';
-		this.addModCommand("" + name + " was appointed Room Leader by " + user.name + ".");
+		this.addModAction("" + name + " was appointed Room Leader by " + user.name + ".");
 		room.onUpdateIdentity(targetUser);
 		Rooms.global.writeChatRoomData();
 	},
@@ -803,7 +803,7 @@ exports.commands = {
 		}
 		try {
 			fs.unlinkSync(logPath + "modlog_" + room.id + ".txt");
-			this.addModCommand(user.name + " has destroyed the modlog for this room." + (target ? ('(' + target + ')') : ''));
+			this.addModAction(user.name + " has destroyed the modlog for this room." + (target ? ('(' + target + ')') : ''));
 		} catch (e) {
 			this.sendReply("The modlog for this room cannot be destroyed.");
 		}
@@ -845,7 +845,7 @@ exports.commands = {
 		}
 		if (!this.can('kick', targetUser, room)) return false;
 		let msg = "kicked from room " + room.id + " by " + user.name + (target ? " (" + target + ")" : "") + ".";
-		this.addModCommand("" + targetUser.name + " was " + msg);
+		this.addModAction("" + targetUser.name + " was " + msg);
 		targetUser.popup("You have been " + msg);
 		targetUser.leaveRoom(room);
 	},
@@ -858,7 +858,7 @@ exports.commands = {
 				room.users[i].leaveRoom(room.id);
 			}
 		}
-		this.privateModCommand('(' + Chat.escapeHTML(user.name) + 'kicked everyone from the room.');
+		this.privateModAction('(' + Chat.escapeHTML(user.name) + 'kicked everyone from the room.');
 	},
 
 	bonus: 'dailybonus',
