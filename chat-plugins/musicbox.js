@@ -78,6 +78,12 @@ exports.commands = {
 				);
 				break;
 
+			case 'give':
+				if (!BH.createMusicBox(user)) return this.errorReply("This user already has a musicbox you cannot give them another.");
+				Gold.createMusicBox(user);
+				this.sendReply("You have given " + user.name + " a musicbox.");
+				break;
+
 			case 'add':
 				if (!target || !target.trim()) return this.parse('/' + cmd + ' help');
 				validate(target).then(function (song) {
