@@ -805,8 +805,11 @@ exports.Formats = [
 	},
 	{
 		name: "[Gen 7] Random Perseverance",
+		mod: 'gen7',
+		team: 'random',
+		ruleset: ['Pokemon', 'Standard', 'Sleep Clause Mod', 'OHKO Clause', 'Species Clause', 'Team Preview'],
+		banlist: ['Uber', 'Soul Dew', 'Toxapex'],
 
-		defaultLevel: 100,
 		onFaint: function (pokemon) {
 			let winner = '';
 			if (pokemon.side.id === 'p1') {
@@ -816,11 +819,7 @@ exports.Formats = [
 			}
 			pokemon.battle.win(winner);
 		},
-		mod: 'gen7',
-		team: 'random',
-		ruleset: ['Pokemon', 'Standard', 'Sleep Clause Mod', 'OHKO Clause', 'Species Clause', 'Team Preview'],
-		banlist: ['Uber', 'Soul Dew', 'Toxapex'],
-	},
+	},	
 	{
 		name: "[Gen 7] BSS Factory",
 		desc: [
