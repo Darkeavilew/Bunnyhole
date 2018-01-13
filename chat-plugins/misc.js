@@ -78,18 +78,6 @@ function formatName(name) {
 	}
 }
 
-function getLinkId(msg) {
-	msg = msg.split(' ');
-	for (let i = 0; i < msg.length; i++) {
-		if ((/youtu\.be/i).test(msg[i])) {
-			let temp = msg[i].split('/');
-			return temp[temp.length - 1];
-		} else if ((/youtube\.com/i).test(msg[i])) {
-			return msg[i].substring(msg[i].indexOf("=") + 1).replace(".", "");
-		}
-	}
-}
-
 exports.commands = {
 	clearall: function (target, room, user) {
 		if (!this.can('declare')) return false;
@@ -107,48 +95,6 @@ exports.commands = {
 		Rooms.rooms.forEach(room => clearRoom(room));
 		Users.users.forEach(user => user.popup('All rooms have been cleared.'));
 		this.privateModAction(`(${user.name} used /globalclearall.)`);
-	},
-
-	'!youtube': true,
-	yt: 'youtube',
-	youtube: function (target, room, user) {
-		if (!this.runBroadcast()) return false;
-		if (!target) return false;
-		let params_spl = target.split(' '), g = ' ';
-		for (let i = 0; i < params_spl.length; i++) {
-			g += '+' + params_spl[i];
-		}
-		g = g.substr(1);
-
-		let reqOpts = {
-			hostname: 'www.googleapis.com',
-			method: 'GET',
-			path: '/youtube/v3/search?part=snippet&q=' + g + '&type=video&key=AIzaSyA4fgl5OuqrgLE1B7v8IWYr3rdpTGkTmns',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		};
-
-		let self = this;
-		let data = '';
-		let req = require('https').request(reqOpts, function (res) {
-			res.on('data', function (chunk) {
-				data += chunk;
-			});
-			res.on('end', function (chunk) {
-				let d = JSON.parse(data);
-				if (d.pageInfo.totalResults === 0) {
-					room.add('No videos found');
-					room.update();
-					return false;
-				}
-				let id = getLinkId(target);
-				const image = '<button style="background: none; border: none;"><img src="https://i.ytimg.com/vi/' + id + '/hqdefault.jpg?custom=true&w=168&h=94&stc=true&jpg444=true&jpgq=90&sp=68&sigh=tbq7TDTjFXD_0RtlFUMGz-k3JiQ" height="180" width="180"></button>';
-				self.sendReplyBox('<center>' + image + '<br><a href="https://www.youtube.com/watch?v=' + d.items[0].id.videoId + '"><b> ' + d.items[0].snippet.title + '</b></center>');
-				room.update();
-			});
-		});
-		req.end();
 	},
 
 	dm: 'daymute',
@@ -169,13 +115,13 @@ exports.commands = {
 		if ((room.isMuted(targetUser) && !canBeMutedFurther) || targetUser.locked || !targetUser.connected) {
 			let problem = " but was already " + (!targetUser.connected ? "offline" : targetUser.locked ? "locked" : "muted");
 			if (!target) {
-				return this.privateModCommand("(" + targetUser.name + " would be muted by " + user.name + problem + ".)");
+				return this.privateModAction("(" + targetUser.name + " would be muted by " + user.name + problem + ".)");
 			}
-			return this.addModCommand("" + targetUser.name + " would be muted by " + user.name + problem + "." + (target ? " (" + target + ")" : ""));
+			return this.addModAction("" + targetUser.name + " would be muted by " + user.name + problem + "." + (target ? " (" + target + ")" : ""));
 		}
 
 		if (targetUser in room.users) targetUser.popup("|modal|" + user.name + " has muted you in " + room.id + " for 24 hours. " + target);
-		this.addModCommand("" + targetUser.name + " was muted by " + user.name + " for 24 hours." + (target ? " (" + target + ")" : ""));
+		this.addModAction("" + targetUser.name + " was muted by " + user.name + " for 24 hours." + (target ? " (" + target + ")" : ""));
 		if (targetUser.autoconfirmed && targetUser.autoconfirmed !== targetUser.userid) this.privateModCommand("(" + targetUser.name + "'s ac account: " + targetUser.autoconfirmed + ")");
 		this.add('|unlink|' + toId(this.inputUsername));
 
@@ -275,7 +221,7 @@ exports.commands = {
 			if (user1ID === user2ID) return this.errorReply(`You provided the same accounts for the alt change.`);
 			let transferSuccess = transferAuth(user1ID, user2ID, user.group);
 			if (transferSuccess.length >= 1) {
-				this.addModCommand(`${user1} has had their account (${transferSuccess.join(', ')}) transfered onto new name: ${user2} - by ${user.name}.`);
+				this.addModAction(`${user1} has had their account (${transferSuccess.join(', ')}) transfered onto new name: ${user2} - by ${user.name}.`);
 				this.sendReply(`Note: avatars do not transfer automatically with this command.`);
 			} else {
 				return this.errorReply(`User '${user1}' has no global or room authority, or they have higher global authority than you.`);
