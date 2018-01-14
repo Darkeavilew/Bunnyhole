@@ -128,7 +128,7 @@ BH.randomString = function (length) {
 };
 
 BH.reloadCSS = function () {
-	const cssPath = 'wavelength'; // This should be the server id if Config.serverid doesn't exist. Ex: 'serverid'
+	const cssPath = 'bunnyhole'; // This should be the server id if Config.serverid doesn't exist. Ex: 'serverid'
 	let req = https.get('https://play.pokemonshowdown.com/customcss.php?server=' + (Config.serverid || cssPath), () => {});
 	req.end();
 };
