@@ -70,6 +70,7 @@ exports.commands = {
 				if (!this.runBroadcast()) return;
 				this.sendReplyBox('<b>Music Box Commands:</b><br><br><ul>' +
 						'<li>/' + cmd + ' <em>User</em> - View\'s a user\'s music box.<br>' +
+						'<li>/' + cmd + ' give <em>User</em> - Gives user a musicbox they can use on the server.<br>' +
 						'<li>/' + cmd + ' add <em>Youtube link</em> - Adds a song into your music box.<br>' +
 						'<li>/' + cmd + ' remove <em>Youtube link/Song title/Song list number</em> - Removes a song from your music box.<br>' +
 						'<li>/' + cmd + ' removeall - Removes all songs from your music box.<br>' +
@@ -79,6 +80,7 @@ exports.commands = {
 				break;
 
 			case 'give':
+				if (!this.can('ban')) return false;
 				if (!BH.createMusicBox(user)) return this.errorReply("This user already has a musicbox you cannot give them another.");
 				BH.createMusicBox(user);
 				this.sendReply("You have given " + user.name + " a musicbox.");
