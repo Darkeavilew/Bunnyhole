@@ -53,7 +53,7 @@ function validate(link) {
 exports.commands = {
 	mb: 'musicbox',
 	musicbox: function (target, room, user, connection, cmd) {
-		let cmds = {'help':1, 'add':1, 'remove':1, 'css':1, 'removeall':1, 'delete':1};
+		let cmds = {'help': 1, 'give': 1, 'add': 1, 'remove': 1, 'css': 1, 'removeall': 1, 'delete': 1};
 		if (target && toId(target.split(' ')[0]) in cmds) {
 			if (typeof musicboxes[user.userid] !== 'object') return this.errorReply("You do not own a music box. Buy one from the shop.");
 			let cmdIndex = target.indexOf(' '), command;
@@ -80,7 +80,7 @@ exports.commands = {
 
 			case 'give':
 				if (!BH.createMusicBox(user)) return this.errorReply("This user already has a musicbox you cannot give them another.");
-				Gold.createMusicBox(user);
+				BH.createMusicBox(user);
 				this.sendReply("You have given " + user.name + " a musicbox.");
 				break;
 
@@ -134,7 +134,7 @@ exports.commands = {
 					if (toId(box2.css)) return this.sendReplyBox("Your music box css: <code>" + box2.css + "</code>");
 					return this.sendReplyBox("You haven't set button css for your music box yet.");
 				}
-				if (toId(target) in {'remove':1, 'delete':1, 'none':1, 'hidden':1}) {
+				if (toId(target) in {'remove': 1, 'delete': 1, 'none': 1, 'hidden': 1}) {
 					delete box2.css;
 				} else {
 					box2.css = Chat.escapeHTML(target.replace(/^["']/, '').replace(/["']$/, ''));
