@@ -21,7 +21,6 @@ exports.commands = {
 			sprite = sprite.substr(0, sprite.length - 1);
 			url = 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/';
 		}
-		let main = target[0].split(',');
 		if (Dex.data.Pokedex[toId(sprite)]) {
 			sprite = Dex.data.Pokedex[toId(sprite)].species.toLowerCase();
 		} else {
@@ -67,7 +66,6 @@ exports.commands = {
 			sprite = sprite.substr(0, sprite.length - 1);
 			url = 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/';
 		}
-		let main = target[0].split(',');
 		if (Dex.data.Pokedex[toId(sprite)]) {
 			sprite = Dex.data.Pokedex[toId(sprite)].species.toLowerCase();
 		} else {
@@ -113,7 +111,6 @@ exports.commands = {
 			sprite = sprite.substr(0, sprite.length - 1);
 			url = 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/';
 		}
-		let main = target[0].split(',');
 		if (Dex.data.Pokedex[toId(sprite)]) {
 			sprite = Dex.data.Pokedex[toId(sprite)].species.toLowerCase();
 		} else {
@@ -159,7 +156,6 @@ exports.commands = {
 			sprite = sprite.substr(0, sprite.length - 1);
 			url = 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/';
 		}
-		let main = target[0].split(',');
 		if (Dex.data.Pokedex[toId(sprite)]) {
 			sprite = Dex.data.Pokedex[toId(sprite)].species.toLowerCase();
 		} else {
@@ -173,7 +169,7 @@ exports.commands = {
 					}
 				}
 			} else {
-				return this.sendReply("There isn\'t any Pokémon called '" + sprite + "'...");
+				return this.sendReply("There isn't any Pokémon called '" + sprite + "'...");
 			}
 		}
 		let self = this;
@@ -205,7 +201,6 @@ exports.commands = {
 			sprite = sprite.substr(0, sprite.length - 1);
 			url = 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/';
 		}
-		let main = target[0].split(',');
 		if (Dex.data.Pokedex[toId(sprite)]) {
 			sprite = Dex.data.Pokedex[toId(sprite)].species.toLowerCase();
 		} else {
@@ -251,7 +246,6 @@ exports.commands = {
 			sprite = sprite.substr(0, sprite.length - 1);
 			url = 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/';
 		}
-		let main = target[0].split(',');
 		if (Dex.data.Pokedex[toId(sprite)]) {
 			sprite = Dex.data.Pokedex[toId(sprite)].species.toLowerCase();
 		} else {
@@ -293,7 +287,6 @@ exports.commands = {
 			sprite = sprite.substr(0, sprite.length - 1);
 			url = 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/';
 		}
-		let main = target[0].split(',');
 		if (Dex.data.Pokedex[toId(sprite)]) {
 			sprite = Dex.data.Pokedex[toId(sprite)].species.toLowerCase();
 		} else {
@@ -337,7 +330,6 @@ exports.commands = {
 			sprite = sprite.substr(0, sprite.length - 1);
 			url = 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/';
 		}
-		let main = target[0].split(',');
 		if (Dex.data.Pokedex[toId(sprite)]) {
 			sprite = Dex.data.Pokedex[toId(sprite)].species.toLowerCase();
 		} else {
@@ -381,7 +373,6 @@ exports.commands = {
 			sprite = sprite.substr(0, sprite.length - 1);
 			url = 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/';
 		}
-		let main = target[0].split(',');
 		if (Dex.data.Pokedex[toId(sprite)]) {
 			sprite = Dex.data.Pokedex[toId(sprite)].species.toLowerCase();
 		} else {
@@ -427,7 +418,6 @@ exports.commands = {
 			sprite = sprite.substr(0, sprite.length - 1);
 			url = 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/';
 		}
-		let main = target[0].split(',');
 		if (Dex.data.Pokedex[toId(sprite)]) {
 			sprite = Dex.data.Pokedex[toId(sprite)].species.toLowerCase();
 		} else {
@@ -472,7 +462,6 @@ exports.commands = {
 			sprite = sprite.substr(0, sprite.length - 1);
 			url = 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/';
 		}
-		let main = target[0].split(',');
 		if (Dex.data.Pokedex[toId(sprite)]) {
 			sprite = Dex.data.Pokedex[toId(sprite)].species.toLowerCase();
 		} else {
@@ -518,7 +507,6 @@ exports.commands = {
 			sprite = sprite.substr(0, sprite.length - 1);
 			url = 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/';
 		}
-		let main = target[0].split(',');
 		if (Dex.data.Pokedex[toId(sprite)]) {
 			sprite = Dex.data.Pokedex[toId(sprite)].species.toLowerCase();
 		} else {
@@ -562,7 +550,6 @@ exports.commands = {
 			sprite = sprite.substr(0, sprite.length - 1);
 			url = 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/';
 		}
-		let main = target[0].split(',');
 		if (Dex.data.Pokedex[toId(sprite)]) {
 			sprite = Dex.data.Pokedex[toId(sprite)].species.toLowerCase();
 		} else {
@@ -604,7 +591,6 @@ exports.commands = {
 			sprite = sprite.substr(0, sprite.length - 1);
 			url = 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/';
 		}
-		let main = target[0].split(',');
 		if (Dex.data.Pokedex[toId(sprite)]) {
 			sprite = Dex.data.Pokedex[toId(sprite)].species.toLowerCase();
 		} else {
@@ -631,7 +617,7 @@ exports.commands = {
 		});
 	},
 	'!model': true,
-    model: function (target, room, user, connection, cmd) {
+	model: function (target, room, user, connection, cmd) {
 		if (!this.runBroadcast()) return;
 		if (!toId(target)) return this.sendReply('/model [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
@@ -648,7 +634,6 @@ exports.commands = {
 			sprite = sprite.substr(0, sprite.length - 1);
 			url = 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/';
 		}
-		let main = target[0].split(',');
 		if (Dex.data.Pokedex[toId(sprite)]) {
 			sprite = Dex.data.Pokedex[toId(sprite)].species.toLowerCase();
 		} else {
