@@ -118,7 +118,7 @@ exports.commands = {
 		},
 		help: function (target, room, user) {
 			if (!this.runBroadcast()) return;
-			this.sendReplyBox('<center>Wheels of Misfortune Commands</center><hr />' +
+			this.sendReplyBox('<center><b>Wheels of Misfortune Commands</b></center><hr />' +
 			'/wheel list - Shows the list of wheels with their names and numbers<br />' +
 			'/wheel create [wheelname], [multiplier] - Starts a wheel game Hint: don\'t put "Wheel of" in the wheelname<br />' +
 			'/wheel join/spin/start - Joins the wheel game. <br />' +
@@ -126,11 +126,11 @@ exports.commands = {
 		},
 		list: function (target, room, user) {
 			if (!this.runBroadcast()) return;
-			this.sendReplyBox('<center>Wheels of Misfortune:</center><hr />' +
+			this.sendReplyBox('<center><b>Wheels of Misfortune:</b></center><hr />' +
 			'Wheel of Scrubs: -5, -4, -3, -2, -2, -1, -1, -1, -1, -1, -1, +1, +1, +3, +3, +3, +3, +3, +3, +5<br />' +
 			'Wheel of Wealth: -200, -100, -100, -50, -50, -25, -25, -25, +50, +200, +200, +300, +300, +400<br />' +
-			'Wheel of Arrogance -20, -10, -10, -5, -5, -1, -1, +2, +15, +20, +25<br />' +
-			'Wheel of Demise -10, -8, -4, -2, -2, -2, +1, +2, +5, +6, +9, +10<br />' +
+			'Wheel of Arrogance: -20, -10, -10, -5, -5, -1, -1, +2, +15, +20, +25<br />' +
+			'Wheel of Demise: -10, -8, -4, -2, -2, -2, +1, +2, +5, +6, +9, +10<br />' +
 			'To make a wheel talk to a global staff member.');
 		},
 	},
