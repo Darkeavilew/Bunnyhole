@@ -261,6 +261,7 @@ exports.commands = {
 				'Slot - we mean what slot you want the pokemon to be. valid entries for this are: one, two, three, four, five, six.<br />' +
 				'Chosing the right slot is crucial because if you chose a slot that already has a pokemon, it will overwrite that data and replace it. This can be used to replace / reorder what pokemon go where.<br />' +
 				'If the Pokemon is in the first 99 Pokemon, do 0(number), and for Megas do (dex number)-m, -mx for mega , -my for mega Y.<br>' +
+				'If the Pokemon is an alolan form use (dex number)-a. Also for therian use (dex number)-s.<br>' +
 				'For example: Mega Venusaur would be 003-m<br />' +
 				'<code>give</code>: Global staff can give user\'s ability to set their own team.<br />' +
 				'<code>take</code>: Global staff can take user\'s ability to set their own team.<br />' +
