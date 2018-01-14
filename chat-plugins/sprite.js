@@ -11,10 +11,19 @@ exports.commands = {
 		let type = toId(target[1]);
 		let sprite = target[0].trim();
 		let url;
-		if (type === 'shiny') url = 'http://play.pokemonshowdown.com/sprites/xyani-shiny/';
-		else if (type === 'back') url = 'http://play.pokemonshowdown.com/sprites/xyani-back/';
-		else if (type === 'backshiny' || type === 'shinyback') url = 'http://play.pokemonshowdown.com/sprites/xyani-back-shiny/';
-		else url = 'http://play.pokemonshowdown.com/sprites/xyani/';
+		if (type === 'shiny') {
+			url = 'http://play.pokemonshowdown.com/sprites/xyani-shiny/';
+		} else {
+			if (type === 'back') {
+				url = 'http://play.pokemonshowdown.com/sprites/xyani-back/';
+			} else {
+				if (type === 'backshiny' || type === 'shinyback') {
+					url = 'http://play.pokemonshowdown.com/sprites/xyani-back-shiny/';
+				} else {
+					url = 'http://play.pokemonshowdown.com/sprites/xyani/';
+				}
+			}
+		}
 
 		if (Number(sprite[sprite.length - 1]) && !toId(sprite[sprite.length - 2])) {
 			alt = '-' + sprite[sprite.length - 1];
@@ -56,10 +65,19 @@ exports.commands = {
 		let type = toId(target[1]);
 		let sprite = target[0].trim();
 		let url;
-		if (type === 'bwshiny') url = 'http://play.pokemonshowdown.com/sprites/bwani-shiny/';
-		else if (type === 'back') url = 'http://play.pokemonshowdown.com/sprites/bwani-back/';
-		else if (type === 'shinyback') url = 'http://play.pokemonshowdown.com/sprites/bwani-back-shiny/';
-		else url = 'http://play.pokemonshowdown.com/sprites/bwani/';
+		if (type === 'bwshiny') {
+			url = 'http://play.pokemonshowdown.com/sprites/bwani-shiny/';
+		} else {
+			if (type === 'back') {
+				url = 'http://play.pokemonshowdown.com/sprites/bwani-back/';
+			} else {
+				if (type === 'shinyback') {
+					url = 'http://play.pokemonshowdown.com/sprites/bwani-back-shiny/';
+				} else {
+					url = 'http://play.pokemonshowdown.com/sprites/bwani/';
+				}
+			}
+		}
 
 		if (Number(sprite[sprite.length - 1]) && !toId(sprite[sprite.length - 2])) {
 			alt = '-' + sprite[sprite.length - 1];
@@ -101,10 +119,19 @@ exports.commands = {
 		let type = toId(target[1]);
 		let sprite = target[0].trim();
 		let url;
-		if (type === 'shiny') url = 'http://play.pokemonshowdown.com/sprites/dpp-shiny/';
-		else if (type === 'back') url = 'http://play.pokemonshowdown.com/sprites/dpp-back/';
-		else if (type === 'shinyback') url = 'http://play.pokemonshowdown.com/sprites/dpp-back-shiny/';
-		else url = 'http://play.pokemonshowdown.com/sprites/dpp/';
+		if (type === 'shiny') {
+			url = 'http://play.pokemonshowdown.com/sprites/dpp-shiny/';
+		} else {
+			if (type === 'back') {
+				url = 'http://play.pokemonshowdown.com/sprites/dpp-back/';
+			} else {
+				if (type === 'shinyback') {
+					url = 'http://play.pokemonshowdown.com/sprites/dpp-back-shiny/';
+				} else {
+					url = 'http://play.pokemonshowdown.com/sprites/dpp/';
+				}
+			}
+		}
 
 		if (Number(sprite[sprite.length - 1]) && !toId(sprite[sprite.length - 2])) {
 			alt = '-' + sprite[sprite.length - 1];
@@ -146,10 +173,19 @@ exports.commands = {
 		let type = toId(target[1]);
 		let sprite = target[0].trim();
 		let url;
-		if (type === 'shiny') url = 'http://play.pokemonshowdown.com/sprites/rse-shiny/';
-		else if (type === 'back') url = 'http://play.pokemonshowdown.com/sprites/rse-back/';
-		else if (type === 'shinyback') url = 'http://play.pokemonshowdown.com/sprites/rse-back-shiny/';
-		else url = 'http://play.pokemonshowdown.com/sprites/rse/';
+		if (type === 'shiny') {
+			url = 'http://play.pokemonshowdown.com/sprites/rse-shiny/';
+		} else {
+			if (type === 'back') {
+				url = 'http://play.pokemonshowdown.com/sprites/rse-back/';
+			} else {
+				if (type === 'shinyback') {
+					url = 'http://play.pokemonshowdown.com/sprites/rse-back-shiny/';
+				} else {
+					url = 'http://play.pokemonshowdown.com/sprites/rse/';
+				}
+			}
+		}
 
 		if (Number(sprite[sprite.length - 1]) && !toId(sprite[sprite.length - 2])) {
 			alt = '-' + sprite[sprite.length - 1];
@@ -191,10 +227,19 @@ exports.commands = {
 		let type = toId(target[1]);
 		let sprite = target[0].trim();
 		let url;
-		if (type === 'shiny') url = 'http://play.pokemonshowdown.com/sprites/gsc-shiny/';
-		else if (type === 'back') url = 'http://play.pokemonshowdown.com/sprites/gsc-back/';
-		else if (type === 'shinyback') url = 'http://play.pokemonshowdown.com/sprites/gsc-back-shiny/';
-		else url = 'http://play.pokemonshowdown.com/sprites/gsc/';
+		if (type === 'shiny') {
+			url = 'http://play.pokemonshowdown.com/sprites/gsc-shiny/';
+		} else {
+			if (type === 'back') {
+				url = 'http://play.pokemonshowdown.com/sprites/gsc-back/';
+			} else {
+				if (type === 'shinyback') {
+					url = 'http://play.pokemonshowdown.com/sprites/gsc-back-shiny/';
+				} else {
+					url = 'http://play.pokemonshowdown.com/sprites/gsc/';
+				}
+			}
+		}
 
 		if (Number(sprite[sprite.length - 1]) && !toId(sprite[sprite.length - 2])) {
 			alt = '-' + sprite[sprite.length - 1];
