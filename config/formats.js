@@ -804,6 +804,28 @@ exports.Formats = [
 		ruleset: ['Pokemon', 'Sleep Clause Mod', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Mega Rayquaza Clause'],
 	},
 	{
+		name: "[Gen 7] Random Perseverance",
+
+		mod: 'gen7',
+		team: 'random',
+		ruleset: ['Pokemon', 'Standard', 'Sleep Clause Mod', 'OHKO Clause', 'Species Clause', 'Team Preview'],
+		effectType: 'Format',
+		challengeDefault: true,
+		rated: true,
+		challengeShow: true,
+		searchShow: true,
+		defaultLevel: 100,
+		onFaint: function (pokemon) {
+			let winner = '';
+			if (pokemon.side.id === 'p1') {
+				winner = 'p2';
+			} else {
+				winner = 'p1';
+			}
+			pokemon.battle.win(winner);
+		},
+	},
+	{
 		name: "[Gen 7] BSS Factory",
 		desc: [
 			"Randomised 3v3 Singles featuring Pok&eacute;mon and movesets popular in Battle Spot Singles.",
