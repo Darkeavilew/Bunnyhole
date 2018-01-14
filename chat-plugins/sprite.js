@@ -1,9 +1,9 @@
 'use strict';
 
 exports.commands = {
-'!sprite': true,
-spr: 'sprite',
-    sprite: function (target, room, user, connection, cmd) {
+	'!sprite': true,
+	spr: 'sprite',
+	sprite: function (target, room, user, connection, cmd) {
 		if (!this.runBroadcast()) return;
 		if (!toId(target)) return this.sendReply('/sprite [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
@@ -35,21 +35,21 @@ spr: 'sprite',
 					}
 				}
 			} else {
-				return this.sendReply("There isn\'t any Pokémon called '" + sprite + "'...");
+				return this.sendReply("There isn't any Pokémon called '" + sprite + "'...");
 			}
 		}
 		let self = this;
 		require('request').get(url + sprite + alt + '.gif').on('error', function () {
 			self.sendReply('The sprite for ' + sprite + alt + ' is unavailable.');
 		}).on('response', function (response) {
-			if (response.statusCode == 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
+			if (response.statusCode === 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
 			self.sendReply('|html|<img src = "' + url + sprite + alt + '.gif">');
 			room.update();
 		});
 	},
-    '!bwsprite': true,
-    bwspr: 'bwsprite',
-    bwsprite: function (target, room, user, connection, cmd) {
+	'!bwsprite': true,
+	bwspr: 'bwsprite',
+	bwsprite: function (target, room, user, connection, cmd) {
 		if (!this.runBroadcast()) return;
 		if (!toId(target)) return this.sendReply('/bwsprite [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
@@ -81,21 +81,21 @@ spr: 'sprite',
 					}
 				}
 			} else {
-				return this.sendReply("There isn\'t any Pokémon called '" + sprite + "'...");
+				return this.sendReply("There isn't any Pokémon called '" + sprite + "'...");
 			}
 		}
 		let self = this;
 		require('request').get(url + sprite + alt + '.gif').on('error', function () {
 			self.sendReply('The sprite for ' + sprite + alt + ' is unavailable.');
 		}).on('response', function (response) {
-			if (response.statusCode == 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
+			if (response.statusCode === 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
 			self.sendReply('|html|<img src = "' + url + sprite + alt + '.gif">');
 			room.update();
 		});
 	},
 	'!dppsprite': true,
 	dppspr: 'dppsprite',
-        dppsprite: function (target, room, user, connection, cmd) {
+	dppsprite: function (target, room, user, connection, cmd) {
 		if (!this.runBroadcast()) return;
 		if (!toId(target)) return this.sendReply('/dppsprite [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
@@ -127,21 +127,21 @@ spr: 'sprite',
 					}
 				}
 			} else {
-				return this.sendReply("There isn\'t any Pokémon called '" + sprite + "'...");
+				return this.sendReply("There isn't any Pokémon called '" + sprite + "'...");
 			}
 		}
 		let self = this;
 		require('request').get(url + sprite + alt + '.png').on('error', function () {
 			self.sendReply('The sprite for ' + sprite + alt + ' is unavailable.');
 		}).on('response', function (response) {
-			if (response.statusCode == 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
+			if (response.statusCode === 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
 			self.sendReply('|html|<img src = "' + url + sprite + alt + '.png">');
 			room.update();
 		});
 	},
 	'!rsesprite': true,
 	rsespr: 'rsesprite',
-        rsesprite: function (target, room, user, connection, cmd) {
+	rsesprite: function (target, room, user, connection, cmd) {
 		if (!this.runBroadcast()) return;
 		if (!toId(target)) return this.sendReply('/rsesprite [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
@@ -180,14 +180,14 @@ spr: 'sprite',
 		require('request').get(url + sprite + alt + '.png').on('error', function () {
 			self.sendReply('The sprite for ' + sprite + alt + ' is unavailable.');
 		}).on('response', function (response) {
-			if (response.statusCode == 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
+			if (response.statusCode === 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
 			self.sendReply('|html|<img src = "' + url + sprite + alt + '.png">');
 			room.update();
 		});
 	},
 	'!gscsprite': true,
 	gscspr: 'gscsprite',
-        gscsprite: function (target, room, user, connection, cmd) {
+	gscsprite: function (target, room, user, connection, cmd) {
 		if (!this.runBroadcast()) return;
 		if (!toId(target)) return this.sendReply('/gscsprite [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
@@ -219,21 +219,21 @@ spr: 'sprite',
 					}
 				}
 			} else {
-				return this.sendReply("There isn\'t any Pokémon called '" + sprite + "'...");
+				return this.sendReply("There isn't any Pokémon called '" + sprite + "'...");
 			}
 		}
 		let self = this;
 		require('request').get(url + sprite + alt + '.png').on('error', function () {
 			self.sendReply('The sprite for ' + sprite + alt + ' is unavailable.');
 		}).on('response', function (response) {
-			if (response.statusCode == 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
+			if (response.statusCode === 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
 			self.sendReply('|html|<img src = "' + url + sprite + alt + '.png">');
 			room.update();
 		});
 	},
 	'!rbysprite': true,
 	rbyspr: 'rbysprite',
-        rbysprite: function (target, room, user, connection, cmd) {
+	rbysprite: function (target, room, user, connection, cmd) {
 		if (!this.runBroadcast()) return;
 		if (!toId(target)) return this.sendReply('/rbysprite [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
@@ -265,21 +265,21 @@ spr: 'sprite',
 					}
 				}
 			} else {
-				return this.sendReply("There isn\'t any Pokémon called '" + sprite + "'...");
+				return this.sendReply("There isn't any Pokémon called '" + sprite + "'...");
 			}
 		}
 		let self = this;
 		require('request').get(url + sprite + alt + '.png').on('error', function () {
 			self.sendReply('The sprite for ' + sprite + alt + ' is unavailable.');
 		}).on('response', function (response) {
-			if (response.statusCode == 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
+			if (response.statusCode === 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
 			self.sendReply('|html|<img src = "' + url + sprite + alt + '.png">');
 			room.update();
 		});
 	},
 	'!greensprite': true,
 	greenspr: 'greensprite',
-        greensprite: function (target, room, user, connection, cmd) {
+	greensprite: function (target, room, user, connection, cmd) {
 		if (!this.runBroadcast()) return;
 		if (!toId(target)) return this.sendReply('/greensprite [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
@@ -307,21 +307,21 @@ spr: 'sprite',
 					}
 				}
 			} else {
-				return this.sendReply("There isn\'t any Pokémon called '" + sprite + "'...");
+				return this.sendReply("There isn't any Pokémon called '" + sprite + "'...");
 			}
 		}
 		let self = this;
 		require('request').get(url + sprite + alt + '.png').on('error', function () {
 			self.sendReply('The sprite for ' + sprite + alt + ' is unavailable.');
 		}).on('response', function (response) {
-			if (response.statusCode == 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
+			if (response.statusCode === 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
 			self.sendReply('|html|<img src = "' + url + sprite + alt + '.png">');
 			room.update();
 		});
 	},
 	'!rbsprite': true,
 	rbspr: 'rbsprite',
-        rbsprite: function (target, room, user, connection, cmd) {
+	rbsprite: function (target, room, user, connection, cmd) {
 		if (!this.runBroadcast()) return;
 		if (!toId(target)) return this.sendReply('/rbsprite [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
@@ -351,21 +351,21 @@ spr: 'sprite',
 					}
 				}
 			} else {
-				return this.sendReply("There isn\'t any Pokémon called '" + sprite + "'...");
+				return this.sendReply("There isn't any Pokémon called '" + sprite + "'...");
 			}
 		}
 		let self = this;
 		require('request').get(url + sprite + alt + '.png').on('error', function () {
 			self.sendReply('The sprite for ' + sprite + alt + ' is unavailable.');
 		}).on('response', function (response) {
-			if (response.statusCode == 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
+			if (response.statusCode === 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
 			self.sendReply('|html|<img src = "' + url + sprite + alt + '.png">');
 			room.update();
 		});
 	},
 	'!crystalsprite': true,
 	crystalspr: 'crystalsprite',
-        crystalsprite: function (target, room, user, connection, cmd) {
+	crystalsprite: function (target, room, user, connection, cmd) {
 		if (!this.runBroadcast()) return;
 		if (!toId(target)) return this.sendReply('/crystalsprite [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
@@ -395,21 +395,21 @@ spr: 'sprite',
 					}
 				}
 			} else {
-				return this.sendReply("There isn\'t any Pokémon called '" + sprite + "'...");
+				return this.sendReply("There isn't any Pokémon called '" + sprite + "'...");
 			}
 		}
 		let self = this;
 		require('request').get(url + sprite + alt + '.gif').on('error', function () {
 			self.sendReply('The sprite for ' + sprite + alt + ' is unavailable.');
 		}).on('response', function (response) {
-			if (response.statusCode == 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
+			if (response.statusCode === 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
 			self.sendReply('|html|<img src = "' + url + sprite + alt + '.gif">');
 			room.update();
 		});
 	},
 	'!rflgsprite': true,
 	rflgspr: 'rflgsprite',
-        rflgsprite: function (target, room, user, connection, cmd) {
+	rflgsprite: function (target, room, user, connection, cmd) {
 		if (!this.runBroadcast()) return;
 		if (!toId(target)) return this.sendReply('/rsesprite [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
@@ -441,21 +441,21 @@ spr: 'sprite',
 					}
 				}
 			} else {
-				return this.sendReply("There isn\'t any Pokémon called '" + sprite + "'...");
+				return this.sendReply("There isn't any Pokémon called '" + sprite + "'...");
 			}
 		}
 		let self = this;
 		require('request').get(url + sprite + alt + '.png').on('error', function () {
 			self.sendReply('The sprite for ' + sprite + alt + ' is unavailable.');
 		}).on('response', function (response) {
-			if (response.statusCode == 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
+			if (response.statusCode === 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
 			self.sendReply('|html|<img src = "' + url + sprite + alt + '.png">');
 			room.update();
 		});
 	},
 	'!emeraldsprite': true,
 	emeraldspr: 'emeraldsprite',
-        emeraldsprite: function (target, room, user, connection, cmd) {
+	emeraldsprite: function (target, room, user, connection, cmd) {
 		if (!this.runBroadcast()) return;
 		if (!toId(target)) return this.sendReply('/rsesprite [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
@@ -486,21 +486,21 @@ spr: 'sprite',
 					}
 				}
 			} else {
-				return this.sendReply("There isn\'t any Pokémon called '" + sprite + "'...");
+				return this.sendReply("There isn't any Pokémon called '" + sprite + "'...");
 			}
 		}
 		let self = this;
 		require('request').get(url + sprite + alt + '.gif').on('error', function () {
 			self.sendReply('The sprite for ' + sprite + alt + ' is unavailable.');
 		}).on('response', function (response) {
-			if (response.statusCode == 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
+			if (response.statusCode === 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
 			self.sendReply('|html|<img src = "' + url + sprite + alt + '.gif">');
 			room.update();
 		});
 	},
 	'!afdsprite': true,
 	afdspr: 'afdsprite',
-        afdsprite: function (target, room, user, connection, cmd) {
+	afdsprite: function (target, room, user, connection, cmd) {
 		if (!this.runBroadcast()) return;
 		if (!toId(target)) return this.sendReply('/afdsprite [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
@@ -532,21 +532,21 @@ spr: 'sprite',
 					}
 				}
 			} else {
-				return this.sendReply("There isn\'t any Pokémon called '" + sprite + "'...");
+				return this.sendReply("There isn't any Pokémon called '" + sprite + "'...");
 			}
 		}
 		let self = this;
 		require('request').get(url + sprite + alt + '.png').on('error', function () {
 			self.sendReply('The sprite for ' + sprite + alt + ' is unavailable.');
 		}).on('response', function (response) {
-			if (response.statusCode == 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
+			if (response.statusCode === 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
 			self.sendReply('|html|<img src = "' + url + sprite + alt + '.png">');
 			room.update();
 		});
 	},
 	'!xysprite': true,
 	xyspr: 'xysprite',
-        xysprite: function (target, room, user, connection, cmd) {
+	xysprite: function (target, room, user, connection, cmd) {
 		if (!this.runBroadcast()) return;
 		if (!toId(target)) return this.sendReply('/xysprite [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
@@ -576,21 +576,21 @@ spr: 'sprite',
 					}
 				}
 			} else {
-				return this.sendReply("There isn\'t any Pokémon called '" + sprite + "'...");
+				return this.sendReply("There isn't any Pokémon called '" + sprite + "'...");
 			}
 		}
 		let self = this;
 		require('request').get(url + sprite + alt + '.png').on('error', function () {
 			self.sendReply('The sprite for ' + sprite + alt + ' is unavailable.');
 		}).on('response', function (response) {
-			if (response.statusCode == 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
+			if (response.statusCode === 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
 			self.sendReply('|html|<img src = "' + url + sprite + alt + '.png">');
 			room.update();
 		});
 	},
 	'!artsprite': true,
 	artspr: 'artsprite',
-        artsprite: function (target, room, user, connection, cmd) {
+	artsprite: function (target, room, user, connection, cmd) {
 		if (!this.runBroadcast()) return;
 		if (!toId(target)) return this.sendReply('/artsprite [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
@@ -617,15 +617,15 @@ spr: 'sprite',
 						sprite = Dex.data.Pokedex[correction[0].id].species.toLowerCase();
 					}
 				}
-			} /*else {
-				return this.sendReply("There isn\'t any Pokémon called '" + sprite + "'...");
-			}*/
+			} else {
+				return this.sendReply("There isn't any Pokémon called '" + sprite + "'...");
+			}
 		}
 		let self = this;
 		require('request').get(url + sprite + alt + '.png').on('error', function () {
 			self.sendReply('The sprite for ' + sprite + alt + ' is unavailable.');
 		}).on('response', function (response) {
-			if (response.statusCode == 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
+			if (response.statusCode === 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
 			self.sendReply('|html|<img src = "' + url + sprite + alt + '.png">');
 			room.update();
 		});
@@ -661,15 +661,15 @@ spr: 'sprite',
 						sprite = Dex.data.Pokedex[correction[0].id].species.toLowerCase();
 					}
 				}
-			} /*else {
-				return this.sendReply("There isn\'t any Pokémon called '" + sprite + "'...");
-			}*/
+			} else {
+				return this.sendReply("There isn't any Pokémon called '" + sprite + "'...");
+			}
 		}
 		let self = this;
 		require('request').get(url + sprite + alt + '.gif').on('error', function () {
 			self.sendReply('The sprite for ' + sprite + alt + ' is unavailable.');
 		}).on('response', function (response) {
-			if (response.statusCode == 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
+			if (response.statusCode === 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
 			self.sendReply('|html|<img src = "' + url + sprite + alt + '.gif">');
 			room.update();
 		});
