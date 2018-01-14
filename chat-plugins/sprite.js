@@ -278,7 +278,6 @@ exports.commands = {
 		if (!toId(target)) return this.sendReply('/greensprite [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
 		let alt = '';
-		let type = toId(target[1]);
 		let sprite = target[0].trim();
 		let url = 'http://www.pokestadium.com/img/sprites/main-series/green/';
 
@@ -582,7 +581,6 @@ exports.commands = {
 		if (!toId(target)) return this.sendReply('/artsprite [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
 		let alt = '';
-		let type = toId(target[1]);
 		let sprite = target[0].trim();
 		let url = 'http://www.pokestadium.com/img/sprites/official-art/';
 
