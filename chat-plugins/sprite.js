@@ -281,10 +281,19 @@ exports.commands = {
 		let type = toId(target[1]);
 		let sprite = target[0].trim();
 		let url;
-		if (type === 'shiny') url = 'http://play.pokemonshowdown.com/sprites/rby-shiny/';
-		else if (type === 'back') url = 'http://play.pokemonshowdown.com/sprites/rby-back/';
-		else if (type === 'shinyback') url = 'http://play.pokemonshowdown.com/sprites/rby-back-shiny/';
-		else url = 'http://play.pokemonshowdown.com/sprites/rby/';
+		if (type === 'shiny') {
+			url = 'http://play.pokemonshowdown.com/sprites/rby-shiny/';
+		} else {
+			if (type === 'back') {
+				url = 'http://play.pokemonshowdown.com/sprites/rby-back/';
+			} else {
+				if (type === 'shinyback') {
+					url = 'http://play.pokemonshowdown.com/sprites/rby-back-shiny/';
+				} else {
+					url = 'http://play.pokemonshowdown.com/sprites/rby/';
+				}
+			}
+		}
 
 		if (Number(sprite[sprite.length - 1]) && !toId(sprite[sprite.length - 2])) {
 			alt = '-' + sprite[sprite.length - 1];
@@ -452,10 +461,19 @@ exports.commands = {
 		let type = toId(target[1]);
 		let sprite = target[0].trim();
 		let url;
-		if (type === 'shiny') url = 'http://www.pokestadium.com/img/sprites/main-series/firered-leafgreen/shiny/';
-		else if (type === 'back') url = 'http://www.pokestadium.com/img/sprites/main-series/firered-leafgreen/back/';
-		else if (type === 'shinyback') url = 'http://www.pokestadium.com/img/sprites/main-series/firered-leafgreen/shiny/back/';
-		else url = 'http://www.pokestadium.com/img/sprites/main-series/firered-leafgreen/';
+		if (type === 'shiny') {
+			url = 'http://www.pokestadium.com/img/sprites/main-series/firered-leafgreen/shiny/';
+		} else {
+			if (type === 'back') {
+				url = 'http://www.pokestadium.com/img/sprites/main-series/firered-leafgreen/back/';
+			} else {
+				if (type === 'shinyback') {
+					url = 'http://www.pokestadium.com/img/sprites/main-series/firered-leafgreen/shiny/back/';
+				} else {
+					url = 'http://www.pokestadium.com/img/sprites/main-series/firered-leafgreen/';
+				}
+			}
+		}
 
 		if (Number(sprite[sprite.length - 1]) && !toId(sprite[sprite.length - 2])) {
 			alt = '-' + sprite[sprite.length - 1];
@@ -497,9 +515,15 @@ exports.commands = {
 		let type = toId(target[1]);
 		let sprite = target[0].trim();
 		let url;
-		if (type === 'shiny') url = 'http://www.pokestadium.com/img/sprites/main-series/emerald/animated/shiny/';
-		else if (type === 'shinyback') url = 'http://www.pokestadium.com/img/sprites/main-series/emerald/animated/shiny/back/';
-		else url = 'http://www.pokestadium.com/img/sprites/main-series/emerald/animated/';
+		if (type === 'shiny') {
+			url = 'http://www.pokestadium.com/img/sprites/main-series/emerald/animated/shiny/';
+		} else {
+			if (type === 'shinyback') {
+				url = 'http://www.pokestadium.com/img/sprites/main-series/emerald/animated/shiny/back/';
+			} else {
+				url = 'http://www.pokestadium.com/img/sprites/main-series/emerald/animated/';
+			}
+		}
 
 		if (Number(sprite[sprite.length - 1]) && !toId(sprite[sprite.length - 2])) {
 			alt = '-' + sprite[sprite.length - 1];
@@ -541,10 +565,19 @@ exports.commands = {
 		let type = toId(target[1]);
 		let sprite = target[0].trim();
 		let url;
-		if (type === 'shiny') url = 'http://play.pokemonshowdown.com/sprites/afd-shiny/';
-		else if (type === 'back') url = 'http://play.pokemonshowdown.com/sprites/afd-back/';
-		else if (type === 'shinyback') url = 'http://play.pokemonshowdown.com/sprites/afd-back-shiny/';
-		else url = 'http://play.pokemonshowdown.com/sprites/afd/';
+		if (type === 'shiny') {
+			url = 'http://play.pokemonshowdown.com/sprites/afd-shiny/';
+		} else {
+			if (type === 'back') {
+				url = 'http://play.pokemonshowdown.com/sprites/afd-back/';
+			} else {
+				if (type === 'shinyback') {
+					url = 'http://play.pokemonshowdown.com/sprites/afd-back-shiny/';
+				} else {
+					url = 'http://play.pokemonshowdown.com/sprites/afd/';
+				}
+			}
+		}
 
 		if (Number(sprite[sprite.length - 1]) && !toId(sprite[sprite.length - 2])) {
 			alt = '-' + sprite[sprite.length - 1];
@@ -586,8 +619,11 @@ exports.commands = {
 		let type = toId(target[1]);
 		let sprite = target[0].trim();
 		let url;
-		if (type === 'shiny') url = 'http://play.pokemonshowdown.com/sprites/xydex-shiny/';
-		else url = 'http://play.pokemonshowdown.com/sprites/xydex/';
+		if (type === 'shiny') {
+			url = 'http://play.pokemonshowdown.com/sprites/xydex-shiny/';
+		} else {
+			url = 'http://play.pokemonshowdown.com/sprites/xydex/';
+		}
 
 		if (Number(sprite[sprite.length - 1]) && !toId(sprite[sprite.length - 2])) {
 			alt = '-' + sprite[sprite.length - 1];
