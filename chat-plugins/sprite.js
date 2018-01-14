@@ -52,7 +52,7 @@ exports.commands = {
 		}).on('response', function (response) {
 			if (response.statusCode === 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
 			self.sendReply('|html|<img src = "' + url + sprite + alt + '.gif">');
-			room.update();
+			if (room) room.update();
 		});
 	},
 	'!bwsprite': true,
@@ -106,7 +106,7 @@ exports.commands = {
 		}).on('response', function (response) {
 			if (response.statusCode === 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
 			self.sendReply('|html|<img src = "' + url + sprite + alt + '.gif">');
-			room.update();
+			if (room) room.update();
 		});
 	},
 	'!dppsprite': true,
@@ -160,7 +160,7 @@ exports.commands = {
 		}).on('response', function (response) {
 			if (response.statusCode === 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
 			self.sendReply('|html|<img src = "' + url + sprite + alt + '.png">');
-			room.update();
+			if (room) room.update();
 		});
 	},
 	'!rsesprite': true,
@@ -214,7 +214,7 @@ exports.commands = {
 		}).on('response', function (response) {
 			if (response.statusCode === 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
 			self.sendReply('|html|<img src = "' + url + sprite + alt + '.png">');
-			room.update();
+			if (room) room.update();
 		});
 	},
 	'!gscsprite': true,
@@ -268,7 +268,7 @@ exports.commands = {
 		}).on('response', function (response) {
 			if (response.statusCode === 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
 			self.sendReply('|html|<img src = "' + url + sprite + alt + '.png">');
-			room.update();
+			if (room) room.update();
 		});
 	},
 	'!rbysprite': true,
@@ -322,7 +322,7 @@ exports.commands = {
 		}).on('response', function (response) {
 			if (response.statusCode === 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
 			self.sendReply('|html|<img src = "' + url + sprite + alt + '.png">');
-			room.update();
+			if (room) room.update();
 		});
 	},
 	'!greensprite': true,
@@ -362,7 +362,7 @@ exports.commands = {
 		}).on('response', function (response) {
 			if (response.statusCode === 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
 			self.sendReply('|html|<img src = "' + url + sprite + alt + '.png">');
-			room.update();
+			if (room) room.update();
 		});
 	},
 	'!rbsprite': true,
@@ -408,7 +408,7 @@ exports.commands = {
 		}).on('response', function (response) {
 			if (response.statusCode === 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
 			self.sendReply('|html|<img src = "' + url + sprite + alt + '.png">');
-			room.update();
+			if (room) room.update();
 		});
 	},
 	'!crystalsprite': true,
@@ -454,7 +454,7 @@ exports.commands = {
 		}).on('response', function (response) {
 			if (response.statusCode === 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
 			self.sendReply('|html|<img src = "' + url + sprite + alt + '.gif">');
-			room.update();
+			if (room) room.update();
 		});
 	},
 	'!rflgsprite': true,
@@ -508,7 +508,7 @@ exports.commands = {
 		}).on('response', function (response) {
 			if (response.statusCode === 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
 			self.sendReply('|html|<img src = "' + url + sprite + alt + '.png">');
-			room.update();
+			if (room) room.update();
 		});
 	},
 	'!emeraldsprite': true,
@@ -558,7 +558,7 @@ exports.commands = {
 		}).on('response', function (response) {
 			if (response.statusCode === 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
 			self.sendReply('|html|<img src = "' + url + sprite + alt + '.gif">');
-			room.update();
+			if (room) room.update();
 		});
 	},
 	'!afdsprite': true,
@@ -612,7 +612,7 @@ exports.commands = {
 		}).on('response', function (response) {
 			if (response.statusCode === 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
 			self.sendReply('|html|<img src = "' + url + sprite + alt + '.png">');
-			room.update();
+			if (room) room.update();
 		});
 	},
 	'!xysprite': true,
@@ -658,7 +658,7 @@ exports.commands = {
 		}).on('response', function (response) {
 			if (response.statusCode === 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
 			self.sendReply('|html|<img src = "' + url + sprite + alt + '.png">');
-			room.update();
+			if (room) room.update();
 		});
 	},
 	'!artsprite': true,
@@ -698,7 +698,7 @@ exports.commands = {
 		}).on('response', function (response) {
 			if (response.statusCode === 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
 			self.sendReply('|html|<img src = "' + url + sprite + alt + '.png">');
-			room.update();
+			if (room) room.update();
 		});
 	},
 	'!model': true,
@@ -747,7 +747,7 @@ exports.commands = {
 		}).on('response', function (response) {
 			if (response.statusCode === 404) return self.sendReply('The sprite for ' + sprite + alt + ' is currently unavailable.');
 			self.sendReply('|html|<img src = "' + url + sprite + alt + '.gif">');
-			room.update();
+			if (room) room.update();
 		});
 	},
 };
