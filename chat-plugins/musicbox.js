@@ -68,13 +68,13 @@ exports.commands = {
 			case 'help':
 				if (!this.runBroadcast()) return;
 				this.sendReplyBox('<b>Music Box Commands:</b><br><br><ul>' +
-						'<li>/' + cmd + ' <em>User</em> - View\'s a user\'s music box.<br>' +
+						'<li>/' + cmd + ' <em>User</em> - View\'s a user\'s music box. Requires: @ & ~.<br>' +
 						'<li>/' + cmd + ' give <em>User</em> - Gives user a musicbox they can use on the server.<br>' +
 						'<li>/' + cmd + ' add <em>Youtube link</em> - Adds a song into your music box.<br>' +
 						'<li>/' + cmd + ' remove <em>Youtube link/Song title/Song list number</em> - Removes a song from your music box.<br>' +
 						'<li>/' + cmd + ' removeall - Removes all songs from your music box.<br>' +
 						'<li>/' + cmd + ' css <em>CSS code</em> - Edits the CSS of your music box\'s buttons.<br>' +
-						'<li>/' + cmd + ' delete <em>User</em> - Deletes a user\'s music box. Requires ~.</ul>'
+						'<li>/' + cmd + ' delete <em>User</em> - Deletes a user\'s music box. Requires: ~.</ul>'
 				);
 				break;
 
@@ -158,7 +158,7 @@ exports.commands = {
 				break;
 
 			case 'delete':
-				if (!this.can('pban')) return false;
+				if (!this.can('hotpatch')) return false;
 				let targetUser = Users.getExact(target) ? Users.getExact(target).name : target;
 				let box3 = musicboxes[toId(targetUser)];
 				if (!box3) return this.sendReply(targetUser + " doesn't have a music box...");
