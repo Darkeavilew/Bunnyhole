@@ -375,8 +375,11 @@ exports.commands = {
 		let type = toId(target[1]);
 		let sprite = target[0].trim();
 		let url;
-		if (type === 'gray') url = 'http://www.pokestadium.com/img/sprites/main-series/red-blue/gray/';
-		else url = 'http://www.pokestadium.com/img/sprites/main-series/red-blue/';
+		if (type === 'gray') {
+			url = 'http://www.pokestadium.com/img/sprites/main-series/red-blue/gray/';
+		} else {
+			url = 'http://www.pokestadium.com/img/sprites/main-series/red-blue/';
+		}
 
 		if (Number(sprite[sprite.length - 1]) && !toId(sprite[sprite.length - 2])) {
 			alt = '-' + sprite[sprite.length - 1];
@@ -418,8 +421,11 @@ exports.commands = {
 		let type = toId(target[1]);
 		let sprite = target[0].trim();
 		let url;
-		if (type === 'shiny') url = 'http://www.pokestadium.com/img/sprites/main-series/crystal/animated/shiny/';
-		else url = 'http://www.pokestadium.com/img/sprites/main-series/crystal/animated/';
+		if (type === 'shiny') {
+			url = 'http://www.pokestadium.com/img/sprites/main-series/crystal/animated/shiny/';
+		} else {
+			url = 'http://www.pokestadium.com/img/sprites/main-series/crystal/animated/';
+		}
 
 		if (Number(sprite[sprite.length - 1]) && !toId(sprite[sprite.length - 2])) {
 			alt = '-' + sprite[sprite.length - 1];
@@ -704,9 +710,15 @@ exports.commands = {
 		let type = toId(target[1]);
 		let sprite = target[0].trim();
 		let url;
-		if (type === 'shiny') url = 'http://www.pokestadium.com/img/sprites/main-series/xy/shiny/';
-		else if (type === 'back') url = 'http://www.pokestadium.com/img/sprites/main-series/xy/back/';
-		else url = 'http://www.pokestadium.com/img/sprites/main-series/xy/';
+		if (type === 'shiny') {
+			url = 'http://www.pokestadium.com/img/sprites/main-series/xy/shiny/';
+		} else {
+			if (type === 'back') {
+				url = 'http://www.pokestadium.com/img/sprites/main-series/xy/back/';
+			} else {
+				url = 'http://www.pokestadium.com/img/sprites/main-series/xy/';
+			}
+		}
 
 		if (Number(sprite[sprite.length - 1]) && !toId(sprite[sprite.length - 2])) {
 			alt = '-' + sprite[sprite.length - 1];
