@@ -55,7 +55,6 @@ exports.commands = {
 	musicbox: function (target, room, user, connection, cmd) {
 		let cmds = {'help': 1, 'give': 1, 'add': 1, 'remove': 1, 'css': 1, 'removeall': 1, 'delete': 1};
 		if (target && toId(target.split(' ')[0]) in cmds) {
-			if (typeof musicboxes[user.userid] !== 'object') return this.errorReply("You do not own a music box. Buy one from the shop.");
 			let cmdIndex = target.indexOf(' '), command;
 			if (cmdIndex > -1) {
 				command = target.substr(0, cmdIndex);
