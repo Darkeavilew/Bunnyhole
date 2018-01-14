@@ -7,10 +7,10 @@ spr: 'sprite',
 		if (!this.runBroadcast()) return;
 		if (!toId(target)) return this.sendReply('/sprite [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
-		var alt = '';
-		var type = toId(target[1]);
-		var sprite = target[0].trim();
-		var url;
+		let alt = '';
+		let type = toId(target[1]);
+		let sprite = target[0].trim();
+		let url;
 		if (type === 'shiny') url = 'http://play.pokemonshowdown.com/sprites/xyani-shiny/';
 		else if (type === 'back') url = 'http://play.pokemonshowdown.com/sprites/xyani-back/';
 		else if (type === 'backshiny' || type === 'shinyback') url = 'http://play.pokemonshowdown.com/sprites/xyani-back-shiny/';
@@ -21,13 +21,13 @@ spr: 'sprite',
 			sprite = sprite.substr(0, sprite.length - 1);
 			url = 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/';
 		}
-		var main = target[0].split(',');
+		let main = target[0].split(',');
 		if (Dex.data.Pokedex[toId(sprite)]) {
 			sprite = Dex.data.Pokedex[toId(sprite)].species.toLowerCase();
 		} else {
-			var correction = Dex.dataSearch(toId(sprite));
+			let correction = Dex.dataSearch(toId(sprite));
 			if (correction && correction.length) {
-				for (var i = 0; i < correction.length; i++) {
+				for (let i = 0; i < correction.length; i++) {
 					if (correction[i].id !== toId(sprite) && !Dex.data.Aliases[toId(correction[i].id)] && !i) {
 						if (!Dex.data.Pokedex[toId(correction[i])]) continue;
 						if (!Dex.data.Aliases[toId(sprite)]) this.sendReply("There isn't any Pokémon called '" + sprite + "'... Did you mean '" + correction[0].name + "'?\n");
@@ -38,7 +38,7 @@ spr: 'sprite',
 				return this.sendReply("There isn\'t any Pokémon called '" + sprite + "'...");
 			}
 		}
-		var self = this;
+		let self = this;
 		require('request').get(url + sprite + alt + '.gif').on('error', function () {
 			self.sendReply('The sprite for ' + sprite + alt + ' is unavailable.');
 		}).on('response', function (response) {
@@ -53,10 +53,10 @@ spr: 'sprite',
 		if (!this.runBroadcast()) return;
 		if (!toId(target)) return this.sendReply('/bwsprite [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
-		var alt = '';
-		var type = toId(target[1]);
-		var sprite = target[0].trim();
-		var url;
+		let alt = '';
+		let type = toId(target[1]);
+		let sprite = target[0].trim();
+		let url;
 		if (type === 'bwshiny') url = 'http://play.pokemonshowdown.com/sprites/bwani-shiny/';
 		else if (type === 'back') url = 'http://play.pokemonshowdown.com/sprites/bwani-back/';
 		else if (type === 'shinyback') url = 'http://play.pokemonshowdown.com/sprites/bwani-back-shiny/';
@@ -67,13 +67,13 @@ spr: 'sprite',
 			sprite = sprite.substr(0, sprite.length - 1);
 			url = 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/';
 		}
-		var main = target[0].split(',');
+		let main = target[0].split(',');
 		if (Dex.data.Pokedex[toId(sprite)]) {
 			sprite = Dex.data.Pokedex[toId(sprite)].species.toLowerCase();
 		} else {
-			var correction = Dex.dataSearch(toId(sprite));
+			let correction = Dex.dataSearch(toId(sprite));
 			if (correction && correction.length) {
-				for (var i = 0; i < correction.length; i++) {
+				for (let i = 0; i < correction.length; i++) {
 					if (correction[i].id !== toId(sprite) && !Dex.data.Aliases[toId(correction[i].id)] && !i) {
 						if (!Dex.data.Pokedex[toId(correction[i])]) continue;
 						if (!Dex.data.Aliases[toId(sprite)]) this.sendReply("There isn't any Pokémon called '" + sprite + "'... Did you mean '" + correction[0].name + "'?\n");
@@ -84,7 +84,7 @@ spr: 'sprite',
 				return this.sendReply("There isn\'t any Pokémon called '" + sprite + "'...");
 			}
 		}
-		var self = this;
+		let self = this;
 		require('request').get(url + sprite + alt + '.gif').on('error', function () {
 			self.sendReply('The sprite for ' + sprite + alt + ' is unavailable.');
 		}).on('response', function (response) {
@@ -99,10 +99,10 @@ spr: 'sprite',
 		if (!this.runBroadcast()) return;
 		if (!toId(target)) return this.sendReply('/dppsprite [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
-		var alt = '';
-		var type = toId(target[1]);
-		var sprite = target[0].trim();
-		var url;
+		let alt = '';
+		let type = toId(target[1]);
+		let sprite = target[0].trim();
+		let url;
 		if (type === 'shiny') url = 'http://play.pokemonshowdown.com/sprites/dpp-shiny/';
 		else if (type === 'back') url = 'http://play.pokemonshowdown.com/sprites/dpp-back/';
 		else if (type === 'shinyback') url = 'http://play.pokemonshowdown.com/sprites/dpp-back-shiny/';
@@ -113,13 +113,13 @@ spr: 'sprite',
 			sprite = sprite.substr(0, sprite.length - 1);
 			url = 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/';
 		}
-		var main = target[0].split(',');
+		let main = target[0].split(',');
 		if (Dex.data.Pokedex[toId(sprite)]) {
 			sprite = Dex.data.Pokedex[toId(sprite)].species.toLowerCase();
 		} else {
-			var correction = Dex.dataSearch(toId(sprite));
+			let correction = Dex.dataSearch(toId(sprite));
 			if (correction && correction.length) {
-				for (var i = 0; i < correction.length; i++) {
+				for (let i = 0; i < correction.length; i++) {
 					if (correction[i].id !== toId(sprite) && !Dex.data.Aliases[toId(correction[i].id)] && !i) {
 						if (!Dex.data.Pokedex[toId(correction[i])]) continue;
 						if (!Dex.data.Aliases[toId(sprite)]) this.sendReply("There isn't any Pokémon called '" + sprite + "'... Did you mean '" + correction[0].name + "'?\n");
@@ -130,7 +130,7 @@ spr: 'sprite',
 				return this.sendReply("There isn\'t any Pokémon called '" + sprite + "'...");
 			}
 		}
-		var self = this;
+		let self = this;
 		require('request').get(url + sprite + alt + '.png').on('error', function () {
 			self.sendReply('The sprite for ' + sprite + alt + ' is unavailable.');
 		}).on('response', function (response) {
@@ -145,10 +145,10 @@ spr: 'sprite',
 		if (!this.runBroadcast()) return;
 		if (!toId(target)) return this.sendReply('/rsesprite [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
-		var alt = '';
-		var type = toId(target[1]);
-		var sprite = target[0].trim();
-		var url;
+		let alt = '';
+		let type = toId(target[1]);
+		let sprite = target[0].trim();
+		let url;
 		if (type === 'shiny') url = 'http://play.pokemonshowdown.com/sprites/rse-shiny/';
 		else if (type === 'back') url = 'http://play.pokemonshowdown.com/sprites/rse-back/';
 		else if (type === 'shinyback') url = 'http://play.pokemonshowdown.com/sprites/rse-back-shiny/';
@@ -159,13 +159,13 @@ spr: 'sprite',
 			sprite = sprite.substr(0, sprite.length - 1);
 			url = 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/';
 		}
-		var main = target[0].split(',');
+		let main = target[0].split(',');
 		if (Dex.data.Pokedex[toId(sprite)]) {
 			sprite = Dex.data.Pokedex[toId(sprite)].species.toLowerCase();
 		} else {
-			var correction = Dex.dataSearch(toId(sprite));
+			let correction = Dex.dataSearch(toId(sprite));
 			if (correction && correction.length) {
-				for (var i = 0; i < correction.length; i++) {
+				for (let i = 0; i < correction.length; i++) {
 					if (correction[i].id !== toId(sprite) && !Dex.data.Aliases[toId(correction[i].id)] && !i) {
 						if (!Dex.data.Pokedex[toId(correction[i])]) continue;
 						if (!Dex.data.Aliases[toId(sprite)]) this.sendReply("There isn't any Pokémon called '" + sprite + "'... Did you mean '" + correction[0].name + "'?\n");
@@ -176,7 +176,7 @@ spr: 'sprite',
 				return this.sendReply("There isn\'t any Pokémon called '" + sprite + "'...");
 			}
 		}
-		var self = this;
+		let self = this;
 		require('request').get(url + sprite + alt + '.png').on('error', function () {
 			self.sendReply('The sprite for ' + sprite + alt + ' is unavailable.');
 		}).on('response', function (response) {
@@ -191,10 +191,10 @@ spr: 'sprite',
 		if (!this.runBroadcast()) return;
 		if (!toId(target)) return this.sendReply('/gscsprite [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
-		var alt = '';
-		var type = toId(target[1]);
-		var sprite = target[0].trim();
-		var url;
+		let alt = '';
+		let type = toId(target[1]);
+		let sprite = target[0].trim();
+		let url;
 		if (type === 'shiny') url = 'http://play.pokemonshowdown.com/sprites/gsc-shiny/';
 		else if (type === 'back') url = 'http://play.pokemonshowdown.com/sprites/gsc-back/';
 		else if (type === 'shinyback') url = 'http://play.pokemonshowdown.com/sprites/gsc-back-shiny/';
@@ -205,13 +205,13 @@ spr: 'sprite',
 			sprite = sprite.substr(0, sprite.length - 1);
 			url = 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/';
 		}
-		var main = target[0].split(',');
+		let main = target[0].split(',');
 		if (Dex.data.Pokedex[toId(sprite)]) {
 			sprite = Dex.data.Pokedex[toId(sprite)].species.toLowerCase();
 		} else {
-			var correction = Dex.dataSearch(toId(sprite));
+			let correction = Dex.dataSearch(toId(sprite));
 			if (correction && correction.length) {
-				for (var i = 0; i < correction.length; i++) {
+				for (let i = 0; i < correction.length; i++) {
 					if (correction[i].id !== toId(sprite) && !Dex.data.Aliases[toId(correction[i].id)] && !i) {
 						if (!Dex.data.Pokedex[toId(correction[i])]) continue;
 						if (!Dex.data.Aliases[toId(sprite)]) this.sendReply("There isn't any Pokémon called '" + sprite + "'... Did you mean '" + correction[0].name + "'?\n");
@@ -222,7 +222,7 @@ spr: 'sprite',
 				return this.sendReply("There isn\'t any Pokémon called '" + sprite + "'...");
 			}
 		}
-		var self = this;
+		let self = this;
 		require('request').get(url + sprite + alt + '.png').on('error', function () {
 			self.sendReply('The sprite for ' + sprite + alt + ' is unavailable.');
 		}).on('response', function (response) {
@@ -237,10 +237,10 @@ spr: 'sprite',
 		if (!this.runBroadcast()) return;
 		if (!toId(target)) return this.sendReply('/rbysprite [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
-		var alt = '';
-		var type = toId(target[1]);
-		var sprite = target[0].trim();
-		var url;
+		let alt = '';
+		let type = toId(target[1]);
+		let sprite = target[0].trim();
+		let url;
 		if (type === 'shiny') url = 'http://play.pokemonshowdown.com/sprites/rby-shiny/';
 		else if (type === 'back') url = 'http://play.pokemonshowdown.com/sprites/rby-back/';
 		else if (type === 'shinyback') url = 'http://play.pokemonshowdown.com/sprites/rby-back-shiny/';
@@ -251,13 +251,13 @@ spr: 'sprite',
 			sprite = sprite.substr(0, sprite.length - 1);
 			url = 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/';
 		}
-		var main = target[0].split(',');
+		let main = target[0].split(',');
 		if (Dex.data.Pokedex[toId(sprite)]) {
 			sprite = Dex.data.Pokedex[toId(sprite)].species.toLowerCase();
 		} else {
-			var correction = Dex.dataSearch(toId(sprite));
+			let correction = Dex.dataSearch(toId(sprite));
 			if (correction && correction.length) {
-				for (var i = 0; i < correction.length; i++) {
+				for (let i = 0; i < correction.length; i++) {
 					if (correction[i].id !== toId(sprite) && !Dex.data.Aliases[toId(correction[i].id)] && !i) {
 						if (!Dex.data.Pokedex[toId(correction[i])]) continue;
 						if (!Dex.data.Aliases[toId(sprite)]) this.sendReply("There isn't any Pokémon called '" + sprite + "'... Did you mean '" + correction[0].name + "'?\n");
@@ -268,7 +268,7 @@ spr: 'sprite',
 				return this.sendReply("There isn\'t any Pokémon called '" + sprite + "'...");
 			}
 		}
-		var self = this;
+		let self = this;
 		require('request').get(url + sprite + alt + '.png').on('error', function () {
 			self.sendReply('The sprite for ' + sprite + alt + ' is unavailable.');
 		}).on('response', function (response) {
@@ -283,23 +283,23 @@ spr: 'sprite',
 		if (!this.runBroadcast()) return;
 		if (!toId(target)) return this.sendReply('/greensprite [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
-		var alt = '';
-		var type = toId(target[1]);
-		var sprite = target[0].trim();
-		var url = 'http://www.pokestadium.com/img/sprites/main-series/green/';
+		let alt = '';
+		let type = toId(target[1]);
+		let sprite = target[0].trim();
+		let url = 'http://www.pokestadium.com/img/sprites/main-series/green/';
 
 		if (Number(sprite[sprite.length - 1]) && !toId(sprite[sprite.length - 2])) {
 			alt = '-' + sprite[sprite.length - 1];
 			sprite = sprite.substr(0, sprite.length - 1);
 			url = 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/';
 		}
-		var main = target[0].split(',');
+		let main = target[0].split(',');
 		if (Dex.data.Pokedex[toId(sprite)]) {
 			sprite = Dex.data.Pokedex[toId(sprite)].species.toLowerCase();
 		} else {
-			var correction = Dex.dataSearch(toId(sprite));
+			let correction = Dex.dataSearch(toId(sprite));
 			if (correction && correction.length) {
-				for (var i = 0; i < correction.length; i++) {
+				for (let i = 0; i < correction.length; i++) {
 					if (correction[i].id !== toId(sprite) && !Dex.data.Aliases[toId(correction[i].id)] && !i) {
 						if (!Dex.data.Pokedex[toId(correction[i])]) continue;
 						if (!Dex.data.Aliases[toId(sprite)]) this.sendReply("There isn't any Pokémon called '" + sprite + "'... Did you mean '" + correction[0].name + "'?\n");
@@ -310,7 +310,7 @@ spr: 'sprite',
 				return this.sendReply("There isn\'t any Pokémon called '" + sprite + "'...");
 			}
 		}
-		var self = this;
+		let self = this;
 		require('request').get(url + sprite + alt + '.png').on('error', function () {
 			self.sendReply('The sprite for ' + sprite + alt + ' is unavailable.');
 		}).on('response', function (response) {
@@ -325,10 +325,10 @@ spr: 'sprite',
 		if (!this.runBroadcast()) return;
 		if (!toId(target)) return this.sendReply('/rbsprite [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
-		var alt = '';
-		var type = toId(target[1]);
-		var sprite = target[0].trim();
-		var url;
+		let alt = '';
+		let type = toId(target[1]);
+		let sprite = target[0].trim();
+		let url;
 		if (type === 'gray') url = 'http://www.pokestadium.com/img/sprites/main-series/red-blue/gray/';
 		else url = 'http://www.pokestadium.com/img/sprites/main-series/red-blue/';
 
@@ -337,13 +337,13 @@ spr: 'sprite',
 			sprite = sprite.substr(0, sprite.length - 1);
 			url = 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/';
 		}
-		var main = target[0].split(',');
+		let main = target[0].split(',');
 		if (Dex.data.Pokedex[toId(sprite)]) {
 			sprite = Dex.data.Pokedex[toId(sprite)].species.toLowerCase();
 		} else {
-			var correction = Dex.dataSearch(toId(sprite));
+			let correction = Dex.dataSearch(toId(sprite));
 			if (correction && correction.length) {
-				for (var i = 0; i < correction.length; i++) {
+				for (let i = 0; i < correction.length; i++) {
 					if (correction[i].id !== toId(sprite) && !Dex.data.Aliases[toId(correction[i].id)] && !i) {
 						if (!Dex.data.Pokedex[toId(correction[i])]) continue;
 						if (!Dex.data.Aliases[toId(sprite)]) this.sendReply("There isn't any Pokémon called '" + sprite + "'... Did you mean '" + correction[0].name + "'?\n");
@@ -354,7 +354,7 @@ spr: 'sprite',
 				return this.sendReply("There isn\'t any Pokémon called '" + sprite + "'...");
 			}
 		}
-		var self = this;
+		let self = this;
 		require('request').get(url + sprite + alt + '.png').on('error', function () {
 			self.sendReply('The sprite for ' + sprite + alt + ' is unavailable.');
 		}).on('response', function (response) {
@@ -369,10 +369,10 @@ spr: 'sprite',
 		if (!this.runBroadcast()) return;
 		if (!toId(target)) return this.sendReply('/crystalsprite [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
-		var alt = '';
-		var type = toId(target[1]);
-		var sprite = target[0].trim();
-		var url;
+		let alt = '';
+		let type = toId(target[1]);
+		let sprite = target[0].trim();
+		let url;
 		if (type === 'shiny') url = 'http://www.pokestadium.com/img/sprites/main-series/crystal/animated/shiny/';
 		else url = 'http://www.pokestadium.com/img/sprites/main-series/crystal/animated/';
 
@@ -381,13 +381,13 @@ spr: 'sprite',
 			sprite = sprite.substr(0, sprite.length - 1);
 			url = 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/';
 		}
-		var main = target[0].split(',');
+		let main = target[0].split(',');
 		if (Dex.data.Pokedex[toId(sprite)]) {
 			sprite = Dex.data.Pokedex[toId(sprite)].species.toLowerCase();
 		} else {
-			var correction = Dex.dataSearch(toId(sprite));
+			let correction = Dex.dataSearch(toId(sprite));
 			if (correction && correction.length) {
-				for (var i = 0; i < correction.length; i++) {
+				for (let i = 0; i < correction.length; i++) {
 					if (correction[i].id !== toId(sprite) && !Dex.data.Aliases[toId(correction[i].id)] && !i) {
 						if (!Dex.data.Pokedex[toId(correction[i])]) continue;
 						if (!Dex.data.Aliases[toId(sprite)]) this.sendReply("There isn't any Pokémon called '" + sprite + "'... Did you mean '" + correction[0].name + "'?\n");
@@ -398,7 +398,7 @@ spr: 'sprite',
 				return this.sendReply("There isn\'t any Pokémon called '" + sprite + "'...");
 			}
 		}
-		var self = this;
+		let self = this;
 		require('request').get(url + sprite + alt + '.gif').on('error', function () {
 			self.sendReply('The sprite for ' + sprite + alt + ' is unavailable.');
 		}).on('response', function (response) {
@@ -413,10 +413,10 @@ spr: 'sprite',
 		if (!this.runBroadcast()) return;
 		if (!toId(target)) return this.sendReply('/rsesprite [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
-		var alt = '';
-		var type = toId(target[1]);
-		var sprite = target[0].trim();
-		var url;
+		let alt = '';
+		let type = toId(target[1]);
+		let sprite = target[0].trim();
+		let url;
 		if (type === 'shiny') url = 'http://www.pokestadium.com/img/sprites/main-series/firered-leafgreen/shiny/';
 		else if (type === 'back') url = 'http://www.pokestadium.com/img/sprites/main-series/firered-leafgreen/back/';
 		else if (type === 'shinyback') url = 'http://www.pokestadium.com/img/sprites/main-series/firered-leafgreen/shiny/back/';
@@ -427,13 +427,13 @@ spr: 'sprite',
 			sprite = sprite.substr(0, sprite.length - 1);
 			url = 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/';
 		}
-		var main = target[0].split(',');
+		let main = target[0].split(',');
 		if (Dex.data.Pokedex[toId(sprite)]) {
 			sprite = Dex.data.Pokedex[toId(sprite)].species.toLowerCase();
 		} else {
-			var correction = Dex.dataSearch(toId(sprite));
+			let correction = Dex.dataSearch(toId(sprite));
 			if (correction && correction.length) {
-				for (var i = 0; i < correction.length; i++) {
+				for (let i = 0; i < correction.length; i++) {
 					if (correction[i].id !== toId(sprite) && !Dex.data.Aliases[toId(correction[i].id)] && !i) {
 						if (!Dex.data.Pokedex[toId(correction[i])]) continue;
 						if (!Dex.data.Aliases[toId(sprite)]) this.sendReply("There isn't any Pokémon called '" + sprite + "'... Did you mean '" + correction[0].name + "'?\n");
@@ -444,7 +444,7 @@ spr: 'sprite',
 				return this.sendReply("There isn\'t any Pokémon called '" + sprite + "'...");
 			}
 		}
-		var self = this;
+		let self = this;
 		require('request').get(url + sprite + alt + '.png').on('error', function () {
 			self.sendReply('The sprite for ' + sprite + alt + ' is unavailable.');
 		}).on('response', function (response) {
@@ -459,10 +459,10 @@ spr: 'sprite',
 		if (!this.runBroadcast()) return;
 		if (!toId(target)) return this.sendReply('/rsesprite [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
-		var alt = '';
-		var type = toId(target[1]);
-		var sprite = target[0].trim();
-		var url;
+		let alt = '';
+		let type = toId(target[1]);
+		let sprite = target[0].trim();
+		let url;
 		if (type === 'shiny') url = 'http://www.pokestadium.com/img/sprites/main-series/emerald/animated/shiny/';
 		else if (type === 'shinyback') url = 'http://www.pokestadium.com/img/sprites/main-series/emerald/animated/shiny/back/';
 		else url = 'http://www.pokestadium.com/img/sprites/main-series/emerald/animated/';
@@ -472,13 +472,13 @@ spr: 'sprite',
 			sprite = sprite.substr(0, sprite.length - 1);
 			url = 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/';
 		}
-		var main = target[0].split(',');
+		let main = target[0].split(',');
 		if (Dex.data.Pokedex[toId(sprite)]) {
 			sprite = Dex.data.Pokedex[toId(sprite)].species.toLowerCase();
 		} else {
-			var correction = Dex.dataSearch(toId(sprite));
+			let correction = Dex.dataSearch(toId(sprite));
 			if (correction && correction.length) {
-				for (var i = 0; i < correction.length; i++) {
+				for (let i = 0; i < correction.length; i++) {
 					if (correction[i].id !== toId(sprite) && !Dex.data.Aliases[toId(correction[i].id)] && !i) {
 						if (!Dex.data.Pokedex[toId(correction[i])]) continue;
 						if (!Dex.data.Aliases[toId(sprite)]) this.sendReply("There isn't any Pokémon called '" + sprite + "'... Did you mean '" + correction[0].name + "'?\n");
@@ -489,7 +489,7 @@ spr: 'sprite',
 				return this.sendReply("There isn\'t any Pokémon called '" + sprite + "'...");
 			}
 		}
-		var self = this;
+		let self = this;
 		require('request').get(url + sprite + alt + '.gif').on('error', function () {
 			self.sendReply('The sprite for ' + sprite + alt + ' is unavailable.');
 		}).on('response', function (response) {
@@ -504,10 +504,10 @@ spr: 'sprite',
 		if (!this.runBroadcast()) return;
 		if (!toId(target)) return this.sendReply('/afdsprite [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
-		var alt = '';
-		var type = toId(target[1]);
-		var sprite = target[0].trim();
-		var url;
+		let alt = '';
+		let type = toId(target[1]);
+		let sprite = target[0].trim();
+		let url;
 		if (type === 'shiny') url = 'http://play.pokemonshowdown.com/sprites/afd-shiny/';
 		else if (type === 'back') url = 'http://play.pokemonshowdown.com/sprites/afd-back/';
 		else if (type === 'shinyback') url = 'http://play.pokemonshowdown.com/sprites/afd-back-shiny/';
@@ -518,13 +518,13 @@ spr: 'sprite',
 			sprite = sprite.substr(0, sprite.length - 1);
 			url = 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/';
 		}
-		var main = target[0].split(',');
+		let main = target[0].split(',');
 		if (Dex.data.Pokedex[toId(sprite)]) {
 			sprite = Dex.data.Pokedex[toId(sprite)].species.toLowerCase();
 		} else {
-			var correction = Dex.dataSearch(toId(sprite));
+			let correction = Dex.dataSearch(toId(sprite));
 			if (correction && correction.length) {
-				for (var i = 0; i < correction.length; i++) {
+				for (let i = 0; i < correction.length; i++) {
 					if (correction[i].id !== toId(sprite) && !Dex.data.Aliases[toId(correction[i].id)] && !i) {
 						if (!Dex.data.Pokedex[toId(correction[i])]) continue;
 						if (!Dex.data.Aliases[toId(sprite)]) this.sendReply("There isn't any Pokémon called '" + sprite + "'... Did you mean '" + correction[0].name + "'?\n");
@@ -535,7 +535,7 @@ spr: 'sprite',
 				return this.sendReply("There isn\'t any Pokémon called '" + sprite + "'...");
 			}
 		}
-		var self = this;
+		let self = this;
 		require('request').get(url + sprite + alt + '.png').on('error', function () {
 			self.sendReply('The sprite for ' + sprite + alt + ' is unavailable.');
 		}).on('response', function (response) {
@@ -550,10 +550,10 @@ spr: 'sprite',
 		if (!this.runBroadcast()) return;
 		if (!toId(target)) return this.sendReply('/xysprite [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
-		var alt = '';
-		var type = toId(target[1]);
-		var sprite = target[0].trim();
-		var url;
+		let alt = '';
+		let type = toId(target[1]);
+		let sprite = target[0].trim();
+		let url;
 		if (type === 'shiny') url = 'http://play.pokemonshowdown.com/sprites/xydex-shiny/';
 		else url = 'http://play.pokemonshowdown.com/sprites/xydex/';
 
@@ -562,13 +562,13 @@ spr: 'sprite',
 			sprite = sprite.substr(0, sprite.length - 1);
 			url = 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/';
 		}
-		var main = target[0].split(',');
+		let main = target[0].split(',');
 		if (Dex.data.Pokedex[toId(sprite)]) {
 			sprite = Dex.data.Pokedex[toId(sprite)].species.toLowerCase();
 		} else {
-			var correction = Dex.dataSearch(toId(sprite));
+			let correction = Dex.dataSearch(toId(sprite));
 			if (correction && correction.length) {
-				for (var i = 0; i < correction.length; i++) {
+				for (let i = 0; i < correction.length; i++) {
 					if (correction[i].id !== toId(sprite) && !Dex.data.Aliases[toId(correction[i].id)] && !i) {
 						if (!Dex.data.Pokedex[toId(correction[i])]) continue;
 						if (!Dex.data.Aliases[toId(sprite)]) this.sendReply("There isn't any Pokémon called '" + sprite + "'... Did you mean '" + correction[0].name + "'?\n");
@@ -579,7 +579,7 @@ spr: 'sprite',
 				return this.sendReply("There isn\'t any Pokémon called '" + sprite + "'...");
 			}
 		}
-		var self = this;
+		let self = this;
 		require('request').get(url + sprite + alt + '.png').on('error', function () {
 			self.sendReply('The sprite for ' + sprite + alt + ' is unavailable.');
 		}).on('response', function (response) {
@@ -594,23 +594,23 @@ spr: 'sprite',
 		if (!this.runBroadcast()) return;
 		if (!toId(target)) return this.sendReply('/artsprite [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
-		var alt = '';
-		var type = toId(target[1]);
-		var sprite = target[0].trim();
-		var url = 'http://www.pokestadium.com/img/sprites/official-art/';
+		let alt = '';
+		let type = toId(target[1]);
+		let sprite = target[0].trim();
+		let url = 'http://www.pokestadium.com/img/sprites/official-art/';
 
 		if (Number(sprite[sprite.length - 1]) && !toId(sprite[sprite.length - 2])) {
 			alt = '-' + sprite[sprite.length - 1];
 			sprite = sprite.substr(0, sprite.length - 1);
 			url = 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/';
 		}
-		var main = target[0].split(',');
+		let main = target[0].split(',');
 		if (Dex.data.Pokedex[toId(sprite)]) {
 			sprite = Dex.data.Pokedex[toId(sprite)].species.toLowerCase();
 		} else {
-			var correction = Dex.dataSearch(toId(sprite));
+			let correction = Dex.dataSearch(toId(sprite));
 			if (correction && correction.length) {
-				for (var i = 0; i < correction.length; i++) {
+				for (let i = 0; i < correction.length; i++) {
 					if (correction[i].id !== toId(sprite) && !Dex.data.Aliases[toId(correction[i].id)] && !i) {
 						if (!Dex.data.Pokedex[toId(correction[i])]) continue;
 						if (!Dex.data.Aliases[toId(sprite)]) this.sendReply("There isn't any Pokémon called '" + sprite + "'... Did you mean '" + correction[0].name + "'?\n");
@@ -621,7 +621,7 @@ spr: 'sprite',
 				return this.sendReply("There isn\'t any Pokémon called '" + sprite + "'...");
 			}*/
 		}
-		var self = this;
+		let self = this;
 		require('request').get(url + sprite + alt + '.png').on('error', function () {
 			self.sendReply('The sprite for ' + sprite + alt + ' is unavailable.');
 		}).on('response', function (response) {
@@ -635,10 +635,10 @@ spr: 'sprite',
 		if (!this.runBroadcast()) return;
 		if (!toId(target)) return this.sendReply('/model [Pokémon] - Allows you to view the sprite of a Pokémon');
 		target = target.toLowerCase().split(',');
-		var alt = '';
-		var type = toId(target[1]);
-		var sprite = target[0].trim();
-		var url;
+		let alt = '';
+		let type = toId(target[1]);
+		let sprite = target[0].trim();
+		let url;
 		if (type === 'shiny') url = 'http://www.pokestadium.com/img/sprites/main-series/xy/shiny/';
 		else if (type === 'back') url = 'http://www.pokestadium.com/img/sprites/main-series/xy/back/';
 		else url = 'http://www.pokestadium.com/img/sprites/main-series/xy/';
@@ -648,13 +648,13 @@ spr: 'sprite',
 			sprite = sprite.substr(0, sprite.length - 1);
 			url = 'http://www.pkparaiso.com/imagenes/xy/sprites/animados/';
 		}
-		var main = target[0].split(',');
+		let main = target[0].split(',');
 		if (Dex.data.Pokedex[toId(sprite)]) {
 			sprite = Dex.data.Pokedex[toId(sprite)].species.toLowerCase();
 		} else {
-			var correction = Dex.dataSearch(toId(sprite));
+			let correction = Dex.dataSearch(toId(sprite));
 			if (correction && correction.length) {
-				for (var i = 0; i < correction.length; i++) {
+				for (let i = 0; i < correction.length; i++) {
 					if (correction[i].id !== toId(sprite) && !Dex.data.Aliases[toId(correction[i].id)] && !i) {
 						if (!Dex.data.Pokedex[toId(correction[i])]) continue;
 						if (!Dex.data.Aliases[toId(sprite)]) this.sendReply("There isn't any Pokémon called '" + sprite + "'... Did you mean '" + correction[0].name + "'?\n");
@@ -665,7 +665,7 @@ spr: 'sprite',
 				return this.sendReply("There isn\'t any Pokémon called '" + sprite + "'...");
 			}*/
 		}
-		var self = this;
+		let self = this;
 		require('request').get(url + sprite + alt + '.gif').on('error', function () {
 			self.sendReply('The sprite for ' + sprite + alt + ' is unavailable.');
 		}).on('response', function (response) {
