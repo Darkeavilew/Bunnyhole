@@ -94,17 +94,8 @@ exports.Formats = [
 		],
 
 		mod: 'gen7',
-		searchShow: false,
 		ruleset: ['[Gen 7] RU'],
 		banlist: ['RU', 'BL3', 'Drought'],
-	},
-	{
-		name: "[Gen 7] NU (suspect test)",
-		desc: ["&bullet; <a href=\"http://www.smogon.com/forums/threads/3624392/\">NU Suspect Test</a>"],
-
-		mod: 'gen7',
-		challengeShow: false,
-		ruleset: ['[Gen 7] NU'],
 	},
 	{
 		name: "[Gen 7] PU",
@@ -205,8 +196,10 @@ exports.Formats = [
 		requirePentagon: true,
 	},
 	{
-		name: "[Gen 7] Battle Spot Special 7",
-		desc: ["&bullet; <a href=\"http://www.smogon.com/forums/threads/3621403/\">Battle Spot Special: Season 7</a>"],
+		name: "[Gen 7] Battle Spot Special 8",
+		desc: [
+			"&bullet; <a href=\"http://www.smogon.com/forums/threads/3626059/\">Battle Spot Special 8</a>",
+		],
 
 		mod: 'gen7',
 		maxForcedLevel: 50,
@@ -214,32 +207,19 @@ exports.Formats = [
 			validate: [3, 6],
 			battle: 3,
 		},
-		ruleset: ['Pokemon', 'Standard GBU', 'Alola Pokedex'],
-		banlist: ['Poipole', 'Naganadel', 'Stakataka', 'Blacephalon'],
-		requirePlus: true,
-	},
-	{
-		name: "[Gen 7] Dragon Cup",
-		desc: [`&bullet; <a href="https://3ds.pokemon-gl.com/dl-regulation/6010">Dragon Cup: Official rules</a>`],
-
-		mod: 'gen7',
-		maxForcedLevel: 50,
-		teamLength: {
-			validate: [3, 6],
-			battle: 3,
-		},
-		timer: {starting: 15 * 60 - 10, perTurn: 10, maxPerTurn: 60, maxFirstTurn: 90, timeoutAutoChoose: true},
-		ruleset: ['Pokemon', 'Minimal GBU', 'Team Preview'],
+		ruleset: ['Pokemon', 'Species Clause', 'Item Clause', 'Team Preview'],
+		banlist: ['Unreleased', 'Illegal'],
 		onValidateTeam: function (team) {
-			const restrictedLegends = ['Mewtwo', 'Lugia', 'Ho-Oh', 'Kyogre', 'Groudon', 'Rayquaza', 'Dialga', 'Palkia', 'Giratina', 'Reshiram', 'Zekrom', 'Kyurem', 'Xerneas', 'Yveltal', 'Zygarde', 'Cosmog', 'Cosmoem', 'Solgaleo', 'Lunala', 'Necrozma'];
-			let count = 0;
+			const legends = ['Mewtwo', 'Mew', 'Lugia', 'Ho-Oh', 'Celebi', 'Kyogre', 'Groudon', 'Rayquaza', 'Jirachi', 'Deoxys', 'Dialga', 'Palkia', 'Giratina', 'Phione', 'Manaphy', 'Darkrai', 'Shaymin', 'Arceus', 'Victini', 'Reshiram', 'Zekrom', 'Kyurem', 'Keldeo', 'Meloetta', 'Genesect', 'Xerneas', 'Yveltal', 'Zygarde', 'Diancie', 'Hoopa', 'Volcanion', 'Cosmog', 'Cosmoem', 'Solgaleo', 'Lunala', 'Necrozma', 'Magearna', 'Marshadow'];
+			let hasLegend = false;
 			for (const set of team) {
-				const baseSpecies = this.getTemplate(set.species).baseSpecies;
-				if (restrictedLegends.includes(baseSpecies)) count++;
-				if (count > 1) return ["You can only use one Restricted Legendary Pok\u00E9mon."];
+				const pokemon = this.getTemplate(set.species).baseSpecies;
+				if (legends.includes(pokemon)) {
+					if (hasLegend) return ["You can only use one legendary Pok\u00E9mon."];
+					hasLegend = true;
+				}
 			}
 		},
-		requirePentagon: true,
 	},
 	{
 		name: "[Gen 7] Perseverance",
@@ -341,7 +321,7 @@ exports.Formats = [
 		gameType: 'doubles',
 		ruleset: ['[Gen 7] Doubles OU'],
 		banlist: [
-			'Aegislash', 'Amoonguss', 'Arcanine', 'Bronzong', 'Celesteela', 'Charizard-Mega-Y', 'Cresselia', 'Deoxys-Attack', 'Diancie', 'Diancie-Mega', 'Excadrill',
+			'Aegislash', 'Amoonguss', 'Arcanine', 'Bronzong', 'Camerupt-Mega', 'Celesteela', 'Charizard-Mega-Y', 'Cresselia', 'Deoxys-Attack', 'Diancie', 'Diancie-Mega', 'Excadrill',
 			'Ferrothorn', 'Garchomp', 'Gastrodon', 'Genesect', 'Gengar-Mega', 'Heatran', 'Hoopa-Unbound', 'Jirachi', 'Kangaskhan-Mega', 'Kartana', 'Kingdra',
 			'Kyurem-Black', 'Landorus-Therian', 'Marowak-Alola', 'Marowak-Alola-Totem', 'Marshadow', 'Metagross-Mega', 'Mew', 'Mimikyu', 'Naganadel', 'Ninetales-Alola',
 			'Oranguru', 'Pelipper', 'Politoed', 'Porygon2', 'Salamence-Mega', 'Scrafty', 'Snorlax', 'Stakataka', 'Swampert-Mega', 'Tapu Bulu', 'Tapu Fini',
@@ -393,6 +373,7 @@ exports.Formats = [
 
 		mod: 'vgc17',
 		gameType: 'doubles',
+		searchShow: false,
 		forcedLevel: 50,
 		teamLength: {
 			validate: [4, 6],
@@ -456,7 +437,7 @@ exports.Formats = [
 		mod: 'gen7',
 		ruleset: ['[Gen 7] OU'],
 		banlist: [
-			'Hoopa-Unbound', 'Kartana', 'Kyurem-Black', 'Regigigas', 'Shedinja', 'Slaking', 'Gyaradosite',
+			'Blacephalon', 'Hoopa-Unbound', 'Kartana', 'Kyurem-Black', 'Regigigas', 'Shedinja', 'Slaking', 'Gyaradosite',
 			'Huge Power', 'Imposter', 'Innards Out', 'Pure Power', 'Speed Boost', 'Water Bubble', 'Assist', 'Chatter', 'Shell Smash',
 		],
 		noChangeForme: true,
@@ -590,7 +571,11 @@ exports.Formats = [
 
 		mod: 'gen7',
 		ruleset: ['[Gen 7] OU'],
-		noLearn: ['Geomancy', 'Shell Smash', 'Sketch'],
+		restrictedMoves: ['Geomancy', 'Shell Smash', 'Sketch'],
+		checkLearnset: function (move, template, lsetData, set) {
+			if (!move.isZ && !this.format.restrictedMoves.includes(move.name) && move.id[0] === template.speciesid[0]) return false;
+			return this.checkLearnset(move, template, lsetData, set);
+		},
 		onValidateTeam: function (team) {
 			let alphabetTable = {};
 			for (const set of team) {
@@ -759,9 +744,22 @@ exports.Formats = [
 
 		mod: 'gen7',
 		searchShow: false,
-		ruleset: ['[Gen 7] OU', 'Ignore STAB Moves'],
+		ruleset: ['[Gen 7] OU'],
 		banlist: ['Kartana', 'Komala', 'Kyurem-Black', 'Silvally', 'Tapu Koko', 'Tapu Lele', 'Aerodactylite', 'King\'s Rock', 'Metagrossite', 'Razor Fang'],
-		noLearn: ['Acupressure', 'Belly Drum', 'Chatter', 'Geomancy', 'Lovely Kiss', 'Shell Smash', 'Shift Gear', 'Thousand Arrows'],
+		restrictedMoves: ['Acupressure', 'Belly Drum', 'Chatter', 'Geomancy', 'Lovely Kiss', 'Shell Smash', 'Shift Gear', 'Thousand Arrows'],
+		checkLearnset: function (move, template, lsetData, set) {
+			if (!move.isZ && !this.format.restrictedMoves.includes(move.name)) {
+				let types = template.types;
+				if (template.prevo) types = types.concat(this.dex.getTemplate(this.dex.getTemplate(template.prevo).prevo || template.prevo).types);
+				if (template.baseSpecies === 'Rotom') types = ['Electric', 'Ghost', 'Fire', 'Water', 'Ice', 'Flying', 'Grass'];
+				if (template.baseSpecies === 'Shaymin') types = ['Grass', 'Flying'];
+				if (template.baseSpecies === 'Hoopa') types = ['Psychic', 'Ghost', 'Dark'];
+				if (template.baseSpecies === 'Oricorio') types = ['Fire', 'Flying', 'Electric', 'Psychic', 'Ghost'];
+				if (template.baseSpecies === 'Necrozma') types = ['Psychic', 'Steel', 'Ghost'];
+				if (template.baseSpecies === 'Arceus' || template.baseSpecies === 'Silvally' || types.includes(move.type)) return false;
+			}
+			return this.checkLearnset(move, template, lsetData, set);
+		},
 	},
 	{
 		name: "[Gen 7] 2v2 Doubles",
@@ -974,8 +972,14 @@ exports.Formats = [
 		],
 
 		mod: 'gen1',
-		ruleset: ['[Gen 1] OU', 'Ignore STAB Moves'],
+		ruleset: ['[Gen 1] OU'],
 		banlist: [],
+		checkLearnset: function (move, template, lsetData, set) {
+			let types = template.types;
+			if (template.prevo) types = types.concat(this.dex.getTemplate(this.dex.getTemplate(template.prevo).prevo || template.prevo).types);
+			if (types.includes(move.type)) return false;
+			return this.checkLearnset(move, template, lsetData, set);
+		},
 	},
 
 	// Past Gens OU

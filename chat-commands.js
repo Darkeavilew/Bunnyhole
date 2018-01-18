@@ -690,12 +690,14 @@ exports.commands = {
 			isPrivate: privacy,
 			auth: {},
 			introMessage: '<h2 style="margin-top:0">' + titleHTML + '</h2><p>There are several ways to invite people:<br />- in this chat: <code>/invite USERNAME</code><br />- anywhere in PS: link to <code>&lt;&lt;' + roomid + '>></code>' + (groupChatURL ? '<br />- outside of PS: link to <a href="' + groupChatURL + '">' + groupChatURL + '</a>' : '') + '</p><p>This room will expire after 40 minutes of inactivity or when the server is restarted.</p><p style="margin-bottom:0"><button name="send" value="/roomhelp">Room management</button>',
+			staffMessage: `<p>As creator of this groupchat, <u>you are entirely responsible for what occurs in this chatroom</u>. Global rules apply at all times.</p><p>If you have created this room for someone else, <u>you are still responsible</u> whether or not you choose to actively supervise the room.</p><p style="font-style:italic">For this reason, we strongly recommend that you only create groupchats for users you know and trust.</p><p>If this room is used to break global rules or disrupt other areas of the server, this will be considered irresponsible use of auth privileges on the part of the creator, and <b>you will be globally demoted and barred from public auth.</b></p>`,
 		});
 		if (targetRoom) {
 			// The creator is RO.
 			targetRoom.auth[user.userid] = '#';
 			// Join after creating room. No other response is given.
 			user.joinRoom(targetRoom.id);
+			user.popup(`You've just made a groupchat; it is now your responsibility, regardless of whether or not you actively partake in the room. For more info, read your groupchat's staff intro.`);
 			return;
 		}
 		return this.errorReply("An unknown error occurred while trying to create the room '" + title + "'.");
@@ -2392,7 +2394,7 @@ exports.commands = {
 		if (!targetUser) return this.errorReply("User '" + name + "' not found.");
 		let userid = targetUser.getLastId();
 		let hidetype = '';
-		if (!user.can('lock', targetUser) && !this.can('ban', targetUser, room)) return false;
+		if (!user.can('mute', targetUser, room) && !this.can('ban', targetUser, room)) return;
 
 		if (targetUser.locked || Punishments.isRoomBanned(targetUser, room.id) || room.isMuted(targetUser) || user.can('rangeban')) {
 			hidetype = 'hide|';
@@ -2420,8 +2422,8 @@ exports.commands = {
 		}
 	},
 	hidetexthelp: [
-		`/hidetext [username] - Removes a locked or muted/banned user's messages from chat (includes users banned from the room). Requires: % (global only), @ * # & ~`,
-		`/hidealtstext [username] - Removes a locked or muted/banned user's messages, and their alternate account's messages from the chat (includes users banned from the room).  Requires: % (global only), @ * # & ~`,
+		`/hidetext [username] - Removes a locked or muted/banned user's messages from chat. Requires: %, @ * # & ~`,
+		`/hidealtstext [username] - Removes a locked or muted/banned user's messages, and their alternate account's messages from the chat.  Requires: %, @ * # & ~`,
 	],
 
 	ab: 'blacklist',
