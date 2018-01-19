@@ -12,10 +12,7 @@ import * as LaddersType from './../ladders'
 import * as UsersType from './../users'
 import * as PunishmentsType from './../punishments'
 import * as StreamsType from './../lib/streams'
-<<<<<<< HEAD
-=======
 import * as child_process from 'child_process'
->>>>>>> 631f64d66c9c4517f6608e40af0d02ae35924cb1
 
 declare global {
 	// modules
@@ -27,15 +24,12 @@ declare global {
 
 	const WriteStream: typeof StreamsType.WriteStream
 	const ReadStream: typeof StreamsType.ReadStream
-<<<<<<< HEAD
-=======
 	const ReadWriteStream: typeof StreamsType.ReadWriteStream
 	const ObjectWriteStream: typeof StreamsType.ObjectWriteStream
 	const ObjectReadStream: typeof StreamsType.ObjectReadStream
 	const ObjectReadWriteStream: typeof StreamsType.ObjectReadWriteStream
 
 	type ChildProcess = child_process.ChildProcess
->>>>>>> 631f64d66c9c4517f6608e40af0d02ae35924cb1
 
 	// sim
 	const Battle: typeof BattleType
