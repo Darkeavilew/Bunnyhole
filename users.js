@@ -194,7 +194,7 @@ function importUsergroups() {
 	// can't just say usergroups = {} because it's exported
 	for (let i in usergroups) delete usergroups[i];
 
-	FS('config/usergroups.csv').readTextIfExists().then(data => {
+	FS('config/usergroups.csv').readIfExists().then(data => {
 		for (const row of data.split("\n")) {
 			if (!row) continue;
 			let cells = row.split(",");
@@ -607,7 +607,7 @@ class User {
 		}
 
 		let group = ' ';
-		let targetGroup = ' ';
+		let targetGroup = '';
 		let targetUser = null;
 
 		if (typeof target === 'string') {

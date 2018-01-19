@@ -200,6 +200,7 @@ exports.Formats = [
 		desc: [
 			"&bullet; <a href=\"http://www.smogon.com/forums/threads/3626059/\">Battle Spot Special 8</a>",
 		],
+<<<<<<< HEAD
 
 		mod: 'gen7',
 		maxForcedLevel: 50,
@@ -223,6 +224,8 @@ exports.Formats = [
 	},
 	{
 		name: "[Gen 7] Perseverance",
+=======
+>>>>>>> 631f64d66c9c4517f6608e40af0d02ae35924cb1
 
 		effectType: 'Format',
 		challengeDefault: true,
@@ -240,6 +243,7 @@ exports.Formats = [
 			}
 			pokemon.battle.win(winner);
 		},
+<<<<<<< HEAD
 		mod: 'gen7',
 		ruleset: ['Pokemon', 'Standard', 'Sleep Clause Mod', 'OHKO Clause', 'Species Clause', 'Team Preview'],
 		banlist: ['Uber', 'Soul Dew', 'Toxapex'],
@@ -255,6 +259,19 @@ exports.Formats = [
 			for (let i = 0, len = allPokemon.length; i < len; i++) {
 				allPokemon[i].maxhp *= 5;
 				allPokemon[i].hp = allPokemon[i].maxhp;
+=======
+		ruleset: ['Pokemon', 'Species Clause', 'Item Clause', 'Team Preview'],
+		banlist: ['Unreleased', 'Illegal'],
+		onValidateTeam: function (team) {
+			const legends = ['Mewtwo', 'Mew', 'Lugia', 'Ho-Oh', 'Celebi', 'Kyogre', 'Groudon', 'Rayquaza', 'Jirachi', 'Deoxys', 'Dialga', 'Palkia', 'Giratina', 'Phione', 'Manaphy', 'Darkrai', 'Shaymin', 'Arceus', 'Victini', 'Reshiram', 'Zekrom', 'Kyurem', 'Keldeo', 'Meloetta', 'Genesect', 'Xerneas', 'Yveltal', 'Zygarde', 'Diancie', 'Hoopa', 'Volcanion', 'Cosmog', 'Cosmoem', 'Solgaleo', 'Lunala', 'Necrozma', 'Magearna', 'Marshadow'];
+			let hasLegend = false;
+			for (const set of team) {
+				const pokemon = this.getTemplate(set.species).baseSpecies;
+				if (legends.includes(pokemon)) {
+					if (hasLegend) return ["You can only use one legendary Pok\u00E9mon."];
+					hasLegend = true;
+				}
+>>>>>>> 631f64d66c9c4517f6608e40af0d02ae35924cb1
 			}
 		},
 	},
@@ -358,7 +375,7 @@ exports.Formats = [
 			validate: [4, 6],
 			battle: 4,
 		},
-		timer: {starting: 5 * 60 - 10, perTurn: 10, maxPerTurn: 55, maxFirstTurn: 90, timeoutAutoChoose: true},
+		timer: {starting: 6 * 60 + 30 - 10, perTurn: 10, maxPerTurn: 55, maxFirstTurn: 90, timeoutAutoChoose: true},
 		ruleset: ['Pokemon', 'Standard GBU'],
 		banlist: ['Unown'],
 		requirePlus: true,
@@ -613,6 +630,7 @@ exports.Formats = [
 		],
 
 		mod: 'gen7',
+		searchShow: false,
 		teamLength: {
 			validate: [1, 3],
 			battle: 1,
@@ -625,6 +643,18 @@ exports.Formats = [
 			'Focus Sash', 'Flash', 'Kinesis', 'Leaf Tornado', 'Mirror Shot', 'Mud Bomb', 'Mud-Slap', 'Muddy Water', 'Night Daze', 'Octazooka', 'Perish Song', 'Sand Attack', 'Smokescreen',
 			'Chansey + Charm + Seismic Toss', 'Chansey + Charm + Psywave',
 		],
+	},
+	{
+		name: "[Gen 7] 1v1 (suspect test)",
+		desc: ["&bullet; <a href=\"http://www.smogon.com/forums/posts/7655187/\">1v1 Suspect Test</a>"],
+
+		mod: 'gen7',
+		challengeShow: false,
+		teamLength: {
+			validate: [1, 3],
+			battle: 1,
+		},
+		ruleset: ['[Gen 7] 1v1'],
 	},
 	{
 		name: "[Gen 7] Mix and Mega",
@@ -749,6 +779,7 @@ exports.Formats = [
 		restrictedMoves: ['Acupressure', 'Belly Drum', 'Chatter', 'Geomancy', 'Lovely Kiss', 'Shell Smash', 'Shift Gear', 'Thousand Arrows'],
 		checkLearnset: function (move, template, lsetData, set) {
 			if (!move.isZ && !this.format.restrictedMoves.includes(move.name)) {
+<<<<<<< HEAD
 				let types = template.types;
 				if (template.prevo) types = types.concat(this.dex.getTemplate(this.dex.getTemplate(template.prevo).prevo || template.prevo).types);
 				if (template.baseSpecies === 'Rotom') types = ['Electric', 'Ghost', 'Fire', 'Water', 'Ice', 'Flying', 'Grass'];
@@ -757,6 +788,21 @@ exports.Formats = [
 				if (template.baseSpecies === 'Oricorio') types = ['Fire', 'Flying', 'Electric', 'Psychic', 'Ghost'];
 				if (template.baseSpecies === 'Necrozma') types = ['Psychic', 'Steel', 'Ghost'];
 				if (template.baseSpecies === 'Arceus' || template.baseSpecies === 'Silvally' || types.includes(move.type)) return false;
+=======
+				let dex = this.dex;
+				let types = template.types;
+				let baseTemplate = dex.getTemplate(template.baseSpecies);
+				if (template.prevo) types = types.concat(dex.getTemplate(dex.getTemplate(template.prevo).prevo || template.prevo).types);
+				for (let i in baseTemplate.otherFormes) {
+					let forme = dex.getTemplate(baseTemplate.otherFormes[i]);
+					if (baseTemplate.otherFormes && !forme.battleOnly) {
+						if (forme.forme !== 'Alola' && forme.forme !== 'Alola-Totem') {
+							types = types.concat(forme.types).concat(baseTemplate.types);
+						}
+					}
+				}
+				if (types.includes(move.type)) return false;
+>>>>>>> 631f64d66c9c4517f6608e40af0d02ae35924cb1
 			}
 			return this.checkLearnset(move, template, lsetData, set);
 		},
