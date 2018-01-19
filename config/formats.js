@@ -200,7 +200,6 @@ exports.Formats = [
 		desc: [
 			"&bullet; <a href=\"http://www.smogon.com/forums/threads/3626059/\">Battle Spot Special 8</a>",
 		],
-<<<<<<< HEAD
 
 		mod: 'gen7',
 		maxForcedLevel: 50,
@@ -219,59 +218,6 @@ exports.Formats = [
 					if (hasLegend) return ["You can only use one legendary Pok\u00E9mon."];
 					hasLegend = true;
 				}
-			}
-		},
-	},
-	{
-		name: "[Gen 7] Perseverance",
-=======
->>>>>>> 631f64d66c9c4517f6608e40af0d02ae35924cb1
-
-		effectType: 'Format',
-		challengeDefault: true,
-		rated: true,
-		challengeShow: true,
-		searchShow: true,
-		isTeambuilderFormat: true,
-		defaultLevel: 100,
-		onFaint: function (pokemon) {
-			let winner = '';
-			if (pokemon.side.id === 'p1') {
-				winner = 'p2';
-			} else {
-				winner = 'p1';
-			}
-			pokemon.battle.win(winner);
-		},
-<<<<<<< HEAD
-		mod: 'gen7',
-		ruleset: ['Pokemon', 'Standard', 'Sleep Clause Mod', 'OHKO Clause', 'Species Clause', 'Team Preview'],
-		banlist: ['Uber', 'Soul Dew', 'Toxapex'],
-	},
-	{
-		name: "[Gen 7] Pokemon Mystery Dungeon",
-
-		mod: 'pmd',
-		team: 'randomPmd',
-		ruleset: ['HP Percentage Mod', 'Cancel Mod'],
-		onBegin: function () {
-			let allPokemon = this.p1.pokemon.concat(this.p2.pokemon);
-			for (let i = 0, len = allPokemon.length; i < len; i++) {
-				allPokemon[i].maxhp *= 5;
-				allPokemon[i].hp = allPokemon[i].maxhp;
-=======
-		ruleset: ['Pokemon', 'Species Clause', 'Item Clause', 'Team Preview'],
-		banlist: ['Unreleased', 'Illegal'],
-		onValidateTeam: function (team) {
-			const legends = ['Mewtwo', 'Mew', 'Lugia', 'Ho-Oh', 'Celebi', 'Kyogre', 'Groudon', 'Rayquaza', 'Jirachi', 'Deoxys', 'Dialga', 'Palkia', 'Giratina', 'Phione', 'Manaphy', 'Darkrai', 'Shaymin', 'Arceus', 'Victini', 'Reshiram', 'Zekrom', 'Kyurem', 'Keldeo', 'Meloetta', 'Genesect', 'Xerneas', 'Yveltal', 'Zygarde', 'Diancie', 'Hoopa', 'Volcanion', 'Cosmog', 'Cosmoem', 'Solgaleo', 'Lunala', 'Necrozma', 'Magearna', 'Marshadow'];
-			let hasLegend = false;
-			for (const set of team) {
-				const pokemon = this.getTemplate(set.species).baseSpecies;
-				if (legends.includes(pokemon)) {
-					if (hasLegend) return ["You can only use one legendary Pok\u00E9mon."];
-					hasLegend = true;
-				}
->>>>>>> 631f64d66c9c4517f6608e40af0d02ae35924cb1
 			}
 		},
 	},
@@ -343,26 +289,6 @@ exports.Formats = [
 			'Kyurem-Black', 'Landorus-Therian', 'Marowak-Alola', 'Marowak-Alola-Totem', 'Marshadow', 'Metagross-Mega', 'Mew', 'Mimikyu', 'Naganadel', 'Ninetales-Alola',
 			'Oranguru', 'Pelipper', 'Politoed', 'Porygon2', 'Salamence-Mega', 'Scrafty', 'Snorlax', 'Stakataka', 'Swampert-Mega', 'Tapu Bulu', 'Tapu Fini',
 			'Tapu Koko', 'Tapu Lele', 'Torkoal', 'Tyranitar', 'Volcanion', 'Volcarona', 'Whimsicott', 'Zapdos', 'Zygarde-Base',
-		],
-	},
-	{
-		name: "[Gen 7] Doubles Monotype",
-		desc: [
-			"All the Pok&eacute;mon on a team must share a type.",
-			"&bullet; <a href=\"http://www.smogon.com/forums/threads/3621036/\">Monotype Metagame Discussion</a>",
-			"&bullet; <a href=\"http://www.smogon.com/forums/threads/3622349\">Monotype Viability Rankings</a>",
-			"&bullet; <a href=\"http://www.smogon.com/forums/threads/3599682/\">Monotype Sample Teams</a>",
-		],
-
-		mod: 'gen7',
-		gameType: 'doubles',
-		ruleset: ['Pokemon', 'Standard', 'Swagger Clause', 'Same Type Clause', 'Team Preview'],
-		banlist: [
-			'Aegislash', 'Arceus', 'Blaziken', 'Darkrai', 'Deoxys-Base', 'Deoxys-Attack', 'Dialga', 'Genesect', 'Gengar-Mega', 'Giratina', 'Groudon',
-			'Ho-Oh', 'Hoopa-Unbound', 'Kangaskhan-Mega', 'Kartana', 'Kyogre', 'Kyurem-White', 'Lucario-Mega', 'Lugia', 'Lunala', 'Magearna',
-			'Marshadow', 'Mawile-Mega', 'Medicham-Mega', 'Metagross-Mega', 'Mewtwo', 'Naganadel', 'Necrozma-Dawn-Wings', 'Necrozma-Dusk-Mane', 'Palkia',
-			'Pheromosa', 'Rayquaza', 'Reshiram', 'Salamence-Mega', 'Shaymin-Sky', 'Solgaleo', 'Tapu Lele', 'Xerneas', 'Yveltal', 'Zekrom', 'Zygarde',
-			'Battle Bond', 'Shadow Tag', 'Damp Rock', 'Smooth Rock', 'Terrain Extender', 'Baton Pass',
 		],
 	},
 	{
@@ -779,16 +705,6 @@ exports.Formats = [
 		restrictedMoves: ['Acupressure', 'Belly Drum', 'Chatter', 'Geomancy', 'Lovely Kiss', 'Shell Smash', 'Shift Gear', 'Thousand Arrows'],
 		checkLearnset: function (move, template, lsetData, set) {
 			if (!move.isZ && !this.format.restrictedMoves.includes(move.name)) {
-<<<<<<< HEAD
-				let types = template.types;
-				if (template.prevo) types = types.concat(this.dex.getTemplate(this.dex.getTemplate(template.prevo).prevo || template.prevo).types);
-				if (template.baseSpecies === 'Rotom') types = ['Electric', 'Ghost', 'Fire', 'Water', 'Ice', 'Flying', 'Grass'];
-				if (template.baseSpecies === 'Shaymin') types = ['Grass', 'Flying'];
-				if (template.baseSpecies === 'Hoopa') types = ['Psychic', 'Ghost', 'Dark'];
-				if (template.baseSpecies === 'Oricorio') types = ['Fire', 'Flying', 'Electric', 'Psychic', 'Ghost'];
-				if (template.baseSpecies === 'Necrozma') types = ['Psychic', 'Steel', 'Ghost'];
-				if (template.baseSpecies === 'Arceus' || template.baseSpecies === 'Silvally' || types.includes(move.type)) return false;
-=======
 				let dex = this.dex;
 				let types = template.types;
 				let baseTemplate = dex.getTemplate(template.baseSpecies);
@@ -802,7 +718,6 @@ exports.Formats = [
 					}
 				}
 				if (types.includes(move.type)) return false;
->>>>>>> 631f64d66c9c4517f6608e40af0d02ae35924cb1
 			}
 			return this.checkLearnset(move, template, lsetData, set);
 		},
@@ -846,28 +761,6 @@ exports.Formats = [
 		mod: 'gen6',
 		team: 'randomFactory',
 		ruleset: ['Pokemon', 'Sleep Clause Mod', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod', 'Mega Rayquaza Clause'],
-	},
-	{
-		name: "[Gen 7] Random Perseverance",
-
-		mod: 'gen7',
-		team: 'random',
-		ruleset: ['Pokemon', 'Standard', 'Sleep Clause Mod', 'OHKO Clause', 'Species Clause', 'Team Preview'],
-		effectType: 'Format',
-		challengeDefault: true,
-		rated: true,
-		challengeShow: true,
-		searchShow: true,
-		defaultLevel: 100,
-		onFaint: function (pokemon) {
-			let winner = '';
-			if (pokemon.side.id === 'p1') {
-				winner = 'p2';
-			} else {
-				winner = 'p1';
-			}
-			pokemon.battle.win(winner);
-		},
 	},
 	{
 		name: "[Gen 7] BSS Factory",
