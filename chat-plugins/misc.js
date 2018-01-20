@@ -291,7 +291,7 @@ exports.commands = {
 			break;
 		}
 		this.add(`|notify|${room.title} announcement!|${target}`);
-		this.add(Chat.html`|raw|<div class="broadcast-' + color + '"><b>${target}</b></div>`);
+		this.add(Chat.html`|raw|<div class="broadcast-${color}"><b>${target}</b></div>`);
 		this.modlog('DECLARE', null, target);
 	},
 	declarehelp: [`/declare [message] - Anonymously announces a message. Requires: # * & ~`],
