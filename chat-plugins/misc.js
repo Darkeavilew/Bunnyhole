@@ -315,7 +315,7 @@ exports.commands = {
 			break;
 		}
 		this.add(`|notify|${room.title} announcement!|${Chat.stripHTML(target)}`);
-		this.add(`|raw|<div class="broadcast-' + color + '"><b>${target}</b></div>`);
+		this.add(`|raw|<div class="broadcast-${color}"><b>${target}</b></div>`);
 		this.modlog(`HTMLDECLARE`, null, target);
 	},
 	htmldeclarehelp: [`/htmldeclare [message] - Anonymously announces a message using safe HTML. Requires: ~`],
@@ -343,10 +343,10 @@ exports.commands = {
 			break;
 		}
 		Rooms.rooms.forEach((curRoom, id) => {
-			if (id !== 'global') curRoom.addRaw(`<div class="broadcast-' + color + '"><b>${target}</b></div>`).update();
+			if (id !== 'global') curRoom.addRaw(`<div class="broadcast-${color}"><b>${target}</b></div>`).update();
 		});
 		Users.users.forEach(u => {
-			if (u.connected) u.send(`|pm|~|${u.group}${u.name}|/raw <div class="broadcast-' + color +'"><b>${target}</b></div>`);
+			if (u.connected) u.send(`|pm|~|${u.group}${u.name}|/raw <div class="broadcast-${color}"><b>${target}</b></div>`);
 		});
 		this.modlog(`GLOBALDECLARE`, null, target);
 	},
@@ -373,7 +373,7 @@ exports.commands = {
 			break;
 		}
 		Rooms.rooms.forEach((curRoom, id) => {
-			if (id !== 'global' && curRoom.type !== 'battle') curRoom.addRaw(`<div class="broadcast-' + color + '"><b>${target}</b></div>`).update();
+			if (id !== 'global' && curRoom.type !== 'battle') curRoom.addRaw(`<div class="broadcast-${color}"><b>${target}</b></div>`).update();
 		});
 		this.modlog(`CHATDECLARE`, null, target);
 	},
