@@ -139,7 +139,7 @@ exports.commands = {
 			curUser.send(message);
 		});
 	},
-	pmallhelp: ["/pmall [message]."],
+	pmallhelp: [`/pmall [message].`],
 
 	staffpm: 'pmallstaff',
 	pmstaff: 'pmallstaff',
@@ -155,7 +155,7 @@ exports.commands = {
 			curUser.send(message);
 		});
 	},
-	pmallstaffhelp: ["/pmallstaff [message]"],
+	pmallstaffhelp: [`/pmallstaff [message]`],
 
 	pmroom: 'rmall',
 	roompm: 'rmall',
@@ -228,7 +228,7 @@ exports.commands = {
 			}
 		};
 	})(),
-	transferauthorityhelp: ["/transferauthority [old alt], [new alt] - Transfers a user's global/room authority onto their new alt. Requires & ~"],
+	transferauthorityhelp: [`/transferauthority [old alt], [new alt] - Transfers a user's global/room authority onto their new alt. Requires & ~`],
 
 	'!seen': true,
 	seen: function (target, room, user) {
@@ -241,7 +241,7 @@ exports.commands = {
 		if (!seen) return this.sendReplyBox(BH.nameColor(target, true) + " has <b><font color='red'>never been online</font></b> on this server.");
 		this.sendReplyBox(BH.nameColor(target, true) + " was last seen <b>" + Chat.toDurationString(Date.now() - seen, {precision: true}) + "</b> ago.");
 	},
-	seenhelp: ["/seen - Shows when the user last connected on the server."],
+	seenhelp: [`/seen - Shows when the user last connected on the server.`],
 
 	'!regdate': true,
 	regdate: function (target, room, user, connection) {
@@ -271,7 +271,7 @@ exports.commands = {
 			//room.update();
 		}
 	},
-	regdatehelp: ["/regdate - Gets the regdate (register date) of a username."],
+	regdatehelp: [`/regdate - Gets the regdate (register date) of a username.`],
 
 	reddeclare: 'declare',
 	greendeclare: 'declare',
@@ -279,6 +279,7 @@ exports.commands = {
 		if (!target) return this.parse('/help declare');
 		if (!this.can('declare', null, room)) return false;
 		if (!this.canTalk()) return;
+		if (target.length > 2000) return this.errorReply("Declares should not exceed 2000 characters.");
 
 		let color = 'blue';
 		switch (cmd) {
@@ -289,10 +290,11 @@ exports.commands = {
 			color = 'green';
 			break;
 		}
-		this.add('|raw|<div class="broadcast-' + color + '"><b>' + Chat.escapeHTML(target) + '</b></div>');
-		this.addModAction(user.name + " declared " + target);
+		this.add(`|notify|${room.title} announcement!|${target}`);
+		this.add(Chat.html`|raw|<div class="broadcast-' + color + '"><b>${target}</b></div>`);
+		this.modlog('DECLARE', null, target);
 	},
-	declarehelp: ["/declare [message] - Anonymously announces a message. Requires: # * & ~"],
+	declarehelp: [`/declare [message] - Anonymously announces a message. Requires: # * & ~`],
 
 	redhtmldeclare: 'htmldeclare',
 	greenhtmldeclare: 'htmldeclare',
@@ -312,10 +314,11 @@ exports.commands = {
 			color = 'green';
 			break;
 		}
-		this.add('|raw|<div class="broadcast-' + color + '">' + target + '</div>');
-		this.addModAction(user.name + " declared " + target);
+		this.add(`|notify|${room.title} announcement!|${Chat.stripHTML(target)}`);
+		this.add(`|raw|<div class="broadcast-' + color + '"><b>${target}</b></div>`);
+		this.modlog(`HTMLDECLARE`, null, target);
 	},
-	htmldeclarehelp: ["/htmldeclare [message] - Anonymously announces a message using safe HTML. Requires: ~"],
+	htmldeclarehelp: [`/htmldeclare [message] - Anonymously announces a message using safe HTML. Requires: ~`],
 
 	redglobaldeclare: 'globaldeclare',
 	greenglobaldeclare: 'globaldeclare',
@@ -340,11 +343,14 @@ exports.commands = {
 			break;
 		}
 		Rooms.rooms.forEach((curRoom, id) => {
-			if (id !== 'global') curRoom.addRaw('<div class="broadcast-' + color + '">' + target + '</div>').update();
+			if (id !== 'global') curRoom.addRaw(`<div class="broadcast-' + color + '"><b>${target}</b></div>`).update();
 		});
-		this.addModAction(user.name + " globally declared " + target);
+		Users.users.forEach(u => {
+			if (u.connected) u.send(`|pm|~|${u.group}${u.name}|/raw <div class="broadcast-' + color +'"><b>${target}</b></div>`);
+		});
+		this.modlog(`GLOBALDECLARE`, null, target);
 	},
-	globaldeclarehelp: ["/globaldeclare [message] - Anonymously announces a message to every room on the server. Requires: ~"],
+	globaldeclarehelp: [`/globaldeclare [message] - Anonymously announces a message to every room on the server. Requires: ~`],
 
 	redchatdeclare: 'chatdeclare',
 	greenchatdeclare: 'chatdeclare',
@@ -367,11 +373,11 @@ exports.commands = {
 			break;
 		}
 		Rooms.rooms.forEach((curRoom, id) => {
-			if (id !== 'global' && curRoom.type !== 'battle') curRoom.addRaw('<div class="broadcast-' + color + '">' + target + '</div>').update();
+			if (id !== 'global' && curRoom.type !== 'battle') curRoom.addRaw(`<div class="broadcast-' + color + '"><b>${target}</b></div>`).update();
 		});
-		this.addModAction(user.name + " globally declared (chat level) " + target);
+		this.modlog(`CHATDECLARE`, null, target);
 	},
-	chatdeclarehelp: ["/cdeclare [message] - Anonymously announces a message to all chatrooms on the server. Requires: ~"],
+	chatdeclarehelp: [`/cdeclare [message] - Anonymously announces a message to all chatrooms on the server. Requires: ~`],
 
 	htmlgdeclare: 'htmlglobaldeclare',
 	htmlglobaldeclare: function (target, room, user) {
@@ -386,9 +392,9 @@ exports.commands = {
 		Users.users.forEach(u => {
 			if (u.connected) u.send(`|pm|~|${u.group}${u.name}|/raw <div class="broadcast-blue"><b>${target}</b></div>`);
 		});
-		this.addModAction(`${user.name} HTML-declared: ${target}`);
+		this.modlog(`HTMLGLOBALDECLARE`, null, target);
 	},
-	htmlglobaldeclarehelp: ["/htmlglobaldeclare [message] - Anonymously announces a message using safe HTML to every room on the server. Requires: ~"],
+	htmlglobaldeclarehelp: [`/htmlglobaldeclare [message] - Anonymously announces a message using safe HTML to every room on the server. Requires: ~`],
 
 	fj: 'forcejoin',
 	forcejoin: function (target, room, user) {
@@ -402,7 +408,7 @@ exports.commands = {
 		if (!Rooms.get(roomid)) return this.sendReply("Room not found.");
 		Users.get(userid).joinRoom(roomid);
 	},
-	forcejoinhelp: ["/forcejoin [target], [room] - Forces a user to join a room"],
+	forcejoinhelp: [`/forcejoin [target], [room] - Forces a user to join a room`],
 
 	usetoken: function (target, room, user, connection, cmd, message) {
 		target = target.split(',');
@@ -597,7 +603,7 @@ exports.commands = {
 			return;
 		}
 	},
-	tellhelp: ['/tell [user], [message] - Leaves a message for an offline user for them to see when they log on next.'],
+	tellhelp: [`/tell [user], [message] - Leaves a message for an offline user for them to see when they log on next.`],
 
 	'!authlist': true,
 	staff: 'authlist',
@@ -819,7 +825,8 @@ exports.commands = {
 		Monitor.adminlog(user.name + ` has disabled the roomintro scroll bar for ${Rooms(target).title}.`);
 	},
 
-	disableintroscrollhelp: ["/disableintroscroll [room] - Disables scroll bar preset in the room's roomintro."],
+	disableintroscrollhelp: [`/disableintroscroll [room] - Disables scroll bar preset in the room's roomintro.`],
+
 	enableintroscroll: function (target, room, user) {
 		if (!this.can('roomowner')) return false;
 		if (!target) return this.errorReply("No Room Specified");
@@ -829,7 +836,7 @@ exports.commands = {
 		Db('disabledScrolls').delete(target);
 		Monitor.adminlog(user.name + ` has enabled the roomintro scroll bar for ${Rooms(target).title}.`);
 	},
-	enableintroscrollhelp: ["/enableintroscroll [room] - Enables scroll bar preset in the room's roomintro."],
+	enableintroscrollhelp: [`/enableintroscroll [room] - Enables scroll bar preset in the room's roomintro.`],
 
 	rk: 'kick',
 	roomkick: 'kick',
@@ -933,7 +940,7 @@ exports.commands = {
 		user.updateIdentity();
 		return this.sendReply("You are now hiding your auth as ' " + tar + "'.");
 	},
-	hidehelp: ["/hide - Hides user's global rank. Requires: & ~"],
+	hidehelp: [`/hide - Hides user's global rank. Requires: & ~`],
 
 	show: 'showauth',
 	showauth: function (target, room, user) {
@@ -942,6 +949,6 @@ exports.commands = {
 		user.updateIdentity();
 		return this.sendReply("You are now showing your authority!");
 	},
-	showhelp: ["/show - Displays user's global rank. Requires: & ~"],
+	showhelp: [`/show - Displays user's global rank. Requires: & ~`],
 
 };
