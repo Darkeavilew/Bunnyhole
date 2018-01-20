@@ -293,7 +293,13 @@ exports.commands = {
 			keys.sort(function (a, b) {
 				if (Db('rpslsrank').get(a, 1000) > Db('rpslsrank').get(b, 1000)) return -1;
 				return 1;});
-			this.sendReplyBox(rankLadder('Rock/Paper/Scissors/Lizard/Spock Ladder', 'RPSLS Ladder Points', Db('rpslsrank').get(user.name, 1000), 'points') + '</div>');
+			keys = keys.slice(0, 100).map(function (user) {
+				return {
+					name: user.name,
+					points: Db('rpslsrank').get(user, 1000),
+				};
+			});
+			this.sendReplyBox(rankLadder('Rock/Paper/Scissors/Lizard/Spock Ladder', 'RPSLS Ladder Points', keys, 'points') + '</div>');
 		},
 		"": "help",
 		"help": function (target, room, user) {
