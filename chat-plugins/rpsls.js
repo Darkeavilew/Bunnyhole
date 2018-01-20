@@ -282,17 +282,18 @@ exports.commands = {
 			this.sendReplyBox("Rank - <b>" + target + "</b>: " + userRank);
 		},
 		ladder: function (target, room, user) {
-			if (!this.runBroadcast()) return false;
-			let html = '<center><b><font size="2">Rock/Paper/Scissors/Lizard/Spock Ladder</font><b></center><br><div style="max-height: 310px; overflow-y: scroll">';
-			let index = 1;
-			let table = Object.keys(Db('rpslsrank').object()).sort(function (a, b) {
+			if (!target) target = 100;
+			target = Number(target);
+			if (isNaN(target)) target = 100;
+			if (!this.runBroadcast()) return;
+			let keys = Db('rpslsrank').keys().map(name => {
+				return {name: name, points: Db('rpslsrank').get(name)};
+			});
+			if (!keys.length) return this.sendReplyBox("The ladder is empty!");
+			keys.sort(function (a, b) {
 				if (Db('rpslsrank').get(a, 1000) > Db('rpslsrank').get(b, 1000)) return -1;
-				return 1;
-			}).slice(0, 100).map(function (u) {
-				return '<tr><td>&nbsp;' + index++ + '&nbsp;</td><td>&nbsp;' + u + '&nbsp;</td><td>&nbsp;' + Db('rpslsrank').get(u, 1000) + "&nbsp;</td></tr>";
-			}).join("");
-			if (!table.length) return this.sendReplyBox("The ladder is empty!");
-			this.sendReplyBox(html + '<table border="1" cellspacing="0" cellpadding="5" width="100%"><tbody><tr><th>Rank</th><th>Username</th><th>RPSLS Ladder Points</th></tr>' + table + "</table></div>");
+				return 1;});
+			this.sendReplyBox(rankLadder('Rock/Paper/Scissors/Lizard/Spock Ladder', 'RPSLS Ladder Points', Db('rpslsrank').get(user.name, 1000), 'points') + '</div>');
 		},
 		"": "help",
 		"help": function (target, room, user) {
