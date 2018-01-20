@@ -31,11 +31,7 @@
   },
   "scripts": {
     "start": "node pokemon-showdown",
-<<<<<<< HEAD
-    "test": "eslint --rulesdir=dev-tools/eslint --cache . && mocha"
-=======
-    "test": "eslint --cache . && tsc && mocha"
->>>>>>> 1c119bf3fa8c28c8c5721e48509cb481f463be57
+    "test": "eslint --cache . && mocha"
   },
   "bin": "./pokemon-showdown",
   "homepage": "http://pokemonshowdown.com",
