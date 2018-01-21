@@ -16,7 +16,7 @@
 		"Users": false, "Punishments": false, "Rooms": false, "Verifier": false, "Chat": false,
 		"Tournaments": false, "Dnsbl": false, "Sockets": false, "TeamValidator": false,
 		"TeamValidatorAsync": false, "Ladders": false, "BH": false, "Db": false, "Economy": false,
-		"moneyName": false, "moneyPlural": false, "Ontime": false, "rankLadder": false
+		"moneyName": false, "moneyPlural": false, "Ontime": false, "sqlite3": false, "rankLadder": false
 	},
 	"extends": "eslint:recommended",
 	"rules": {
