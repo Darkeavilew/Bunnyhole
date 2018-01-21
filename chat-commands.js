@@ -2018,21 +2018,20 @@ exports.commands = {
 
 	rangeban: 'banip',
 	banip: function (target, room, user) {
-		target = this.splitTargetText(target);
-		let targetIp = this.targetUsername.trim();
-		if (!targetIp || !/^[0-9.]+(?:\.\*)?$/.test(targetIp)) return this.parse('/help banip');
-		if (!target) return this.errorReply("/banip requires a ban reason");
+		const [ip, reason] = this.splitOne(target);
+		if (!ip || !/^[0-9.]+(?:\.\*)?$/.test(ip)) return this.parse('/help banip');
+		if (!reason) return this.errorReply("/banip requires a ban reason");
 
 		if (!this.can('rangeban')) return false;
-		const targetDesc = "IP " + (targetIp.endsWith('*') ? "range " : "") + targetIp;
+		const ipDesc = "IP " + (ip.endsWith('*') ? "range " : "") + ip;
 
-		const curPunishment = Punishments.ipSearch(targetIp);
+		const curPunishment = Punishments.ipSearch(ip);
 		if (curPunishment && curPunishment[0] === 'BAN') {
-			return this.errorReply(`The ${targetDesc} is already temporarily banned.`);
+			return this.errorReply(`The ${ipDesc} is already temporarily banned.`);
 		}
-		Punishments.banRange(targetIp, target);
-		this.addModAction(`${user.name} hour-banned the ${targetDesc}: ${target}`);
-		this.modlog('RANGEBAN', null, target);
+		Punishments.banRange(ip, reason);
+		this.addModAction(`${user.name} hour-banned the ${ipDesc}: ${reason}`);
+		this.modlog('RANGEBAN', null, reason);
 	},
 	baniphelp: [`/banip [ip] - Globally bans this IP or IP range for an hour. Accepts wildcards to ban ranges. Existing users on the IP will not be banned. Requires: & ~`],
 
@@ -2054,23 +2053,22 @@ exports.commands = {
 
 	rangelock: 'lockip',
 	lockip: function (target, room, user) {
-		target = this.splitTargetText(target);
-		let targetIp = this.targetUsername.trim();
-		if (!targetIp || !/^[0-9.]+(?:\.\*)?$/.test(targetIp)) return this.parse('/help lockip');
-		if (!target) return this.errorReply("/lockip requires a lock reason");
+		const [ip, reason] = this.splitOne(target);
+		if (!ip || !/^[0-9.]+(?:\.\*)?$/.test(ip)) return this.parse('/help lockip');
+		if (!reason) return this.errorReply("/lockip requires a lock reason");
 
 		if (!this.can('rangeban')) return false;
-		const targetDesc = "IP " + (targetIp.endsWith('*') ? "range " : "") + targetIp;
+		const ipDesc = "IP " + (ip.endsWith('*') ? "range " : "") + ip;
 
-		const curPunishment = Punishments.ipSearch(targetIp);
+		const curPunishment = Punishments.ipSearch(ip);
 		if (curPunishment && (curPunishment[0] === 'BAN' || curPunishment[0] === 'LOCK')) {
 			const punishDesc = curPunishment[0] === 'BAN' ? `temporarily banned` : `temporarily locked`;
-			return this.errorReply(`The ${targetDesc} is already ${punishDesc}.`);
+			return this.errorReply(`The ${ipDesc} is already ${punishDesc}.`);
 		}
 
-		Punishments.lockRange(targetIp, target);
-		this.addModAction(`${user.name} hour-locked the ${targetDesc}: ${target}`);
-		this.modlog('RANGELOCK', null, target);
+		Punishments.lockRange(ip, reason);
+		this.addModAction(`${user.name} hour-locked the ${ipDesc}: ${reason}`);
+		this.modlog('RANGELOCK', null, reason);
 	},
 	lockiphelp: [`/lockip [ip] - Globally locks this IP or IP range for an hour. Accepts wildcards to ban ranges. Existing users on the IP will not be banned. Requires: & ~`],
 
@@ -2386,12 +2384,12 @@ exports.commands = {
 	hidealttext: 'hidetext',
 	hidealtstext: 'hidetext',
 	hidetext: function (target, room, user, connection, cmd) {
-		if (!target) return this.parse('/help hidetext');
+		if (!target) return this.parse(`/help hidetext`);
 
 		this.splitTarget(target);
 		let targetUser = this.targetUser;
 		let name = this.targetUsername;
-		if (!targetUser) return this.errorReply("User '" + name + "' not found.");
+		if (!targetUser) return this.errorReply(`User "${name}" not found.`);
 		let userid = targetUser.getLastId();
 		let hidetype = '';
 		if (!user.can('mute', targetUser, room) && !this.can('ban', targetUser, room)) return;
@@ -2399,26 +2397,26 @@ exports.commands = {
 		if (targetUser.locked || Punishments.isRoomBanned(targetUser, room.id) || room.isMuted(targetUser) || user.can('rangeban')) {
 			hidetype = 'hide|';
 		} else {
-			return this.errorReply("User '" + name + "' is not muted/banned from this room or locked.");
+			return this.errorReply(`User "${name}" is not muted/banned from this room or locked.`);
 		}
 
 		if (cmd === 'hidealtstext' || cmd === 'hidetextalts' || cmd === 'hidealttext') {
-			this.addModAction(`${targetUser.name}'s alts' messages were cleared from ${room.title} by ${user.name}.`);
+			this.addModAction(`${name}'s alts' messages were cleared from ${room.title} by ${user.name}.`);
 			this.modlog('HIDEALTSTEXT', targetUser, null, {noip: 1});
 			this.add(`|unlink|${hidetype}${userid}`);
 
 			const alts = targetUser.getAltUsers(true);
 			for (const alt of alts) {
-				this.add(`|unlink|${hidetype}${alt.name}`);
+				this.add(`|unlink|${hidetype}${alt.getLastId()}`);
 			}
-			for (const name in targetUser.prevNames) {
-				this.add(`|unlink|${hidetype}${targetUser.prevNames[name]}`);
+			for (const prevName in targetUser.prevNames) {
+				this.add(`|unlink|${hidetype}${targetUser.prevNames[prevName]}`);
 			}
 		} else {
-			this.addModAction("" + targetUser.name + "'s messages were cleared from  " + room.title + " by " + user.name + ".");
+			this.addModAction(`${name}'s messages were cleared from ${room.title} by ${user.name}.`);
 			this.modlog('HIDETEXT', targetUser, null, {noip: 1, noalts: 1});
-			this.add('|unlink|' + hidetype + userid);
-			if (userid !== toId(this.inputUsername)) this.add('|unlink|' + hidetype + toId(this.inputUsername));
+			this.add(`|unlink|${hidetype}${userid}`);
+			if (userid !== toId(this.inputUsername)) this.add(`|unlink|${hidetype}${toId(this.inputUsername)}`);
 		}
 	},
 	hidetexthelp: [
