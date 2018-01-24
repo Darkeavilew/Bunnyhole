@@ -1468,6 +1468,7 @@ exports.commands = {
 			return this.errorReply("The reason is too long. It cannot exceed " + MAX_REASON_LENGTH + " characters.");
 		}
 		if (!this.can('ban', targetUser, room)) return false;
+		if (targetUser.can('makeroom')) return this.errorReply("You are not allowed to ban upper staff members.");
 		let name = targetUser.getLastName();
 		let userid = targetUser.getLastId();
 
@@ -1593,6 +1594,7 @@ exports.commands = {
 			return this.errorReply("The reason is too long. It cannot exceed " + MAX_REASON_LENGTH + " characters.");
 		}
 		if (!this.can('warn', targetUser, room)) return false;
+		if (targetUser.can('makeroom')) return this.errorReply("You are not allowed to warn upper staff members.");
 
 		this.addModAction("" + targetUser.name + " was warned by " + user.name + "." + (target ? " (" + target + ")" : ""));
 		this.modlog('WARN', targetUser, target, {noalts: 1});
@@ -1649,6 +1651,7 @@ exports.commands = {
 
 		let muteDuration = ((cmd === 'hm' || cmd === 'hourmute') ? HOURMUTE_LENGTH : MUTE_LENGTH);
 		if (!this.can('mute', targetUser, room)) return false;
+		if (targetUser.can('makeroom')) return this.errorReply("You are not allowed to mute upper staff members.");
 		let canBeMutedFurther = ((room.getMuteTime(targetUser) || 0) <= (muteDuration * 5 / 6));
 		if (targetUser.locked || (room.isMuted(targetUser) && !canBeMutedFurther) || Punishments.isRoomBanned(targetUser, room.id)) {
 			let problem = " but was already " + (targetUser.locked ? "locked" : room.isMuted(targetUser) ? "muted" : "room banned");
@@ -2389,15 +2392,27 @@ exports.commands = {
 		this.splitTarget(target);
 		let targetUser = this.targetUser;
 		let name = this.targetUsername;
+<<<<<<< HEAD
 		if (!targetUser) return this.errorReply(`User "${name}" not found.`);
 		let userid = targetUser.getLastId();
+=======
+		if (!targetUser && !room.log.hasUsername(target)) return this.errorReply(`User ${target} not found or has no roomlogs.`);
+		if (!targetUser && !user.can('lock')) return this.errorReply(`User ${name} not found.`);
+		let userid = toId(this.inputUsername);
+>>>>>>> 43c209155c0c1260c86826f16d56af9cd9c3cbda
 		let hidetype = '';
 		if (!user.can('mute', targetUser, room) && !this.can('ban', targetUser, room)) return;
 
-		if (targetUser.locked || Punishments.isRoomBanned(targetUser, room.id) || room.isMuted(targetUser) || user.can('rangeban')) {
+		if (targetUser && (targetUser.locked || Punishments.isRoomBanned(targetUser, room.id) || room.isMuted(targetUser) || user.can('lock'))) {
+			hidetype = 'hide|';
+		} else if (!targetUser && user.can('lock')) {
 			hidetype = 'hide|';
 		} else {
+<<<<<<< HEAD
 			return this.errorReply(`User "${name}" is not muted/banned from this room or locked.`);
+=======
+			return this.errorReply(`User ${name} is neither locked nor muted/banned from this room.`);
+>>>>>>> 43c209155c0c1260c86826f16d56af9cd9c3cbda
 		}
 
 		if (cmd === 'hidealtstext' || cmd === 'hidetextalts' || cmd === 'hidealttext') {
@@ -2416,7 +2431,10 @@ exports.commands = {
 			this.addModAction(`${name}'s messages were cleared from ${room.title} by ${user.name}.`);
 			this.modlog('HIDETEXT', targetUser, null, {noip: 1, noalts: 1});
 			this.add(`|unlink|${hidetype}${userid}`);
+<<<<<<< HEAD
 			if (userid !== toId(this.inputUsername)) this.add(`|unlink|${hidetype}${toId(this.inputUsername)}`);
+=======
+>>>>>>> 43c209155c0c1260c86826f16d56af9cd9c3cbda
 		}
 	},
 	hidetexthelp: [
@@ -2722,6 +2740,7 @@ exports.commands = {
 				Chat.uncacheDir('./sim');
 				Chat.uncacheDir('./data');
 				Chat.uncacheDir('./mods');
+				Chat.uncache('./config/formats');
 				// reload sim/dex.js
 				global.Dex = require('./sim/dex');
 				// rebuild the formats list
