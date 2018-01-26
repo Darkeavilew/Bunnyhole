@@ -236,6 +236,7 @@ exports.commands = {
 		give: function (target, room, user) {
 			if (!this.can('ban')) return false;
 			if (!target) return this.parse('/profileteam help');
+			if (!Db('hasteam').has(user)) return this.errorReply('This user already has the ability to set their team.');
 			let targetId = toId(target);
 			Db('hasteam').set(targetId, 1);
 			this.sendReply(target + ' has been given the ability to set their team.');
