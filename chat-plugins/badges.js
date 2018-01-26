@@ -45,7 +45,7 @@ exports.commands = {
 			let img = parts[3].trim();
 			if (Db('badgeData').has(badgeName)) return this.errorReply('This badge already exists.');
 			Db('badgeData').set(badgeName, [description, img]);
-			this.privateModAction(user.name + " created the badge '" + badgeName + ".");
+			this.privateModAction(user.name + " created the badge '" + badgeName + "'.");
 			Users.get(user.userid).popup('|modal||html|You have succesfully created the badge ' + badgeName + '<img src ="' + img + '" width="16" height="16">');
 			break;
 		case 'list':
