@@ -165,10 +165,12 @@ exports.commands = {
 		if (targets.length === 0) {
 			return this.sendReply('||' + this.targetUsername + " is already shadow banned or isn't named.");
 		}
+		this.modlog(`SHADOWBAN`, this.targetUser, target);
 		this.privateModAction("(" + user.name + " has shadow banned: " + targets.join(", ") + (reason ? " (" + reason + ")" : "") + ")");
 
 		//return this.parse('/' + action + ' ' + toId(this.targetUser) + ',' + reason);
 	},
+	shadowbanhelp: ["/shadowban [username], (reason) - Sends all the user's messages to the shadow ban room. Requires %, @, &, ~"],
 
 	unspam: 'unshadowban',
 	unsban: 'unshadowban',
@@ -182,8 +184,10 @@ exports.commands = {
 		if (targets.length === 0) {
 			return this.sendReply('||' + this.targetUsername + " is not shadow banned.");
 		}
+		this.modlog(`UNSHADOWBAN`, this.targetUser);
 		this.privateModAction("(" + user.name + " has shadow unbanned: " + targets.join(", ") + ")");
 	},
+	unshadowbanhelp: ['/unshadowban [user] - Undoes a shadowban. Requires %, @, &, ~'],
 
 	sbanlist: function (target, room, user) {
 		if (!target && !this.can('lock')) return this.sendReply("The command '/sbanlist' was unrecognized.  To send a message starting with '/sbanlist', type '//sbanlist'.");
