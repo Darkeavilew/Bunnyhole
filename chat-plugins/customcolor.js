@@ -64,6 +64,7 @@ exports.commands = {
 			if (!target[1]) return this.parse('/help customcolor');
 			if (toId(target[0]).length > 19) return this.errorReply("Usernames are not this long...");
 			this.sendReply("|raw|You have given <b><font color=" + target[1] + ">" + Chat.escapeHTML(target[0]) + "</font></b> a custom color.");
+			this.modlog(`CUSTOMCOLOR`, target[0], `gave color ${target[1]}`);
 			this.privateModAction("(" + target[0] + " has received custom color: '" + target[1] + "' from " + user.name + ".)");
 			Monitor.adminlog(target[0] + " has received custom color: '" + target[1] + "' from " + user.name + ".");
 			customColors[toId(target[0])] = target[1];
@@ -76,6 +77,7 @@ exports.commands = {
 			delete customColors[toId(target)];
 			updateColor();
 			this.sendReply("You removed " + target + "'s custom color.");
+			this.modlog(`CUSTOMCOLOR`, target, `removed custom color`);
 			this.privateModAction("(" + target + "'s custom color was removed by " + user.name + ".)");
 			Monitor.adminlog(target + "'s custom color was removed by " + user.name + ".");
 			if (Users(target) && Users(target).connected) Users(target).popup(user.name + " removed your custom color.");
@@ -91,6 +93,7 @@ exports.commands = {
 		reload: function (target, room, user) {
 			if (!this.can('hotpatch')) return false;
 			updateColor();
+			this.modlog(`CUSTOMCOLOR`, null, `reloaded colors`);
 			this.privateModAction("(" + user.name + " has reloaded custom colours.)");
 		},
 		'': function (target, room, user) {
