@@ -2451,10 +2451,7 @@ exports.BattleFormatsData = {
 		randomDoubleBattleMoves: ["nastyplot", "darkpulse", "taunt", "heatwave", "hiddenpowergrass", "protect"],
 		requiredItem: "Houndoominite",
 		tier: "UU",
-<<<<<<< HEAD
-=======
 		doublesTier: "DUU",
->>>>>>> 27dc108d6c2849b9b937563c020ea834293a0f19
 	},
 	phanpy: {
 		randomBattleMoves: ["stealthrock", "earthquake", "iceshard", "headsmash", "knockoff", "seedbomb", "superpower", "playrough"],
