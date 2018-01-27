@@ -85,6 +85,7 @@ exports.commands = {
 
 		clearRoom(room);
 
+		this.modlog(`CLEARALL`);
 		this.privateModAction(`(${user.name} used /clearall.)`);
 	},
 
@@ -94,6 +95,7 @@ exports.commands = {
 
 		Rooms.rooms.forEach(room => clearRoom(room));
 		Users.users.forEach(user => user.popup('All rooms have been cleared.'));
+		this.modlog(`GLOBALCLEARALL`);
 		this.privateModAction(`(${user.name} used /globalclearall.)`);
 	},
 
@@ -170,6 +172,7 @@ exports.commands = {
 			let message = '|pm|' + pmName + '|' + room.users[i].getIdentity() + '| ' + target;
 			room.users[i].send(message);
 		}
+		this.modlog(`MASSROOMPM`, null, target);
 		this.privateModAction('(' + Chat.escapeHTML(user.name) + ' mass room PM\'ed: ' + target + ')');
 	},
 
@@ -865,10 +868,12 @@ exports.commands = {
 		}
 		if (!this.can('kick', targetUser, room)) return false;
 		let msg = "kicked from room " + room.id + " by " + user.name + (target ? " (" + target + ")" : "") + ".";
+		this.modlog(`ROOMKICK`, targetUser, target);
 		this.addModAction("" + targetUser.name + " was " + msg);
 		targetUser.popup("You have been " + msg);
 		targetUser.leaveRoom(room);
 	},
+	kickhelp: ["/kick - Kick a user out of a room. Requires: % @ # & ~"],
 
 	kickall: function (target, room, user) {
 		if (!this.can('declare')) return this.errorReply("/kickall - Access denied.");
