@@ -486,24 +486,24 @@ exports.commands = {
 			if (!this.userid === 'darknightz' || 'fairyserena') return this.errorReply('This command can only be used by DarkNightz or Fairy Serena');
 			let hoster = toId(target);
 			if (!hoster) return this.parse('/hoster');
-			if (isHoster(hoster)) return this.errorReply(hoster + ' is already a vip.');
+			if (isHoster(hoster)) return this.errorReply(hoster + ' is already a hoster.');
 			Db('hoster').set(hoster, 1);
-			this.sendReply(hoster + ' has been granted with vip status.');
+			this.sendReply(hoster + ' has been granted with hoster status.');
 		},
 		remove: function (target, room, user) {
 			let userid = user.userid;
 			if (!isHoster(userid)) return false;
 			let hoster = toId(target);
 			if (!hoster) return this.parse('/hoster');
-			if (!isHoster(hoster)) return this.errorReply(hoster + ' is not a vip.');
+			if (!isHoster(hoster)) return this.errorReply(hoster + ' is not a hoster.');
 			Db('hoster').delete(hoster);
-			this.sendReply(hoster + '\'s vip status has been taken.');
+			this.sendReply(hoster + '\'s hoster status has been taken.');
 		},
 		list: function (target, room, user) {
 			let userid = user.userid;
 			if (!isHoster(userid)) return false;
-			if (!Object.keys(Db('hoster').object()).length) return this.errorReply('There seems to be no user with vip status.');
-			user.popup('|html|<center><b><u>Super Administrators.</u></b></center>' + '<br /><br />' + Object.keys(Db('hoster').object()).join('</strong><br />'));
+			if (!Object.keys(Db('hoster').object()).length) return this.errorReply('There seems to be no user with hoster status.');
+			user.popup('|html|<center><b><u>Bunnyhole Hosters.</u></b></center>' + '<br /><br />' + Object.keys(Db('hoster').object()).join('</strong><br />'));
 		},
 		'': function (target, room, user) {
 			if (!this.can('hotpatch')) return false;
