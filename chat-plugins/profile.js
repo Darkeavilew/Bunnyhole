@@ -237,8 +237,8 @@ exports.commands = {
 		give: function (target, room, user) {
 			if (!this.can('ban')) return false;
 			if (!target) return this.parse('/profileteam help');
-			if (!Db('hasteam').has(target)) return this.errorReply('This user already has the ability to set their team.');
 			let targetId = toId(target);
+			if (!Db('hasteam').has(targetId)) return this.errorReply('This user already has the ability to set their team.');
 			Db('hasteam').set(targetId, 1);
 			this.sendReply(target + ' has been given the ability to set their team.');
 			Users(target).popup('You have been given the ability to set your profile team.');
@@ -480,17 +480,19 @@ exports.commands = {
 	},
 
 	profilehelp: [
-		"/profile [user] - Shows a user's profile. Defaults to yourself.",
-		"/pteam give [user] - Gives a user access to edit their profile team. Requires + or higher.",
-		"/pteam add [slot], [dex # of the Pokemon] - Adds a Pokemon onto your profile team. Requires profile edit access.",
-		"/pteam take [user] - Revokes a user's access to edit their profile team. Requires + or higher.",
-		"/type set [type] - Set your favorite type.",
-		"/type delete - Delete your favorite type.",
-		"/nature set [nature] - Set your nature.",
-		"/nature delete - Delete your nature.",
-		"/bg set [user], [link] - Sets the user's profile background. Requires + or higher.",
-		"/bg delete [user] - Removes the user's profile background. Requires + or higher.",
-		"/fc set [friend code] - Sets your Friend Code.",
-		"/fc delete [friend code] - Removes your Friend Code.",
+		`/profile [user] - Shows a user's profile. Defaults to yourself.`,
+		`/pteam give [user] - Gives a user access to edit their profile team. Requires + or higher.`,
+		`/pteam add [slot], [dex # of the Pokemon] - Adds a Pokemon onto your profile team. Requires profile edit access.`,
+		`/pteam take [user] - Revokes a user's access to edit their profile team. Requires + or higher.`,
+		`/hometown set [town] - Sets your Hometown.`,
+		`/hometown delete - Removes your Hometown.`,
+		`/type set [type] - Set your favorite type.`,
+		`/type delete - Delete your favorite type.`,
+		`/nature set [nature] - Set your nature.`,
+		`/nature delete - Delete your nature.`,
+		`/bg set [user], [link] - Sets the user's profile background. Requires + or higher.`,
+		`/bg delete [user] - Removes the user's profile background. Requires + or higher.`,
+		`/fc set [friend code] - Sets your Friend Code.`,
+		`/fc delete [friend code] - Removes your Friend Code.`,
 	],
 };
