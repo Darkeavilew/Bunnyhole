@@ -670,85 +670,98 @@ exports.commands = {
 
 	rf: 'roomfounder',
 	roomfounder: function (target, room, user) {
-		if (!room.chatRoomData) return this.sendReply("/roomfounder - This room isn't designed for per-room moderation to be added.");
+		if (!room.chatRoomData) return this.sendReply(`/roomfounder - This room isn't designed for per-room moderation to be added.`);
 		target = this.splitTarget(target, true);
 		let targetUser = this.targetUser;
-		if (!targetUser) return this.sendReply("User '" + this.targetUsername + "' is not online.");
+		if (!targetUser) return this.sendReply(`User '${this.targetUsername}' is not online.`);
 		if (!this.can('declare')) return false;
-		if (room.isPersonal) return this.sendReply("You can't do this in personal rooms.");
+		if (room.isPersonal) return this.sendReply(`You can't do this in personal rooms.`);
 		if (!room.auth) room.auth = room.chatRoomData.auth = {};
-		if (!room.leagueauth) room.leagueauth = room.chatRoomData.leagueauth = {};
 		let name = targetUser.name;
 		room.auth[targetUser.userid] = '#';
 		room.founder = targetUser.userid;
-		this.addModAction(name + ' was appointed to Room Founder by ' + user.name + '.');
-		room.onUpdateIdentity(targetUser);
+		this.modlog(`ROOMFOUNDER`, name);
+		this.addModAction(`${name} was appointed Room Founder by ${user.name}.`);
+		if (targetUser) {
+			targetUser.popup(`|html|You were appointed Room Founder by ${BH.nameColor(user.name, true)} in ${room.title}.`);
+			room.onUpdateIdentity(targetUser);
+		}
 		room.chatRoomData.founder = room.founder;
 		Rooms.global.writeChatRoomData();
 	},
+	roomfounderhelp: [`/roomfounder [username] - Appoints [username] as a room founder. Requires: & ~`],
 
 	roomdefounder: 'deroomfounder',
 	deroomfounder: function (target, room, user) {
-		if (!room.auth) return this.sendReply("/roomdefounder - This room isn't designed for per-room moderation");
+		if (!room.auth) return this.sendReply(`/roomdefounder - This room isn't designed for per-room moderation`);
 		target = this.splitTarget(target, true);
 		let targetUser = this.targetUser;
 		let name = this.targetUsername;
 		let userid = toId(name);
-		if (room.isPersonal) return this.sendReply("You can't do this in personal rooms.");
-		if (!userid || userid === '') return this.sendReply("User '" + name + "' does not exist.");
-		if (room.auth[userid] !== '#') return this.sendReply("User '" + name + "' is not a room founder.");
+		if (room.isPersonal) return this.sendReply(`You can't do this in personal rooms.`);
+		if (!userid || userid === '') return this.sendReply(`User '${name}' does not exist.`);
+		if (room.auth[userid] !== '#') return this.sendReply(`User '${name}' is not a roomfounder.`);
 		if (!this.can('declare')) return false;
 		delete room.auth[userid];
 		delete room.founder;
-		this.sendReply(name + ' was demoted from Room Founder by ' + user.name + '.');
+		this.modlog(`ROOMDEFOUNDER`, name);
+		this.sendReply(`${name} was demoted from Room Founder by ${user.name}.`);
 		if (targetUser) targetUser.updateIdentity();
 		if (room.chatRoomData) Rooms.global.writeChatRoomData();
 	},
+	roomdefounderhelp: [`/roomdefounder [username] - Revoke [username]'s room founder position. Requires: & ~`],
 
 	 rl: 'roomleader',
 	roomleader: function (target, room, user) {
 		if (!room.chatRoomData) {
-			return this.sendReply("/roomleader - This room isn't designed for per-room moderation to be added");
+			return this.sendReply(`/roomleader - This room isn't designed for per-room moderation to be added`);
 		}
 		target = this.splitTarget(target, true);
 		let targetUser = this.targetUser;
 
-		if (!targetUser) return this.sendReply("User '" + this.targetUsername + "' is not online.");
+		if (!targetUser) return this.sendReply(`User '${this.targetUsername}' is not online.`);
 
-		if (!room.founder) return this.sendReply('The room needs a room founder before it can have a room leader.');
-		if (room.founder !== user.userid && !this.can('makeroom')) return this.sendReply('/roomleader - Access denied.');
+		if (!room.founder) return this.sendReply(`The room needs a room founder before it can have a room leader.`);
+		if (room.founder !== user.userid && !this.can('makeroom')) return this.sendReply(`/roomleader - Access denied.`);
 
 		if (!room.auth) room.auth = room.chatRoomData.auth = {};
 
 		let name = targetUser.name;
 
 		room.auth[targetUser.userid] = '&';
-		this.addModAction("" + name + " was appointed Room Leader by " + user.name + ".");
-		room.onUpdateIdentity(targetUser);
+		this.modlog(`ROOMLEADER`, name);
+		this.addModAction(`${name} was appointed Room Leader by ${user.name}.`);
+		if (targetUser) {
+			targetUser.popup(`You were appointed Room Leader by ${user.name} in ${room.title}.`);
+			room.onUpdateIdentity(targetUser);
+		}
 		Rooms.global.writeChatRoomData();
 	},
+	roomleaderhelp: [`/roomleader [username] - Appoints [username] as a room leader. Requires: # & ~`],
 
 	roomdeleader: 'deroomleader',
 	deroomleader: function (target, room, user) {
 		if (!room.auth) {
-			return this.sendReply("/deroomleader - This room isn't designed for per-room moderation");
+			return this.sendReply(`/deroomleader - This room isn't designed for per-room moderation`);
 		}
 		target = this.splitTarget(target, true);
 		let targetUser = this.targetUser;
 		let name = this.targetUsername;
 		let userid = toId(name);
-		if (!userid || userid === '') return this.sendReply("User '" + name + "' does not exist.");
+		if (!userid || userid === '') return this.sendReply(`User '${name}' does not exist.`);
 
-		if (room.auth[userid] !== '&') return this.sendReply("User '" + name + "' is not a room leader.");
+		if (room.auth[userid] !== '&') return this.sendReply(`User '${name}' is not a room leader.`);
 		if (!room.founder || user.userid !== room.founder && !this.can('makeroom', null, room)) return false;
 
 		delete room.auth[userid];
-		this.sendReply("(" + name + " is no longer Room Leader.)");
+		this.modlog(`ROOMDELEADER`, name);
+		this.sendReply(`(${name} is no longer Room Leader.)`);
 		if (targetUser) targetUser.updateIdentity();
 		if (room.chatRoomData) {
 			Rooms.global.writeChatRoomData();
 		}
 	},
+	roomdeleaderhelp: [`/roomdeleader [username] - Revoke [username]'s room leader position. Requires: # & ~`],
 
 	'!errorlog': true,
 	errorlog: function (target, room, user, connection) {
