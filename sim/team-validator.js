@@ -788,20 +788,6 @@ class Validator {
 		let problems = [];
 
 		if (problem) {
-<<<<<<< HEAD
-			let problemString = `${name} can't learn ${problem.moveName}`;
-			if (problem.type === 'incompatibleAbility') {
-				problemString = problemString.concat(` because it's incompatible with its ability.`);
-			} else if (problem.type === 'incompatible') {
-				problemString = problemString.concat(` because it's incompatible with another move.`);
-			} else if (problem.type === 'oversketched') {
-				let plural = (parseInt(problem.maxSketches) === 1 ? '' : 's');
-				problemString = problemString.concat(` because it can only sketch ${problem.maxSketches} move${plural}.`);
-			} else if (problem.type === 'pastgen') {
-				problemString = problemString.concat(` because it needs to be from generation ${problem.gen} or later.`);
-			} else {
-				problemString = problemString.concat(`.`);
-=======
 			let problemString = `${name}'s move ${problem.moveName}`;
 			if (problem.type === 'incompatibleAbility') {
 				problemString += ` can only be learned in past gens without Hidden Abilities.`;
@@ -816,7 +802,6 @@ class Validator {
 				problemString = `${name} can't learn ${problem.moveName}.`;
 			} else {
 				throw new Error(`Unrecognized problem ${JSON.stringify(problem)}`);
->>>>>>> e35bd7048d9e52e6d1b4bc923474a0b156514c62
 			}
 			problems.push(problemString);
 		}
