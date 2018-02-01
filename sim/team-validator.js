@@ -8,6 +8,8 @@
  */
 
 'use strict';
+const Dex = require('./dex');
+const toId = Dex.getId;
 
 /**
  * Keeps track of how a pokemon with a given set might be obtained.
@@ -27,6 +29,7 @@
  * @property {string} [babyOnly]
  * @property {string} [sketchMove] limit 1 in fakemon Sketch-as-egg-move formats
  * @property {string} [hm] limit 1 HM transferred from gen 4 to 5
+ * @property {string[]} [restrictiveMoves]
  * @property {(string | 'self')[]} [limitedEgg] list of egg moves
  * @property {true} [fastCheck]
  */
@@ -522,7 +525,7 @@ class Validator {
 			problems.push(`${name} must be at least level ${template.evoLevel} to be evolved.`);
 		}
 		if (!lsetData.sources && lsetData.sourcesBefore <= 3 && dex.getAbility(set.ability).gen === 4 && !template.prevo && dex.gen <= 5) {
-			problems.push(`${name} has a gen 4 ability and isn't evolved - it can't use anything from gen 3.`);
+			problems.push(`${name} has a gen 4 ability and isn't evolved - it can't use moves from gen 3.`);
 		}
 		if (!lsetData.sources && lsetData.sourcesBefore < 6 && lsetData.sourcesBefore >= 3 && (isHidden || dex.gen <= 5) && template.gen <= lsetData.sourcesBefore) {
 			let oldAbilities = dex.mod('gen' + lsetData.sourcesBefore).getTemplate(set.species).abilities;
@@ -785,6 +788,7 @@ class Validator {
 		let problems = [];
 
 		if (problem) {
+<<<<<<< HEAD
 			let problemString = `${name} can't learn ${problem.moveName}`;
 			if (problem.type === 'incompatibleAbility') {
 				problemString = problemString.concat(` because it's incompatible with its ability.`);
@@ -797,6 +801,22 @@ class Validator {
 				problemString = problemString.concat(` because it needs to be from generation ${problem.gen} or later.`);
 			} else {
 				problemString = problemString.concat(`.`);
+=======
+			let problemString = `${name}'s move ${problem.moveName}`;
+			if (problem.type === 'incompatibleAbility') {
+				problemString += ` can only be learned in past gens without Hidden Abilities.`;
+			} else if (problem.type === 'incompatible') {
+				problemString = `${name}'s moves ${lsetData.restrictiveMoves.join(', ')} are incompatible.`;
+			} else if (problem.type === 'oversketched') {
+				let plural = (parseInt(problem.maxSketches) === 1 ? '' : 's');
+				problemString += ` can't be Sketched because it can only Sketch ${problem.maxSketches} move${plural}.`;
+			} else if (problem.type === 'pastgen') {
+				problemString += ` is only available in generation ${problem.gen} or later.`;
+			} else if (problem.type === 'invalid') {
+				problemString = `${name} can't learn ${problem.moveName}.`;
+			} else {
+				throw new Error(`Unrecognized problem ${JSON.stringify(problem)}`);
+>>>>>>> e35bd7048d9e52e6d1b4bc923474a0b156514c62
 			}
 			problems.push(problemString);
 		}
@@ -1215,6 +1235,11 @@ class Validator {
 			if (lsetData.hm) return {type: 'incompatible'};
 			lsetData.hm = moveid;
 		}
+
+		if (!lsetData.restrictiveMoves) {
+			lsetData.restrictiveMoves = [];
+		}
+		lsetData.restrictiveMoves.push(move.name);
 
 		// Now that we have our list of possible sources, intersect it with the current list
 		if (!sourcesBefore && !sources.length) {

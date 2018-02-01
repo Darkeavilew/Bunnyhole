@@ -382,9 +382,7 @@ class ModdedDex {
 				}
 			}
 			if (!template.tier) template.tier = 'Illegal';
-			if (!template.doublesTier) {
-				template.doublesTier = template.tier;
-			}
+			if (!template.doublesTier) template.doublesTier = template.tier;
 		} else {
 			template = new Data.Template({name, exists: false});
 		}
@@ -994,17 +992,17 @@ class ModdedDex {
 
 	/**
 	 * @param {Format} format
-	 * @param {[number, number, number, number]} [seed]
+	 * @param {PRNG | PRNGSeed?} [seed]
 	 */
-	getTeamGenerator(format, seed) {
+	getTeamGenerator(format, seed = null) {
 		const TeamGenerator = require(dexes['base'].forFormat(format).dataDir + '/random-teams');
 		return new TeamGenerator(format, seed);
 	}
 	/**
 	 * @param {Format} format
-	 * @param {[number, number, number, number]} [seed]
+	 * @param {PRNG | PRNGSeed?} [seed]
 	 */
-	generateTeam(format, seed) {
+	generateTeam(format, seed = null) {
 		return this.getTeamGenerator(format, seed).generateTeam();
 	}
 
@@ -1186,10 +1184,14 @@ class ModdedDex {
 
 	/**
 	 * @param {string} buf
-	 * @return {?PokemonSet[]}
+	 * @return {PokemonSet[]?}
 	 */
 	fastUnpackTeam(buf) {
 		if (!buf) return null;
+		if (typeof buf !== 'string') return buf;
+		if (buf.charAt(0) === '[' && buf.charAt(buf.length - 1) === ']') {
+			buf = this.packTeam(JSON.parse(buf));
+		}
 
 		let team = [];
 		let i = 0, j = 0;
