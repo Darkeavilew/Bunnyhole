@@ -227,7 +227,6 @@ exports.Formats = [
 		},
 	},
 	{
-<<<<<<< HEAD
 		name: "[Gen 7] Perseverance",
 
 		effectType: 'Format',
@@ -261,7 +260,10 @@ exports.Formats = [
 			for (let i = 0, len = allPokemon.length; i < len; i++) {
 				allPokemon[i].maxhp *= 5;
 				allPokemon[i].hp = allPokemon[i].maxhp;
-=======
+			}
+		},
+	},
+	{
 		name: "[Gen 7] Ultra Sinnoh Classic",
 		desc: [`&bullet; <a href="http://www.smogon.com/forums/threads/3627404/">Ultra Sinnoh Classic Discussion</a>`],
 
@@ -279,7 +281,6 @@ exports.Formats = [
 			}
 			if (item.zMove) {
 				return [`(${set.name} is holding ${item.name})`, `Z-Crystals are banned in Ultra Sinnoh Classic.`];
->>>>>>> 5ae3dc885fe4e752f6fe3fd5c394d87648f359e2
 			}
 		},
 	},
