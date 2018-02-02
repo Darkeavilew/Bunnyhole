@@ -1532,8 +1532,10 @@ exports.commands = {
 		this.add('|unlink|hide|' + userid);
 		if (userid !== toId(this.inputUsername)) this.add('|unlink|hide|' + toId(this.inputUsername));
 
-		if (!room.isPrivate && room.chatRoomData) {
+		if (room.isPrivate !== true && room.chatRoomData) {
 			this.globalModlog("ROOMBAN", targetUser, " by " + user.userid + (target ? ": " + target : ""));
+		} else {
+			this.modlog("ROOMBAN", targetUser, " by " + user.userid + (target ? ": " + target : ""));
 		}
 		return true;
 	},
@@ -2835,7 +2837,7 @@ exports.commands = {
 		} else {
 			return this.errorReply("This hot-patch is not an option to disable.");
 		}
-		Rooms.global.notifyRooms(['development', 'staff', 'upperstaff'], `|c|${user.getIdentity()}|/log ${user.name} has disabled hot-patching ${hotpatch}.`);
+		Rooms.global.notifyRooms(['development', 'staff', 'upperstaff'], `|c|${user.getIdentity()}|/log ${user.name} has disabled hot-patching ${hotpatch}. Reason: ${reason}`);
 	},
 	nohotpatchhelp: [`/nohotpatch [chat|formats|battles|validator|tournaments|punishments|all] [reason] - Disables hotpatching the specified part of the simulator. Requires: ~`],
 

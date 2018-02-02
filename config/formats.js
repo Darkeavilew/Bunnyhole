@@ -227,6 +227,7 @@ exports.Formats = [
 		},
 	},
 	{
+<<<<<<< HEAD
 		name: "[Gen 7] Perseverance",
 
 		effectType: 'Format',
@@ -260,6 +261,25 @@ exports.Formats = [
 			for (let i = 0, len = allPokemon.length; i < len; i++) {
 				allPokemon[i].maxhp *= 5;
 				allPokemon[i].hp = allPokemon[i].maxhp;
+=======
+		name: "[Gen 7] Ultra Sinnoh Classic",
+		desc: [`&bullet; <a href="http://www.smogon.com/forums/threads/3627404/">Ultra Sinnoh Classic Discussion</a>`],
+
+		mod: 'gen7',
+		forcedLevel: 50,
+		teamLength: {
+			validate: [3, 6],
+			battle: 3,
+		},
+		ruleset: ['Pokemon', 'Standard GBU', 'Sinnoh Pokedex'],
+		onValidateSet: function (set) {
+			const item = this.getItem(set.item);
+			if (item.megaStone) {
+				return [`(${set.name} is holding ${item.name})`, `Mega Stones are banned in Ultra Sinnoh Classic.`];
+			}
+			if (item.zMove) {
+				return [`(${set.name} is holding ${item.name})`, `Z-Crystals are banned in Ultra Sinnoh Classic.`];
+>>>>>>> 5ae3dc885fe4e752f6fe3fd5c394d87648f359e2
 			}
 		},
 	},
@@ -1001,41 +1021,41 @@ exports.Formats = [
 		column: 3,
 	},
 	{
-		name: "[Gen 2] UU",
-		desc: [`&bullet; <a href="http://www.smogon.com/forums/threads/3576710/">GSC UU Discussion</a>`],
+		name: "[Gen 3] UU",
+		desc: [
+			`&bullet; <a href="http://www.smogon.com/forums/threads/3585923/">ADV UU Metagame Discussion</a>`,
+			`&bullet; <a href="http://www.smogon.com/forums/threads/3548578/">ADV UU Viability Rankings</a>`,
+		],
 
-		mod: 'gen2',
-		ruleset: ['[Gen 2] OU'],
+		mod: 'gen3',
+		// searchShow: false,
+		ruleset: ['[Gen 3] OU'],
 		banlist: ['OU', 'BL'],
 	},
 	{
-		name: "[Gen 5] RU",
+		name: "[Gen 4] LC",
 		desc: [
-			`&bullet; <a href="http://www.smogon.com/forums/threads/3473124/">BW2 RU Viability Ranking</a>`,
-			`&bullet; <a href="http://www.smogon.com/forums/posts/6431094/">BW2 Sample Teams</a>`,
+			`&bullet; <a href="http://www.smogon.com/dp/articles/little_cup_guide">DPP LC Guide</a>`,
+			`&bullet; <a href="http://www.smogon.com/forums/posts/7336500/">DPP LC Viability Ranking</a>`,
 		],
 
-		mod: 'gen5',
+		mod: 'gen4',
 		// searchShow: false,
-		ruleset: ['[Gen 5] UU'],
-		banlist: ['UU', 'BL2', 'Shell Smash + Baton Pass', 'Snow Warning'],
+		maxLevel: 5,
+		ruleset: ['Pokemon', 'Standard', 'Little Cup'],
+		banlist: ['LC Uber', 'Misdreavus', 'Murkrow', 'Scyther', 'Sneasel', 'Tangela', 'Yanma', 'Berry Juice', 'Deep Sea Tooth', 'Dragon Rage', 'Sonic Boom'],
 	},
 	{
-		name: "[Gen 1] STABmons",
+		name: "[Gen 2] OU + Ho-Oh + Celebi",
 		desc: [
-			`Pok&eacute;mon can use any move of their typing, in addition to the moves they can normally learn.`,
-			`&bullet; <a href="http://www.smogon.com/forums/threads/3587949/">STABmons</a>`,
+			`&bullet; <a href="http://www.smogon.com/forums/threads/3556533/">GSC OU Viability Ranking</a>`,
+			`&bullet; <a href="http://www.smogon.com/forums/posts/6431086/">GSC Sample Teams</a>`,
 		],
 
-		mod: 'gen1',
-		ruleset: ['[Gen 1] OU'],
-		banlist: [],
-		checkLearnset: function (move, template, lsetData, set) {
-			let types = template.types;
-			if (template.prevo) types = types.concat(this.dex.getTemplate(this.dex.getTemplate(template.prevo).prevo || template.prevo).types);
-			if (types.includes(move.type)) return false;
-			return this.checkLearnset(move, template, lsetData, set);
-		},
+		mod: 'gen2',
+		ruleset: ['Pokemon', 'Standard'],
+		banlist: ['Uber'],
+		unbanlist: ['Celebi', 'Ho-Oh'],
 	},
 
 	// Past Gens OU
@@ -1403,6 +1423,18 @@ exports.Formats = [
 		banlist: ['OU', 'BL', 'Drought', 'Sand Stream', 'Snow Warning'],
 	},
 	{
+		name: "[Gen 5] RU",
+		desc: [
+			`&bullet; <a href="http://www.smogon.com/forums/threads/3473124/">BW2 RU Viability Ranking</a>`,
+			`&bullet; <a href="http://www.smogon.com/forums/posts/6431094/">BW2 Sample Teams</a>`,
+		],
+
+		mod: 'gen5',
+		searchShow: false,
+		ruleset: ['[Gen 5] UU'],
+		banlist: ['UU', 'BL2', 'Shell Smash + Baton Pass', 'Snow Warning'],
+	},
+	{
 		name: "[Gen 5] NU",
 		desc: [
 			`&bullet; <a href="http://www.smogon.com/forums/threads/3484121/">BW2 NU Viability Ranking</a>`,
@@ -1548,19 +1580,6 @@ exports.Formats = [
 		banlist: ['Uber', 'OU', 'BL', 'UU', 'BL2'],
 	},
 	{
-		name: "[Gen 4] LC",
-		desc: [
-			`&bullet; <a href="http://www.smogon.com/dp/articles/little_cup_guide">DPP LC Guide</a>`,
-			`&bullet; <a href="http://www.smogon.com/forums/posts/7336500/">DPP LC Viability Ranking</a>`,
-		],
-
-		mod: 'gen4',
-		searchShow: false,
-		maxLevel: 5,
-		ruleset: ['Pokemon', 'Standard', 'Little Cup'],
-		banlist: ['LC Uber', 'Misdreavus', 'Murkrow', 'Scyther', 'Sneasel', 'Tangela', 'Yanma', 'Berry Juice', 'Deep Sea Tooth', 'Dragon Rage', 'Sonic Boom'],
-	},
-	{
 		name: "[Gen 4] Custom Game",
 
 		mod: 'gen4',
@@ -1623,18 +1642,6 @@ exports.Formats = [
 		searchShow: false,
 		ruleset: ['Pokemon', 'Standard'],
 		banlist: ['Wobbuffet + Leftovers'],
-	},
-	{
-		name: "[Gen 3] UU",
-		desc: [
-			`&bullet; <a href="http://www.smogon.com/forums/threads/3585923/">ADV UU Metagame Discussion</a>`,
-			`&bullet; <a href="http://www.smogon.com/forums/threads/3548578/">ADV UU Viability Rankings</a>`,
-		],
-
-		mod: 'gen3',
-		searchShow: false,
-		ruleset: ['[Gen 3] OU'],
-		banlist: ['OU', 'BL'],
 	},
 	{
 		name: "[Gen 3] Custom Game",
