@@ -455,18 +455,6 @@ exports.Formats = [
 
 		mod: 'sharedpower',
 		ruleset: ['[Gen 7] OU', 'Evasion Abilities Clause'],
-<<<<<<< HEAD
-		banlist: ['Gyarados-Mega', 'Shedinja', 'Electric Seed ++ Grassy Seed ++ Misty Seed ++ Psychic Seed > 1'],
-		unbanlist: ['Aegislash', 'Blaziken', 'Blaziken-Mega', 'Deoxys-Defense'],
-		restrictedAbilities: [
-			'Chlorophyll', 'Comatose', 'Fluffy', 'Fur Coat', 'Huge Power', 'Illusion', 'Imposter',
-			'Mold Breaker', 'Protean', 'Pure Power', 'Sand Rush', 'Simple', 'Slush Rush', 'Speed Boost',
-			'Surge Surfer', 'Swift Swim', 'Teravolt', 'Tinted Lens', 'Trace', 'Water Bubble',
-		],
-		onBeforeSwitchIn: function (pokemon) {
-			let restrictedAbilities = this.getFormat().restrictedAbilities.map(toId);
-			pokemon.side.pokemon.forEach(ally => {
-=======
 		banlist: ['Gyarados-Mega', 'Shedinja'],
 		unbanlist: ['Aegislash', 'Blaziken', 'Blaziken-Mega', 'Deoxys-Defense'],
 		restrictedAbilities: [
@@ -477,22 +465,10 @@ exports.Formats = [
 		onBeforeSwitchIn: function (pokemon) {
 			let restrictedAbilities = this.getFormat().restrictedAbilities.map(toId);
 			for (const ally of pokemon.side.pokemon) {
->>>>>>> 3605c1f24fdffd28600a03a98002b4a252fce1a5
 				if (ally.baseAbility !== pokemon.baseAbility && !restrictedAbilities.includes(ally.baseAbility)) {
 					let effect = 'ability' + ally.baseAbility;
 					pokemon.volatiles[effect] = {id: effect, target: pokemon};
 				}
-<<<<<<< HEAD
-			});
-		},
-		onSwitchInPriority: 2,
-		onSwitchIn: function (pokemon) {
-			let restrictedAbilities = this.getFormat().restrictedAbilities.map(toId);
-			pokemon.side.pokemon.forEach(ally => {
-				if (ally.baseAbility !== pokemon.baseAbility && !restrictedAbilities.includes(ally.baseAbility)) {
-					let effect = 'ability' + ally.baseAbility;
-					delete pokemon.volatiles[effect];
-=======
 			}
 		},
 		onSwitchInPriority: 2,
@@ -512,24 +488,10 @@ exports.Formats = [
 			for (const ally of pokemon.side.pokemon) {
 				if (ally.baseAbility !== pokemon.baseAbility && !restrictedAbilities.includes(ally.baseAbility)) {
 					let effect = 'ability' + ally.baseAbility;
->>>>>>> 3605c1f24fdffd28600a03a98002b4a252fce1a5
 					pokemon.addVolatile(effect);
 				}
-			});
+			}
 		},
-<<<<<<< HEAD
-		onAfterMega: function (pokemon) {
-			let restrictedAbilities = this.getFormat().restrictedAbilities.map(toId);
-			pokemon.removeVolatile('ability' + pokemon.baseAbility);
-			pokemon.side.pokemon.forEach(ally => {
-				if (ally.baseAbility !== pokemon.baseAbility && !restrictedAbilities.includes(ally.baseAbility)) {
-					let effect = 'ability' + ally.baseAbility;
-					pokemon.addVolatile(effect);
-				}
-			});
-		},
-=======
->>>>>>> 3605c1f24fdffd28600a03a98002b4a252fce1a5
 	},
 	{
 		name: "[Gen 7] Middle Cup",
