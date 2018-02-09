@@ -260,6 +260,7 @@ exports.BattleAbilities = {
 				this.add('detailschange', source, source.details);
 			}
 		},
+		onModifyMovePriority: -1,
 		onModifyMove: function (move, attacker) {
 			if (move.id === 'watershuriken' && attacker.template.species === 'Greninja-Ash') {
 				move.multihit = 3;
@@ -3331,6 +3332,7 @@ exports.BattleAbilities = {
 	},
 	"stench": {
 		shortDesc: "This Pokemon's attacks without a chance to flinch have a 10% chance to flinch.",
+		onModifyMovePriority: -1,
 		onModifyMove: function (move) {
 			if (move.category !== "Status") {
 				this.debug('Adding Stench flinch');

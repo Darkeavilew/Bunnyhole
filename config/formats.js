@@ -84,19 +84,28 @@ exports.Formats = [
 	{
 		name: "[Gen 7] NU",
 		desc: [
-			`&bullet; <a href="http://www.smogon.com/forums/threads/3624392/">NU Metagame Discussion</a>`,
+			`&bullet; <a href="http://www.smogon.com/forums/threads/3628085/">NU Metagame Discussion</a>`,
 			`&bullet; <a href="http://www.smogon.com/forums/threads/3622107/">NU Viability Rankings</a>`,
 			`&bullet; <a href="http://www.smogon.com/forums/threads/3606112/">NU Sample Teams</a>`,
 		],
 
 		mod: 'gen7',
+		searchShow: false,
 		ruleset: ['[Gen 7] RU'],
 		banlist: ['RU', 'BL3', 'Drought'],
 	},
 	{
+		name: "[Gen 7] NU (suspect test)",
+		desc: [`&bullet; <a href="http://www.smogon.com/forums/threads/3628085/">NU Suspect Test</a>`],
+
+		mod: 'gen7',
+		challengeShow: false,
+		ruleset: ['[Gen 7] NU'],
+	},
+	{
 		name: "[Gen 7] PU",
 		desc: [
-			`&bullet; <a href="http://www.smogon.com/forums/threads/3614120/">PU Metagame Discussion</a>`,
+			`&bullet; <a href="http://www.smogon.com/forums/threads/3625646/">PU Metagame Discussion</a>`,
 			`&bullet; <a href="http://www.smogon.com/forums/threads/3614892/">PU Viability Rankings</a>`,
 			`&bullet; <a href="http://www.smogon.com/forums/threads/3614470/">PU Sample Teams</a>`,
 		],
@@ -379,7 +388,7 @@ exports.Formats = [
 		},
 		timer: {starting: 6 * 60 + 30 - 10, perTurn: 10, maxPerTurn: 55, maxFirstTurn: 90, timeoutAutoChoose: true},
 		ruleset: ['Pokemon', 'Standard GBU'],
-		banlist: ['Unown', 'Curse', 'String Shot', 'Forest\'s Curse', 'Power Trick'],
+		banlist: ['Unown'],
 		requirePlus: true,
 	},
 	{
@@ -458,9 +467,9 @@ exports.Formats = [
 		banlist: ['Gyarados-Mega', 'Shedinja'],
 		unbanlist: ['Aegislash', 'Blaziken', 'Blaziken-Mega', 'Deoxys-Defense'],
 		restrictedAbilities: [
-			'Chlorophyll', 'Comatose', 'Fluffy', 'Fur Coat', 'Huge Power', 'Illusion', 'Imposter', 'Mold Breaker',
-			'Protean', 'Pure Power', 'Quick Feet', 'Rattled', 'Sand Rush', 'Simple', 'Slush Rush', 'Speed Boost',
-			'Surge Surfer', 'Swift Swim', 'Teravolt', 'Tinted Lens', 'Trace', 'Unburden', 'Water Bubble', 'Weak Armor',
+			'Chlorophyll', 'Comatose', 'Emergency Exit', 'Fluffy', 'Fur Coat', 'Huge Power', 'Illusion', 'Imposter', 'Mold Breaker',
+			'Protean', 'Pure Power', 'Quick Feet', 'Rattled', 'Sand Rush', 'Simple', 'Slush Rush', 'Speed Boost', 'Surge Surfer',
+			'Swift Swim', 'Teravolt', 'Tinted Lens', 'Trace', 'Unburden', 'Water Bubble', 'Weak Armor', 'Wimp Out',
 		],
 		onBeforeSwitchIn: function (pokemon) {
 			let restrictedAbilities = this.getFormat().restrictedAbilities.map(toId);
