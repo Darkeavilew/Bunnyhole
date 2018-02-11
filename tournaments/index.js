@@ -941,6 +941,10 @@ class Tournament {
 			});
 			this.room.addRaw(`${BH.nameColor(winner, true)} <strong>has won <font color='${color}'>${firstMoney}</font> ${(firstMoney === 1 ? global.moneyName : global.moneyPlural)} for winning the tournament!</strong>`);
 
+			if ((tourSize >= sizeRequiredToEarn) && this.room.isOfficial) {
+				BH.leagueTourPoints(toId(winner), toId(runnerUp), tourSize, this.room);
+			}
+
 			if (runnerUp) {
 				if (Users(rid).tourBoost) secondMoney *= 2;
 				if (Users(rid).gameBoost) secondMoney *= 2;
