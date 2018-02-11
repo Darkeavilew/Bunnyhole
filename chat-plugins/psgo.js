@@ -118,7 +118,7 @@ function takeCard(userid, cardId) {
 	Db('cards').set(userid, userCards);
 	return true;
 }
-
+/*
 BH.tourCard = function (tourSize, userid) {
 	if (tourSize > 32) tourSize = 32;
 	let tourRarity = PACK_MAKING_DATA[Math.floor(tourSize / 4)];
@@ -127,7 +127,7 @@ BH.tourCard = function (tourSize, userid) {
 	let colors = {Common: '#0066ff', Uncommon: '#008000', Rare: '#cc0000', "Ultra Rare": '#800080', Legendary: '#c0c0c0', Mythic: '#998200'};
 	giveCard(userid, card);
 	return [colors[cards[card].rarity], cards[card].rarity, cards[card].id, cards[card].type];
-};
+};*/
 
 exports.commands = {
 	psgo: {
