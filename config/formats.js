@@ -467,15 +467,9 @@ exports.Formats = [
 		banlist: ['Beedrill-Mega', 'Gyarados-Mega', 'Shedinja', 'Emergency Exit ++ Regenerator', 'Wimp Out ++ Regenerator'],
 		unbanlist: ['Aegislash', 'Blaziken', 'Blaziken-Mega', 'Deoxys-Defense'],
 		restrictedAbilities: [
-<<<<<<< HEAD
-			'Chlorophyll', 'Comatose', 'Emergency Exit', 'Fluffy', 'Fur Coat', 'Huge Power', 'Illusion', 'Imposter', 'Mold Breaker',
-			'Protean', 'Pure Power', 'Quick Feet', 'Rattled', 'Sand Rush', 'Simple', 'Slush Rush', 'Speed Boost', 'Surge Surfer',
-			'Swift Swim', 'Teravolt', 'Tinted Lens', 'Trace', 'Unburden', 'Water Bubble', 'Weak Armor', 'Wimp Out',
-=======
 			'Chlorophyll', 'Comatose', 'Fluffy', 'Fur Coat', 'Harvest', 'Huge Power', 'Illusion', 'Imposter', 'Mold Breaker',
 			'Multiscale', 'Protean', 'Pure Power', 'Quick Feet', 'Rattled', 'Sand Rush', 'Simple', 'Slush Rush', 'Speed Boost',
 			'Surge Surfer', 'Swift Swim', 'Teravolt', 'Tinted Lens', 'Trace', 'Unburden', 'Water Bubble', 'Weak Armor',
->>>>>>> faf414a32b9ee9fccae10b99ca622411b722e951
 		],
 		onBeforeSwitchIn: function (pokemon) {
 			let restrictedAbilities = this.getFormat().restrictedAbilities.map(toId);
