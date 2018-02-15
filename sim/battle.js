@@ -189,7 +189,7 @@ class Battle extends Dex.ModdedDex {
 
 		const inputOptions = {formatid: options.formatid, seed: this.prng.seed};
 		if (this.rated) inputOptions.rated = this.rated;
-		if (global.__version !== undefined) {
+		if (global.__version) {
 			this.inputLog.push(`>version ${global.__version}`);
 		}
 		this.inputLog.push(`>start ` + JSON.stringify(inputOptions));
@@ -1627,7 +1627,7 @@ class Battle extends Dex.ModdedDex {
 							continue;
 						}
 						let ability = this.getAbility(abilityName);
-						if (ruleTable.has('-' + ability.id)) continue;
+						if (ruleTable.has('-ability:' + ability.id)) continue;
 						if (pokemon.knownType && !this.getImmunity('trapped', pokemon)) continue;
 						this.singleEvent('FoeMaybeTrapPokemon',
 							ability, {}, pokemon, source);
