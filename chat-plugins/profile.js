@@ -238,7 +238,6 @@ exports.commands = {
 			if (!this.can('ban')) return false;
 			if (!target) return this.parse('/profileteam help');
 			let targetId = toId(target);
-			if (!Db('hasteam').has(targetId)) return this.errorReply('This user already has the ability to set their team.');
 			Db('hasteam').set(targetId, 1);
 			this.sendReply(target + ' has been given the ability to set their team.');
 			Users(target).popup('You have been given the ability to set your profile team.');
