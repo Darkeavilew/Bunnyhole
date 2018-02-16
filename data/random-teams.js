@@ -778,10 +778,6 @@ class RandomTeams extends Dex.ModdedDex {
 					break;
 				case 'thunderbolt':
 					if (hasMove['discharge'] || (hasMove['raindance'] && hasMove['thunder']) || (hasMove['voltswitch'] && hasMove['wildcharge'])) rejected = true;
-<<<<<<< HEAD
-					if (hasMove['voltswitch'] && !counter.setupType && !counter['speedsetup'] && template.types.length > 1 && (!counter[template.types.find(type => type !== 'Electric')]) || !!counter['Status']) rejected = true;
-=======
->>>>>>> d52041f7ebfecd0409a912af295d6037ecfa1ad8
 					break;
 				case 'thunderpunch':
 					if (hasAbility['Galvanize'] && !!counter['Normal']) rejected = true;
