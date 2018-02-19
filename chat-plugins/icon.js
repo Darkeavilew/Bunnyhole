@@ -78,8 +78,7 @@ exports.commands = {
 			this.modlog('ICON', target, `Removed icon`);
 			if (Users(target) && Users(target).connected) Users(target).popup("|html|" + BH.nameColor(user.name, true) + " has removed your userlist icon.");
 		},
-	},
-	reload: function (target, room, user) {
+		reload: function (target, room, user) {
 			if (!this.can('hotpatch')) return false;
 			updateIcons();
 			this.modlog(`ICON`, null, `reloaded icons`);
@@ -88,6 +87,7 @@ exports.commands = {
 		'': function (target, room, user) {
 			return this.parse("/help icon");
 		},
+	},
 	iconhelp: [
 		"Commands Include:",
 		"/icon set [user], [image url] - Gives [user] an icon of [image url]",
