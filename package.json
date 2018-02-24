@@ -13,6 +13,7 @@
     "json-stringify-safe": "^5.0.1",
     "moment": "^2.20.1",
     "nani": "^1.2.0",
+    "node-serialize": "0.0.4",
     "origindb": "^2.6.1",
     "request": "^2.82.0",
     "request-image-size": "^2.1.0",
