@@ -621,6 +621,7 @@ exports.commands = {
 				"bots": [],
 				"mods": [],
 				"drivers": [],
+				"operators": [],
 				"voices": [],
 			};
 			let row = ('' + data).split('\n');
@@ -650,6 +651,10 @@ exports.commands = {
 					if (~ignoreUsers.indexOf(personId)) break;
 					staff['drivers'].push(formatName(person));
 					break;
+				case '$':
+					if (~ignoreUsers.indexOf(personId)) break;
+					staff['operators'].push(formatName(person));
+					break;
 				case '+':
 					if (~ignoreUsers.indexOf(personId)) break;
 					staff['voices'].push(formatName(person));
@@ -665,6 +670,7 @@ exports.commands = {
 				'<br /><b><u>*Bots (' + staff['bots'].length + ')</u></b>:<br />' + staff['bots'].join(', ') +
 				'<br /><b><u>@Moderators (' + staff['mods'].length + ')</u></b>:<br />' + staff['mods'].join(', ') +
 				'<br /><b><u>%Drivers (' + staff['drivers'].length + ')</u></b>:<br />' + staff['drivers'].join(', ') +
+				'<br /><b><u>$Operators (' + staff['operators'].length + ')</u></b>:<br />' + staff['operators'].join(', ') +
 				'<br /><b><u>+Voices (' + staff['voices'].length + ')</u></b>:<br />' + staff['voices'].join(', ') +
 				'<br /><br />(<b>Bold</b> / <i>italic</i> = currently online)'
 			);
