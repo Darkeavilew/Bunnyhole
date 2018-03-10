@@ -211,33 +211,6 @@ exports.Formats = [
 		requirePentagon: true,
 	},
 	{
-<<<<<<< HEAD
-		name: "[Gen 7] Battle Spot Special 8",
-		desc: [
-			`&bullet; <a href="http://www.smogon.com/forums/threads/3626059/">Battle Spot Special 8</a>`,
-		],
-
-		mod: 'gen7',
-		maxForcedLevel: 50,
-		teamLength: {
-			validate: [3, 6],
-			battle: 3,
-		},
-		ruleset: ['Pokemon', 'Species Clause', 'Item Clause', 'Team Preview', 'Cancel Mod'],
-		banlist: ['Unreleased', 'Illegal'],
-		onValidateTeam: function (team) {
-			const legends = ['Mewtwo', 'Mew', 'Lugia', 'Ho-Oh', 'Celebi', 'Kyogre', 'Groudon', 'Rayquaza', 'Jirachi', 'Deoxys', 'Dialga', 'Palkia', 'Giratina', 'Phione', 'Manaphy', 'Darkrai', 'Shaymin', 'Arceus', 'Victini', 'Reshiram', 'Zekrom', 'Kyurem', 'Keldeo', 'Meloetta', 'Genesect', 'Xerneas', 'Yveltal', 'Zygarde', 'Diancie', 'Hoopa', 'Volcanion', 'Cosmog', 'Cosmoem', 'Solgaleo', 'Lunala', 'Necrozma', 'Magearna', 'Marshadow'];
-			let hasLegend = false;
-			for (const set of team) {
-				const pokemon = this.getTemplate(set.species).baseSpecies;
-				if (legends.includes(pokemon)) {
-					if (hasLegend) return ["You can only use one legendary Pok\u00E9mon."];
-					hasLegend = true;
-				}
-			}
-		},
-	},
-	{
 		name: "[Gen 7] Perseverance",
 
 		effectType: 'Format',
@@ -275,29 +248,6 @@ exports.Formats = [
 		},
 	},
 	{
-		name: "[Gen 7] Ultra Sinnoh Classic",
-		desc: [`&bullet; <a href="http://www.smogon.com/forums/threads/3627404/">Ultra Sinnoh Classic Discussion</a>`],
-
-		mod: 'gen7',
-		forcedLevel: 50,
-		teamLength: {
-			validate: [3, 6],
-			battle: 3,
-		},
-		ruleset: ['Pokemon', 'Standard GBU', 'Sinnoh Pokedex'],
-		onValidateSet: function (set) {
-			const item = this.getItem(set.item);
-			if (item.megaStone) {
-				return [`(${set.name} is holding ${item.name})`, `Mega Stones are banned in Ultra Sinnoh Classic.`];
-			}
-			if (item.zMove) {
-				return [`(${set.name} is holding ${item.name})`, `Z-Crystals are banned in Ultra Sinnoh Classic.`];
-			}
-		},
-	},
-	{
-=======
->>>>>>> 46f3683a3a5fb72231862ebd1be22012637c18d9
 		name: "[Gen 7] Custom Game",
 
 		mod: 'gen7',
