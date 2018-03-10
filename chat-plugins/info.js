@@ -120,6 +120,20 @@ exports.commands = {
 					if (punishment[3]) buf += Chat.html` (reason: ${punishment[3]})`;
 				}
 			}
+			let battlebanned = Punishments.isBattleBanned(targetUser);
+			if (battlebanned) {
+				buf += `<br />BATTLEBANNED: ${battlebanned[1]}`;
+				let expiresIn = new Date(battlebanned[2]).getTime() - Date.now();
+				let expiresDays = Math.round(expiresIn / 1000 / 60 / 60 / 24);
+				let expiresText = '';
+				if (expiresDays >= 1) {
+					expiresText = `in around ${Chat.count(expiresDays, "days")}`;
+				} else {
+					expiresText = `soon`;
+				}
+				if (expiresIn > 1) buf += ` (expires ${expiresText})`;
+				if (battlebanned[3]) buf += Chat.html` (reason: ${battlebanned[3]})`;
+			}
 			if (targetUser.semilocked) {
 				buf += `<br />Semilocked: ${targetUser.semilocked}`;
 			}
@@ -630,7 +644,7 @@ exports.commands = {
 		target = target.trim();
 		let mod = target.split(',');
 		mod = Dex.mod(toId(mod[mod.length - 1])) || Dex;
-		let targets = target.split(/ ?[,/ ] ?/);
+		let targets = target.split(/ ?[,/] ?/);
 		let pokemon = mod.getTemplate(targets[0]);
 		let type1 = mod.getType(targets[0]);
 		let type2 = mod.getType(targets[1]);
@@ -1326,7 +1340,7 @@ exports.commands = {
 		if (!this.runBroadcast()) return;
 		this.sendReplyBox(
 			`New to competitive Pok&eacute;mon?<br />` +
-			`- <a href="http://www.smogon.com/forums/posts/6774481/">Beginner's Guide to Pok&eacute;mon Showdown</a><br />` +
+			`- <a href="http://www.smogon.com/forums/threads/3496279/">Beginner's Guide to Pok&eacute;mon Showdown</a><br />` +
 			`- <a href="http://www.smogon.com/dp/articles/intro_comp_pokemon">An introduction to competitive Pok&eacute;mon</a><br />` +
 			`- <a href="http://www.smogon.com/bw/articles/bw_tiers">What do 'OU', 'UU', etc mean?</a><br />` +
 			`- <a href="http://www.smogon.com/xyhub/tiers">What are the rules for each format? What is 'Sleep Clause'?</a>`

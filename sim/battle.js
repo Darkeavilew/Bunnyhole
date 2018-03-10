@@ -222,6 +222,14 @@ class Battle extends Dex.ModdedDex {
 		return this.prng.next(m, n);
 	}
 
+	/**
+	 * @param {number} numerator
+	 * @param {number} denominator
+	 */
+	randomChance(numerator, denominator) {
+		return this.prng.randomChance(numerator, denominator);
+	}
+
 	resetRNG() {
 		this.prng = new PRNG(this.prng.startingSeed);
 	}
@@ -542,17 +550,6 @@ class Battle extends Dex.ModdedDex {
 			return -(b.thing.abilityOrder - a.thing.abilityOrder);
 		}
 		return 0;
-	}
-
-	/**
-	 * @param {Pokemon | Side} [thing]
-	 * @param {string} [callbackType]
-	 */
-	getResidualStatuses(thing, callbackType) {
-		let statuses = this.getRelevantEffectsInner(thing || this, callbackType || 'residualCallback', null, null, false, true, 'duration');
-		statuses.sort((a, b) => this.comparePriority(a, b));
-		//if (statuses[0]) this.debug('match ' + (callbackType || 'residualCallback') + ': ' + statuses[0].status.id);
-		return statuses;
 	}
 
 	/**
@@ -1098,11 +1095,11 @@ class Battle extends Dex.ModdedDex {
 			statuses.push({status: item, callback: item[callbackType], statusData: thing.itemData, end: thing.clearItem, thing: thing});
 			this.resolveLastPriority(statuses, callbackType);
 		}
-		let baseSpecies = this.getEffect(thing.template.baseSpecies);
+		let species = thing.baseTemplate;
 		// @ts-ignore
-		if (baseSpecies[callbackType] !== undefined) {
+		if (species[callbackType] !== undefined) {
 			// @ts-ignore
-			statuses.push({status: baseSpecies, callback: baseSpecies[callbackType], statusData: thing.speciesData, end: function () {}, thing: thing});
+			statuses.push({status: species, callback: species[callbackType], statusData: thing.speciesData, end: function () {}, thing: thing});
 			this.resolveLastPriority(statuses, callbackType);
 		}
 
@@ -2203,7 +2200,7 @@ class Battle extends Dex.ModdedDex {
 		move.crit = move.willCrit || false;
 		if (move.willCrit === undefined) {
 			if (critRatio) {
-				move.crit = (this.random(critMult[critRatio]) === 0);
+				move.crit = this.randomChance(1, critMult[critRatio]);
 			}
 		}
 

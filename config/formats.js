@@ -35,7 +35,6 @@ exports.Formats = [
 		name: "[Gen 7] OU",
 		desc: [
 			`&bullet; <a href="http://www.smogon.com/forums/threads/3621042/">OU Metagame Discussion</a>`,
-			`&bullet; <a href="http://www.smogon.com/forums/threads/3587177/">OU Banlist</a>`,
 			`&bullet; <a href="http://www.smogon.com/forums/threads/3621329/">OU Viability Rankings</a>`,
 			`&bullet; <a href="http://www.smogon.com/forums/threads/3626219/">OU Sample Teams</a>`,
 		],
@@ -60,13 +59,23 @@ exports.Formats = [
 		name: "[Gen 7] UU",
 		desc: [
 			`&bullet; <a href="http://www.smogon.com/forums/threads/3627043/">UU Metagame Discussion</a>`,
-			`&bullet; <a href="http://www.smogon.com/forums/threads/3620980/">UU Viability Rankings</a>`,
+			`&bullet; <a href="http://www.smogon.com/forums/threads/3626124/">UU Viability Rankings</a>`,
 			`&bullet; <a href="http://www.smogon.com/forums/threads/3621217/">UU Sample Teams</a>`,
 		],
 
 		mod: 'gen7',
+		searchShow: false,
 		ruleset: ['[Gen 7] OU'],
 		banlist: ['OU', 'BL', 'Drizzle', 'Drought', 'Kommonium Z', 'Mewnium Z'],
+	},
+	{
+		name: "[Gen 7] UU (suspect test)",
+		desc: [`&bullet; <a href="http://www.smogon.com/forums/threads/3630113/">UU Suspect Test</a>`],
+
+		mod: 'gen7',
+		challengeShow: false,
+		ruleset: ['[Gen 7] UU'],
+		unbanlist: ['Slowbro-Mega'],
 	},
 	{
 		name: "[Gen 7] RU",
@@ -86,7 +95,7 @@ exports.Formats = [
 		desc: [
 			`&bullet; <a href="http://www.smogon.com/forums/threads/3628085/">NU Metagame Discussion</a>`,
 			`&bullet; <a href="http://www.smogon.com/forums/threads/3622107/">NU Viability Rankings</a>`,
-			`&bullet; <a href="http://www.smogon.com/forums/threads/3606112/">NU Sample Teams</a>`,
+			`&bullet; <a href="http://www.smogon.com/forums/threads/3612396/">NU Sample Teams</a>`,
 		],
 
 		mod: 'gen7',
@@ -108,7 +117,7 @@ exports.Formats = [
 	{
 		name: "[Gen 7] LC",
 		desc: [
-			`&bullet; <a href="http://www.smogon.com/forums/threads/3587196/">LC Metagame Discussion</a>`,
+			`&bullet; <a href="http://www.smogon.com/forums/threads/3629645/">LC Metagame Discussion</a>`,
 			`&bullet; <a href="http://www.smogon.com/dex/sm/formats/lc/">LC Banlist</a>`,
 			`&bullet; <a href="http://www.smogon.com/forums/threads/3621440/">LC Viability Rankings</a>`,
 			`&bullet; <a href="http://www.smogon.com/forums/threads/3588679/">LC Sample Teams</a>`,
@@ -116,11 +125,21 @@ exports.Formats = [
 
 		mod: 'gen7',
 		maxLevel: 5,
+		searchShow: false,
 		ruleset: ['Pokemon', 'Standard', 'Swagger Clause', 'Team Preview', 'Little Cup'],
 		banlist: [
 			'Aipom', 'Cutiefly', 'Drifloon', 'Gligar', 'Gothita', 'Meditite', 'Misdreavus', 'Murkrow', 'Porygon', 'Scyther', 'Sneasel', 'Swirlix', 'Tangela', 'Vulpix-Base', 'Yanma',
 			'Eevium Z', 'Dragon Rage', 'Sonic Boom',
 		],
+	},
+	{
+		name: "[Gen 7] LC (suspect test)",
+		desc: [`&bullet; <a href="http://www.smogon.com/forums/threads/3629645/">LC Suspect Test</a>`],
+
+		mod: 'gen7',
+		maxLevel: 5,
+		challengeShow: false,
+		ruleset: ['[Gen 7] LC'],
 	},
 	{
 		name: "[Gen 7] Monotype",
@@ -192,6 +211,7 @@ exports.Formats = [
 		requirePentagon: true,
 	},
 	{
+<<<<<<< HEAD
 		name: "[Gen 7] Battle Spot Special 8",
 		desc: [
 			`&bullet; <a href="http://www.smogon.com/forums/threads/3626059/">Battle Spot Special 8</a>`,
@@ -276,6 +296,8 @@ exports.Formats = [
 		},
 	},
 	{
+=======
+>>>>>>> 46f3683a3a5fb72231862ebd1be22012637c18d9
 		name: "[Gen 7] Custom Game",
 
 		mod: 'gen7',
@@ -317,18 +339,8 @@ exports.Formats = [
 
 		mod: 'gen7',
 		gameType: 'doubles',
-		searchShow: false,
 		ruleset: ['Pokemon', 'Standard Doubles', 'Swagger Clause', 'Team Preview'],
 		banlist: ['DUber', 'Power Construct', 'Eevium Z', 'Dark Void', 'Gravity ++ Grass Whistle', 'Gravity ++ Hypnosis', 'Gravity ++ Lovely Kiss', 'Gravity ++ Sing', 'Gravity ++ Sleep Powder'],
-	},
-	{
-		name: "[Gen 7] Doubles OU (suspect test)",
-		desc: [`&bullet; <a href="http://www.smogon.com/forums/threads/3629155/">Doubles OU Suspect Test</a>`],
-
-		mod: 'gen7',
-		gameType: 'doubles',
-		challengeShow: false,
-		ruleset: ['[Gen 7] Doubles OU'],
 	},
 	{
 		name: "[Gen 7] Doubles Ubers",
@@ -422,6 +434,26 @@ exports.Formats = [
 		requirePentagon: true,
 	},
 	{
+		name: "[Gen 7] Battle Spot Special 9",
+		desc: [`&bullet; <a href="http://www.smogon.com/forums/threads/3629823/">Battle Spot Special 9</a>`],
+
+		mod: 'gen7',
+		gameType: 'doubles',
+		maxForcedLevel: 50,
+		teamLength: {
+			validate: [2, 6],
+			battle: 2,
+		},
+		ruleset: ['Pokemon', 'Standard GBU'],
+		banlist: ['Eviolite', 'Focus Sash'],
+		onValidateSet: function (set, format) {
+			if (set.item) {
+				let item = this.getItem(set.item);
+				if (item.megaStone || item.zMove) return [`${set.name || set.species} has ${item.name}, which is banned in ${format.name}.`];
+			}
+		},
+	},
+	{
 		name: "[Gen 7] Doubles Custom Game",
 
 		mod: 'gen7',
@@ -461,7 +493,7 @@ exports.Formats = [
 			battle: 2,
 		},
 		ruleset: ['Gen 7] Doubles OU'],
-		banlist: ['Tapu Lele', 'Focus Sash', 'Perish Song'],
+		banlist: ['Salamence-Mega', 'Tapu Lele', 'Focus Sash', 'Perish Song'],
 	},
 	{
 		name: "[Gen 7] Nature Swap",
@@ -472,7 +504,7 @@ exports.Formats = [
 
 		mod: 'natureswap',
 		ruleset: ['[Gen 7] OU'],
-		banlist: ['Blissey', 'Chansey', 'Cloyster', 'Hoopa-Unbound', 'Kyurem-Black'],
+		banlist: ['Blissey', 'Chansey', 'Cloyster', 'Hoopa-Unbound', 'Kyurem-Black', 'Stakataka'],
 	},
 	{
 		section: "Other Metagames",
@@ -488,17 +520,8 @@ exports.Formats = [
 		],
 
 		mod: 'gen7',
-		searchShow: false,
 		ruleset: ['Pokemon', 'Ability Clause', 'OHKO Clause', 'Evasion Moves Clause', 'CFZ Clause', 'Endless Battle Clause', 'Team Preview', 'HP Percentage Mod', 'Cancel Mod'],
 		banlist: ['Groudon-Primal', 'Arena Trap', 'Huge Power', 'Innards Out', 'Magnet Pull', 'Moody', 'Parental Bond', 'Protean', 'Pure Power', 'Shadow Tag', 'Stakeout', 'Water Bubble', 'Wonder Guard', 'Gengarite', 'Chatter', 'Comatose + Sleep Talk'],
-	},
-	{
-		name: "[Gen 7] Balanced Hackmons (suspect test)",
-		desc: [`&bullet; <a href="http://www.smogon.com/forums/threads/3628905/">Balanced Hackmons Suspect Test</a>`],
-
-		mod: 'gen7',
-		ruleset: ['[Gen 7] Balanced Hackmons'],
-		banlist: ['Psychic Surge'],
 	},
 	{
 		name: "[Gen 7] 1v1",
@@ -642,8 +665,8 @@ exports.Formats = [
 		mod: 'gen7',
 		searchShow: false,
 		ruleset: ['[Gen 7] OU', 'STABmons Move Legality'],
-		banlist: ['Blacephalon', 'Kartana', 'Komala', 'Kyurem-Black', 'Silvally', 'Tapu Koko', 'Tapu Lele', 'Aerodactylite', 'King\'s Rock', 'Metagrossite', 'Razor Fang'],
-		restrictedMoves: ['Acupressure', 'Belly Drum', 'Chatter', 'Geomancy', 'Lovely Kiss', 'Shell Smash', 'Shift Gear', 'Thousand Arrows'],
+		banlist: ['Blacephalon', 'Kartana', 'Komala', 'Kyurem-Black', 'Porygon-Z', 'Silvally', 'Tapu Koko', 'Tapu Lele', 'Aerodactylite', 'King\'s Rock', 'Metagrossite', 'Razor Fang'],
+		restrictedMoves: ['Acupressure', 'Belly Drum', 'Chatter', 'Geomancy', 'Lovely Kiss', 'Shell Smash', 'Shift Gear', 'Spore', 'Thousand Arrows'],
 	},
 	{
 		name: "[Gen 6] Gen-NEXT OU",
@@ -875,9 +898,10 @@ exports.Formats = [
 
 		mod: 'gen1',
 		teamLength: {
+			validate: [1, 3],
 			battle: 1,
 		},
-		ruleset: ['[Gen 1] OU'],
+		ruleset: ['[Gen 1] OU', 'Team Preview'],
 		banlist: [
 			'Flash', 'Kinesis', 'Sand Attack', 'Smokescreen',
 			'Bind', 'Clamp', 'Fire Spin', 'Wrap',
