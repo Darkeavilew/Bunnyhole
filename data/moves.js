@@ -15409,7 +15409,11 @@ exports.BattleMovedex = {
 			onAnyTryMove: function (source, target, move) {
 				let snatchUser = this.effectData.source;
 				if (snatchUser.isSkyDropped()) return;
+<<<<<<< HEAD
 				if (move && move.flags['snatch'] && move.sourceEffect !== 'snatch') {
+=======
+				if (move && !move.isZ && move.flags['snatch'] && move.sourceEffect !== 'snatch') {
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 					snatchUser.removeVolatile('snatch');
 					this.add('-activate', snatchUser, 'move: Snatch', '[of] ' + source);
 					this.useMove(move.id, snatchUser);

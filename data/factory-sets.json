@@ -762,7 +762,11 @@
 				"gender": "",
 				"item": ["Rocky Helmet"],
 				"ability": ["Pressure"],
+<<<<<<< HEAD
 				"evs": {"hp": 248, "atk": 0, "def": 232, "spa": 0, "spd": 0, "spe": 24},
+=======
+				"evs": {"hp": 252, "atk": 0, "def": 232, "spa": 0, "spd": 0, "spe": 24},
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"nature": "Timid",
 				"moves": [["Stealth Rock"], ["Taunt"], ["Spikes"], ["Magic Coat"]]
 			}, {
@@ -1648,6 +1652,7 @@
 				"evs": {"hp": 252, "atk": 4, "def": 0, "spa": 0, "spd": 252, "spe": 0},
 				"nature": "Sassy",
 				"moves": [["King's Shield"], ["Gyro Ball"], ["Shadow Ball"], ["Toxic"]]
+<<<<<<< HEAD
 			}, {
 				"species": "Aegislash",
 				"gender": "",
@@ -1656,6 +1661,8 @@
 				"evs": {"hp": 252, "atk": 4, "def": 0, "spa": 252, "spd": 0, "spe": 0},
 				"nature": "Quiet",
 				"moves": [["Flash Cannon"], ["Shadow Ball"], ["Gyro Ball"], ["Rock Slide"]]
+=======
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"landorus": {
@@ -1974,7 +1981,11 @@
 				"gender": "",
 				"item": ["Solganium Z"],
 				"ability": ["Prism Armor"],
+<<<<<<< HEAD
 				"evs": {"hp": 0, "atk": 252, "def": 0, "spa": 0, "spd": 0, "spe": 252},
+=======
+				"evs": {"hp": 0, "atk": 252, "def": 4, "spa": 0, "spd": 0, "spe": 252},
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"nature": "Adamant",
 				"moves": [["Rock Polish"], ["Swords Dance"], ["Earthquake"], ["Sunsteel Strike"]]
 			}, {
@@ -2289,6 +2300,7 @@
 				"ability": ["Iron Barbs"],
 				"evs": {"hp": 252, "atk": 0, "def": 48, "spa": 0, "spd": 208, "spe": 0},
 				"nature": "Careful",
+<<<<<<< HEAD
 				"moves": [["Spikes"], ["Leech Seed"], ["Power Whip"], ["Knock Off", "Protect", "Gyro Ball"]]
 			}, {
 				"species": "Ferrothorn",
@@ -2298,6 +2310,9 @@
 				"evs": {"hp": 252, "atk": 0, "def": 48, "spa": 0, "spd": 208, "spe": 0},
 				"nature": "Careful",
 				"moves": [["Stealth Rock"], ["Leech Seed"], ["Power Whip"], ["Knock Off", "Protect", "Gyro Ball"]]
+=======
+				"moves": [["Spikes", "Stealth Rock"], ["Leech Seed"], ["Power Whip"], ["Knock Off", "Protect", "Gyro Ball"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"garchomp": {
@@ -3046,6 +3061,7 @@
 				"ability": ["Sturdy"],
 				"evs": {"hp": 248, "atk": 0, "def": 252, "spa": 0, "spd": 8, "spe": 0},
 				"nature": "Impish",
+<<<<<<< HEAD
 				"moves": [["Roost"], ["Whirlwind"], ["Toxic"], ["Counter", "Brave Bird"]]
 			}, {
 				"species": "Skarmory",
@@ -3071,6 +3087,9 @@
 				"evs": {"hp": 248, "atk": 0, "def": 252, "spa": 0, "spd": 8, "spe": 0},
 				"nature": "Impish",
 				"moves": [["Roost"], ["Defog"], ["Spikes"], ["Counter", "Brave Bird"]]
+=======
+				"moves": [["Roost"], ["Whirlwind", "Defog"], ["Toxic", "Spikes"], ["Counter", "Brave Bird"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"stakataka": {
@@ -3095,6 +3114,7 @@
 				"ability": ["Regenerator"],
 				"evs": {"hp": 252, "atk": 0, "def": 28, "spa": 0, "spd": 228, "spe": 0},
 				"nature": "Sassy",
+<<<<<<< HEAD
 				"moves": [["Giga Drain", "Leaf Storm"], ["Knock Off"], ["Hidden Power Ice"], ["Earthquake"]]
 			}, {
 				"species": "Tangrowth",
@@ -3112,6 +3132,9 @@
 				"evs": {"hp": 248, "atk": 0, "def": 212, "spa": 0, "spd": 48, "spe": 0},
 				"nature": "Relaxed",
 				"moves": [["Giga Drain"], ["Knock Off"], ["Sleep Powder"], ["Hidden Power Ice"]]
+=======
+				"moves": [["Giga Drain", "Leaf Storm"], ["Knock Off"], ["Hidden Power Ice", "Hidden Power Fire"], ["Earthquake"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}, {
 				"species": "Tangrowth",
 				"gender": "",
@@ -3119,7 +3142,11 @@
 				"ability": ["Regenerator"],
 				"evs": {"hp": 248, "atk": 0, "def": 212, "spa": 0, "spd": 48, "spe": 0},
 				"nature": "Relaxed",
+<<<<<<< HEAD
 				"moves": [["Giga Drain"], ["Knock Off"], ["Sleep Powder"], ["Hidden Power Fire"]]
+=======
+				"moves": [["Giga Drain"], ["Knock Off"], ["Sleep Powder"], ["Hidden Power Ice", "Hidden Power Fire"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"tapubulu": {
@@ -3167,6 +3194,7 @@
 				"ability": ["Misty Surge"],
 				"evs": {"hp": 248, "atk": 0, "def": 8, "spa": 0, "spd": 0, "spe": 252},
 				"nature": "Timid",
+<<<<<<< HEAD
 				"moves": [["Taunt"], ["Nature's Madness"], ["Moonblast"], ["Scald"]]
 			}, {
 				"species": "Tapu Fini",
@@ -3176,6 +3204,9 @@
 				"evs": {"hp": 248, "atk": 0, "def": 8, "spa": 0, "spd": 0, "spe": 252},
 				"nature": "Timid",
 				"moves": [["Taunt"], ["Nature's Madness"], ["Moonblast"], ["Defog"]]
+=======
+				"moves": [["Taunt"], ["Nature's Madness"], ["Moonblast"], ["Scald", "Defog"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"tapukoko": {
@@ -3475,6 +3506,7 @@
 				"ability": ["Regenerator"],
 				"evs": {"hp": 248, "atk": 0, "def": 44, "spa": 0, "spd": 216, "spe": 0},
 				"nature": "Calm",
+<<<<<<< HEAD
 				"moves": [["Spore"], ["Giga Drain"], ["Sludge Bomb"], ["Stun Spore", "Toxic"]]
 			}, {
 				"species": "Amoonguss",
@@ -3484,6 +3516,9 @@
 				"evs": {"hp": 248, "atk": 0, "def": 44, "spa": 0, "spd": 216, "spe": 0},
 				"nature": "Calm",
 				"moves": [["Spore"], ["Giga Drain"], ["Hidden Power Fire"], ["Stun Spore", "Toxic"]]
+=======
+				"moves": [["Spore"], ["Giga Drain"], ["Sludge Bomb", "Hidden Power Fire"], ["Stun Spore", "Toxic"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"azumarill": {
@@ -3507,6 +3542,7 @@
 				"ability": ["Magma Armor"],
 				"evs": {"hp": 128, "atk": 0, "def": 0, "spa": 252, "spd": 0, "spe": 128},
 				"nature": "Modest",
+<<<<<<< HEAD
 				"moves": [["Fire Blast"], ["Earth Power"], ["Toxic"], ["Rock Slide"]]
 			}, {
 				"species": "Camerupt",
@@ -3516,6 +3552,9 @@
 				"evs": {"hp": 128, "atk": 0, "def": 0, "spa": 252, "spd": 0, "spe": 128},
 				"nature": "Modest",
 				"moves": [["Fire Blast"], ["Earth Power"], ["Toxic"], ["Stealth Rock"]]
+=======
+				"moves": [["Fire Blast"], ["Earth Power"], ["Toxic"], ["Rock Slide", "Stealth Rock"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"ditto": {
@@ -3578,6 +3617,7 @@
 				"ability": ["Beast Boost"],
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 180, "spd": 80, "spe": 248},
 				"nature": "Timid",
+<<<<<<< HEAD
 				"moves": [["Power Gem"], ["Sludge Wave"], ["Hidden Power Ice"], ["Toxic Spikes"]]
 			}, {
 				"species": "Nihilego",
@@ -3587,6 +3627,9 @@
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 180, "spd": 80, "spe": 248},
 				"nature": "Timid",
 				"moves": [["Power Gem"], ["Sludge Wave"], ["Hidden Power Fire"], ["Toxic Spikes"]]
+=======
+				"moves": [["Power Gem"], ["Sludge Wave"], ["Hidden Power Ice", "Hidden Power Fire"], ["Toxic Spikes"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"shuckle": {
@@ -4008,6 +4051,7 @@
 				"ability": ["Thick Fat"],
 				"evs": {"hp": 0, "atk": 252, "def": 0, "spa": 0, "spd": 4, "spe": 252},
 				"nature": "Jolly",
+<<<<<<< HEAD
 				"moves": [["Earthquake"], ["Ice Shard"], ["Icicle Crash", "Icicle Spear"], ["Knock Off"]]
 			}, {
 				"species": "Mamoswine",
@@ -4017,6 +4061,9 @@
 				"evs": {"hp": 0, "atk": 252, "def": 0, "spa": 0, "spd": 4, "spe": 252},
 				"nature": "Jolly",
 				"moves": [["Earthquake"], ["Ice Shard"], ["Icicle Crash", "Icicle Spear"], ["Stealth Rock"]]
+=======
+				"moves": [["Earthquake"], ["Ice Shard"], ["Icicle Crash", "Icicle Spear"], ["Knock Off", "Stealth Rock"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"quagsire": {
@@ -4282,6 +4329,7 @@
 				"ability": ["Natural Cure"],
 				"evs": {"hp": 0, "atk": 252, "def": 4, "spa": 0, "spd": 0, "spe": 252},
 				"nature": "Jolly",
+<<<<<<< HEAD
 				"moves": [["Dragon Dance"], ["Facade"], ["Earthquake"], ["Roost"]]
 			}, {
 				"species": "Altaria",
@@ -4291,6 +4339,9 @@
 				"evs": {"hp": 0, "atk": 252, "def": 4, "spa": 0, "spd": 0, "spe": 252},
 				"nature": "Jolly",
 				"moves": [["Dragon Dance"], ["Return"], ["Earthquake"], ["Roost"]],
+=======
+				"moves": [["Dragon Dance"], ["Return", "Facade"], ["Earthquake"], ["Roost"]],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"happiness": 255
 			}, {
 				"species": "Altaria",
@@ -4299,6 +4350,7 @@
 				"ability": ["Natural Cure"],
 				"evs": {"hp": 248, "atk": 0, "def": 252, "spa": 0, "spd": 8, "spe": 0},
 				"nature": "Bold",
+<<<<<<< HEAD
 				"moves": [["Hyper Voice"], ["Roost"], ["Heal Bell"], ["Defog"]]
 			}, {
 				"species": "Altaria",
@@ -4316,6 +4368,9 @@
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 252, "spd": 4, "spe": 252},
 				"nature": "Modest",
 				"moves": [["Hyper Voice"], ["Fire Blast"], ["Earthquake", "Heal Bell"], ["Roost"]]
+=======
+				"moves": [["Hyper Voice"], ["Roost"], ["Heal Bell", "Flamethrower"], ["Defog"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}, {
 				"species": "Altaria",
 				"gender": "",
@@ -4323,7 +4378,11 @@
 				"ability": ["Natural Cure"],
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 252, "spd": 4, "spe": 252},
 				"nature": "Modest",
+<<<<<<< HEAD
 				"moves": [["Hyper Voice"], ["Fire Blast"], ["Defog"], ["Roost"]]
+=======
+				"moves": [["Hyper Voice"], ["Fire Blast"], ["Earthquake", "Heal Bell", "Defog"], ["Roost"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"hydreigon": {
@@ -4476,6 +4535,10 @@
 				"item": ["Focus Sash"],
 				"ability": ["Technician"],
 				"evs": {"hp": 0, "atk": 252, "def": 4, "spa": 0, "spd": 0, "spe": 252},
+<<<<<<< HEAD
+=======
+				"nature": "Adamant",
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"moves": [["Mach Punch"], ["Spore"], ["Bullet Seed"], ["Rock Tomb", "Swords Dance"]]
 			}, {
 				"species": "Breloom",
@@ -4483,6 +4546,10 @@
 				"item": ["Life Orb"],
 				"ability": ["Technician"],
 				"evs": {"hp": 0, "atk": 252, "def": 4, "spa": 0, "spd": 0, "spe": 252},
+<<<<<<< HEAD
+=======
+				"nature": "Jolly",
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"moves": [["Mach Punch"], ["Spore"], ["Bullet Seed"], ["Swords Dance"]]
 			}, {
 				"species": "Breloom",
@@ -4490,6 +4557,10 @@
 				"item": ["Toxic Orb"],
 				"ability": ["Poison Heal"],
 				"evs": {"hp": 12, "atk": 244, "def": 0, "spa": 0, "spd": 0, "spe": 252},
+<<<<<<< HEAD
+=======
+				"nature": "Jolly",
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"moves": [["Mach Punch", "Seed Bomb"], ["Swords Dance"], ["Drain Punch"], ["Facade"]]
 			}]
 		},
@@ -4574,6 +4645,7 @@
 				"ability": ["Thick Fat"],
 				"evs": {"hp": 0, "atk": 252, "def": 0, "spa": 0, "spd": 4, "spe": 252},
 				"nature": "Jolly",
+<<<<<<< HEAD
 				"moves": [["Ice Shard"], ["Earthquake"], ["Icicle Crash"], ["Knock Off"]]
 			}, {
 				"species": "Mamoswine",
@@ -4583,6 +4655,9 @@
 				"evs": {"hp": 0, "atk": 252, "def": 0, "spa": 0, "spd": 4, "spe": 252},
 				"nature": "Jolly",
 				"moves": [["Ice Shard"], ["Earthquake"], ["Icicle Crash"], ["Stealth Rock"]]
+=======
+				"moves": [["Ice Shard"], ["Earthquake"], ["Icicle Crash"], ["Knock Off", "Stealth Rock"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"mukalola": {
@@ -4617,7 +4692,11 @@
 				"gender": "",
 				"item": ["Rockium Z"],
 				"ability": ["Beast Boost"],
+<<<<<<< HEAD
 				"evs": {"hp": 252, "atk": 252, "def": 0, "spa": 0, "spd": 0, "spe": 0},
+=======
+				"evs": {"hp": 252, "atk": 252, "def": 0, "spa": 0, "spd": 4, "spe": 0},
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ivs": {"hp": 31, "atk": 31, "def": 15, "spa": 31, "spd": 31, "spe": 0},
 				"nature": "Lonely",
 				"moves": [["Trick Room"], ["Gyro Ball"], ["Stone Edge"], ["Earthquake"]]
@@ -4696,6 +4775,7 @@
 				"ability": ["Swarm"],
 				"evs": {"hp": 0, "atk": 252, "def": 0, "spa": 0, "spd": 4, "spe": 252},
 				"nature": "Jolly",
+<<<<<<< HEAD
 				"moves": [["U-turn"], ["Poison Jab"], ["Drill Run"], ["Knock Off"]]
 			}, {
 				"species": "Beedrill",
@@ -4713,6 +4793,9 @@
 				"evs": {"hp": 0, "atk": 252, "def": 0, "spa": 0, "spd": 4, "spe": 252},
 				"nature": "Jolly",
 				"moves": [["U-turn"], ["Poison Jab"], ["Drill Run"], ["Toxic Spikes"]]
+=======
+				"moves": [["U-turn"], ["Poison Jab"], ["Drill Run"], ["Knock Off", "Pursuit", "Toxic Spikes"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"blissey": {
@@ -4724,6 +4807,7 @@
 				"ability": ["Natural Cure"],
 				"evs": {"hp": 252, "atk": 0, "def": 252, "spa": 0, "spd": 4, "spe": 0},
 				"nature": "Bold",
+<<<<<<< HEAD
 				"moves": [["Soft-Boiled"], ["Seismic Toss"], ["Toxic"], ["Heal Bell"]]
 			}, {
 				"species": "Blissey",
@@ -4733,6 +4817,9 @@
 				"evs": {"hp": 252, "atk": 0, "def": 252, "spa": 0, "spd": 4, "spe": 0},
 				"nature": "Bold",
 				"moves": [["Soft-Boiled"], ["Seismic Toss"], ["Toxic"], ["Stealth Rock"]]
+=======
+				"moves": [["Soft-Boiled"], ["Seismic Toss"], ["Toxic"], ["Heal Bell", "Stealth Rock"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"heracross": {
@@ -5189,6 +5276,7 @@
 				"ability": ["Liquid Ooze"],
 				"evs": {"hp": 248, "atk": 0, "def": 156, "spa": 8, "spd": 0, "spe": 96},
 				"nature": "Timid",
+<<<<<<< HEAD
 				"moves": [["Rapid Spin"], ["Scald"], ["Haze"], ["Toxic"]]
 			}, {
 				"species": "Tentacruel",
@@ -5198,6 +5286,9 @@
 				"evs": {"hp": 248, "atk": 0, "def": 156, "spa": 8, "spd": 0, "spe": 96},
 				"nature": "Timid",
 				"moves": [["Rapid Spin"], ["Scald"], ["Haze"], ["Toxic Spikes"]]
+=======
+				"moves": [["Rapid Spin"], ["Scald"], ["Haze"], ["Toxic", "Toxic Spikes"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"terrakion": {
@@ -5582,6 +5673,7 @@
 				"ability": ["Levitate"],
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 252, "spd": 4, "spe": 252},
 				"nature": "Timid",
+<<<<<<< HEAD
 				"moves": [["Thunderbolt"], ["Volt Switch"], ["Leaf Storm"], ["Defog"]]
 			}, {
 				"species": "Rotom-Mow",
@@ -5599,6 +5691,9 @@
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 252, "spd": 4, "spe": 252},
 				"nature": "Timid",
 				"moves": [["Thunderbolt"], ["Volt Switch"], ["Leaf Storm"], ["Trick"]]
+=======
+				"moves": [["Thunderbolt"], ["Volt Switch"], ["Leaf Storm"], ["Defog", "Hidden Power Fire"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}, {
 				"species": "Rotom-Mow",
 				"gender": "",
@@ -5606,7 +5701,11 @@
 				"ability": ["Levitate"],
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 252, "spd": 4, "spe": 252},
 				"nature": "Timid",
+<<<<<<< HEAD
 				"moves": [["Thunderbolt"], ["Volt Switch"], ["Leaf Storm"], ["Hidden Power Fire"]]
+=======
+				"moves": [["Thunderbolt"], ["Volt Switch"], ["Leaf Storm"], ["Trick", "Hidden Power Fire"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"salazzle": {
@@ -5776,6 +5875,7 @@
 				"ability": ["Snow Warning"],
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 252, "spd": 4, "spe": 252},
 				"nature": "Timid",
+<<<<<<< HEAD
 				"moves": [["Stealth Rock"], ["Freeze-Dry"], ["Blizzard"], ["Encore", "Thunder Wave"]]
 			}, {
 				"species": "Aurorus",
@@ -5785,6 +5885,9 @@
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 252, "spd": 4, "spe": 252},
 				"nature": "Timid",
 				"moves": [["Stealth Rock"], ["Freeze-Dry"], ["Hidden Power Fire"], ["Encore", "Thunder Wave"]]
+=======
+				"moves": [["Stealth Rock"], ["Freeze-Dry"], ["Blizzard", "Hidden Power Fire"], ["Encore", "Thunder Wave"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"bewear": {
@@ -5875,6 +5978,7 @@
 				"ability": ["Mold Breaker"],
 				"evs": {"hp": 0, "atk": 252, "def": 0, "spa": 0, "spd": 4, "spe": 252},
 				"nature": "Jolly",
+<<<<<<< HEAD
 				"moves": [["Dragon Dance"], ["Outrage"], ["Earthquake"], ["Poison Jab"]]
 			}, {
 				"species": "Haxorus",
@@ -5884,6 +5988,9 @@
 				"evs": {"hp": 0, "atk": 252, "def": 0, "spa": 0, "spd": 4, "spe": 252},
 				"nature": "Jolly",
 				"moves": [["Swords Dance"], ["Outrage"], ["Earthquake"], ["Poison Jab"]]
+=======
+				"moves": [["Dragon Dance", "Swords Dance"], ["Outrage"], ["Earthquake"], ["Poison Jab"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"kommoo": {
@@ -6278,6 +6385,7 @@
 				"ability": ["Queenly Majesty"],
 				"evs": {"hp": 0, "atk": 252, "def": 0, "spa": 0, "spd": 4, "spe": 252},
 				"nature": "Jolly",
+<<<<<<< HEAD
 				"moves": [["Power Whip"], ["U-turn"], ["Knock Off"], ["High Jump Kick"]]
 			}, {
 				"species": "Tsareena",
@@ -6287,6 +6395,9 @@
 				"evs": {"hp": 0, "atk": 252, "def": 0, "spa": 0, "spd": 4, "spe": 252},
 				"nature": "Jolly",
 				"moves": [["Power Whip"], ["U-turn"], ["Rapid Spin"], ["High Jump Kick"]]
+=======
+				"moves": [["Power Whip"], ["U-turn"], ["Knock Off", "Rapid Spin"], ["High Jump Kick"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"umbreon": {
@@ -6373,6 +6484,10 @@
 				"item": ["Life Orb"],
 				"ability": ["Sheer Force"],
 				"evs": {"hp": 4, "atk": 252, "def": 0, "spa": 0, "spd": 0, "spe": 252},
+<<<<<<< HEAD
+=======
+				"nature": "Adamant",
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"moves": [["Dragon Dance"], ["Liquidation"], ["Ice Punch"], ["Crunch"]]
 			}, {
 				"species": "Feraligatr",
@@ -6442,6 +6557,7 @@
 				"ability": ["Tinted Lens"],
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 252, "spd": 4, "spe": 252},
 				"nature": "Timid",
+<<<<<<< HEAD
 				"moves": [["Bug Buzz"], ["Air Slash"], ["U-turn"], ["Giga Drain"]]
 			}, {
 				"species": "Yanmega",
@@ -6451,6 +6567,9 @@
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 252, "spd": 4, "spe": 252},
 				"nature": "Timid",
 				"moves": [["Bug Buzz"], ["Air Slash"], ["U-turn"], ["Hidden Power Fire"]]
+=======
+				"moves": [["Bug Buzz"], ["Air Slash"], ["U-turn"], ["Giga Drain", "Hidden Power Fire"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"cloyster": {
@@ -6583,6 +6702,7 @@
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 252, "spd": 4, "spe": 252},
 				"ivs": {"hp": 31, "atk": 0, "def": 31, "spa": 31, "spd": 31, "spe": 31},
 				"nature": "Timid",
+<<<<<<< HEAD
 				"moves": [["Leaf Storm"], ["Sludge Bomb"], ["Hidden Power Fire"], ["Sleep Powder"]]
 			}, {
 				"species": "Roserade",
@@ -6593,6 +6713,9 @@
 				"ivs": {"hp": 31, "atk": 0, "def": 31, "spa": 31, "spd": 31, "spe": 31},
 				"nature": "Timid",
 				"moves": [["Leaf Storm"], ["Sludge Bomb"], ["Hidden Power Fire"], ["Spikes"]]
+=======
+				"moves": [["Leaf Storm"], ["Sludge Bomb"], ["Hidden Power Fire"], ["Sleep Powder", "Spikes"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"rotomheat": {
@@ -6605,6 +6728,7 @@
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 252, "spd": 4, "spe": 252},
 				"ivs": {"hp": 31, "atk": 0, "def": 31, "spa": 31, "spd": 31, "spe": 31},
 				"nature": "Timid",
+<<<<<<< HEAD
 				"moves": [["Overheat"], ["Volt Switch"], ["Hidden Power Ice"], ["Thunderbolt", "Thunder Wave"]]
 			}, {
 				"species": "Rotom-Heat",
@@ -6615,6 +6739,9 @@
 				"ivs": {"hp": 31, "atk": 0, "def": 31, "spa": 31, "spd": 31, "spe": 31},
 				"nature": "Timid",
 				"moves": [["Overheat"], ["Volt Switch"], ["Hidden Power Grass"], ["Thunderbolt", "Thunder Wave"]]
+=======
+				"moves": [["Overheat"], ["Volt Switch"], ["Hidden Power Ice", "Hidden Power Grass"], ["Thunderbolt", "Thunder Wave"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		}
 	},
@@ -6651,6 +6778,7 @@
 				"evs": {"hp": 248, "atk": 0, "def": 0, "spa": 252, "spd": 8, "spe": 0},
 				"ivs": {"hp": 31, "atk": 0, "def": 31, "spa": 31, "spd": 31, "spe": 31},
 				"nature": "Modest",
+<<<<<<< HEAD
 				"moves": [["Fire Blast"], ["Earth Power"], ["Toxic"], ["Hidden Power Ice"]]
 			}, {
 				"species": "Camerupt",
@@ -6661,6 +6789,9 @@
 				"ivs": {"hp": 31, "atk": 0, "def": 31, "spa": 31, "spd": 31, "spe": 31},
 				"nature": "Modest",
 				"moves": [["Fire Blast"], ["Earth Power"], ["Toxic"], ["Stealth Rock"]]
+=======
+				"moves": [["Fire Blast"], ["Earth Power"], ["Toxic"], ["Hidden Power Ice", "Stealth Rock"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"abomasnow": {
@@ -7102,7 +7233,11 @@
 				"gender": "",
 				"item": ["Leftovers"],
 				"ability": ["Synchronize"],
+<<<<<<< HEAD
 				"evs": {"hp": 248, "atk": 0, "def": 0, "spa": 0, "spd": 212, "spe": 44},
+=======
+				"evs": {"hp": 252, "atk": 0, "def": 0, "spa": 0, "spd": 212, "spe": 44},
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"nature": "Calm",
 				"moves": [["Moonlight"], ["Toxic"], ["Taunt"], ["Foul Play"]]
 			}]
@@ -7322,6 +7457,7 @@
 				"gender": "",
 				"item": ["Leftovers"],
 				"ability": ["Drought"],
+<<<<<<< HEAD
 				"evs": {"hp": 248, "atk": 0, "def": 252, "spa": 0, "spd": 4, "spe": 0},
 				"nature": "Bold",
 				"moves": [["Stealth Rock"], ["Lava Plume"], ["Toxic"], ["Yawn"]]
@@ -7333,6 +7469,11 @@
 				"evs": {"hp": 248, "atk": 0, "def": 252, "spa": 0, "spd": 4, "spe": 0},
 				"nature": "Bold",
 				"moves": [["Stealth Rock"], ["Lava Plume"], ["Toxic"], ["Rapid Spin"]]
+=======
+				"evs": {"hp": 248, "atk": 0, "def": 252, "spa": 0, "spd": 8, "spe": 0},
+				"nature": "Bold",
+				"moves": [["Stealth Rock"], ["Lava Plume"], ["Toxic"], ["Yawn", "Rapid Spin"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"venusaur": {
@@ -7546,7 +7687,11 @@
 				"gender": "",
 				"item": ["Figy Berry"],
 				"ability": ["Gluttony"],
+<<<<<<< HEAD
 				"evs": {"hp": 128, "atk": 252, "def": 0, "spa": 0, "spd": 0, "spe": 128},
+=======
+				"evs": {"hp": 148, "atk": 252, "def": 0, "spa": 0, "spd": 0, "spe": 108},
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"nature": "Adamant",
 				"moves": [["Belly Drum"], ["Extreme Speed"], ["Seed Bomb"], ["Stomping Tantrum", "Throat Chop"]]
 			}]
@@ -7683,6 +7828,10 @@
 				"item": ["Choice Specs"],
 				"ability": ["Levitate"],
 				"evs": {"hp": 0, "atk": 0, "def": 4, "spa": 252, "spd": 0, "spe": 252},
+<<<<<<< HEAD
+=======
+				"nature": "Timid",
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"moves": [["Overheat"], ["Thunderbolt", "Trick"], ["Hidden Power Ice"], ["Volt Switch"]]
 			}, {
 				"species": "Rotom-Heat",
@@ -8567,7 +8716,11 @@
 			"sets": [{
 				"species": "Klinklang",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["Steelium-Z", "Leftovers"],
+=======
+				"item": ["Steelium Z", "Leftovers"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Clear Body"],
 				"happiness": 0,
 				"evs": {"hp": 104, "atk": 252, "def": 0, "spa": 0, "spd": 0, "spe": 152},
@@ -8576,7 +8729,11 @@
 			}, {
 				"species": "Klinklang",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["Electrium-Z", "Lum Berry"],
+=======
+				"item": ["Electrium Z", "Lum Berry"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Clear Body"],
 				"happiness": 0,
 				"evs": {"hp": 104, "atk": 252, "def": 0, "spa": 0, "spd": 0, "spe": 152},
@@ -8644,8 +8801,22 @@
 				"gender": "",
 				"item": ["Ghostium Z"],
 				"ability": ["Levitate"],
+<<<<<<< HEAD
 				"nature": "Timid",
 				"moves": [["Shadow Ball"], ["Dazzling Gleam"], ["Nasty Plot"], ["Taunt"]]
+=======
+				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 252, "spd": 4, "spe": 252},
+				"nature": "Timid",
+				"moves": [["Shadow Ball"], ["Dazzling Gleam"], ["Nasty Plot"], ["Taunt"]]
+			}, {
+				"species": "Mismagius",
+				"gender": "",
+				"item": ["Colbur Berry", "Ghostium Z"],
+				"ability": ["Levitate"],
+				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 252, "spd": 4, "spe": 252},
+				"nature": "Timid",
+				"moves": [["Hex"], ["Dazzling Gleam"], ["Nasty Plot"], ["Will-O-Wisp"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"omastar": {
@@ -8730,7 +8901,11 @@
 			}, {
 				"species": "Rotom",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["Iapapa Berry", "Ghostium-Z"],
+=======
+				"item": ["Iapapa Berry", "Ghostium Z"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Levitate"],
 				"evs": {"hp": 252, "atk": 0, "def": 88, "spa": 0, "spd": 0, "spe": 168},
 				"ivs": {"hp": 31, "atk": 0, "def": 31, "spa": 31, "spd": 31, "spe": 31},
@@ -8887,7 +9062,11 @@
 			"sets": [{
 				"species": "Slowbro",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["Colbur Berry", "Psychium-Z"],
+=======
+				"item": ["Colbur Berry", "Psychium Z"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Regenerator"],
 				"evs": {"hp": 252, "atk": 0, "def": 252, "spa": 0, "spd": 0, "spe": 4},
 				"ivs": {"hp": 31, "atk": 0, "def": 31, "spa": 31, "spd": 31, "spe": 31},
@@ -9401,7 +9580,11 @@
 			}, {
 				"species": "Magmortar",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["Fightinium-Z"],
+=======
+				"item": ["Fightinium Z"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Vital Spirit"],
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 252, "spd": 4, "spe": 252},
 				"nature": "Mild",
@@ -9721,6 +9904,10 @@
 				"item": ["Colbur Berry"],
 				"ability": ["Levitate"],
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 252, "spd": 4, "spe": 252},
+<<<<<<< HEAD
+=======
+				"nature": "Timid",
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"moves": [["Psychic"], ["Stealth Rock"], ["Ice Beam", "Dazzling Gleam"], ["U-turn", "Healing Wish"]]
 			}, {
 				"species": "Mesprit",
@@ -9737,6 +9924,10 @@
 				"ability": ["Levitate"],
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 252, "spd": 4, "spe": 252},
 				"ivs": {"hp": 31, "atk": 0, "def": 31, "spa": 31, "spd": 31, "spe": 31},
+<<<<<<< HEAD
+=======
+				"nature": "Modest",
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"moves": [["Psychic"], ["Ice Beam"], ["Signal Beam"], ["U-turn"]]
 			}, {
 				"species": "Mesprit",
@@ -9745,6 +9936,10 @@
 				"ability": ["Levitate"],
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 252, "spd": 4, "spe": 252},
 				"ivs": {"hp": 31, "atk": 0, "def": 31, "spa": 31, "spd": 31, "spe": 31},
+<<<<<<< HEAD
+=======
+				"nature": "Modest",
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"moves": [["Psychic"], ["Ice Beam"], ["Signal Beam"], ["Hidden Power Ground"]]
 			}, {
 				"species": "Mesprit",
@@ -9765,20 +9960,38 @@
 				"item": ["Black Sludge", "Darkinium Z"],
 				"ability": ["Aftermath"],
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 252, "spd": 4, "spe": 252},
+<<<<<<< HEAD
+=======
+				"nature": "Timid",
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"moves": [["Dark Pulse"], ["Acid Spray"], ["Fire Blast"], ["Defog"]]
 			}, {
 				"species": "Skuntank",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["Black Sludge ", "Lum Berry"],
 				"ability": ["Aftermath"],
 				"evs": {"hp": 0, "atk": 252, "def": 4, "spa": 0, "spd": 0, "spe": 252},
+=======
+				"item": ["Black Sludge", "Lum Berry"],
+				"ability": ["Aftermath"],
+				"evs": {"hp": 0, "atk": 252, "def": 4, "spa": 0, "spd": 0, "spe": 252},
+				"nature": "Jolly",
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"moves": [["Sucker Punch"], ["Pursuit"], ["Poison Jab", "Crunch"], ["Taunt"]]
 			}, {
 				"species": "Skuntank",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["Black Sludge ", "Lum Berry"],
 				"ability": ["Aftermath"],
 				"evs": {"hp": 0, "atk": 252, "def": 4, "spa": 0, "spd": 0, "spe": 252},
+=======
+				"item": ["Black Sludge", "Lum Berry"],
+				"ability": ["Aftermath"],
+				"evs": {"hp": 0, "atk": 252, "def": 4, "spa": 0, "spd": 0, "spe": 252},
+				"nature": "Jolly",
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"moves": [["Sucker Punch"], ["Pursuit"], ["Poison Jab", "Crunch"], ["Defog"]]
 			}, {
 				"species": "Skuntank",
@@ -9786,6 +9999,10 @@
 				"item": ["Choice Band", "Black Glasses"],
 				"ability": ["Aftermath"],
 				"evs": {"hp": 0, "atk": 252, "def": 4, "spa": 0, "spd": 0, "spe": 252},
+<<<<<<< HEAD
+=======
+				"nature": "Jolly",
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"moves": [["Sucker Punch"], ["Pursuit"], ["Poison Jab"], ["Crunch"]]
 			}]
 		},
@@ -9834,6 +10051,7 @@
 				"ability": ["Vital Spirit"],
 				"evs": {"hp": 0, "atk": 0, "def": 4, "spa": 252, "spd": 0, "spe": 252},
 				"nature": "Modest",
+<<<<<<< HEAD
 				"moves": [["Thunderbolt"], ["Earthquake"], ["Fire Blast"], ["Focus Blast"]]
 			}, {
 				"species": "Magmortar",
@@ -9843,6 +10061,9 @@
 				"evs": {"hp": 0, "atk": 0, "def": 4, "spa": 252, "spd": 0, "spe": 252},
 				"nature": "Modest",
 				"moves": [["Thunderbolt"], ["Hidden Power Grass"], ["Fire Blast"], ["Focus Blast"]]
+=======
+				"moves": [["Thunderbolt"], ["Earthquake", "Hidden Power Grass"], ["Fire Blast"], ["Focus Blast"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"musharna": {
@@ -9984,7 +10205,11 @@
 				"gender": "",
 				"item": ["Leftovers"],
 				"ability": ["Prankster"],
+<<<<<<< HEAD
 				"evs": {"hp": 248, "atk": 0, "def": 252, "spa": 0, "spd": 4, "spe": 0},
+=======
+				"evs": {"hp": 248, "atk": 0, "def": 252, "spa": 0, "spd": 8, "spe": 0},
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"nature": "Impish",
 				"moves": [["Will-O-Wisp"], ["Taunt"], ["Recover"], ["Foul Play", "Knock Off"]]
 			}]
@@ -10020,6 +10245,7 @@
 				"ability": ["Iron Barbs"],
 				"evs": {"hp": 248, "atk": 0, "def": 128, "spa": 0, "spd": 132, "spe": 0},
 				"nature": "Sassy",
+<<<<<<< HEAD
 				"moves": [["Stealth Rock"], ["Leech Seed"], ["Gyro Ball"], ["Protect", "Knock Off"]]
 			}, {
 				"species": "Ferroseed",
@@ -10029,6 +10255,9 @@
 				"evs": {"hp": 248, "atk": 0, "def": 128, "spa": 0, "spd": 132, "spe": 0},
 				"nature": "Sassy",
 				"moves": [["Spikes"], ["Leech Seed"], ["Gyro Ball"], ["Protect", "Knock Off"]]
+=======
+				"moves": [["Stealth Rock", "Spikes"], ["Leech Seed"], ["Gyro Ball"], ["Protect", "Knock Off"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"golurk": {
@@ -10039,6 +10268,10 @@
 				"item": ["Colbur Berry"],
 				"ability": ["Iron Fist"],
 				"evs": {"hp": 0, "atk": 252, "def": 0, "spa": 0, "spd": 4, "spe": 252},
+<<<<<<< HEAD
+=======
+				"nature": "Jolly",
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"moves": [["Stealth Rock"], ["Earthquake"], ["Shadow Punch"], ["Ice Punch"]]
 			}]
 		},
@@ -10047,7 +10280,11 @@
 			"sets": [{
 				"species": "Hitmonchan",
 				"gender": "M",
+<<<<<<< HEAD
 				"item": ["Life Orb ", "Fist Plate"],
+=======
+				"item": ["Life Orb", "Fist Plate"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Iron Fist"],
 				"evs": {"hp": 0, "atk": 252, "def": 0, "spa": 0, "spd": 4, "spe": 252},
 				"nature": "Jolly",
@@ -10089,7 +10326,11 @@
 				"gender": "",
 				"item": ["Leftovers"],
 				"ability": ["Thick Fat", "Sap Sipper"],
+<<<<<<< HEAD
 				"evs": {"hp": 248, "atk": 0, "def": 0, "spa": 0, "spd": 240, "spe": 16},
+=======
+				"evs": {"hp": 248, "atk": 0, "def": 0, "spa": 0, "spd": 240, "spe": 20},
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"nature": "Careful",
 				"moves": [["Stealth Rock"], ["Milk Drink"], ["Body Slam", "Seismic Toss"], ["Toxic", "Heal Bell", "Thunder Wave"]]
 			}]
@@ -10149,7 +10390,11 @@
 				"gender": "",
 				"item": ["Leftovers"],
 				"ability": ["Clear Body"],
+<<<<<<< HEAD
 				"evs": {"hp": 248, "atk": 0, "def": 56, "spa": 0, "spd": 200, "spe": 0},
+=======
+				"evs": {"hp": 252, "atk": 0, "def": 56, "spa": 0, "spd": 200, "spe": 0},
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"nature": "Impish",
 				"moves": [["Stealth Rock"], ["Rock Slide", "Stone Edge"], ["Earthquake", "Fire Punch"], ["Toxic"]]
 			}]
@@ -10206,6 +10451,10 @@
 				"item": ["Life Orb", "Grassium Z"],
 				"ability": ["Soundproof", "Snow Warning"],
 				"evs": {"hp": 0, "atk": 252, "def": 0, "spa": 0, "spd": 4, "spe": 252},
+<<<<<<< HEAD
+=======
+				"nature": "Jolly",
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"moves": [["Swords Dance"], ["Seed Bomb", "Wood Hammer"], ["Earthquake"], ["Ice Shard"]]
 			}]
 		},
@@ -10517,6 +10766,7 @@
 				"ability": ["RKS System"],
 				"evs": {"hp": 184, "atk": 72, "def": 0, "spa": 0, "spd": 0, "spe": 252},
 				"nature": "Jolly",
+<<<<<<< HEAD
 				"moves": [["Multi-Attack"], ["Parting Shot"], ["Rock Slide"], ["Toxic", "Thunder Wave"]]
 			}, {
 				"species": "Silvally-Fairy",
@@ -10526,6 +10776,9 @@
 				"evs": {"hp": 184, "atk": 72, "def": 0, "spa": 0, "spd": 0, "spe": 252},
 				"nature": "Jolly",
 				"moves": [["Multi-Attack"], ["Parting Shot"], ["Defog"], ["Toxic", "Thunder Wave"]]
+=======
+				"moves": [["Multi-Attack"], ["Parting Shot"], ["Rock Slide", "Defog"], ["Toxic", "Thunder Wave"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"swanna": {
@@ -10577,6 +10830,10 @@
 				"item": ["Toxic Orb"],
 				"ability": ["Toxic Boost"],
 				"evs": {"hp": 0, "atk": 252, "def": 4, "spa": 0, "spd": 0, "spe": 252},
+<<<<<<< HEAD
+=======
+				"nature": "Jolly",
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"moves": [["Facade"], ["Knock Off"], ["Quick Attack"], ["Close Combat", "Swords Dance"]]
 			}]
 		},
@@ -10645,6 +10902,7 @@
 				"gender": "",
 				"item": ["White Herb"],
 				"ability": ["Swift Swim"],
+<<<<<<< HEAD
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 252, "spd": 0, "spe": 252},
 				"ivs": {"hp": 31, "atk": 0, "def": 31, "spa": 31, "spd": 31, "spe": 31},
 				"nature": "Modest",
@@ -10667,6 +10925,12 @@
 				"ivs": {"hp": 31, "atk": 0, "def": 31, "spa": 31, "spd": 31, "spe": 31},
 				"nature": "Modest",
 				"moves": [["Shell Smash"], ["Hydro Pump"], ["Ice Beam"], ["Hidden Power Fire"]]
+=======
+				"evs": {"hp": 0, "atk": 0, "def": 4, "spa": 252, "spd": 0, "spe": 252},
+				"ivs": {"hp": 31, "atk": 0, "def": 31, "spa": 31, "spd": 31, "spe": 31},
+				"nature": "Modest",
+				"moves": [["Shell Smash"], ["Hydro Pump"], ["Ice Beam"], ["Substitute", "Hidden Power Grass", "Hidden Power Fire"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"komala": {
@@ -10704,6 +10968,7 @@
 				"ability": ["Lightning Rod"],
 				"evs": {"hp": 0, "atk": 0, "def": 4, "spa": 252, "spd": 0, "spe": 252},
 				"nature": "Timid",
+<<<<<<< HEAD
 				"moves": [["Thunderbolt"], ["Volt Switch"], ["Overheat", "Flamethrower"], ["Switcheroo"]]
 			}, {
 				"species": "Manectric",
@@ -10713,6 +10978,9 @@
 				"evs": {"hp": 0, "atk": 0, "def": 4, "spa": 252, "spd": 0, "spe": 252},
 				"nature": "Timid",
 				"moves": [["Thunderbolt"], ["Volt Switch"], ["Overheat", "Flamethrower"], ["Hidden Power Grass"]]
+=======
+				"moves": [["Thunderbolt"], ["Volt Switch"], ["Overheat", "Flamethrower"], ["Switcheroo", "Hidden Power Grass"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"lurantis": {
@@ -10750,6 +11018,7 @@
 				"evs": {"hp": 248, "atk": 0, "def": 0, "spa": 8, "spd": 0, "spe": 252},
 				"ivs": {"hp": 31, "atk": 0, "def": 31, "spa": 31, "spd": 31, "spe": 31},
 				"nature": "Timid",
+<<<<<<< HEAD
 				"moves": [["Revelation Dance"], ["Toxic"], ["Taunt"], ["Roost"]]
 			}, {
 				"species": "Oricorio-Pom-Pom",
@@ -10760,6 +11029,9 @@
 				"ivs": {"hp": 31, "atk": 0, "def": 31, "spa": 31, "spd": 31, "spe": 31},
 				"nature": "Timid",
 				"moves": [["Revelation Dance"], ["Toxic"], ["Defog"], ["Roost"]]
+=======
+				"moves": [["Revelation Dance"], ["Toxic"], ["Taunt", "Defog"], ["Roost"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"throh": {
@@ -10789,7 +11061,11 @@
 				"gender": "",
 				"item": ["Leftovers"],
 				"ability": ["Water Absorb"],
+<<<<<<< HEAD
 				"evs": {"hp": 248, "atk": 0, "def": 0, "spa": 0, "spd": 0, "spe": 96},
+=======
+				"evs": {"hp": 248, "atk": 0, "def": 0, "spa": 164, "spd": 0, "spe": 96},
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"nature": "Modest",
 				"moves": [["Scald"], ["Focus Blast"], ["Substitute"], ["Toxic"]]
 			}, {
@@ -10898,6 +11174,10 @@
 				"item": ["Life Orb"],
 				"ability": ["Skill Link"],
 				"evs": {"hp": 0, "atk": 4, "def": 0, "spa": 252, "spd": 0, "spe": 252},
+<<<<<<< HEAD
+=======
+				"nature": "Rash",
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"moves": [["Boomburst"], ["Brave Bird"], ["Overheat"], ["Bullet Seed"]]
 			}]
 		},
@@ -11007,6 +11287,7 @@
 				"ability": ["RKS System"],
 				"evs": {"hp": 0, "atk": 0, "def": 4, "spa": 252, "spd": 0, "spe": 252},
 				"nature": "Timid",
+<<<<<<< HEAD
 				"moves": [["Shadow Ball"], ["Ice Beam", "Flamethrower"], ["Parting Shot"], ["Thunderbolt"]]
 			}, {
 				"species": "Silvally-Ghost",
@@ -11016,6 +11297,9 @@
 				"evs": {"hp": 0, "atk": 0, "def": 4, "spa": 252, "spd": 0, "spe": 252},
 				"nature": "Timid",
 				"moves": [["Shadow Ball"], ["Ice Beam", "Flamethrower"], ["Parting Shot"], ["Defog"]]
+=======
+				"moves": [["Shadow Ball"], ["Ice Beam", "Flamethrower"], ["Parting Shot"], ["Thunderbolt", "Defog"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"stoutland": {
@@ -11088,10 +11372,25 @@
 				"species": "Aurorus",
 				"gender": "",
 				"item": ["Choice Specs"],
+<<<<<<< HEAD
 				"ability": ["Snow Warning", "Refrigerate"],
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 252, "spd": 4, "spe": 252},
 				"nature": "Modest",
 				"moves": [["Blizzard", "Hyper Voice"], ["Freeze-Dry"], ["Earth Power"], ["Ancient Power"]]
+=======
+				"ability": ["Snow Warning"],
+				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 252, "spd": 4, "spe": 252},
+				"nature": "Modest",
+				"moves": [["Blizzard"], ["Freeze-Dry"], ["Earth Power"], ["Ancient Power"]]
+			}, {
+				"species": "Aurorus",
+				"gender": "",
+				"item": ["Choice Specs"],
+				"ability": ["Refrigerate"],
+				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 252, "spd": 4, "spe": 252},
+				"nature": "Modest",
+				"moves": [["Hyper Voice"], ["Freeze-Dry"], ["Earth Power"], ["Ancient Power"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}, {
 				"species": "Aurorus",
 				"gender": "",
@@ -11106,6 +11405,10 @@
 				"item": ["Focus Sash"],
 				"ability": ["Snow Warning"],
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 252, "spd": 4, "spe": 252},
+<<<<<<< HEAD
+=======
+				"nature": "Timid",
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"moves": [["Blizzard"], ["Freeze-Dry", "Thunder Wave"], ["Earth Power"], ["Stealth Rock"]]
 			}]
 		},
@@ -11148,7 +11451,11 @@
 			"sets": [{
 				"species": "Abra",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Magic Guard"],
 				"level": 5,
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 240, "spd": 0, "spe": 200},
@@ -11157,7 +11464,11 @@
 			}, {
 				"species": "Abra",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Magic Guard"],
 				"level": 5,
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 240, "spd": 0, "spe": 200},
@@ -11166,7 +11477,11 @@
 			}, {
 				"species": "Abra",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Magic Guard"],
 				"level": 5,
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 240, "spd": 0, "spe": 200},
@@ -11286,7 +11601,11 @@
 			}, {
 				"species": "Staryu",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Analytic"],
 				"level": 5,
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 200, "spd": 0, "spe": 240},
@@ -11322,6 +11641,7 @@
 				"level": 5,
 				"evs": {"hp": 116, "atk": 0, "def": 0, "spa": 240, "spd": 0, "spe": 116},
 				"nature": "Modest",
+<<<<<<< HEAD
 				"moves": [["Nasty Plot"], ["Air Slash"], ["Heat Wave"], ["Dark Pulse"]]
 			}, {
 				"species": "Vullaby",
@@ -11332,6 +11652,9 @@
 				"evs": {"hp": 116, "atk": 0, "def": 0, "spa": 240, "spd": 0, "spe": 116},
 				"nature": "Modest",
 				"moves": [["Nasty Plot"], ["Air Slash"], ["Heat Wave"], ["Hidden Power Grass"]]
+=======
+				"moves": [["Nasty Plot"], ["Air Slash"], ["Heat Wave"], ["Dark Pulse", "Hidden Power Grass"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}, {
 				"species": "Vullaby",
 				"gender": "",
@@ -11349,6 +11672,7 @@
 				"level": 5,
 				"evs": {"hp": 0, "atk": 236, "def": 0, "spa": 0, "spd": 76, "spe": 196},
 				"nature": "Jolly",
+<<<<<<< HEAD
 				"moves": [["Brave Bird"], ["Knock Off"], ["U-turn"], ["Rock Smash"]]
 			}, {
 				"species": "Vullaby",
@@ -11359,6 +11683,9 @@
 				"evs": {"hp": 0, "atk": 236, "def": 0, "spa": 0, "spd": 76, "spe": 196},
 				"nature": "Jolly",
 				"moves": [["Brave Bird"], ["Knock Off"], ["U-turn"], ["Defog"]]
+=======
+				"moves": [["Brave Bird"], ["Knock Off"], ["U-turn"], ["Rock Smash", "Defog"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}, {
 				"species": "Vullaby",
 				"gender": "",
@@ -11415,7 +11742,11 @@
 			"sets": [{
 				"species": "Gastly",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Levitate"],
 				"level": 5,
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 200, "spd": 80, "spe": 200},
@@ -11424,7 +11755,11 @@
 			}, {
 				"species": "Gastly",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Levitate"],
 				"level": 5,
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 200, "spd": 80, "spe": 200},
@@ -11433,7 +11768,11 @@
 			}, {
 				"species": "Gastly",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Levitate"],
 				"level": 5,
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 200, "spd": 80, "spe": 200},
@@ -11442,7 +11781,11 @@
 			}, {
 				"species": "Gastly",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Levitate"],
 				"level": 5,
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 200, "spd": 80, "spe": 200},
@@ -11491,7 +11834,11 @@
 			}, {
 				"species": "Diglett",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb", "Groundium Z"],
+=======
+				"item": ["Life Orb", "Groundium Z"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Arena Trap"],
 				"level": 5,
 				"evs": {"hp": 36, "atk": 236, "def": 0, "spa": 0, "spd": 0, "spe": 236},
@@ -11507,6 +11854,7 @@
 				"item": ["Eviolite"],
 				"ability": ["Regenerator"],
 				"level": 5,
+<<<<<<< HEAD
 				"evs": {"hp": 124, "atk": 0, "def": 160, "spa": 0, "spd": 156, "spe": 0},
 				"nature": "Bold",
 				"moves": [["Spore"], ["Sludge Bomb"], ["Giga Drain"], ["Synthesis"]]
@@ -11528,6 +11876,11 @@
 				"evs": {"hp": 124, "atk": 0, "def": 160, "spa": 0, "spd": 156, "spe": 0},
 				"nature": "Bold",
 				"moves": [["Spore"], ["Sludge Bomb"], ["Giga Drain"], ["Hidden Power Fire"]]
+=======
+				"evs": {"hp": 124, "atk": 0, "def": 160, "spa": 0, "spd": 160, "spe": 0},
+				"nature": "Bold",
+				"moves": [["Spore"], ["Sludge Bomb"], ["Giga Drain"], ["Synthesis", "Hidden Power Fighting", "Hidden Power Fire"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"grimeralola": {
@@ -11607,7 +11960,11 @@
 			}, {
 				"species": "Doduo",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Early Bird"],
 				"level": 5,
 				"evs": {"hp": 0, "atk": 236, "def": 0, "spa": 0, "spd": 0, "spe": 236},
@@ -11696,7 +12053,11 @@
 			}, {
 				"species": "Pawniard",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Defiant"],
 				"level": 5,
 				"evs": {"hp": 0, "atk": 236, "def": 36, "spa": 0, "spd": 36, "spe": 196},
@@ -11967,6 +12328,7 @@
 				"moves": [["High Jump Kick"], ["Drain Punch"], ["Knock Off"], ["Poison Jab", "Zen Headbutt"]]
 			}]
 		},
+<<<<<<< HEAD
 		"torchic": {
 			"flags": {},
 			"sets": [{
@@ -11989,6 +12351,8 @@
 				"moves": [["Protect"], ["Swords Dance", "Curse"], ["Will-O-Wisp", "Substitute"], ["Baton Pass"]]
 			}]
 		},
+=======
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 		"carvanha": {
 			"flags": {},
 			"sets": [{
@@ -12003,7 +12367,11 @@
 			}, {
 				"species": "Carvanha",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Speed Boost"],
 				"level": 5,
 				"evs": {"hp": 0, "atk": 196, "def": 36, "spa": 0, "spd": 36, "spe": 236},
@@ -12012,7 +12380,11 @@
 			}, {
 				"species": "Carvanha",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Speed Boost"],
 				"level": 5,
 				"evs": {"hp": 0, "atk": 0, "def": 36, "spa": 236, "spd": 0, "spe": 236},
@@ -12025,7 +12397,11 @@
 			"sets": [{
 				"species": "Corphish",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["Eviolite", "life Orb"],
+=======
+				"item": ["Eviolite", "Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Adaptability"],
 				"level": 5,
 				"evs": {"hp": 0, "atk": 196, "def": 76, "spa": 0, "spd": 0, "spe": 236},
@@ -12118,7 +12494,11 @@
 			"sets": [{
 				"species": "Elekid",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Vital Spirit"],
 				"level": 5,
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 240, "spd": 0, "spe": 236},
@@ -12193,7 +12573,11 @@
 				"item": ["Choice Scarf"],
 				"ability": ["Stamina"],
 				"level": 5,
+<<<<<<< HEAD
 				"evs": {"hp": 36, "atk": 196, "def": 0, "spa": 0, "spd": 0, "spe": 236},
+=======
+				"evs": {"hp": 36, "atk": 196, "def": 36, "spa": 0, "spd": 0, "spe": 236},
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"nature": "Adamant",
 				"moves": [["Close Combat"], ["Earthquake"], ["Heavy Slam"], ["Rock Slide"]]
 			}]
@@ -12260,7 +12644,11 @@
 				"item": ["Berry Juice", "Eviolite"],
 				"ability": ["Aroma Veil"],
 				"level": 5,
+<<<<<<< HEAD
 				"evs": {"hp": 52, "atk": 0, "def": 36, "spa": 252, "spd": 76, "spe": 96},
+=======
+				"evs": {"hp": 52, "atk": 0, "def": 36, "spa": 252, "spd": 76, "spe": 92},
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ivs": {"hp": 31, "atk": 0, "def": 31, "spa": 31, "spd": 31, "spe": 31},
 				"nature": "Modest",
 				"moves": [["Nasty Plot"], ["Moonblast"], ["Draining Kiss"], ["Psychic"]]
@@ -12298,6 +12686,7 @@
 				"level": 5,
 				"evs": {"hp": 132, "atk": 196, "def": 108, "spa": 0, "spd": 28, "spe": 36},
 				"nature": "Adamant",
+<<<<<<< HEAD
 				"moves": [["Belly Drum"], ["Extreme Speed"], ["Thief"], ["Seed Bomb"]]
 			}, {
 				"species": "Zigzagoon",
@@ -12308,6 +12697,9 @@
 				"evs": {"hp": 132, "atk": 196, "def": 108, "spa": 0, "spd": 28, "spe": 36},
 				"nature": "Adamant",
 				"moves": [["Belly Drum"], ["Extreme Speed"], ["Thief"], ["Return"]],
+=======
+				"moves": [["Belly Drum"], ["Extreme Speed"], ["Thief"], ["Return", "Seed Bomb"]],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"happiness": 255
 			}]
 		},
@@ -12321,6 +12713,7 @@
 				"level": 5,
 				"evs": {"hp": 76, "atk": 180, "def": 0, "spa": 0, "spd": 0, "spe": 196},
 				"nature": "Jolly",
+<<<<<<< HEAD
 				"moves": [["Rock Slide"], ["Acrobatics"], ["Earthquake"], ["U-turn"]]
 			}, {
 				"species": "Archen",
@@ -12331,6 +12724,9 @@
 				"evs": {"hp": 76, "atk": 180, "def": 0, "spa": 0, "spd": 0, "spe": 196},
 				"nature": "Jolly",
 				"moves": [["Rock Slide"], ["Acrobatics"], ["Earthquake"], ["Stealth Rock"]]
+=======
+				"moves": [["Rock Slide"], ["Acrobatics"], ["Earthquake"], ["U-turn", "Stealth Rock"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}, {
 				"species": "Archen",
 				"gender": "",
@@ -12346,6 +12742,7 @@
 				"item": ["Berry Juice"],
 				"ability": ["Defeatist"],
 				"level": 5,
+<<<<<<< HEAD
 				"evs": {"hp": 76, "atk": 20, "def": 76, "spa": 0, "spd": 0, "spe": 196},
 				"nature": "Jolly",
 				"moves": [["Stealth Rock"], ["Rock Slide"], ["Acrobatics", "Earthquake"], ["Knock Off"]]
@@ -12358,6 +12755,11 @@
 				"evs": {"hp": 76, "atk": 20, "def": 76, "spa": 0, "spd": 0, "spe": 196},
 				"nature": "Jolly",
 				"moves": [["Stealth Rock"], ["Rock Slide"], ["Acrobatics", "Earthquake"], ["Defog"]]
+=======
+				"evs": {"hp": 76, "atk": 20, "def": 76, "spa": 0, "spd": 76, "spe": 196},
+				"nature": "Jolly",
+				"moves": [["Stealth Rock"], ["Rock Slide"], ["Acrobatics", "Earthquake"], ["Knock Off", "Defog"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"bunnelby": {
@@ -12365,7 +12767,11 @@
 			"sets": [{
 				"species": "Bunnelby",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Huge Power"],
 				"level": 5,
 				"evs": {"hp": 0, "atk": 228, "def": 52, "spa": 0, "spd": 0, "spe": 220},
@@ -12401,7 +12807,11 @@
 				"item": ["Choice Scarf"],
 				"ability": ["Water Absorb"],
 				"level": 5,
+<<<<<<< HEAD
 				"evs": {"hp": 76, "atk": 0, "def": 0, "spa": 0, "spd": 0, "spe": 196},
+=======
+				"evs": {"hp": 76, "atk": 0, "def": 0, "spa": 236, "spd": 0, "spe": 196},
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"nature": "Timid",
 				"moves": [["Water Spout"], ["Shadow Ball"], ["Ice Beam", "Energy Ball"], ["Trick", "Hydro Pump"]]
 			}]
@@ -12469,6 +12879,7 @@
 				"item": ["Eviolite"],
 				"ability": ["Weak Armor"],
 				"level": 5,
+<<<<<<< HEAD
 				"evs": {"hp": 76, "atk": 0, "def": 36, "spa": 196, "spd": 0, "spe": 196},
 				"nature": "Timid",
 				"moves": [["Spikes"], ["Stealth Rock"], ["Hydro Pump"], ["Knock Off"]]
@@ -12490,6 +12901,11 @@
 				"evs": {"hp": 76, "atk": 0, "def": 0, "spa": 196, "spd": 0, "spe": 236},
 				"nature": "Modest",
 				"moves": [["Shell Smash"], ["Hydro Pump"], ["Ice Beam"], ["Earth Power"]]
+=======
+				"evs": {"hp": 76, "atk": 0, "def": 36, "spa": 196, "spd": 0, "spe": 156},
+				"nature": "Timid",
+				"moves": [["Spikes"], ["Stealth Rock", "Toxic Spikes"], ["Hydro Pump"], ["Knock Off"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}, {
 				"species": "Omanyte",
 				"gender": "",
@@ -12498,7 +12914,11 @@
 				"level": 5,
 				"evs": {"hp": 0, "atk": 0, "def": 36, "spa": 200, "spd": 0, "spe": 236},
 				"nature": "Modest",
+<<<<<<< HEAD
 				"moves": [["Shell Smash"], ["Hydro Pump"], ["Ice Beam"], ["Hidden Power Grass"]]
+=======
+				"moves": [["Shell Smash"], ["Hydro Pump"], ["Ice Beam"], ["Earth Power", "Hidden Power Grass"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"pancham": {
@@ -12579,6 +12999,7 @@
 				"evs": {"hp": 44, "atk": 68, "def": 196, "spa": 0, "spd": 156, "spe": 0},
 				"ivs": {"hp": 31, "atk": 31, "def": 31, "spa": 31, "spd": 31, "spe": 0},
 				"nature": "Brave",
+<<<<<<< HEAD
 				"moves": [["Trick Room"], ["Bullet Seed"], ["Synthesis"], ["Explosion"]]
 			}, {
 				"species": "Pumpkaboo-Super",
@@ -12589,6 +13010,8 @@
 				"evs": {"hp": 44, "atk": 68, "def": 196, "spa": 0, "spd": 156, "spe": 0},
 				"ivs": {"hp": 31, "atk": 31, "def": 31, "spa": 31, "spd": 31, "spe": 0},
 				"nature": "Brave",
+=======
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"moves": [["Trick Room"], ["Bullet Seed"], ["Synthesis"], ["Destiny Bond", "Explosion"]]
 			}]
 		},
@@ -12646,7 +13069,11 @@
 			"sets": [{
 				"species": "Vulpix-Alola",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["light Clay"],
+=======
+				"item": ["Light Clay"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Snow Warning"],
 				"level": 5,
 				"evs": {"hp": 52, "atk": 0, "def": 0, "spa": 200, "spd": 0, "spe": 240},
@@ -12659,7 +13086,11 @@
 			"sets": [{
 				"species": "Wingull",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb", "Flyinium Z"],
+=======
+				"item": ["Life Orb", "Flyinium Z"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Rain Dish"],
 				"level": 5,
 				"evs": {"hp": 36, "atk": 0, "def": 0, "spa": 236, "spd": 0, "spe": 236},
@@ -12724,7 +13155,11 @@
 			}, {
 				"species": "Cranidos",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Sheer Force"],
 				"level": 5,
 				"evs": {"hp": 0, "atk": 236, "def": 36, "spa": 0, "spd": 0, "spe": 212},
@@ -12733,7 +13168,11 @@
 			}, {
 				"species": "Cranidos",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Sheer Force"],
 				"level": 5,
 				"evs": {"hp": 0, "atk": 236, "def": 36, "spa": 0, "spd": 0, "spe": 212},
@@ -12781,7 +13220,11 @@
 			"sets": [{
 				"species": "Houndour",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Flash Fire"],
 				"level": 5,
 				"evs": {"hp": 0, "atk": 36, "def": 36, "spa": 196, "spd": 0, "spe": 236},
@@ -12864,6 +13307,7 @@
 				"item": ["Choice Scarf", "Icium Z"],
 				"ability": ["Snow Warning"],
 				"level": 5,
+<<<<<<< HEAD
 				"evs": {"hp": 0, "atk": 184, "def": 0, "spa": 0, "spd": 0, "spe": 200},
 				"moves": [["Blizzard"], ["Giga Drain"], ["Hidden Power Fire"], ["Ice Shard"]]
 			}, {
@@ -12874,6 +13318,11 @@
 				"level": 5,
 				"evs": {"hp": 0, "atk": 184, "def": 0, "spa": 0, "spd": 0, "spe": 200},
 				"moves": [["Blizzard"], ["Giga Drain"], ["Hidden Power Ground"], ["Ice Shard"]]
+=======
+				"evs": {"hp": 0, "atk": 104, "def": 0, "spa": 184, "spd": 0, "spe": 200},
+				"nature": "Naive",
+				"moves": [["Blizzard"], ["Giga Drain"], ["Hidden Power Fire", "Hidden Power Ground"], ["Ice Shard"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"spinarak": {
@@ -12923,6 +13372,7 @@
 			"sets": [{
 				"species": "Taillow",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
 				"ability": ["Scrappy"],
 				"level": 5,
@@ -12934,12 +13384,19 @@
 				"species": "Taillow",
 				"gender": "",
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Scrappy"],
 				"level": 5,
 				"evs": {"hp": 0, "atk": 0, "def": 36, "spa": 196, "spd": 36, "spe": 236},
 				"ivs": {"hp": 19, "atk": 31, "def": 31, "spa": 31, "spd": 31, "spe": 31},
 				"nature": "Naive",
+<<<<<<< HEAD
 				"moves": [["Boomburst"], ["Hidden Power Ground"], ["Brave Bird"], ["U-turn"]]
+=======
+				"moves": [["Boomburst"], ["Heat Wave", "Hidden Power Ground"], ["Brave Bird"], ["U-turn"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}, {
 				"species": "Taillow",
 				"gender": "",
@@ -12948,6 +13405,7 @@
 				"level": 5,
 				"evs": {"hp": 0, "atk": 240, "def": 0, "spa": 0, "spd": 0, "spe": 236},
 				"nature": "Jolly",
+<<<<<<< HEAD
 				"moves": [["Facade"], ["Brave Bird"], ["Protect"], ["Quick Attack"]]
 			}, {
 				"species": "Taillow",
@@ -12958,6 +13416,9 @@
 				"evs": {"hp": 0, "atk": 240, "def": 0, "spa": 0, "spd": 0, "spe": 236},
 				"nature": "Jolly",
 				"moves": [["Facade"], ["Brave Bird"], ["Protect"], ["Hidden Power Grass"]]
+=======
+				"moves": [["Facade"], ["Brave Bird"], ["Protect"], ["Quick Attack", "Hidden Power Grass"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"amaura": {
@@ -13010,6 +13471,7 @@
 				"level": 5,
 				"evs": {"hp": 0, "atk": 0, "def": 44, "spa": 160, "spd": 0, "spe": 240},
 				"nature": "Modest",
+<<<<<<< HEAD
 				"moves": [["Celebrate"], ["Sludge Bomb"], ["Giga Drain"], ["Sleep Powder"]]
 			}, {
 				"species": "Bulbasaur",
@@ -13029,6 +13491,9 @@
 				"evs": {"hp": 0, "atk": 0, "def": 160, "spa": 240, "spd": 0, "spe": 0},
 				"nature": "Modest",
 				"moves": [["Celebrate"], ["Sludge Bomb"], ["Giga Drain"], ["Hidden Power Fire"]]
+=======
+				"moves": [["Celebrate"], ["Sludge Bomb"], ["Giga Drain"], ["Sleep Powder", "Synthesis", "Hidden Power Fire"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"buneary": {
@@ -13095,6 +13560,7 @@
 				"level": 5,
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 248, "spd": 76, "spe": 184},
 				"nature": "Timid",
+<<<<<<< HEAD
 				"moves": [["Shell Smash"], ["Surf"], ["Ice Beam"], ["Hidden Power Grass"]]
 			}, {
 				"species": "Clamperl",
@@ -13105,6 +13571,9 @@
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 248, "spd": 76, "spe": 184},
 				"nature": "Timid",
 				"moves": [["Shell Smash"], ["Surf"], ["Ice Beam"], ["Hidden Power Electric"]]
+=======
+				"moves": [["Shell Smash"], ["Surf"], ["Ice Beam"], ["Hidden Power Grass", "Hidden Power Electric"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"koffing": {
@@ -13133,7 +13602,11 @@
 				"item": ["Darkinium Z"],
 				"ability": ["Levitate"],
 				"level": 5,
+<<<<<<< HEAD
 				"evs": {"hp": 236, "atk": 0, "def": 236, "spa": 0, "spd": 0, "spe": 0},
+=======
+				"evs": {"hp": 196, "atk": 0, "def": 236, "spa": 0, "spd": 76, "spe": 0},
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"nature": "Bold",
 				"moves": [["Sludge Bomb"], ["Toxic Spikes"], ["Will-O-Wisp"], ["Memento"]]
 			}, {
@@ -13152,7 +13625,11 @@
 			"sets": [{
 				"species": "Meowth",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Technician"],
 				"level": 5,
 				"evs": {"hp": 0, "atk": 236, "def": 0, "spa": 36, "spd": 36, "spe": 196},
@@ -13175,7 +13652,11 @@
 			}, {
 				"species": "Pikipek",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Skill Link"],
 				"level": 5,
 				"evs": {"hp": 0, "atk": 236, "def": 36, "spa": 0, "spd": 0, "spe": 236},
@@ -13216,6 +13697,7 @@
 				"level": 5,
 				"evs": {"hp": 116, "atk": 196, "def": 116, "spa": 0, "spd": 36, "spe": 36},
 				"nature": "Adamant",
+<<<<<<< HEAD
 				"moves": [["Swords Dance"], ["High Jump Kick"], ["Protect"], ["Copycat"]]
 			}, {
 				"species": "Riolu",
@@ -13226,6 +13708,9 @@
 				"evs": {"hp": 116, "atk": 196, "def": 116, "spa": 0, "spd": 36, "spe": 36},
 				"nature": "Adamant",
 				"moves": [["Swords Dance"], ["High Jump Kick"], ["Meteor Mash", "Crunch"], ["Copycat"]]
+=======
+				"moves": [["Swords Dance"], ["High Jump Kick"], ["Protect", "Meteor Mash", "Crunch"], ["Copycat"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"rowlet": {
@@ -13254,7 +13739,11 @@
 				"item": ["Eviolite"],
 				"ability": ["Overgrow"],
 				"level": 5,
+<<<<<<< HEAD
 				"evs": {"hp": 132, "atk": 0, "def": 196, "spa": 0, "spd": 0, "spe": 20},
+=======
+				"evs": {"hp": 132, "atk": 0, "def": 156, "spa": 0, "spd": 196, "spe": 20},
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"nature": "Careful",
 				"moves": [["Defog"], ["Brave Bird"], ["Leaf Blade"], ["Roost"]]
 			}]
@@ -13273,7 +13762,11 @@
 			}, {
 				"species": "Salandit",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Corrosion"],
 				"level": 5,
 				"evs": {"hp": 0, "atk": 0, "def": 36, "spa": 192, "spd": 40, "spe": 220},
@@ -13304,6 +13797,10 @@
 				"ability": ["Sturdy"],
 				"level": 5,
 				"evs": {"hp": 0, "atk": 204, "def": 0, "spa": 0, "spd": 76, "spe": 212},
+<<<<<<< HEAD
+=======
+				"ivs": {"hp": 23, "atk": 31, "def": 31, "spa": 31, "spd": 31, "spe": 31},
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"nature": "Jolly",
 				"moves": [["Dragon Dance"], ["Outrage"], ["Stone Edge"], ["Earthquake"]]
 			}, {
@@ -13349,6 +13846,7 @@
 				"level": 5,
 				"evs": {"hp": 0, "atk": 236, "def": 36, "spa": 0, "spd": 0, "spe": 236},
 				"nature": "Jolly",
+<<<<<<< HEAD
 				"moves": [["Stealth Rock"], ["Rock Blast"], ["Knock Off"], ["Aerial Ace"]]
 			}, {
 				"species": "Anorith",
@@ -13359,6 +13857,9 @@
 				"evs": {"hp": 0, "atk": 236, "def": 36, "spa": 0, "spd": 0, "spe": 236},
 				"nature": "Jolly",
 				"moves": [["Stealth Rock"], ["Rock Blast"], ["Knock Off"], ["Rapid Spin"]]
+=======
+				"moves": [["Stealth Rock"], ["Rock Blast"], ["Knock Off"], ["Aerial Ace", "Rapid Spin"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"axew": {
@@ -13419,7 +13920,11 @@
 			"sets": [{
 				"species": "Deerling",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Sap Sipper"],
 				"level": 5,
 				"evs": {"hp": 36, "atk": 196, "def": 36, "spa": 0, "spd": 0, "spe": 236},
@@ -13451,7 +13956,11 @@
 			"sets": [{
 				"species": "Dratini",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Shed Skin"],
 				"level": 5,
 				"evs": {"hp": 0, "atk": 244, "def": 0, "spa": 0, "spd": 36, "spe": 196},
@@ -13461,7 +13970,11 @@
 			}, {
 				"species": "Dratini",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Shed Skin"],
 				"level": 5,
 				"evs": {"hp": 0, "atk": 244, "def": 0, "spa": 0, "spd": 36, "spe": 196},
@@ -13471,7 +13984,11 @@
 			}, {
 				"species": "Dratini",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Shed Skin"],
 				"level": 5,
 				"evs": {"hp": 0, "atk": 164, "def": 0, "spa": 196, "spd": 0, "spe": 116},
@@ -13485,7 +14002,11 @@
 			"sets": [{
 				"species": "Goldeen",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Lightning Rod"],
 				"level": 5,
 				"evs": {"hp": 220, "atk": 0, "def": 0, "spa": 0, "spd": 32, "spe": 252},
@@ -13590,7 +14111,11 @@
 			}, {
 				"species": "Mankey",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Defiant"],
 				"level": 5,
 				"evs": {"hp": 36, "atk": 196, "def": 76, "spa": 0, "spd": 0, "spe": 196},
@@ -13603,7 +14128,11 @@
 			"sets": [{
 				"species": "Natu",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Magic Bounce"],
 				"level": 5,
 				"evs": {"hp": 0, "atk": 116, "def": 0, "spa": 196, "spd": 0, "spe": 196},
@@ -13634,7 +14163,11 @@
 			}, {
 				"species": "Numel",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Simple"],
 				"level": 5,
 				"evs": {"hp": 36, "atk": 0, "def": 0, "spa": 236, "spd": 0, "spe": 236},
@@ -13656,7 +14189,11 @@
 			}, {
 				"species": "Sandile",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Moxie"],
 				"level": 5,
 				"evs": {"hp": 0, "atk": 180, "def": 76, "spa": 0, "spd": 0, "spe": 236},
@@ -13665,7 +14202,11 @@
 			}, {
 				"species": "Sandile",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Moxie"],
 				"level": 5,
 				"evs": {"hp": 0, "atk": 180, "def": 76, "spa": 0, "spd": 0, "spe": 236},
@@ -13710,6 +14251,7 @@
 				"level": 5,
 				"evs": {"hp": 196, "atk": 0, "def": 76, "spa": 0, "spd": 196, "spe": 36},
 				"nature": "Calm",
+<<<<<<< HEAD
 				"moves": [["Toxic Spikes"], ["Sludge Bomb"], ["Scald"], ["Knock Off"]]
 			}, {
 				"species": "Tentacool",
@@ -13720,6 +14262,9 @@
 				"evs": {"hp": 196, "atk": 0, "def": 76, "spa": 0, "spd": 196, "spe": 36},
 				"nature": "Calm",
 				"moves": [["Toxic Spikes"], ["Sludge Bomb"], ["Scald"], ["Rapid Spin"]]
+=======
+				"moves": [["Toxic Spikes"], ["Sludge Bomb"], ["Scald"], ["Knock Off", "Rapid Spin"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"trapinch": {
@@ -13951,7 +14496,11 @@
 			}, {
 				"species": "Remoraid",
 				"gender": "",
+<<<<<<< HEAD
 				"item": ["life Orb"],
+=======
+				"item": ["Life Orb"],
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"ability": ["Hustle"],
 				"level": 5,
 				"evs": {"hp": 0, "atk": 236, "def": 0, "spa": 0, "spd": 0, "spe": 236},
@@ -13969,6 +14518,7 @@
 				"level": 5,
 				"evs": {"hp": 0, "atk": 252, "def": 60, "spa": 0, "spd": 188, "spe": 4},
 				"nature": "Careful",
+<<<<<<< HEAD
 				"moves": [["Sucker Punch"], ["Sludge Bomb", "Fire Blast"], ["Defog"], ["Pursuit"]]
 			}, {
 				"species": "Stunky",
@@ -13979,6 +14529,9 @@
 				"evs": {"hp": 0, "atk": 252, "def": 60, "spa": 0, "spd": 188, "spe": 4},
 				"nature": "Careful",
 				"moves": [["Sucker Punch"], ["Defog"], ["Pursuit"], ["Memento"]]
+=======
+				"moves": [["Sucker Punch"], ["Sludge Bomb", "Fire Blast", "Memento"], ["Defog"], ["Pursuit"]]
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 			}]
 		},
 		"treecko": {
@@ -14217,7 +14770,11 @@
 				"gender": "",
 				"item": ["Choice Band"],
 				"ability": ["Beast Boost"],
+<<<<<<< HEAD
 				"evs": {"hp": 0, "atk": 252, "def": 0, "spa": 0, "spd": 0, "spe": 252},
+=======
+				"evs": {"hp": 0, "atk": 252, "def": 4, "spa": 0, "spd": 0, "spe": 252},
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"nature": "Adamant",
 				"moves": [["Leech Life"], ["Drain Punch"], ["Ice Punch", "Stone Edge"], ["Poison Jab"]]
 			}, {
@@ -14341,7 +14898,11 @@
 				"gender": "",
 				"item": ["Choice Band"],
 				"ability": ["Technician"],
+<<<<<<< HEAD
 				"evs": {"hp": 248, "atk": 252, "def": 4, "spa": 0, "spd": 0, "spe": 0},
+=======
+				"evs": {"hp": 248, "atk": 252, "def": 0, "spa": 0, "spd": 8, "spe": 0},
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"nature": "Adamant",
 				"moves": [["Bullet Punch"], ["Superpower"], ["Knock Off", "Pursuit"], ["U-turn"]]
 			}, {
@@ -14765,7 +15326,11 @@
 				"gender": "",
 				"item": ["Choice Scarf"],
 				"ability": ["Protean"],
+<<<<<<< HEAD
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 4, "spd": 0, "spe": 252},
+=======
+				"evs": {"hp": 0, "atk": 4, "def": 0, "spa": 252, "spd": 0, "spe": 252},
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"nature": "Naive",
 				"moves": [["Spikes"], ["U-turn"], ["Gunk Shot"], ["Ice Beam"]]
 			}, {
@@ -14773,7 +15338,11 @@
 				"gender": "",
 				"item": ["Choice Scarf"],
 				"ability": ["Protean"],
+<<<<<<< HEAD
 				"evs": {"hp": 0, "atk": 0, "def": 0, "spa": 4, "spd": 0, "spe": 252},
+=======
+				"evs": {"hp": 0, "atk": 4, "def": 0, "spa": 252, "spd": 0, "spe": 252},
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"nature": "Naive",
 				"moves": [["Toxic Spikes"], ["U-turn"], ["Gunk Shot"], ["Ice Beam"]]
 			}, {
@@ -17917,7 +18486,11 @@
 				"gender": "",
 				"item": ["Rocky Helmet"],
 				"ability": ["Intimidate"],
+<<<<<<< HEAD
 				"evs": {"hp": 248, "atk": 0, "def": 252, "spa": 0, "spd": 4, "spe": 0},
+=======
+				"evs": {"hp": 248, "atk": 0, "def": 252, "spa": 0, "spd": 8, "spe": 0},
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"nature": "Impish",
 				"moves": [["Earthquake"], ["Knock Off"], ["Gravity"], ["U-turn"]]
 			}, {
@@ -17925,7 +18498,11 @@
 				"gender": "",
 				"item": ["Rocky Helmet"],
 				"ability": ["Intimidate"],
+<<<<<<< HEAD
 				"evs": {"hp": 248, "atk": 0, "def": 252, "spa": 0, "spd": 4, "spe": 0},
+=======
+				"evs": {"hp": 248, "atk": 0, "def": 252, "spa": 0, "spd": 8, "spe": 0},
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"nature": "Impish",
 				"moves": [["Earthquake"], ["Knock Off"], ["Stealth Rock"], ["U-turn"]]
 			}, {
@@ -17933,7 +18510,11 @@
 				"gender": "",
 				"item": ["Rocky Helmet"],
 				"ability": ["Intimidate"],
+<<<<<<< HEAD
 				"evs": {"hp": 248, "atk": 0, "def": 252, "spa": 0, "spd": 4, "spe": 0},
+=======
+				"evs": {"hp": 248, "atk": 0, "def": 252, "spa": 0, "spd": 8, "spe": 0},
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"nature": "Impish",
 				"moves": [["Earthquake"], ["Knock Off"], ["Defog"], ["U-turn"]]
 			}]
@@ -18327,7 +18908,11 @@
 				"gender": "",
 				"item": ["Leftovers"],
 				"ability": ["Water Absorb"],
+<<<<<<< HEAD
 				"evs": {"hp": 248, "atk": 0, "def": 0, "spa": 0, "spd": 172, "spe": 84},
+=======
+				"evs": {"hp": 252, "atk": 0, "def": 0, "spa": 0, "spd": 172, "spe": 84},
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"nature": "Calm",
 				"moves": [["Toxic"], ["Scald"], ["Taunt"], ["Recover"]]
 			}, {
@@ -18555,7 +19140,11 @@
 				"gender": "",
 				"item": ["Leftovers"],
 				"ability": ["Iron Barbs"],
+<<<<<<< HEAD
 				":evs": {"hp": 252, "atk": 0, "def": 252, "spa": 0, "spd": 4, "spe": 0},
+=======
+				"evs": {"hp": 252, "atk": 0, "def": 252, "spa": 0, "spd": 4, "spe": 0},
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"nature": "Relaxed",
 				"moves": [["Gyro Ball"], ["Stealth Rock"], ["Leech Seed"], ["Protect"]]
 			}, {
@@ -18593,7 +19182,11 @@
 				"gender": "",
 				"item": ["Venusaurite"],
 				"ability": ["Chlorophyll"],
+<<<<<<< HEAD
 				"evs": {"hp": 252, "atk": 0, "def": 172, "spa": 0, "spd": 76, "spe": 0},
+=======
+				"evs": {"hp": 252, "atk": 0, "def": 212, "spa": 0, "spd": 28, "spe": 16},
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"nature": "Calm",
 				"moves": [["Synthesis"], ["Leech Seed", "Sleep Powder"], ["Sludge Bomb"], ["Giga Drain"]]
 			}, {
@@ -18601,7 +19194,11 @@
 				"gender": "",
 				"item": ["Venusaurite"],
 				"ability": ["Chlorophyll"],
+<<<<<<< HEAD
 				"evs": {"hp": 252, "atk": 0, "def": 172, "spa": 0, "spd": 76, "spe": 0},
+=======
+				"evs": {"hp": 252, "atk": 0, "def": 164, "spa": 0, "spd": 76, "spe": 16},
+>>>>>>> dc9b3eb5238363233b88ef1ef6ea3a69e16a8c17
 				"nature": "Calm",
 				"moves": [["Synthesis"], ["Leech Seed", "Sleep Powder"], ["Sludge Bomb"], ["Hidden Power Fire"]]
 			}, {
