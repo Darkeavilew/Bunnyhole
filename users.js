@@ -1061,22 +1061,13 @@ class User {
 		this.updateReady(connection);
 	}
 	debugData() {
-		let str = '' + this.group + this.name + ' (' + this.userid + ')';
-		for (let i = 0; i < this.connections.length; i++) {
-			let connection = this.connections[i];
-			str += ' socket' + i + '[';
-			let first = true;
-			for (let j of connection.inRooms) {
-				if (first) {
-					first = false;
-				} else {
-					str += ', ';
-				}
-				str += j;
-			}
-			str += ']';
+		let str = `${this.group}${this.name} (${this.userid})`;
+		for (const [i, connection] of this.connections.entries()) {
+			str += ` socket${i}[`;
+			str += [...connection.inRooms].join(`, `);
+			str += `]`;
 		}
-		if (!this.connected) str += ' (DISCONNECTED)';
+		if (!this.connected) str += ` (DISCONNECTED)`;
 		return str;
 	}
 	/**
@@ -1193,6 +1184,7 @@ class User {
 	 * @param {Connection} connection
 	 */
 	onDisconnect(connection) {
+<<<<<<< HEAD
 		if (this.named) Db('seen').set(this.userid, Date.now());
 		if (Ontime[this.userid]) {
 			Db('ontime').set(this.userid, Db('ontime').get(this.userid, 0) + (Date.now() - Ontime[this.userid]));
@@ -1200,6 +1192,10 @@ class User {
 		}
 		for (let i = 0; i < this.connections.length; i++) {
 			if (this.connections[i] === connection) {
+=======
+		for (const [i, connected] of this.connections.entries()) {
+			if (connected === connection) {
+>>>>>>> f8412dab05fc8f23beac6f2e54e9a2851ab1a419
 				// console.log('DISCONNECT: ' + this.userid);
 				if (this.connections.length <= 1) {
 					this.markInactive();
@@ -1338,7 +1334,7 @@ class User {
 	}
 	/**
 	 * @param {string | Room} roomid
-	 * @param {Connection?} connection
+	 * @param {Connection?} [connection]
 	 */
 	joinRoom(roomid, connection = null) {
 		const room = Rooms(roomid);

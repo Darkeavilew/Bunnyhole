@@ -520,7 +520,7 @@ exports.commands = {
 	ignorepm: 'ignorepms',
 	ignorepms: function (target, room, user) {
 		if (user.ignorePMs === (target || true)) return this.errorReply("You are already blocking private messages! To unblock, use /unblockpms");
-		if (user.can('lock') && !user.can('bypassall')) return this.errorReply("You are not allowed to block private messages.");
+		if (user.can('lock') && !user.can('declare')) return this.errorReply("You are not allowed to block private messages.");
 		user.ignorePMs = true;
 		if (target in Config.groups) {
 			user.ignorePMs = target;
@@ -2952,7 +2952,7 @@ exports.commands = {
 			let successes = 0;
 			let identicals = 0;
 			let widenSuccesses = 0;
-			for (let row of data) {
+			for (const row of data) {
 				if (!row) continue;
 				let rowSplit = row.split(',');
 				let rowData = [
@@ -3325,9 +3325,9 @@ exports.commands = {
 		let memUsage = process.memoryUsage();
 		let results = [memUsage.rss, memUsage.heapUsed, memUsage.heapTotal];
 		let units = ["B", "KiB", "MiB", "GiB", "TiB"];
-		for (let i = 0; i < results.length; i++) {
-			let unitIndex = Math.floor(Math.log2(results[i]) / 10); // 2^10 base log
-			results[i] = "" + (results[i] / Math.pow(2, 10 * unitIndex)).toFixed(2) + " " + units[unitIndex];
+		for (let result of results) {
+			let unitIndex = Math.floor(Math.log2(result) / 10); // 2^10 base log
+			result = "" + (result / Math.pow(2, 10 * unitIndex)).toFixed(2) + " " + units[unitIndex];
 		}
 		this.sendReply("||[Main process] RSS: " + results[0] + ", Heap: " + results[1] + " / " + results[2]);
 	},
