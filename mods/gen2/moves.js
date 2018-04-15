@@ -4,7 +4,8 @@
 
 'use strict';
 
-exports.BattleMovedex = {
+/**@type {{[k: string]: ModdedMoveData}} */
+let BattleMovedex = {
 	aeroblast: {
 		inherit: true,
 		critRatio: 3,
@@ -86,6 +87,8 @@ exports.BattleMovedex = {
 						this.add('-miss', pokemon, target);
 						return false;
 					}
+					/**@type {Move} */
+					// @ts-ignore
 					let moveData = {
 						id: 'bide',
 						name: "Bide",
@@ -113,7 +116,9 @@ exports.BattleMovedex = {
 	counter: {
 		inherit: true,
 		damageCallback: function (pokemon, target) {
-			if (pokemon.lastAttackedBy && pokemon.lastAttackedBy.thisTurn && (this.getCategory(pokemon.lastAttackedBy.move) === 'Physical' || this.getMove(pokemon.lastAttackedBy.move).id === 'hiddenpower') && (!target.lastMove || target.lastMove.id !== 'sleeptalk')) {
+			if (pokemon.lastAttackedBy && pokemon.lastAttackedBy.thisTurn && pokemon.lastAttackedBy.move && (this.getCategory(pokemon.lastAttackedBy.move) === 'Physical' || this.getMove(pokemon.lastAttackedBy.move).id === 'hiddenpower') &&
+				(!target.lastMove || target.lastMove.id !== 'sleeptalk')) {
+				// @ts-ignore
 				return 2 * pokemon.lastAttackedBy.damage;
 			}
 			return false;
@@ -157,16 +162,16 @@ exports.BattleMovedex = {
 			onImmunity: function (type, pokemon) {
 				if (type === 'sandstorm') return false;
 			},
-			onAccuracy: function (accuracy, target, source, move) {
+			onTryImmunity: function (target, source, move) {
 				if (move.id === 'earthquake' || move.id === 'magnitude' || move.id === 'fissure') {
 					return;
 				}
 				if (['attract', 'curse', 'foresight', 'meanlook', 'mimic', 'nightmare', 'spiderweb', 'transform'].includes(move.id)) {
 					// Oversight in the interaction between these moves and the Lock-On effect
-					return 0;
+					return false;
 				}
 				if (source.volatiles['lockon'] && target === source.volatiles['lockon'].source) return;
-				return 0;
+				return false;
 			},
 			onSourceBasePower: function (basePower, target, source, move) {
 				if (move.id === 'earthquake' || move.id === 'magnitude') {
@@ -189,7 +194,7 @@ exports.BattleMovedex = {
 			onStart: function (target) {
 				let noEncore = ['encore', 'metronome', 'mimic', 'mirrormove', 'sketch', 'sleeptalk', 'struggle', 'transform'];
 				let moveIndex = target.lastMove ? target.moves.indexOf(target.lastMove.id) : -1;
-				if (!target.lastMove || noEncore.includes(target.lastMove.id) || (target.moveSlots[moveIndex] && target.moveSlots[moveIndex].pp <= 0)) {
+				if (!target.lastMove || noEncore.includes(target.lastMove.id) || !target.moveSlots[moveIndex] || target.moveSlots[moveIndex].pp <= 0) {
 					// it failed
 					this.add('-fail', target);
 					delete target.volatiles['encore'];
@@ -249,20 +254,20 @@ exports.BattleMovedex = {
 		},
 		effect: {
 			duration: 2,
-			onAccuracy: function (accuracy, target, source, move) {
+			onTryImmunity: function (target, source, move) {
 				if (move.id === 'gust' || move.id === 'twister' || move.id === 'thunder' || move.id === 'whirlwind') {
 					return;
 				}
 				if (move.id === 'earthquake' || move.id === 'magnitude' || move.id === 'fissure') {
 					// These moves miss even during the Lock-On effect
-					return 0;
+					return false;
 				}
 				if (['attract', 'curse', 'foresight', 'meanlook', 'mimic', 'nightmare', 'spiderweb', 'transform'].includes(move.id)) {
 					// Oversight in the interaction between these moves and the Lock-On effect
-					return 0;
+					return false;
 				}
 				if (source.volatiles['lockon'] && target === source.volatiles['lockon'].source) return;
-				return 0;
+				return false;
 			},
 			onSourceBasePower: function (basePower, target, source, move) {
 				if (move.id === 'gust' || move.id === 'twister') {
@@ -371,7 +376,9 @@ exports.BattleMovedex = {
 	mirrorcoat: {
 		inherit: true,
 		damageCallback: function (pokemon, target) {
-			if (pokemon.lastAttackedBy && pokemon.lastAttackedBy.thisTurn && this.getCategory(pokemon.lastAttackedBy.move) === 'Special' && this.getMove(pokemon.lastAttackedBy.move).id !== 'hiddenpower' && (!target.lastMove || target.lastMove.id !== 'sleeptalk')) {
+			if (pokemon.lastAttackedBy && pokemon.lastAttackedBy.thisTurn && pokemon.lastAttackedBy.move && this.getCategory(pokemon.lastAttackedBy.move) === 'Special' &&
+				this.getMove(pokemon.lastAttackedBy.move).id !== 'hiddenpower' && (!target.lastMove || target.lastMove.id !== 'sleeptalk')) {
+				// @ts-ignore
 				return 2 * pokemon.lastAttackedBy.damage;
 			}
 			return false;
@@ -672,9 +679,6 @@ exports.BattleMovedex = {
 				if (move.recoil) {
 					this.damage(Math.round(damage * move.recoil[0] / move.recoil[1]), source, target, 'recoil');
 				}
-				if (move.drain) {
-					this.heal(Math.ceil(damage * move.drain[0] / move.drain[1]), source, target, 'drain');
-				}
 				this.runEvent('AfterSubDamage', target, source, move, damage);
 				return 0; // hit
 			},
@@ -775,3 +779,5 @@ exports.BattleMovedex = {
 		priority: -1,
 	},
 };
+
+exports.BattleMovedex = BattleMovedex;

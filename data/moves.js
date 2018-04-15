@@ -1657,7 +1657,7 @@ let BattleMovedex = {
 		},
 		effect: {
 			duration: 2,
-			onAccuracy: function (accuracy, target, source, move) {
+			onTryImmunity: function (target, source, move) {
 				if (move.id === 'gust' || move.id === 'twister') {
 					return;
 				}
@@ -1668,7 +1668,7 @@ let BattleMovedex = {
 					return;
 				}
 				if (source.volatiles['lockon'] && target === source.volatiles['lockon'].source) return;
-				return 0;
+				return false;
 			},
 			onSourceBasePower: function (basePower, target, source, move) {
 				if (move.id === 'gust' || move.id === 'twister') {
@@ -3370,7 +3370,7 @@ let BattleMovedex = {
 			onImmunity: function (type, pokemon) {
 				if (type === 'sandstorm' || type === 'hail') return false;
 			},
-			onAccuracy: function (accuracy, target, source, move) {
+			onTryImmunity: function (target, source, move) {
 				if (move.id === 'earthquake' || move.id === 'magnitude' || move.id === 'helpinghand') {
 					return;
 				}
@@ -3378,7 +3378,7 @@ let BattleMovedex = {
 					return;
 				}
 				if (source.volatiles['lockon'] && target === source.volatiles['lockon'].source) return;
-				return 0;
+				return false;
 			},
 			onSourceModifyDamage: function (damage, source, target, move) {
 				if (move.id === 'earthquake' || move.id === 'magnitude') {
@@ -3530,7 +3530,7 @@ let BattleMovedex = {
 			onImmunity: function (type, pokemon) {
 				if (type === 'sandstorm' || type === 'hail') return false;
 			},
-			onAccuracy: function (accuracy, target, source, move) {
+			onTryImmunity: function (target, source, move) {
 				if (move.id === 'surf' || move.id === 'whirlpool' || move.id === 'helpinghand') {
 					return;
 				}
@@ -3538,7 +3538,7 @@ let BattleMovedex = {
 					return;
 				}
 				if (source.volatiles['lockon'] && target === source.volatiles['lockon'].source) return;
-				return 0;
+				return false;
 			},
 			onSourceModifyDamage: function (damage, source, target, move) {
 				if (move.id === 'surf' || move.id === 'whirlpool') {
@@ -4412,7 +4412,7 @@ let BattleMovedex = {
 			onStart: function (target) {
 				let noEncore = ['assist', 'copycat', 'encore', 'mefirst', 'metronome', 'mimic', 'mirrormove', 'naturepower', 'sketch', 'sleeptalk', 'struggle', 'transform'];
 				let moveIndex = target.lastMove ? target.moves.indexOf(target.lastMove.id) : -1;
-				if (!target.lastMove || target.lastMove.isZ || noEncore.includes(target.lastMove.id) || (target.moveSlots[moveIndex] && target.moveSlots[moveIndex].pp <= 0)) {
+				if (!target.lastMove || target.lastMove.isZ || noEncore.includes(target.lastMove.id) || !target.moveSlots[moveIndex] || target.moveSlots[moveIndex].pp <= 0) {
 					// it failed
 					delete target.volatiles['encore'];
 					return false;
@@ -5581,7 +5581,7 @@ let BattleMovedex = {
 		},
 		effect: {
 			duration: 2,
-			onAccuracy: function (accuracy, target, source, move) {
+			onTryImmunity: function (target, source, move) {
 				if (move.id === 'gust' || move.id === 'twister') {
 					return;
 				}
@@ -5592,7 +5592,7 @@ let BattleMovedex = {
 					return;
 				}
 				if (source.volatiles['lockon'] && target === source.volatiles['lockon'].source) return;
-				return 0;
+				return false;
 			},
 			onSourceModifyDamage: function (damage, source, target, move) {
 				if (move.id === 'gust' || move.id === 'twister') {
@@ -11698,7 +11698,7 @@ let BattleMovedex = {
 		},
 		effect: {
 			duration: 2,
-			onAccuracy: function (accuracy, target, source, move) {
+			onTryImmunity: function (target, source, move) {
 				if (move.id === 'helpinghand') {
 					return;
 				}
@@ -11706,7 +11706,7 @@ let BattleMovedex = {
 					return;
 				}
 				if (source.volatiles['lockon'] && target === source.volatiles['lockon'].source) return;
-				return 0;
+				return false;
 			},
 		},
 		secondary: false,
@@ -14424,7 +14424,7 @@ let BattleMovedex = {
 		},
 		effect: {
 			duration: 2,
-			onAccuracy: function (accuracy, target, source, move) {
+			onTryImmunity: function (target, source, move) {
 				if (move.id === 'helpinghand') {
 					return;
 				}
@@ -14432,7 +14432,7 @@ let BattleMovedex = {
 					return;
 				}
 				if (source.volatiles['lockon'] && target === source.volatiles['lockon'].source) return;
-				return 0;
+				return false;
 			},
 		},
 		secondary: false,
@@ -14990,11 +14990,6 @@ let BattleMovedex = {
 		},
 		effect: {
 			duration: 2,
-			onStart: function () {
-				if (this.willMove(this.effectData.source)) {
-					this.effectData.source.activeTurns--;
-				}
-			},
 			onAnyDragOut: function (pokemon) {
 				if (pokemon === this.effectData.target || pokemon === this.effectData.source) return false;
 			},
@@ -15006,6 +15001,7 @@ let BattleMovedex = {
 			onFoeBeforeMovePriority: 12,
 			onFoeBeforeMove: function (attacker, defender, move) {
 				if (attacker === this.effectData.source) {
+					this.effectData.source.activeTurns--;
 					this.debug('Sky drop nullifying.');
 					return null;
 				}
@@ -15016,7 +15012,7 @@ let BattleMovedex = {
 				if (this.effectData.source.fainted) return;
 				return this.effectData.source;
 			},
-			onAnyAccuracy: function (accuracy, target, source, move) {
+			onAnyTryImmunity: function (target, source, move) {
 				if (target !== this.effectData.target && target !== this.effectData.source) {
 					return;
 				}
@@ -15033,7 +15029,7 @@ let BattleMovedex = {
 					return;
 				}
 				if (source.volatiles['lockon'] && target === source.volatiles['lockon'].source) return;
-				return 0;
+				return false;
 			},
 			onAnyBasePower: function (basePower, target, source, move) {
 				if (target !== this.effectData.target && target !== this.effectData.source) {
@@ -18024,11 +18020,11 @@ let BattleMovedex = {
 		num: 376,
 		accuracy: true,
 		basePower: 0,
-		basePowerCallback: function (pokemon) {
+		basePowerCallback: function (source, target, move) {
+			const callerMoveId = move.sourceEffect || move.id;
+			const moveSlot = source.getMoveData(callerMoveId);
 			// @ts-ignore
-			let move = pokemon.getMoveData(pokemon.lastMove.id); // Account for calling Trump Card via other moves
-			// @ts-ignore
-			switch (move.pp) {
+			switch (moveSlot.pp) {
 			case 0:
 				return 200;
 			case 1:
@@ -18629,12 +18625,8 @@ let BattleMovedex = {
 		num: 311,
 		accuracy: 100,
 		basePower: 50,
-		basePowerCallback: function (pokemon, target, move) {
-			if (this.weather) return move.basePower * 2;
-			return move.basePower;
-		},
 		category: "Special",
-		desc: "Power doubles during weather effects and this move's type changes to match; Ice type during Hail, Water type during Rain Dance, Rock type during Sandstorm, and Fire type during Sunny Day.",
+		desc: "Power doubles during weather effects (except strong winds) and this move's type changes to match; Ice type during Hail, Water type during Rain Dance, Rock type during Sandstorm, and Fire type during Sunny Day.",
 		shortDesc: "Power doubles and type varies in each weather.",
 		id: "weatherball",
 		name: "Weather Ball",
@@ -18646,16 +18638,20 @@ let BattleMovedex = {
 			case 'sunnyday':
 			case 'desolateland':
 				move.type = 'Fire';
+				move.basePower *= 2;
 				break;
 			case 'raindance':
 			case 'primordialsea':
 				move.type = 'Water';
+				move.basePower *= 2;
 				break;
 			case 'sandstorm':
 				move.type = 'Rock';
+				move.basePower *= 2;
 				break;
 			case 'hail':
 				move.type = 'Ice';
+				move.basePower *= 2;
 				break;
 			}
 		},
