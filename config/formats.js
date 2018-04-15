@@ -201,7 +201,6 @@ let Formats = [
 		requirePentagon: true,
 	},
 	{
-<<<<<<< HEAD
 		name: "[Gen 7] Perseverance",
 
 		effectType: 'Format',
@@ -235,7 +234,10 @@ let Formats = [
 			for (let i = 0, len = allPokemon.length; i < len; i++) {
 				allPokemon[i].maxhp *= 5;
 				allPokemon[i].hp = allPokemon[i].maxhp;
-=======
+			}
+		},
+	},
+	{
 		name: "[Gen 7] Ultra Kalos Classic",
 		threads: [`&bullet; <a href="https://www.smogon.com/forums/threads/3632223/">Ultra Kalos Classic Discussion</a>`],
 
@@ -258,7 +260,6 @@ let Formats = [
 			}
 			if (item.zMove) {
 				return [`(${set.name || set.species} is holding ${item.name})`, `Z-Crystals are banned in Ultra Kalos Classic.`];
->>>>>>> d0dff103a32dd695794fb91352a697179024d6bd
 			}
 		},
 	},
